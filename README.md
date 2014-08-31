@@ -1,4 +1,4 @@
-nxt-remote-controller
+NXT Remote Controller
 =====================
 
-Open-Source android Application to control remotely a Lego NXT robot through a WebSocket connection.
+Open-Source Android application to control remotely a Lego NXT robot through a WebSocket connection.
