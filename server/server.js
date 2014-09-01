@@ -61,6 +61,12 @@ var _dirname = isWindows ? __dirname.replace(/\\server$/, "") : __dirname.replac
 var http_cfg  = config.http;
 var https_cfg = config.https;
 
+var unsecure_ip   = args[0] || http.ip    || "localhost" || "127.0.0.1";
+var unsecure_port = args[1] || http.port  || 80;
+var secure_ip     = args[2] || https.ip   || "localhost" || "127.0.0.1";
+var secure_port   = args[3] || https.port || 443;
+
+
 Log.i("Config file (settings.json): OK.");
 
 
@@ -85,7 +91,7 @@ var redirect = function (request, response) {
   /*
   response.writeHead(301, {
     "Content-Length": "0",
-    "Location": "https://" + https_cfg.ip + ":" + https_cfg.port + url.parse(resquest.url).pathname
+    "Location": "https://" + secure_ip + ":" + secure_port + url.parse(resquest.url).pathname
   });
    */
   
@@ -110,3 +116,69 @@ var redirect = function (request, response) {
   file.pipe( response );
   
 };
+
+
+/*
+ * Dummy HTTP server that only handles requests and redirects them to HTTPS.
+ */
+var HttpServer = http.createServer(redirect);
+
+
+/*
+ * We load certificates.
+ */
+try {
+  var key  = fs.readFileSync(_dirname + https_cfg.key,  "utf-8");
+  var cert = fs.readFileSync(_dirname + https_cfg.cert, "utf-8");
+} catch (e) {
+  if (e.errno === 34 || e.code === "ENOENT") {
+    quit("The file " + e.path + " doesn't exists. Run the Shell script located at /sh-scripts/cert.sh.");
+  } else if (e.code === "EACCESS") {
+	quit("Access error. You (or the program) don't have the required permission.");
+  }
+  quit("Unknown error: " + e.message);
+}
+Log.i("Loaded certificates.");
+
+
+/*
+ * We enable gzip compression.
+ */
+app.use( express.compress() );
+
+/*
+ * We serve all paths defined in settings.json.
+ * If the virtual path is a file we serve it as a static one.
+ * Else as a normal directory.
+ */
+_.each(config.paths, function (real, virtual) {
+  var last = _.last(_.compact(real.split(isWin ? "\\" : "/")));
+  
+  if (!_.contains(last, ".")) {
+    app.use(virtual, express.static(_dirname + real));
+  } else {
+	app.use(virtual, function (req, res) {
+		res.sendfile(_dirname + real);
+	});
+  }
+  
+});
+
+/*
+ * HTTPS server using express.
+ */
+var HttpsServer = https.createServer({
+  key : key,
+  cert: cert
+}, app);
+
+
+/*
+ * Server listening.
+ */
+HttpServer.listen(unsecure_port, unsecure_ip);
+HttpsServer.listen(secure_port, secure_ip);
+
+Log.te("start")
+   .d("HTTP server running at: http://%s:%d", unsecure_ip, unsecure_port)
+   .d("HTTPS server running at: https://%s:%d", secure_ip, secure_port);
