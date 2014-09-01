@@ -1,0 +1,14 @@
+{
+  "http": {
+    "ip": "localhost",
+    "port": 80
+  },
+  "https": {
+	"ip": "localhost",
+	"port": 443
+  },
+  "redirect": "/redirect",
+  "paths": {
+    "/": "/public"
+  }
+}
