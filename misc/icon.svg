@@ -20,6 +20,9 @@
   #eyes {
     transform: translate( calc(50px), calc(50px) );
   }
+  #head {
+    transform: translate( calc(50px - 31.18px), calc(50px - 11px) );
+  }
   </style>
   <!-- [/Custom Styles] -->
 
@@ -32,5 +35,19 @@
     <circle r="5" cx="21.7" cy="1" />
   </g>
   <!-- [/eyes] -->
+
+  <!-- Ultra-sound sensor (head) -->
+  <g id="head" class="stroke">
+
+    <path d="m 10,21.4 h 9 s 0,3.5 3.5,3.5 h 17.5 s 3.5,0 3.5,-3.5 h 9" opacity="0.5" />
+    <path d="m 19,12.5 a 7.5,7 0 0,1 -19,0 v -7.5 s 0,-5 5,-5 h 52.5 s 5,0 5,5 v 7.5 a 7.5,7 0 0,1 -19,0" />
+
+    <!-- The line between the eyes -->
+    <g>
+      <rect x="17.6" y="11" width="27.3" height="4" fill="#3498DB" stroke-width="0" />
+      <rect x="17.7" y="14.5" width="27.1" height="2" fill="white" stroke-width="0" />
+    </g>
+
+  </g>
 
 </svg>
