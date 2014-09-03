@@ -11,10 +11,26 @@
   .blue {
     fill: #3498DB;
   }
+  .stroke {
+    stroke: #fff;
+    stroke-width: 2;
+    opacity: 0.8;
+    fill: none;
+  }
+  #eyes {
+    transform: translate( calc(50px), calc(50px) );
+  }
   </style>
   <!-- [/Custom Styles] -->
 
   <!-- Background hexagon -->
   <polygon points="50,0 100,25 100,75 50,100 0,75 0,25 50,0" class="blue" />
+
+  <!-- [eyes]  -->
+  <g id="eyes" class="stroke">
+    <circle r="5" cx="-21.7" cy="1" />
+    <circle r="5" cx="21.7" cy="1" />
+  </g>
+  <!-- [/eyes] -->
 
 </svg>
