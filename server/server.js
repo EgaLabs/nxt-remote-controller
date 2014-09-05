@@ -155,7 +155,7 @@ app.use( express.compress() );
  * Else as a normal directory.
  */
 _.each(config.paths, function (real, virtual) {
-  var last = _.last(_.compact(real.split(isWin ? "\\" : "/")));
+  var last = _.last(_.compact(real.split(isWindows ? "\\" : "/")));
 
   if (!_.contains(last, ".")) {
     app.use(virtual, express.static(_dirname + real));
