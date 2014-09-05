@@ -9,21 +9,20 @@
  * Shortcuts.
  */
 var c        = console || {};
-var nope     = function () {};
-var chaining = function (a, b) {
+var chaining = function (a, ctx, b) {
   return function () {
-	b.apply(this, arguments);
-	return a;  
+	  b.apply(ctx, arguments);
+	  return a;
   };
 };
 
 var Log  = {
-  d  : chaining(Log, c.log     || nope),
-  e  : chaining(Log, c.error   || nope),
-  w  : chaining(Log, c.warn    || nope),
-  i  : chaining(Log, c.info    || nope),
-  t  : chaining(Log, c.time    || nope),
-  te : chaining(Log, c.timeEnd || nope)
+  d  : chaining(Log, c, c.log    ),
+  e  : chaining(Log, c, c.error  ),
+  w  : chaining(Log, c, c.warn   ),
+  i  : chaining(Log, c, c.info   ),
+  t  : chaining(Log, c, c.time   ),
+  te : chaining(Log, c, c.timeEnd)
 };
 var quit = function () {
 	Log.e.apply(this, arguments);
@@ -75,7 +74,7 @@ Log.i("Config file (settings.json): OK.");
  * Handles file requests, supported methods and redirects to HTTPS.
  */
 var redirect = function (request, response) {
-  
+
   /*
    * Exit if request method is not GET.
    */
@@ -84,7 +83,7 @@ var redirect = function (request, response) {
 	response.end("Unsupported request method. Only GET requests allowed.");
 	return;
   }
-  
+
   /*
    * Permanently redirect to HTTPS. Temporally disallowed for testing purposes.
    */
@@ -94,7 +93,7 @@ var redirect = function (request, response) {
     "Location": "https://" + secure_ip + ":" + secure_port + url.parse(resquest.url).pathname
   });
    */
-  
+
   /*
    * If redirect didn't worked we send the redirect path.
    */
@@ -103,18 +102,18 @@ var redirect = function (request, response) {
   var exists = false;
   var readUri = "";
   var file = null;
-  
+
   try {
     exists = fs.existsSync(reqPath) && fs.lstatSync(reqPath).isFile();
   } catch (e) {
 	quit("Unknown error: " + e.message);
   }
   readUri = exists ? reqPath : path + "/index.html";
-  
+
   response.setHeader("Content-Type", mime.lookup(readUri) );
   file = fs.createReadStream( readUri );
   file.pipe( response );
-  
+
 };
 
 
@@ -153,7 +152,7 @@ app.use( express.compress() );
  */
 _.each(config.paths, function (real, virtual) {
   var last = _.last(_.compact(real.split(isWin ? "\\" : "/")));
-  
+
   if (!_.contains(last, ".")) {
     app.use(virtual, express.static(_dirname + real));
   } else {
@@ -161,7 +160,7 @@ _.each(config.paths, function (real, virtual) {
 		res.sendfile(_dirname + real);
 	});
   }
-  
+
 });
 
 /*
