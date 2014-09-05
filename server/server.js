@@ -9,6 +9,7 @@
  * Shortcuts.
  */
 var c        = console || {};
+var nope     = function () {};
 var chaining = function (a, ctx, b) {
   return function () {
 	  b.apply(ctx, arguments);
@@ -16,14 +17,17 @@ var chaining = function (a, ctx, b) {
   };
 };
 
-var Log  = {
-  d  : chaining(Log, c, c.log    ),
-  e  : chaining(Log, c, c.error  ),
-  w  : chaining(Log, c, c.warn   ),
-  i  : chaining(Log, c, c.info   ),
-  t  : chaining(Log, c, c.time   ),
-  te : chaining(Log, c, c.timeEnd)
-};
+var Log = (function (root) {
+
+  root.d = chaining(root, c, c.log      || nope);
+  root.e = chaining(root, c, c.error    || nope);
+  root.w = chaining(root, c, c.warn     || nope);
+  root.i = chaining(root, c, c.info     || nope);
+  root.t = chaining(root, c, c.time     || nope);
+  root.te = chaining(root, c, c.timeEnd || nope);
+
+  return root;
+})({});
 var quit = function () {
 	Log.e.apply(this, arguments);
 	process.exit(1);
