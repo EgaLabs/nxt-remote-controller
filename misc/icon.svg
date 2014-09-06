@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" width="100" height="100" version="1.1">
-  
+
   <!-- [SVG-data]  -->
   <title>NXT Remote Controller - EgaTuts</title>
   <desc>NXT Remote Controller - Control remotely a Lego NXT Reobot throught a Node.js server.</desc>
   <!-- [/SVG-data] -->
-  
+
   <!-- [Custom Styles]  -->
-  <style
-     id="style8">
-  .blue {
-    fill: #3498DB;
-  }
+  <style>
   .white {
     stroke: #d6eaf8;
     fill: #d6eaf8;
+  }
+  .dark-blue {
+   stroke: #2F8AC7;
+   fill: #2F8AC7;
   }
   .light-blue {
     stroke: #84c1e9;
@@ -26,6 +26,9 @@
   .fill {
     stroke: none !important;
   }
+  .blue {
+    fill: #3498DB;
+  }
   #eyes > circle {
     stroke-width: 1.25;
   }
@@ -34,32 +37,52 @@
   }
   </style>
   <!-- [/Custom Styles] -->
-  
+
+  <!-- [Shadow gradient]  -->
+  <defs>
+    <linearGradient id="shadow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(0, 0, 0, 0.275)" />
+      <stop offset="60%" stop-color="rgba(0, 0, 0, 0.175)" />
+      <stop offset="70%" stop-color="rgba(0, 0, 0, 0.1)" />
+      <stop offset="100%" stop-color="rgba(0, 0, 0, 0)" />
+    </linearGradient>
+  </defs>
+  <!-- [/Shadow gradient] -->
+
   <!-- Background hexagon -->
   <polygon class="blue" points="50,0 100,25 100,75 50,100 0,75 0,25 50,0" />
-  
+
+  <!-- Long shadow -->
+  <g>
+    <path fill="url(#shadow)" d="M 19.25,55.375 l 61.3,-17.2 l 19.45,19.45 L 100,75 l -40.75,20.375 l -40,-40 z" />
+
+    <!-- Shadow remover from neck -->
+    <rect class="fill dark-blue" x="34" y="53.5" width="32" height="5" />
+    <rect class="fill dark-blue" x="38" y="57" width="24" height="5" />
+  </g>
+
   <!-- Ultra-sound sensor (head) -->
   <g id="head" transform="translate(18.75,37.55)">
-  
-    <!-- [eyes]  -->
-    <g id="eyes" class="stroke white" transform="translate(31.25,11.45)">
-      <circle r="5" cx="-21.700001" cy="1" d="m -16.700001,1 c 0,2.7614237 -2.238576,5 -5,5 -2.761424,0 -5,-2.2385763 -5,-5 0,-2.7614237 2.238576,-5 5,-5 2.761424,0 5,2.2385763 5,5 z" />
-      <circle r="5" cx="21.700001" cy="1" d="m 26.700001,1 c 0,2.7614237 -2.238576,5 -5,5 -2.761424,0 -5,-2.2385763 -5,-5 0,-2.7614237 2.238576,-5 5,-5 2.761424,0 5,2.2385763 5,5 z"   />
-    </g>
-    <!-- [/eyes] -->
-  
+
     <!-- The neck (light blue background path) -->
     <path class="stroke light-blue" d="m 10,21.4 h 9 c 0,0 0,3.5 3.5,3.5 H 40 c 0,0 3.5,0 3.5,-3.5 h 9" />
-    
+
     <!-- The stroke of the face -->
-    <path class="stroke white" d="m 19,12.5 a 9.5,8.8666667 0 0 1 -19,0 V 5 C 0,5 0,0 5,0 h 52.5 c 0,0 5,0 5,5 v 7.5 a 9.5,8.8666667 0 0 1 -19,0" />
-    
+    <path class="white blue" d="m 19,12.5 a 9.5,8.8666667 0 0 1 -19,0 V 5 C 0,5 0,0 5,0 h 52.5 c 0,0 5,0 5,5 v 7.5 a 9.5,8.8666667 0 0 1 -19,0" />
+
     <!-- The line between the eyes -->
     <g>
       <rect class="fill blue" x="17.6" y="11" width="27.299999" height="4" />
       <rect class="fill white" x="17.700001" y="14.5" width="27.1" height="2" />
     </g>
-    
+
+    <!-- [eyes]  -->
+    <g id="eyes" class="white blue" transform="translate(31.25,11.45)">
+      <circle r="5" cx="-21.700001" cy="1" d="m -16.700001,1 c 0,2.7614237 -2.238576,5 -5,5 -2.761424,0 -5,-2.2385763 -5,-5 0,-2.7614237 2.238576,-5 5,-5 2.761424,0 5,2.2385763 5,5 z" />
+      <circle r="5" cx="21.700001" cy="1" d="m 26.700001,1 c 0,2.7614237 -2.238576,5 -5,5 -2.761424,0 -5,-2.2385763 -5,-5 0,-2.7614237 2.238576,-5 5,-5 2.761424,0 5,2.2385763 5,5 z"   />
+    </g>
+    <!-- [/eyes] -->
+
   </g>
-  
+
 </svg>
