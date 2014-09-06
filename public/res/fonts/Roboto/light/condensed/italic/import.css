@@ -1,11 +1,11 @@
 @charset "UTF-8";
 @font-face {
   font-family: 'Roboto Condensed';
-  src: url('Roboto.eot');
-  src: url('Roboto.eot?#iefix') format('embedded-opentype'),
-       url('Roboto.woff') format('woff'),
-       url('Roboto.ttf') format('truetype'),
-       url('Roboto.svg#Roboto') format('svg');
+  src: url('roboto.eot');
+  src: url('roboto.eot?#iefix') format('embedded-opentype'),
+       url('roboto.woff') format('woff'),
+       url('roboto.ttf') format('truetype'),
+       url('roboto.svg#roboto') format('svg');
   font-weight: light;
   font-style: italic;
 }
