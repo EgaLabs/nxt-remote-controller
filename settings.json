@@ -9,7 +9,7 @@
 	"key": "/certificates/localhost-private.pem",
 	"cert": "/certificates/localhost.crt"
   },
-  "redirect": "/redirect",
+  "redirect": "/public/redirect",
   "paths": {
     "/": "/public"
   }
