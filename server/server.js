@@ -154,16 +154,22 @@ app.use( express.compress() );
  * If the virtual path is a file we serve it as a static one.
  * Else as a normal directory.
  */
-_.each(config.paths, function (real, virtual) {
-  var last = _.last(_.compact(real.split(isWindows ? "\\" : "/")));
-
-  if (!_.contains(last, ".")) {
-    app.use(virtual, express.static(_dirname + real));
-  } else {
-	app.use(virtual, function (req, res) {
-		res.sendfile(_dirname + real);
-	});
+_.each(config.paths, function (pathObject, index) {
+	
+  var path    = pathObject;
+  var real    = path.real;
+  var virtual = path.virtual;
+  var object = {
+    index: "index.html"
+  };
+  
+  if (_.isString(path.static)) {
+	object = require(_dirname + path.static);
+  } else if (_.isObject(path.static)) {
+    object = path.static;
   }
+  
+  app.use(virtual, express.static(_dirname + real, object) );
 
 });
 
