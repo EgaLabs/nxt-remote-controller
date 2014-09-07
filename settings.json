@@ -10,7 +10,15 @@
 	"cert": "/certificates/localhost.crt"
   },
   "redirect": "/public/redirect",
-  "paths": {
-    "/": "/public"
-  }
+  "paths": [
+  
+    {
+      "virtual": "/",
+      "real": "/public/client",
+      "static": {
+        "maxage": 86400000
+      }
+    }
+    
+  ]
 }
