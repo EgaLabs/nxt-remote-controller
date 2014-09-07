@@ -2,33 +2,33 @@
 <html lang="en">
 <head>
   <title>Client Panel - NXT Remote Controller</title>
-  
+
   <!-- Apple-Specific meta tags and settings and extras -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  
+
   <link rel="apple-touch-startup-image"        href="res/img/icon/startup.png">
   <link rel="apple-touch-icon"                 href="res/img/icon/favicon-60.png">
   <link rel="apple-touch-icon" sizes="76x76"   href="res/img/icon/favicon-76.png">
   <link rel="apple-touch-icon" sizes="114x114" href="res/img/icon/favicon-114.png">
   <link rel="apple-touch-icon" sizes="120x120" href="res/img/icon/favicon-120.png">
   <link rel="apple-touch-icon" sizes="152x152" href="res/img/icon/favicon-156.png">
-  
+
   <!-- Web App info (headers) -->
   <meta charset="utf-8" />
   <meta name="language"               content="English" />
-  
+
   <meta http-equiv="Content-Type"     content="text/html; charset=utf-8" />
   <meta http-equiv="content-language" content="en" />
-  
+
   <!-- Web App info (file data) -->
   <meta name="handheldfriendly" content="true" />
   <meta name="author"           content="EgaTuts" />
   <meta name="copyright"        content="EgaTuts" />
   <meta name="application-name" content="NXT Remote Controller" />
   <meta name="description"      content="NXT Remote Controller Control Panel" />
-  <meta name="keywords"         content="html5, web, app, web app, js, javascript required, robot, lego, control, nxt, mindstorm, remote, controller, device, bomb deactivator, streaming, video" /> 
-  
+  <meta name="keywords"         content="html5, web, app, web app, js, javascript required, robot, lego, control, nxt, mindstorm, remote, controller, device, bomb deactivator, streaming, video" />
+
   <!-- Miscellaneous -->
   <meta name="audience"         content="all" />
   <meta name="googlebot"        content="nofollow" />
@@ -37,39 +37,65 @@
   <meta name="google"           content="notranslate" />
   <meta name="format-detection" content="telephone=none" />
   <meta name="reply-to"         content="egatuts@gmail.com" />
-  <meta name="web_author"       content="http://egatuts.com" /> 
-  
+  <meta name="web_author"       content="http://egatuts.com" />
+
   <!-- Open Graph meta tags for social media sharing -->
   <meta property="og:image:width"  content="150" />
   <meta property="og:image:height" content="150" />
   <meta property="og:image:type"   content="image/png" />
-  <meta property="og:image:url"    content="res/img/favicon.png" />
-  
+  <meta property="og:image:url"    content="res/img/favicon/opengraph.png" />
+
   <meta property="og:description"  content="Control your own Lego NXT robot by setting up a Node.js server and control it using Socket.io and WebRTC over HTTPS." />
   <meta property="og:title"        content="NXT Remote Controller" />
   <meta property="og:type"         content="website" />
   <meta property="og:locale"       content="en_UK" />
-  
+
   <!-- Unable to use but correct meta tags
     <meta property="og:url"          content="" />
     <meta property="og:site_name"    content="" />
     <meta property="og:website"      content="" />
   -->
-  
-  <!-- Favicon setup (Favorite Icon) -->
-  <link rel="icon" type="image/png"                href="res/img/favicon/favicon.png">
-  <link rel="icon" type="image/gif"                href="res/img/favicon/favicon.gif">
-  <link rel="icon" type="image/jpeg"               href="res/img/favicon/favicon.jpg">
-  <link rel="icon" type="image/vnd.microsoft.icon" href="res/img/favicon/favicon.ico">
+
+  <!-- Web app meta tags and favicon setup -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="viewport" content="width=device-width" />
+
+  <!-- PNG -->
+  <link rel="icon" sizes="16x16"   href="res/img/favicon/favicon-16.png"  type="image/png">
+  <link rel="icon" sizes="32x32"   href="res/img/favicon/favicon-32.png"  type="image/png">
+  <link rel="icon" sizes="48x48"   href="res/img/favicon/favicon-48.png"  type="image/png">
+  <link rel="icon" sizes="128x128" href="res/img/favicon/favicon-128.png" type="image/png">
+  <link rel="icon" sizes="192x192" href="res/img/favicon/favicon-192.png" type="image/png">
+
+  <!-- GIF -->
+  <link rel="icon" sizes="16x16"   href="res/img/favicon/favicon-16.gif"  type="image/gif">
+  <link rel="icon" sizes="32x32"   href="res/img/favicon/favicon-32.gif"  type="image/gif">
+  <link rel="icon" sizes="48x48"   href="res/img/favicon/favicon-48.gif"  type="image/gif">
+  <link rel="icon" sizes="128x128" href="res/img/favicon/favicon-128.gif" type="image/gif">
+  <link rel="icon" sizes="192x192" href="res/img/favicon/favicon-192.gif" type="image/gif">
+
+  <!-- JPEG -->
+  <link rel="icon" sizes="16x16"   href="res/img/favicon/favicon-16.jpg"  type="image/jpeg">
+  <link rel="icon" sizes="32x32"   href="res/img/favicon/favicon-32.jpg"  type="image/jpeg">
+  <link rel="icon" sizes="48x48"   href="res/img/favicon/favicon-48.jpg"  type="image/jpeg">
+  <link rel="icon" sizes="128x128" href="res/img/favicon/favicon-128.jpg" type="image/jpeg">
+  <link rel="icon" sizes="192x192" href="res/img/favicon/favicon-192.jpg" type="image/jpeg">
+
+  <!-- ICO -->
+  <link rel="icon" sizes="16x16"   href="res/img/favicon/favicon-16.ico"  type="image/x-icon">
+  <link rel="icon" sizes="32x32"   href="res/img/favicon/favicon-32.ico"  type="image/x-icon">
+  <link rel="icon" sizes="48x48"   href="res/img/favicon/favicon-48.ico"  type="image/x-icon">
+  <link rel="icon" sizes="128x128" href="res/img/favicon/favicon-128.ico" type="image/x-icon">
+  <link rel="icon" sizes="192x192" href="res/img/favicon/favicon-192.ico" type="image/x-icon">
   <!--[if IE]>
     <link rel="shortcut icon" href="res/img/favicon/favicon.ico">
-  <![endif]-->
-  
+  <![endif]-->  
+
   <!-- Viewport and resources/dependencies -->
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
   <link rel="stylesheet" media="all" href="css/style.css">
   <script type="text/javascript" src="js/script.js"></script>
-  
+
 </head>
 <body>
 </body>
