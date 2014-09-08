@@ -88,7 +88,7 @@
   <link rel="icon" sizes="16x16"   href="../res/img/favicon/favicon-16.ico"  type="image/x-icon">
   <link rel="icon" sizes="32x32"   href="../res/img/favicon/favicon-32.ico"  type="image/x-icon">
   <link rel="icon" sizes="48x48"   href="../res/img/favicon/favicon-48.ico"  type="image/x-icon">
-  <link rel="icon" sizes="96x96" href="../res/img/favicon/favicon-96.ico" type="image/x-icon">
+  <link rel="icon" sizes="96x96"   href="../res/img/favicon/favicon-96.ico"  type="image/x-icon">
   <link rel="icon" sizes="128x128" href="../res/img/favicon/favicon-128.ico" type="image/x-icon">
   <link rel="icon" sizes="192x192" href="../res/img/favicon/favicon-192.ico" type="image/x-icon">
   <!--[if IE]>
@@ -97,13 +97,20 @@
   <![endif]-->
 
   <!-- Resources and dependencies -->
+  <link rel="stylesheet" media="all" href="../res/css/roboto.css">
+  <noscript>
+    <link rel="stylesheet" media="all" href="css/error.css">
+    <link rel="stylesheet" media="all" href="css/error-noscript.css">
+  </noscript>
   <link rel="stylesheet" media="all" href="css/style.css">
-  <script type="text/javascript" src="js/script.js"></script>
+  <script type="text/javascript" src="../res/js/Modernizr.js"></script>
 
 </head>
 <body>
-  
-  http://localhost
-  
+  <section id="errors">
+    <span id="no-js">You must enable <a title="¿How do I enable JavaScript?" href="http://www.enable-javascript.com/">JavaScript</a> to see the page functionality properly.</span>
+    <span id="no-sockets">You must enable WebSockets or <a title="¿How do I update my browser?" href="http://browsehappy.com/">update</a> your browser.</span>
+    <span id="no-media">You must let access to your media or <a title="¿How do I update my browser?" href="http://browsehappy.com/">update</a> your browser.</span>
+  </section>
 </body>
 </html>
