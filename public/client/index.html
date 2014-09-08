@@ -112,5 +112,16 @@
     <span id="no-sockets">You must enable WebSockets or <a title="¿How do I update my browser?" href="http://browsehappy.com/">update</a> your browser.</span>
     <span id="no-media">You must let access to your media or <a title="¿How do I update my browser?" href="http://browsehappy.com/">update</a> your browser.</span>
   </section>
+  <script type="text/javascript">
+  var path = [];
+  if (!Modernizr.websockets) {
+    path.push("css/error-nosockets.css");
+  } else if (!Modernizr.getusermedia) {
+    path.push("css/error-nomedia.css");
+  }
+  if (path.length > 0) {
+    Modernizr.load.call(this, ["css/error.css"].concat(path));
+  }
+  </script>
 </body>
 </html>
