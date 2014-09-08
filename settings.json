@@ -28,5 +28,9 @@
       }
     }
     
-  ]
+  ],
+  "vhosts": {
+      "cdn.localhost": "/server/subdomains/cdn.js"
+  }
+  
 }
