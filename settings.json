@@ -18,6 +18,14 @@
       "static": {
         "maxage": 86400000
       }
+    },
+    
+    {
+      "virtual": "/res",
+      "real": "/public/res",
+      "static": {
+        "maxage": 86400000
+      }
     }
     
   ]
