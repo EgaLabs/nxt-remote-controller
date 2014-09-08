@@ -1,1 +1,37 @@
 @charset "UTF-8";
+body {
+  display: table !important;
+}
+#errors {
+  font-size: 1.5em;
+  font-weight: 100;
+  display: table-cell !important;
+  vertical-align: middle;
+  background-color: #1b1b1b;
+  color: white;
+  text-align: center;
+}
+a, a:visited {
+  font-weight: 600;
+  transition: background-color 0.2s, color 0.2s;
+  -o-transition: background-color 0.2s, color 0.2s;
+  -ms-transition: background-color 0.2s, color 0.2s;
+  -moz-transition: background-color 0.2s, color 0.2s;
+  -khtml-transition: background-color 0.2s, color 0.2s;
+  -webkit-transition: background-color 0.2s, color 0.2s;
+  background-color: white !important;
+  color: #1b1b1b !important;
+  padding: 0em 0.5em;
+
+}
+a:hover {
+  background-color: #1b1b1b !important;
+  color: white !important;
+}
+
+body > * {
+  display: none !important;
+}
+#errors > span {
+  display: none !important;
+}

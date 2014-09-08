@@ -1,1 +1,4 @@
 @charset "UTF-8";
+#errors > #no-js {
+  display: block !important;
+}
