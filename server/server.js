@@ -173,6 +173,12 @@ _.each(config.paths, function (pathObject, index) {
 
 });
 
+_.each(config.vhosts, function (file, location) {
+  var conf = require(_dirname + file);
+  if (!conf.app) throw new Error("Virtual host file must export server config to as \"app\".");
+  app.use( express.vhost(location, conf.app) );
+});
+
 /*
  * HTTPS server using express.
  */
