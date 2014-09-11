@@ -14,3 +14,4 @@ preferred_syntax = :sass
 output_style = :expanded
 relative_assets = true
 Encoding.default_external = Encoding::UTF_8
+encoding = "utf-8"
