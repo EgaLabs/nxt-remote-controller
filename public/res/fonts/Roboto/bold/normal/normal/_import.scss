@@ -1,10 +1,14 @@
-@font-face {
-  font-family: 'Roboto';
-  src: url('roboto.eot');
-  src: url('roboto.eot?#iefix') format('embedded-opentype'),
-       url('roboto.woff') format('woff'),
-       url('roboto.ttf') format('truetype'),
-       url('roboto.svg#roboto') format('svg');
-  font-weight: bold;
-  font-style: normal;
-}
+@import "compass/css3/font-face";
+@import "../../../../../sass/base";
+
+$path: "Roboto/bold/normal/normal/";
+
+@include font-face("Roboto",
+  font-files(
+    relativize($path, "roboto.woff"),
+    relativize($path, "roboto.ttf"),
+    relativize($path, "roboto.svg")
+  ),
+  relativize($path, "roboto.eot"),
+  "bold",
+  "normal");
