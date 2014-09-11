@@ -1,0 +1,9 @@
+{
+  "ignores": [
+    "Android", "batch-scripts",
+    "certificates", "misc",
+    "node_modules", "server",
+    "shell-scripts", "LICENSE",
+    "*.json", "*.md"
+  ]
+}
