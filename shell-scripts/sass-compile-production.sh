@@ -1,7 +1,7 @@
 cd ..
 cd public
 cd client
-compass compile --production
+compass compile --output-style=compressed
 cd ..
 cd res
-compass compile --production
+compass compile --output-style=compressed

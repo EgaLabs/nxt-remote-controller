@@ -1,7 +1,7 @@
 cd ..
 cd public
 cd client
-compass watch --production
+compass watch --output-style=compressed
 cd ..
 cd res
-compass watch --production
+compass watch --output-style=compressed

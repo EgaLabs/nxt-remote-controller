@@ -1,8 +1,8 @@
 cd ..
 cd public
 cd client
-start cmd /k "compass watch --production"
+start cmd /k "compass watch -output-style=compressed"
 cd ..
 cd res
-compass watch --production
+compass watch --output-style=compressed
 pause
