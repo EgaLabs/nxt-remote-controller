@@ -1,7 +1,7 @@
 cd ..
 cd public
 cd client
-compass watch --production
+start cmd /k "compass watch --production"
 cd ..
 cd res
 compass watch --production
