@@ -1,7 +1,8 @@
 cd ..
 cd public
 cd client
-sass --style compressed --watch sass:css
+compass watch --production
 cd ..
 cd res
-sass --style compressed --watch sass:css
+compass watch --production
+pause

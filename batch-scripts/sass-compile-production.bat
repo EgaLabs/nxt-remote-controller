@@ -1,8 +1,8 @@
 cd ..
 cd public
 cd client
-compass watch
+compass compile
 cd ..
 cd res
-compass watch
+compass compile
 pause
