@@ -1,0 +1,9 @@
+@media
+only screen and (min--moz-device-pixel-ratio: 1.33)    and (min-resolution: 160.000000001dpi) and (max-resolution: 213.333333333dpi),
+only screen and (-o-min-device-pixel-ratio: 1.33/1)    and (min-resolution: 160.000000001dpi) and (max-resolution: 213.333333333dpi),
+only screen and (-webkit-min-device-pixel-ratio: 1.33) and (min-resolution: 160.000000001dpi) and (max-resolution: 213.333333333dpi),
+only screen and (min-device-pixel-ratio: 1.33)         and (min-resolution: 160.000000001dpi) and (max-resolution: 213.333333333dpi) {
+  .logo {
+    background-image: $logo-tvdpi;
+  }
+}

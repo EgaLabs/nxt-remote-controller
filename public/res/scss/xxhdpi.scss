@@ -1,0 +1,9 @@
+@media
+only screen and (min--moz-device-pixel-ratio: 3.0)    and (min-resolution: 320.000000001dpi) and (max-resolution: 480dpi),
+only screen and (-o-min-device-pixel-ratio: 3.0/1)    and (min-resolution: 320.000000001dpi) and (max-resolution: 480dpi),
+only screen and (-webkit-min-device-pixel-ratio: 3.0) and (min-resolution: 320.000000001dpi) and (max-resolution: 480dpi),
+only screen and (min-device-pixel-ratio: 3.0)         and (min-resolution: 320.000000001dpi) and (max-resolution: 480dpi) {
+  .logo {
+    background-image: $logo-xxhdpi;
+  }
+}
