@@ -1,4 +1,9 @@
+@import "compass/css3/font-face";
+
 $dark-blue: #072A36;
 $normal-blue: #178BB5;
 $light-blue: #6FCBEC;
 
+@function relativize ($a, $b) {
+  @return $a + $b;
+}
