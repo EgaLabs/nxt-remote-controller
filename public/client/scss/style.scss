@@ -1,0 +1,19 @@
+@import "compass/css3/box-sizing";
+@import "../../res/scss/reset";
+
+* {
+  outline: none;
+  text-decoration: none;
+  @include box-sizing(border-box);
+  -webkit-highlight-tap-color: transparent;
+  text-rendering: optimizeLegibility;
+}
+html, body {
+  font: normal normal normal 16px/1.7 "Roboto Condensed", "Roboto", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  width: 100%;
+  height: 100%;
+  background: #eaeaea;
+}
+#errors {
+  display: none;
+}
