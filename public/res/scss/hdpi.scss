@@ -1,8 +1,8 @@
 @media
-only screen and (min--moz-device-pixel-ratio: 1.5)    and (min-resolution: 213.333333334dpi) and (max-resolution: 240dpi),
-only screen and (-o-min-device-pixel-ratio: 1.5/1)    and (min-resolution: 213.333333334dpi) and (max-resolution: 240dpi),
-only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-resolution: 213.333333334dpi) and (max-resolution: 240dpi),
-only screen and (min-device-pixel-ratio: 1.5)         and (min-resolution: 213.333333334dpi) and (max-resolution: 240dpi) {
+only screen and (min--moz-device-pixel-ratio: 1.5)    and (min-resolution: 213.333333334dppx) and (max-resolution: 240dppx),
+only screen and (-o-min-device-pixel-ratio: 1.5/1)    and (min-resolution: 213.333333334dppx) and (max-resolution: 240dppx),
+only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-resolution: 213.333333334dppx) and (max-resolution: 240dppx),
+only screen and (min-device-pixel-ratio: 1.5)         and (min-resolution: 213.333333334dppx) and (max-resolution: 240dppx) {
   .logo {
     background-image: $logo-hdpi;
   }
