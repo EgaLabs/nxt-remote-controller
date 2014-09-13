@@ -1,3 +1,30 @@
+$host: "https://localhost";
+$resources-dir: $host + "/res/";
+
+$image-resources: $resources-dir + "img/";
+$javascript-resources: $resources-dir + "js/";
+$fonts-resources: $resources-dir + "fonts/";
+$css-resources: $resources-dir + "css/";
+$scss-resources: $resources-dir + "scss/";
+
 $dark-blue: #072A36;
 $normal-blue: #178BB5;
 $light-blue: #6FCBEC;
+
+@function absolute-url ($path) {
+  @return $host + $path;
+}
+
+@function get-image ($name, $only-path: false, $base: $image-resources) {
+  $result: $base + $name;
+  @if $only-path == false { $result: url(#{$result}); }
+  @return $result;
+}
+
+$logo-ldpi: get-image("logo/logo-48.png");
+$logo-mdpi: get-image("logo/logo-64.png");
+$logo-tvdpi: get-image("logo/logo-85.png");
+$logo-hdpi: get-image("logo/logo-96.png");
+$logo-xhdpi: get-image("logo/logo-128.png");
+$logo-xxhdpi: get-image("logo/logo-192.png");
+$logo-xxxhdpi: get-image("logo/logo-256.png");
