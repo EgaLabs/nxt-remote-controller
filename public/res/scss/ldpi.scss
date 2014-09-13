@@ -1,8 +1,8 @@
 @media
-only screen and (min--moz-device-pixel-ratio: 0.75)    and (max-resolution: 96dppx),
-only screen and (-o-min-device-pixel-ratio: 0.75/1)    and (max-resolution: 96dppx),
-only screen and (-webkit-min-device-pixel-ratio: 0.75) and (max-resolution: 96dppx),
-only screen and (min-device-pixel-ratio: 0.75)         and (max-resolution: 96dppx) {
+only screen and (min--moz-device-pixel-ratio: 0.75)    and (max-resolution: 1dppx),
+only screen and (-o-min-device-pixel-ratio: 0.75/1)    and (max-resolution: 1dppx),
+only screen and (-webkit-min-device-pixel-ratio: 0.75) and (max-resolution: 1dppx),
+only screen and (min-device-pixel-ratio: 0.75)         and (max-resolution: 1dppx) {
   .logo {
     background-image: $logo-ldpi;
   }
