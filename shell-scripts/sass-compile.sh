@@ -1,7 +1,7 @@
 cd ..
 cd public
 cd client
-compass compile
+compass clean; compass compile;
 cd ..
 cd res
-compass compile
+compass clean; compass compile;
