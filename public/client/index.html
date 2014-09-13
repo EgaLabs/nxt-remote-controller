@@ -104,7 +104,6 @@
   </noscript>
   <link rel="stylesheet" media="all" href="css/style.css">
   <script type="text/javascript" src="../res/js/Modernizr.js"></script>
-
 </head>
 <body>
   <section id="errors">
@@ -112,6 +111,18 @@
     <span id="no-sockets">You must enable WebSockets or <a title="¿How do I update my browser?" href="http://browsehappy.com/">update</a> your browser.</span>
     <span id="no-media">You must let access to your media or <a title="¿How do I update my browser?" href="http://browsehappy.com/">update</a> your browser.</span>
   </section>
+  <header>
+    <div id="logo-container">
+      <a id="logo" class="padding" href="https://localhost">
+       <div class="logo"></div>
+       <h1>NXT Remote Controller</h1>
+      </a>
+    </div>
+    <div id="count-hosts" class="padding">
+      <span id="description">Active host streamers:</span>
+      <span id="active-hosts">0</span>
+    </div>
+  </header>
   <script type="text/javascript">
   var path = [];
   if (!Modernizr.websockets) {
@@ -121,6 +132,8 @@
   }
   if (path.length > 0) {
     Modernizr.load.call(this, ["css/error.css"].concat(path));
+  } else {
+	Modernizr.load(["socket.io/socket.io.js", "js/script.js"]);  
   }
   </script>
 </body>

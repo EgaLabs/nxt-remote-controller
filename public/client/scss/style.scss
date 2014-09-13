@@ -1,12 +1,16 @@
 @import "compass/css3/box-sizing";
 @import "../../res/scss/reset";
+@import "../../res/scss/variables";
 
 * {
   outline: none;
-  text-decoration: none;
   @include box-sizing(border-box);
   -webkit-highlight-tap-color: transparent;
   text-rendering: optimizeLegibility;
+}
+a, a:visited, a:hover, a:focus {
+  text-decoration: none;
+  color: inherit;
 }
 html, body {
   font: normal normal normal 16px/1.7 "Roboto Condensed", "Roboto", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
@@ -17,3 +21,59 @@ html, body {
 #errors {
   display: none;
 }
+
+header {
+  color: white;
+  background-color: $dark-blue;
+  width: 100%;
+  
+  > * {
+    display: inline-block;
+    height: 100%;
+  }
+  
+  > #count-hosts {
+    float: right;
+    display: table;
+    > * {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    #active-hosts {
+      text-align: center;
+    }
+    #description {
+      display: table-cell;
+    }
+  }
+    
+}
+
+#logo {
+  height: 100%;
+  display: block;
+  > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  > h1 {
+    font-size: 2em;
+  }
+  > .logo {
+    height: 100%;
+    background-repeat: no-repeat;
+  }
+}
+
+@import "../../res/scss/mobile.scss";
+@import "../../res/scss/tablet.scss";
+@import "../../res/scss/desktop.scss";
+@import "../../res/scss/tv.scss";
+
+@import "../../res/scss/ldpi.scss";
+@import "../../res/scss/mdpi.scss";
+@import "../../res/scss/tvdpi.scss";
+@import "../../res/scss/hdpi.scss";
+@import "../../res/scss/xhdpi.scss";
+@import "../../res/scss/xxhdpi.scss";
+@import "../../res/scss/xxxhdpi.scss";
