@@ -26,12 +26,12 @@ header {
   color: white;
   background-color: $dark-blue;
   width: 100%;
-  
+
   > * {
     display: inline-block;
     height: 100%;
   }
-  
+
   > #count-hosts {
     float: right;
     display: table;
@@ -46,7 +46,7 @@ header {
       display: table-cell;
     }
   }
-    
+
 }
 
 #logo {
@@ -62,6 +62,16 @@ header {
   > .logo {
     height: 100%;
     background-repeat: no-repeat;
+  }
+}
+
+section {
+  width: 100%;
+  display: table;
+  text-align: center;
+  > * {
+    display: table-cell;
+    vertical-align: middle;
   }
 }
 
