@@ -48,6 +48,8 @@ var _       = require("underscore");
 var express = require("express");
 var io      = require("socket.io");
 var app     = express();
+var Users   = require("./Users.js");
+var User    = require("./User.js");
 Log.i("Dependencies: OK.");
 
 
@@ -188,9 +190,31 @@ var HttpsServer = https.createServer({
 }, app);
 
 
+
+
 /*
- * Server listening.
+ ***************************************************************************
+ * Here starts sockets connection.
  */
+var users = new Users();
+var user;
+io = io.listen(HttpsServer);
+io.on("connection", function (socket) {
+  user = new User(null, socket.id);
+  users.add(user);
+  Log.i("Added user: " + user);
+});
+
+
+
+
+
+/*
+ ***************************************************************************
+ * We start the server listening at the end of the script because of the routes.
+ */
+
+
 HttpServer.listen(unsecure_port, unsecure_ip);
 HttpsServer.listen(secure_port, secure_ip);
 
