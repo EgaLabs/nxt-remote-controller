@@ -1,4 +1,6 @@
 @import "compass/css3/box-sizing";
+@import "compass/css3/box-shadow";
+@import "compass/css3/images";
 @import "../../res/scss/reset";
 @import "../../res/scss/variables";
 
@@ -66,12 +68,65 @@ header {
 }
 
 section {
-  width: 100%;
   display: table;
   text-align: center;
+  width: 100%;
+  padding: 1em 2em;
   > * {
     display: table-cell;
     vertical-align: middle;
+  }
+  .error {
+    #loading {
+      display: none;
+    }
+    #streamers-list, #error-message {
+      display: inline;
+    }
+  }
+  .loading {
+    #loading {
+      display: inline;
+    }
+    #streamers-list, #error-message {
+      display: none;
+    }
+  }
+  .hide {
+    display: none;
+  }
+}
+
+#container {
+  margin: 0 auto;
+  display: table;
+  min-width: 280px;
+  > div {
+    width: 280px;
+    height: 350px;
+    margin: 1em 0;
+    background: white;
+    @include single-box-shadow(0px, 0px, 5px, 3px, rgba(0, 0, 0, 0.2), false);
+    > .image-container {
+      background-color: #333333;
+      height: 200px;
+      > img {
+        margin-top: 25px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.host {
+  > span {
+    display: block;
+    padding: 1.25em 0;
+  }
+  hr {
+    height: 1px;
+    border: none;
+    @include background(linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0) 100%));
   }
 }
 
