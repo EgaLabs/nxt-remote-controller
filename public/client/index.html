@@ -124,7 +124,7 @@
     </div>
   </header>
   <section>
-    <div>
+    <div id="text" class="hide">
       <span id="loading">Loading active streamers...</span>
       <div id="streamers-list">
       </div>
@@ -133,8 +133,7 @@
         <div>We haven't found any streamer host.</div>
       </span>
     </div>
-    <div>
-      
+    <div id="container" class="masonry js-masonry">
     </div>
   </section>
   <script type="text/javascript">
@@ -147,8 +146,18 @@
   if (path.length > 0) {
     Modernizr.load.call(this, ["css/error.css"].concat(path));
   } else {
-	Modernizr.load(["socket.io/socket.io.js", "js/isotope.min.js", "js/script.js"]);
+	  Modernizr.load(["socket.io/socket.io.js", "js/Masonry.min.js", "js/mustache.min.js", "js/script.js"]);
   }
   </script>
+<script type="text/x-mustache" id="host-template">
+<div class="host">
+  <div class="image-container">
+    <img src="https://www.gravatar.com/avatar/{{hash}}?s=150" width="150" height="150" title="{{email}}" />
+  </div>
+  <span class="description">{{name}}  |  {{email}}</span>
+  <hr>
+  <span class="location">{{location}}  |  {{latitude}}, {{longitude}}</span>
+</div>
+</script>
 </body>
 </html>
