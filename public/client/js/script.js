@@ -171,10 +171,11 @@
       containerResizer(container, null, masonry.items.length);
     };
     
+    
     for (var i = 0; i < 6; i++) {
       var example = renderTemplate({
         email: "example@domain.com", 
-        hash: "458a728f455940739b0f3a8ddf726d2a",
+        image: "https://localhost/img/example.png",
         name: "Example",
         location: "Spain",
         latitude: function () {
