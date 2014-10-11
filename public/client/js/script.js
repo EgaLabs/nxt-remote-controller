@@ -115,6 +115,7 @@
     maxColumns  = null,
     tempColumns = null,
     tempWidth   = null,
+    example     = null,
     
     /*
      * Returns the width that takes up a n number of columns.
@@ -166,32 +167,29 @@
     /*
      * Assigning resizing functions.
      */
-    masonry.on("beforeLayoutComplete", containerResizer);
     root.onresize = function () {
       containerResizer(container, null, masonry.items.length);
     };
+    masonry.on("beforeLayoutComplete", containerResizer);
     
+    example = renderTemplate({
+      email: "example@domain.com", 
+      image: "https://localhost/img/example.png",
+      name: "Example",
+      location: "Spain",
+      latitude: function () {
+        return _fixed(_range(-90, 90), 7);
+      },
+      longitude: function () {
+        return _fixed(_range(-180, 180), 7);
+      }
+    });
     
-    for (var i = 0; i < 6; i++) {
-      var example = renderTemplate({
-        email: "example@domain.com", 
-        image: "https://localhost/img/example.png",
-        name: "Example",
-        location: "Spain",
-        latitude: function () {
-          return _fixed(_range(-90, 90), 7);
-        },
-        longitude: function () {
-          return _fixed(_range(-180, 180), 7);
-        }
-      });
-
-      (function (data, time) {
-        window.setTimeout(function () {
-          masonry.addElements(container, [data]);
-        }, time);
-      })(example, i * 3000);
-
-    }
+    root.setTimeout(function () {
+      masonry.addElements(container, [example]);
+    }, 1000);
+    
+    var
+      io = io();
 
 })(this, document, Math, Mustache, Masonry, io);
