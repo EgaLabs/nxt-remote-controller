@@ -26,11 +26,20 @@
       "static": {
         "maxage": 86400000
       }
+    },
+    
+    {
+      "virtual": "/host/create",
+      "real": "/public/create",
+      "static": {
+        "maxage": 86400000
+      }
+    },
+    
+    {
+      "settings": "/server/router/host.js"
     }
     
-  ],
-  "vhosts": {
-      "cdn.localhost": "/server/subdomains/cdn.js"
-  }
+  ]
   
 }

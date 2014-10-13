@@ -120,11 +120,14 @@
     /*
      * Returns the width that takes up a n number of columns.
      * 
-     * f(x) = |x| * 280 + (|x| - 1) * 32, x € N, x > 0
+     * f(x) = |x| * width + (|x| - 1) * gutter
      */
+    sizeOfColumns = function (x) {
+      return x * 280 + (x - 1) * 32;
+    },
     
     /**
-     * Returns the number of columns that can fit up in the given width. Is the equivalent of f'(x) = (x + 32) / 312.
+     * Returns the number of columns that can fit up in the given width. Is the inverted sizeOfColumns'() function.
      * 
      * @param {number} x The free space to fill with columns.
      * @return {number} A natural and integer number.

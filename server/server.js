@@ -166,20 +166,26 @@ _.each(config.paths, function (pathObject, index) {
   };
   
   if (_.isString(path.static)) {
-	object = require(_dirname + path.static);
+	  object = require(_dirname + path.static);
   } else if (_.isObject(path.static)) {
     object = path.static;
   }
   
-  app.use(virtual, express.static(_dirname + real, object) );
-
+  if (path.settings) {
+    require(_dirname + path.settings)(app, config, path, _dirname);
+  } else {
+    app.use(virtual, express.static(_dirname + real, object) );
+  }
+  
 });
 
-_.each(config.vhosts, function (file, location) {
+/*
+ * Broken code.
+ _.each(config.vhosts, function (file, location) {
   var conf = require(_dirname + file);
   if (!conf.app) throw new Error("Virtual host file must export server config to as \"app\".");
   app.use( express.vhost(location, conf.app) );
-});
+});*/
 
 /*
  * HTTPS server using express.
