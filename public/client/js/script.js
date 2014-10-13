@@ -3,8 +3,31 @@
  * @author Esaú García (EgaTuts).
  * @version 1.0.0
  */
-(function (root, DOC, M, Mustache, Masonry, io) {
+(function (root, DOC, M, Mustache, Masonry, io, W) {
   "use strict";
+  
+  /*
+   * First of all we add a little modification to the when-then library
+   * to add a custom method that allows delaying async tasks.
+   */
+  
+  /**
+   * Allows delaying the callback function when the async tasks have finished.
+   */
+  W.prototype.delay = function (fn, time) {
+    var
+      self    = this,
+      args    = null,
+      timeout = time || 0;
+    return self.then(function () {
+      args = arguments;
+      root.setTimeout(function () {
+        fn.apply(self, args);
+      }, timeout);
+    });
+    
+  };
+  
   /*
    * We start defining our custom methods.
    */
@@ -17,7 +40,7 @@
    */
   var
     _range = function (min, max) {
-      return (max - min) * Math.random() + min;
+      return (max - min) * M.random() + min;
     },
 
     /**
@@ -27,7 +50,7 @@
      * @return {number} The given number with given fixed length.
      */
     _fixed = function (num, round) {
-      return (num * Math.pow(10, round) | 0) / Math.pow(10, round);
+      return (num * M.pow(10, round) | 0) / M.pow(10, round);
     },
 
     /**
@@ -91,8 +114,9 @@
     /*
      * Local variables.
      */
-    container = DOC.getElementById("container"),
-    template  = DOC.getElementById("host-template"),
+    container    = DOC.getElementById("container"),
+    template     = DOC.getElementById("host-template"),
+    add_template = DOC.getElementById("add-template"),
 
     /**
      * Renders the host template.
@@ -115,7 +139,6 @@
     maxColumns  = null,
     tempColumns = null,
     tempWidth   = null,
-    example     = null,
     
     /*
      * Returns the width that takes up a n number of columns.
@@ -175,24 +198,37 @@
     };
     masonry.on("beforeLayoutComplete", containerResizer);
     
-    example = renderTemplate({
-      email: "example@domain.com", 
-      image: "https://localhost/img/example.png",
-      name: "Example",
-      location: "Spain",
-      latitude: function () {
-        return _fixed(_range(-90, 90), 7);
-      },
-      longitude: function () {
-        return _fixed(_range(-180, 180), 7);
-      }
-    });
-    
-    root.setTimeout(function () {
-      masonry.addElements(container, [example]);
-    }, 1000);
+    W(function (pass) {
+      var addCard = _render(add_template.innerHTML, {
+        image: "https://localhost/res/img/misc/add-icon.png",
+        location: "https://localhost/host/create/",
+        title: "¿Not what you expected?",
+        description: "Be a streamer.",
+        alt: "¡Be a streamer!"
+      });
+      pass("addCard", addCard);
+    }).delay(function (res) {
+      masonry.addElements(container, [res.addCard]);
+    }, 500);
+    W(function (pass) {
+      var example = renderTemplate({
+        email: "example@domain.com", 
+        image: "https://localhost/img/example.png",
+        name: "Example",
+        location: "Spain",
+        latitude: function () {
+          return _fixed(_range(-90, 90), 7);
+        },
+        longitude: function () {
+          return _fixed(_range(-180, 180), 7);
+        }
+      });
+      pass("example", example)
+    }).delay(function (result) {
+      masonry.addElements(container, [result.example]);
+    }, 2000);
     
     var
       io = io();
 
-})(this, document, Math, Mustache, Masonry, io);
+})(this, document, Math, Mustache, Masonry, io, when);
