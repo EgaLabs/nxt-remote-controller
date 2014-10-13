@@ -151,6 +151,7 @@
 	      "https://localhost/socket.io/socket.io.js",
 	      "https://localhost/res/js/Masonry.min.js",
 	      "https://localhost/res/js/mustache.min.js",
+	      "https://localhost/res/js/when-then.min.js",
 	      "js/script.js"
 	    ]
 	  );
@@ -165,6 +166,16 @@
   <hr>
   <span class="location">{{location}}  |  {{latitude}}, {{longitude}}</span>
 </div>
+</script>
+<script type="text/x-template" id="add-template">
+<a class="host" href="{{location}}" alt="{{alt}} title="{{alt}}">
+  <div class="image-container">
+    <img src="{{image}}" width="150" height="150" title="{{alt}}" />
+  </div>
+  <span class="description">{{title}}</span>
+  <hr>
+  <span class="location">{{description}}</span>
+</a>
 </script>
 </body>
 </html>
