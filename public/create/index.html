@@ -146,7 +146,12 @@
   if (path.length > 0) {
     Modernizr.load.call(this, ["css/error.css"].concat(path));
   } else {
-    Modernizr.load(["https://localhost/socket.io/socket.io.js", "js/script.js"]);
+    Modernizr.load(
+      [
+        "https://localhost/socket.io/socket.io.js",
+        "js/script.js"
+      ]
+    );
   }
   </script>
 </body>
