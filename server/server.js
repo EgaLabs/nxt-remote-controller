@@ -66,10 +66,10 @@ var _dirname = isWindows ? __dirname.replace(/\\server$/, "") : __dirname.replac
 var http_cfg  = config.http;
 var https_cfg = config.https;
 
-var unsecure_ip   = args[0] || http.ip    || "localhost" || "127.0.0.1";
-var unsecure_port = args[1] || http.port  || 80;
-var secure_ip     = args[2] || https.ip   || "localhost" || "127.0.0.1";
-var secure_port   = args[3] || https.port || 443;
+var unsecure_ip   = args[0] || http_cfg.ip    || "localhost" || "127.0.0.1";
+var unsecure_port = args[1] || http_cfg.port  || 80;
+var secure_ip     = args[2] || https_cfg.ip   || "localhost" || "127.0.0.1";
+var secure_port   = args[3] || https_cfg.port || 443;
 
 
 Log.i("Config file (settings.json): OK.");
