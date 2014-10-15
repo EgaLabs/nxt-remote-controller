@@ -25,3 +25,4 @@ proguard/
 .project
 node_modules/
 .sass-cache/
+public/res/css/*pi.css
