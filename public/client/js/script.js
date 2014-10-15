@@ -200,8 +200,8 @@
     
     W(function (pass) {
       var addCard = _render(add_template.innerHTML, {
-        image: "https://localhost/res/img/misc/add-icon.png",
-        location: "https://localhost/host/create/",
+        image: "/res/img/misc/add-icon.png",
+        location: "/host/create/",
         title: "¿Not what you expected?",
         description: "Be a streamer.",
         alt: "¡Be a streamer!"
@@ -210,10 +210,11 @@
     }).delay(function (res) {
       masonry.addElements(container, [res.addCard]);
     }, 500);
+    
     W(function (pass) {
       var example = renderTemplate({
         email: "example@domain.com", 
-        image: "https://localhost/img/example.png",
+        image: "/img/example.png",
         name: "Example",
         location: "Spain",
         latitude: function () {
