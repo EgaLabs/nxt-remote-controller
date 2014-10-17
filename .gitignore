@@ -25,4 +25,10 @@ proguard/
 .project
 node_modules/
 .sass-cache/
+
+# Uncompilable SCSS files.
 public/res/css/*pi.css
+
+# Ignoring some certificates.
+certificate/
+certificate_authority/
