@@ -7,7 +7,7 @@ $fonts-resources: $resources-dir + "fonts/";
 $css-resources: $resources-dir + "css/";
 $scss-resources: $resources-dir + "scss/";
 
-$dark-blue: #072A36;
+
 $normal-blue: #178BB5;
 $light-blue: #6FCBEC;
 
@@ -28,3 +28,12 @@ $logo-hdpi: get-image("logo/logo-96.png");
 $logo-xhdpi: get-image("logo/logo-128.png");
 $logo-xxhdpi: get-image("logo/logo-192.png");
 $logo-xxxhdpi: get-image("logo/logo-256.png");
+
+// Main page styles.
+$body-color: #505050;
+$body-background: #eaeaea;
+
+$header-color: #fff;
+$header-background: #072A36;
+
+$section-padding: 1em 2em;
