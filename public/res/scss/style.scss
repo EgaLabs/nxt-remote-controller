@@ -1,0 +1,68 @@
+@import "compass/css3/box-sizing";
+@import "compass/css3/box-shadow";
+@import "compass/css3/images";
+@import "reset";
+@import "variables";
+
+* {
+  outline: none;
+  @include box-sizing(border-box);
+  -webkit-highlight-tap-color: transparent;
+  text-rendering: optimizeLegibility;
+}
+
+a, a:visited, a:hover, a:focus {
+  text-decoration: none;
+  color: inherit;
+}
+
+html, body {
+  font: normal normal normal 16px/1.7 "Roboto Condensed", "Roboto", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+  width: 100%;
+  height: 100%;
+  color: $body-color;
+  background: $body-background;
+}
+
+#errors {
+  display: none;
+}
+
+header {
+  color: $header-color;
+  background-color: $header-background;
+  width: 100%;
+
+  > * {
+    display: inline-block;
+    height: 100%;
+  }
+
+}
+
+#logo {
+  height: 100%;
+  display: block;
+  
+  > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  > h1 {
+    font-size: 2em;
+  }
+  
+  > .logo {
+    height: 100%;
+    background-repeat: no-repeat;
+  }
+  
+}
+
+section {
+  display: table;
+  text-align: center;
+  width: 100%;
+  padding: $section-padding;
+}
