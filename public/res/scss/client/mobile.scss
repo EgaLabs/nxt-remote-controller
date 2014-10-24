@@ -1,0 +1,34 @@
+@media only screen and (min-width: 320px) {
+  
+  header {
+    height: 3em;
+    
+    .padding {
+      padding: 0.3em 0.5em 0.3em 1em;
+    }
+    
+    > #count-hosts {
+      font-size: 1em;
+      #description {
+        display: none;
+      }
+      #active-hosts {
+        width: 1.5em;
+      }
+    }
+  }
+  
+  #logo {
+     
+     > .logo {
+       width: 2.375em;
+       background-size: 2.375em;
+       margin-right: 1em;
+     }
+     
+     > h1 {
+       font-size: 1em;
+     }
+  }
+  
+}
