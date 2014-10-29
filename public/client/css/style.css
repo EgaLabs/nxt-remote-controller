@@ -61,7 +61,7 @@ table {
   border-spacing: 0;
 }
 
-/* line 7, ../scss/style.scss */
+/* line 7, ../../res/scss/style.scss */
 * {
   outline: none;
   -moz-box-sizing: border-box;
@@ -71,115 +71,92 @@ table {
   text-rendering: optimizeLegibility;
 }
 
-/* line 13, ../scss/style.scss */
+/* line 14, ../../res/scss/style.scss */
 a, a:visited, a:hover, a:focus {
   text-decoration: none;
   color: inherit;
 }
 
-/* line 17, ../scss/style.scss */
+/* line 19, ../../res/scss/style.scss */
 html, body {
   font: normal normal normal 16px/1.7 "Roboto Condensed", "Roboto", "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
   width: 100%;
   height: 100%;
+  color: #505050;
   background: #eaeaea;
 }
 
-/* line 23, ../scss/style.scss */
+/* line 27, ../../res/scss/style.scss */
 #errors {
   display: none;
 }
 
-/* line 27, ../scss/style.scss */
+/* line 31, ../../res/scss/style.scss */
 header {
-  color: white;
+  color: #fff;
   background-color: #072A36;
   width: 100%;
 }
-/* line 32, ../scss/style.scss */
+/* line 36, ../../res/scss/style.scss */
 header > * {
   display: inline-block;
   height: 100%;
 }
-/* line 37, ../scss/style.scss */
-header > #count-hosts {
-  float: right;
-  display: table;
-}
-/* line 40, ../scss/style.scss */
-header > #count-hosts > * {
-  display: table-cell;
-  vertical-align: middle;
-}
-/* line 44, ../scss/style.scss */
-header > #count-hosts #active-hosts {
-  text-align: center;
-}
-/* line 47, ../scss/style.scss */
-header > #count-hosts #description {
-  display: table-cell;
-}
 
-/* line 54, ../scss/style.scss */
+/* line 43, ../../res/scss/style.scss */
 #logo {
   height: 100%;
   display: block;
 }
-/* line 57, ../scss/style.scss */
+/* line 47, ../../res/scss/style.scss */
 #logo > * {
   display: inline-block;
   vertical-align: middle;
 }
-/* line 61, ../scss/style.scss */
+/* line 52, ../../res/scss/style.scss */
 #logo > h1 {
   font-size: 2em;
 }
-/* line 64, ../scss/style.scss */
+/* line 56, ../../res/scss/style.scss */
 #logo > .logo {
   height: 100%;
   background-repeat: no-repeat;
 }
 
-/* line 70, ../scss/style.scss */
+/* line 63, ../../res/scss/style.scss */
 section {
   display: table;
   text-align: center;
   width: 100%;
   padding: 1em 2em;
 }
-/* line 75, ../scss/style.scss */
-section > * {
+
+/* line 5, ../scss/style.scss */
+header > #count-hosts {
+  float: right;
+  display: table;
+}
+/* line 9, ../scss/style.scss */
+header > #count-hosts > * {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 80, ../scss/style.scss */
-section .error #loading {
-  display: none;
+/* line 14, ../scss/style.scss */
+header > #count-hosts #active-hosts {
+  text-align: center;
 }
-/* line 83, ../scss/style.scss */
-section .error #streamers-list, section .error #error-message {
-  display: inline;
-}
-/* line 88, ../scss/style.scss */
-section .loading #loading {
-  display: inline;
-}
-/* line 91, ../scss/style.scss */
-section .loading #streamers-list, section .loading #error-message {
-  display: none;
-}
-/* line 95, ../scss/style.scss */
-section .hide {
-  display: none;
+/* line 18, ../scss/style.scss */
+header > #count-hosts #description {
+  display: table-cell;
 }
 
-/* line 100, ../scss/style.scss */
+/* line 26, ../scss/style.scss */
 #container {
   margin: 0 auto;
   display: table;
   min-width: 280px;
 }
-/* line 104, ../scss/style.scss */
+/* line 31, ../scss/style.scss */
 #container > * {
   width: 280px;
   height: 350px;
@@ -189,23 +166,23 @@ section .hide {
   -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.2);
 }
-/* line 110, ../scss/style.scss */
+/* line 38, ../scss/style.scss */
 #container > * > .image-container {
   background-color: #333333;
   height: 200px;
 }
-/* line 113, ../scss/style.scss */
+/* line 42, ../scss/style.scss */
 #container > * > .image-container > img {
   margin-top: 25px;
   border-radius: 50%;
 }
 
-/* line 122, ../scss/style.scss */
+/* line 55, ../scss/style.scss */
 .host > span {
   display: block;
   padding: 1.25em 0;
 }
-/* line 126, ../scss/style.scss */
+/* line 60, ../scss/style.scss */
 .host hr {
   height: 1px;
   border: none;
@@ -217,175 +194,175 @@ section .hide {
 }
 
 @media only screen and (min-width: 320px) {
-  /* line 3, ../../res/scss/mobile.scss */
+  /* line 3, ../../res/scss/client/mobile.scss */
   header {
     height: 3em;
   }
-  /* line 6, ../../res/scss/mobile.scss */
+  /* line 6, ../../res/scss/client/mobile.scss */
   header .padding {
     padding: 0.3em 0.5em 0.3em 1em;
   }
-  /* line 10, ../../res/scss/mobile.scss */
+  /* line 10, ../../res/scss/client/mobile.scss */
   header > #count-hosts {
     font-size: 1em;
   }
-  /* line 12, ../../res/scss/mobile.scss */
+  /* line 12, ../../res/scss/client/mobile.scss */
   header > #count-hosts #description {
     display: none;
   }
-  /* line 15, ../../res/scss/mobile.scss */
+  /* line 15, ../../res/scss/client/mobile.scss */
   header > #count-hosts #active-hosts {
     width: 1.5em;
   }
 
-  /* line 23, ../../res/scss/mobile.scss */
+  /* line 23, ../../res/scss/client/mobile.scss */
   #logo > .logo {
     width: 2.375em;
     background-size: 2.375em;
     margin-right: 1em;
   }
-  /* line 29, ../../res/scss/mobile.scss */
+  /* line 29, ../../res/scss/client/mobile.scss */
   #logo > h1 {
     font-size: 1em;
   }
 }
 @media only screen and (min-width: 768px) {
-  /* line 3, ../../res/scss/tablet.scss */
+  /* line 3, ../../res/scss/client/tablet.scss */
   header {
     height: 3.75em;
   }
-  /* line 6, ../../res/scss/tablet.scss */
+  /* line 6, ../../res/scss/client/tablet.scss */
   header .padding {
     padding: 0.3em 0.5em 0.3em 1.5em;
   }
-  /* line 10, ../../res/scss/tablet.scss */
+  /* line 10, ../../res/scss/client/tablet.scss */
   header > #count-hosts {
     font-size: 1.25em;
   }
-  /* line 12, ../../res/scss/tablet.scss */
+  /* line 12, ../../res/scss/client/tablet.scss */
   header > #count-hosts #description {
     display: table-cell;
   }
-  /* line 15, ../../res/scss/tablet.scss */
+  /* line 15, ../../res/scss/client/tablet.scss */
   header > #count-hosts #active-hosts {
     width: 1.5em;
   }
 
-  /* line 23, ../../res/scss/tablet.scss */
+  /* line 23, ../../res/scss/client/tablet.scss */
   #logo > .logo {
     width: 3.125em;
     background-size: 3.125em;
     margin-right: 1em;
   }
-  /* line 29, ../../res/scss/tablet.scss */
+  /* line 29, ../../res/scss/client/tablet.scss */
   #logo > h1 {
     font-size: 1.25em;
   }
 }
 @media only screen and (min-width: 1224px) {
-  /* line 3, ../../res/scss/desktop.scss */
+  /* line 3, ../../res/scss/client/desktop.scss */
   header {
     height: 4.5em;
   }
-  /* line 6, ../../res/scss/desktop.scss */
+  /* line 6, ../../res/scss/client/desktop.scss */
   header .padding {
     padding: 0.25em 1em 0.25em 2em;
   }
-  /* line 10, ../../res/scss/desktop.scss */
+  /* line 10, ../../res/scss/client/desktop.scss */
   header > #count-hosts {
     font-size: 1.5em;
   }
-  /* line 12, ../../res/scss/desktop.scss */
+  /* line 12, ../../res/scss/client/desktop.scss */
   header > #count-hosts #description {
     display: table-cell;
   }
-  /* line 15, ../../res/scss/desktop.scss */
+  /* line 15, ../../res/scss/client/desktop.scss */
   header > #count-hosts #active-hosts {
     width: 2em;
   }
 
-  /* line 24, ../../res/scss/desktop.scss */
+  /* line 24, ../../res/scss/client/desktop.scss */
   #logo > .logo {
     width: 4em;
     background-size: 4em;
     margin-right: 1em;
   }
-  /* line 30, ../../res/scss/desktop.scss */
+  /* line 30, ../../res/scss/client/desktop.scss */
   #logo > h1 {
     font-size: 2em;
   }
 }
 @media only screen and (min-width: 1824px) {
-  /* line 3, ../../res/scss/tv.scss */
+  /* line 3, ../../res/scss/client/tv.scss */
   header {
     height: 7em;
   }
-  /* line 6, ../../res/scss/tv.scss */
+  /* line 6, ../../res/scss/client/tv.scss */
   header .padding {
     padding: 0.25em 1em 0.25em 2.5em;
   }
-  /* line 10, ../../res/scss/tv.scss */
+  /* line 10, ../../res/scss/client/tv.scss */
   header > #count-hosts {
     font-size: 2.5em;
   }
-  /* line 12, ../../res/scss/tv.scss */
+  /* line 12, ../../res/scss/client/tv.scss */
   header > #count-hosts #description {
     display: table-cell;
   }
-  /* line 15, ../../res/scss/tv.scss */
+  /* line 15, ../../res/scss/client/tv.scss */
   header > #count-hosts #active-hosts {
     width: 2em;
   }
 
-  /* line 24, ../../res/scss/tv.scss */
+  /* line 24, ../../res/scss/client/tv.scss */
   #logo > .logo {
     width: 6.5em;
     background-size: 6.5em;
     margin-right: 1em;
   }
-  /* line 30, ../../res/scss/tv.scss */
+  /* line 30, ../../res/scss/client/tv.scss */
   #logo > h1 {
     font-size: 3em;
   }
 }
 @media only screen and (min--moz-device-pixel-ratio: 0.75) and (max-resolution: 1dppx), only screen and (-o-min-device-pixel-ratio: 0.75 / 1) and (max-resolution: 1dppx), only screen and (-webkit-min-device-pixel-ratio: 0.75) and (max-resolution: 1dppx), only screen and (min-device-pixel-ratio: 0.75) and (max-resolution: 1dppx) {
-  /* line 6, ../../res/scss/ldpi.scss */
+  /* line 6, ../../res/scss/_ldpi.scss */
   .logo {
     background-image: url(/res/img/logo/logo-48.png);
   }
 }
 @media only screen and (min--moz-device-pixel-ratio: 1) and (min-resolution: 1dppx) and (max-resolution: 1.66667dppx), only screen and (-o-min-device-pixel-ratio: 1 / 1) and (min-resolution: 1dppx) and (max-resolution: 1.66667dppx), only screen and (-webkit-min-device-pixel-ratio: 1) and (min-resolution: 1dppx) and (max-resolution: 1.66667dppx), only screen and (min-device-pixel-ratio: 1) and (min-resolution: 1dppx) and (max-resolution: 1.66667dppx) {
-  /* line 6, ../../res/scss/mdpi.scss */
+  /* line 6, ../../res/scss/_mdpi.scss */
   .logo {
     background-image: url(/res/img/logo/logo-64.png);
   }
 }
 @media only screen and (min--moz-device-pixel-ratio: 1.33) and (min-resolution: 1.66667dppx) and (max-resolution: 2.22222dppx), only screen and (-o-min-device-pixel-ratio: 1.33 / 1) and (min-resolution: 1.66667dppx) and (max-resolution: 2.22222dppx), only screen and (-webkit-min-device-pixel-ratio: 1.33) and (min-resolution: 1.66667dppx) and (max-resolution: 2.22222dppx), only screen and (min-device-pixel-ratio: 1.33) and (min-resolution: 1.66667dppx) and (max-resolution: 2.22222dppx) {
-  /* line 6, ../../res/scss/tvdpi.scss */
+  /* line 6, ../../res/scss/_tvdpi.scss */
   .logo {
     background-image: url(/res/img/logo/logo-85.png);
   }
 }
 @media only screen and (min--moz-device-pixel-ratio: 1.5) and (min-resolution: 2.22222dppx) and (max-resolution: 2.5dppx), only screen and (-o-min-device-pixel-ratio: 1.5 / 1) and (min-resolution: 2.22222dppx) and (max-resolution: 2.5dppx), only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-resolution: 2.22222dppx) and (max-resolution: 2.5dppx), only screen and (min-device-pixel-ratio: 1.5) and (min-resolution: 2.22222dppx) and (max-resolution: 2.5dppx) {
-  /* line 6, ../../res/scss/hdpi.scss */
+  /* line 6, ../../res/scss/_hdpi.scss */
   .logo {
     background-image: url(/res/img/logo/logo-96.png);
   }
 }
 @media only screen and (min--moz-device-pixel-ratio: 2) and (min-resolution: 2.5dppx) and (max-resolution: 3.33333dppx), only screen and (-o-min-device-pixel-ratio: 2 / 1) and (min-resolution: 2.5dppx) and (max-resolution: 3.33333dppx), only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 2.5dppx) and (max-resolution: 3.33333dppx), only screen and (min-device-pixel-ratio: 2) and (min-resolution: 2.5dppx) and (max-resolution: 3.33333dppx) {
-  /* line 6, ../../res/scss/xhdpi.scss */
+  /* line 6, ../../res/scss/_xhdpi.scss */
   .logo {
     background-image: url(/res/img/logo/logo-128.png);
   }
 }
 @media only screen and (min--moz-device-pixel-ratio: 3) and (min-resolution: 3.33333dppx) and (max-resolution: 5dppx), only screen and (-o-min-device-pixel-ratio: 3 / 1) and (min-resolution: 3.33333dppx) and (max-resolution: 5dppx), only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 3.33333dppx) and (max-resolution: 5dppx), only screen and (min-device-pixel-ratio: 3) and (min-resolution: 3.33333dppx) and (max-resolution: 5dppx) {
-  /* line 6, ../../res/scss/xxhdpi.scss */
+  /* line 6, ../../res/scss/_xxhdpi.scss */
   .logo {
     background-image: url(/res/img/logo/logo-192.png);
   }
 }
 @media only screen and (min--moz-device-pixel-ratio: 4) and (min-resolution: 5dppx), only screen and (-o-min-device-pixel-ratio: 4 / 1) and (min-resolution: 5dppx), only screen and (-webkit-min-device-pixel-ratio: 4) and (min-resolution: 5dppx), only screen and (min-device-pixel-ratio: 4) and (min-resolution: 5dppx) {
-  /* line 6, ../../res/scss/xxxhdpi.scss */
+  /* line 6, ../../res/scss/_xxxhdpi.scss */
   .logo {
     background-image: url(/res/img/logo/logo-256.png);
   }

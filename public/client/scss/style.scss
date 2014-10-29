@@ -1,5 +1,28 @@
 @import "../../res/scss/style.scss";
 
+header {
+	
+	> #count-hosts {
+     float: right;
+     display: table;
+     
+     > * {
+       display: table-cell;
+       vertical-align: middle;
+     }
+     
+     #active-hosts {
+       text-align: center;
+     }
+     
+     #description {
+       display: table-cell;
+     }
+     
+   }
+   
+}
+
 #container {
   margin: 0 auto;
   display: table;
