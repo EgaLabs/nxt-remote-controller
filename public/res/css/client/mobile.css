@@ -1,0 +1,33 @@
+@media only screen and (min-width: 320px) {
+  /* line 3, ../../scss/client/mobile.scss */
+  header {
+    height: 3em;
+  }
+  /* line 6, ../../scss/client/mobile.scss */
+  header .padding {
+    padding: 0.3em 0.5em 0.3em 1em;
+  }
+  /* line 10, ../../scss/client/mobile.scss */
+  header > #count-hosts {
+    font-size: 1em;
+  }
+  /* line 12, ../../scss/client/mobile.scss */
+  header > #count-hosts #description {
+    display: none;
+  }
+  /* line 15, ../../scss/client/mobile.scss */
+  header > #count-hosts #active-hosts {
+    width: 1.5em;
+  }
+
+  /* line 23, ../../scss/client/mobile.scss */
+  #logo > .logo {
+    width: 2.375em;
+    background-size: 2.375em;
+    margin-right: 1em;
+  }
+  /* line 29, ../../scss/client/mobile.scss */
+  #logo > h1 {
+    font-size: 1em;
+  }
+}
