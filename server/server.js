@@ -39,17 +39,19 @@ var quit = function () {
  */
 Log.t("start").d("Starting server...");
 
-var fs      = require("fs");
-var http    = require("http");
-var https   = require("https");
-var url     = require("url");
-var mime    = require("mime");
-var _       = require("underscore");
-var express = require("express");
-var io      = require("socket.io");
-var app     = express();
-var Users   = require("./Users.js");
-var User    = require("./User.js");
+var fs        = require("fs");
+var http      = require("http");
+var https     = require("https");
+var url       = require("url");
+var mime      = require("mime");
+var _         = require("underscore");
+var express   = require("express");
+var io        = require("socket.io");
+var app       = express();
+var socketJwt = require("socketio-jwt");
+var Users     = require("./Users.js");
+var users     = new Users();
+var User      = require("./User.js");
 Log.i("Dependencies: OK.");
 
 
@@ -70,7 +72,6 @@ var unsecure_ip   = args[0] || http_cfg.ip    || "localhost" || "127.0.0.1";
 var unsecure_port = args[1] || http_cfg.port  || 80;
 var secure_ip     = args[2] || https_cfg.ip   || "localhost" || "127.0.0.1";
 var secure_port   = args[3] || https_cfg.port || 443;
-
 
 Log.i("Config file (settings.json): OK.");
 
@@ -172,7 +173,7 @@ _.each(config.paths, function (pathObject, index) {
   }
   
   if (path.settings) {
-    require(_dirname + path.settings)(app, config, path, _dirname);
+    require(_dirname + path.settings)(app, config, path, _dirname, users);
   } else {
     app.use(virtual, express.static(_dirname + real, object) );
   }
@@ -202,7 +203,6 @@ var HttpsServer = https.createServer({
  ***************************************************************************
  * Here starts sockets connection.
  */
-var users = new Users();
 var user;
 io = io.listen(HttpsServer);
 io.on("connection", function (socket) {

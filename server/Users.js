@@ -1,25 +1,93 @@
+var exports = module.exports;
+
 var Users = function () {
 	this.users = {};
 };
 
-Users.prototype.uuids = [];
-Users.prototype.uuid = (function () {
+var proto = "prototype";
+
+/*
+ * Stored UUID's.
+ */
+Users[proto].uuids = [];
+Users[proto].uuid_spliter = "-";
+
+/*
+ * Checks if UUID exists. If one UUID is destroyed it will be available. 
+ */
+Users[proto].exists_uuid = function (id) {
+  return this.uuids.indexOf(id) > -1;
+};
+
+/*
+ * Deletes a generated/saved UUID from the Array.
+ */
+Users[proto].remove_uuid = function (id) {
+  if (this.exists_uuid(id)) this.uuids.splice(this.uuids.indexOf(id), 1);
+  return this;
+};
+
+/*
+ * Saves the given UUID in the Array.
+ */
+Users[proto].save_uuid = function (id) {
+  if (!this.exists_uuid(id)) this.uuids.push(id);
+  return this;
+};
+
+/*
+ * Generates a new UUID unique in the Users.uuids Array.
+ */
+Users[proto].generate_uuid = (function () {
   var block = function () {
     return ( (Math.random() * 0xffff) | 0).toString(16)
   };
   return function () {
-	var uuID = block() + s + block() + s + block() + s + block();
-	return Users.uuids.indexOf(uuID) > -1 ? Users.uuid() : uuID;
-  }
+    var spliter = this.uuid_spliter,
+	      uuID = block() + spliter + block() + spliter + block() + spliter + block();
+	  return this.exists_uuid(uuID) > -1 ? this.generate_uuid() : uuID;
+  };
 });
 
-Users.prototype.add = function (user) {
+/*
+ * Checks if user exists.
+ */
+Users[proto].exists_user = function (user) {
+  if (typeof user == "string") return !!this.users[user] && this.exists_uuid(user);
+  return this.exists_user(user.id);
+};
+
+/*
+ * Removes existing user.
+ */
+Users[proto].remove_user = function (user) {
+  if (typeof user == "string")
+  {
+    delete this.users[user];
+    this.remove_uuid(user);
+    return this;
+  }
+  return this.remove_user(user.id);
+};
+
+/*
+ * Saves the user.
+ */
+Users[proto].save_user = function (user) {
+  if (!this.exists_user(user)) this.save_uuid(user.id).users[user.id] = user;
+  return this;
+};
+
+/*
+ * Saves the user and listens to ID changes.
+ */
+Users[proto].register_user = function (user) {
+  if (this.exists_user(id)) return this;
   var self = this;
-  var id = user.id;
-  if ( !this.users[id] ) this.users[id] = user;
-  user.onChangeId(function (newUser, oldId) {
-    self.users[oldId] = undefined;
-    self.users[newUser.id] = newUser;
+  this.save_user(user);
+  user.onChangeId(function (client, uuid) {
+    self.remove_user(uuid).save_user(client);
   });
 };
+
 module.exports = Users;
