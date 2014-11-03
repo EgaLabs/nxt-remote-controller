@@ -62,7 +62,7 @@ table {
 }
 
 /* line 7, ../scss/style.scss */
-* {
+*, *:before, *:after {
   outline: none;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -104,26 +104,31 @@ header > * {
 }
 
 /* line 43, ../scss/style.scss */
+#logo-container {
+  float: left;
+}
+
+/* line 47, ../scss/style.scss */
 #logo {
   height: 100%;
   display: block;
 }
-/* line 47, ../scss/style.scss */
+/* line 51, ../scss/style.scss */
 #logo > * {
   display: inline-block;
   vertical-align: middle;
 }
-/* line 52, ../scss/style.scss */
+/* line 56, ../scss/style.scss */
 #logo > h1 {
   font-size: 2em;
 }
-/* line 56, ../scss/style.scss */
+/* line 60, ../scss/style.scss */
 #logo > .logo {
   height: 100%;
   background-repeat: no-repeat;
 }
 
-/* line 63, ../scss/style.scss */
+/* line 67, ../scss/style.scss */
 section {
   display: table;
   text-align: center;

@@ -4,7 +4,7 @@
 @import "reset";
 @import "variables";
 
-* {
+*, *:before, *:after {
   outline: none;
   @include box-sizing(border-box);
   -webkit-highlight-tap-color: transparent;
@@ -38,6 +38,10 @@ header {
     height: 100%;
   }
 
+}
+
+#logo-container {
+	float: left;
 }
 
 #logo {
