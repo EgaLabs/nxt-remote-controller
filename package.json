@@ -10,7 +10,9 @@
     "express": "~3.14.0",
     "socket.io": "~1.0.6",
     "underscore": "~1.6.0",
-    "mime": "~1.2.11"
+    "mime": "~1.2.11",
+    "jsonwebtoken": "~1.1.2",
+    "jwtauth-socket": "~0.1.1"
   },
   
   "author": "Esaú García <egatuts@gmail.com> (http://www.egatuts.com)",
@@ -31,7 +33,6 @@
       "type": "twitter",
       "url": "http://twitter.com/EgaTuts"
     },
-    
     {
       "type": "google+",
       "url": "https://plus.google.com/u/0/110756475333378521990/posts"
@@ -40,7 +41,6 @@
       "type": "google+",
       "url": "https://google.com/+EgaTuts"
     },
-    
     {
       "type": "github",
       "url": "https://github.com/EgaTuts"
