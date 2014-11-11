@@ -1,9 +1,18 @@
 var exports = module.exports;
 
 var Users = require("./Users.js");
+var md5   = require("MD5");
 
 var User = function (data) {
-  this._id = data.id || Users.uuid();
+  this._id        = data.id || Users.uuid();
+  this._name      = data.name || "";
+  this._email     = data.email || "";
+  this._latitude  = data.latitude || "";
+  this._longitude = data.longitude || "";
+  this._location  = data.location || "";
+  this._host      = data.host || false;
+  this._connected = data.connected || false;
+  if (!!data.password) this.password = data.password;
 };
 
 User.prototype = {
@@ -11,6 +20,7 @@ User.prototype = {
   _id:        "",
   _name:      "",
   _email:     "",
+  _password:  "",
   _latitude:  "",
   _longitude: "",
   _location:  "",
@@ -60,6 +70,14 @@ User.prototype = {
   
   get email () {
     return this._email;
+  },
+  
+  set password (val) {
+    this._password = md5(val);
+  },
+  
+  get password () {
+    return this._password;
   },
   
   set latitude (val) {

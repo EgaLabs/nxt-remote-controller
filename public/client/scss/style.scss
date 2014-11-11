@@ -15,8 +15,12 @@ header {
        text-align: center;
      }
      
-     #description {
-       display: table-cell;
+     #loading {
+       margin-right: 8px;
+     }
+     
+     #loading.hide {
+       display: none;
      }
      
    }
@@ -63,6 +67,54 @@ header {
     @include background(linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0) 100%));
   }
   
+}
+
+.loading-tip.hide {
+	display: none;
+}
+
+.loading-tip {
+	font-size: 12px;
+	color: white;
+	position: absolute;
+  cursor: default;
+  z-index: 999;
+  margin-left: -68px;
+}
+
+.loading-tip:before {
+	content: "";
+	background: url("/res/img/misc/spinner128.gif");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	display: block;
+	width: 60px;
+	height: 60px;
+	padding: 8px;
+	margin-right: 8px;
+}
+
+.loading-tip:hover > span{
+	display: block;
+}
+
+.loading-tip span {
+	display: none;
+	text-align: left;
+	background-color: black;
+	padding: 10px;
+	line-height: 1.4;
+}
+
+.loading-tip span:before {
+	position: absolute;
+	content: "";
+	width: 0;
+	height: 0;
+	border: 6px solid transparent;
+	border-bottom-color: black;
+	right: 10;
+	top: -12px;
 }
 
 @import "../../res/scss/client/style_footer.scss";

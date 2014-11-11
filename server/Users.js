@@ -90,4 +90,29 @@ Users[proto].register_user = function (user) {
   });
 };
 
+/*
+ * Filters over all the users.
+ */
+Users[proto].filter = function (fn) {
+  var result = [], check = null;
+  for (var user in this.users) {
+    if ( this.users.hasOwnProperty(user) ) {
+      check = fn(this.users[user]);
+      if (typeof check == "boolean")
+      {
+        if (check == true) result[result.length] = this.users[user];
+      }
+      if (!!check) result[result.length] = check;
+    }
+  }
+  return result;
+};
+
+/*
+ * Authenticate an user.
+ */
+Users[proto].auth = function (email, password) {
+  this.filter(function () {});
+};
+
 module.exports = Users;

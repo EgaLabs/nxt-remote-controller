@@ -3,7 +3,7 @@
  * @author Esaú García (EgaTuts).
  * @version 1.0.0
  */
-(function (root, DOC, M, Mustache, Masonry, io, W) {
+(function (root, DOC, M, Mustache, Masonry, io, W, storage, pegasus) {
   "use strict";
   
   /*
@@ -117,6 +117,8 @@
     container    = DOC.getElementById("container"),
     template     = DOC.getElementById("host-template"),
     add_template = DOC.getElementById("add-template"),
+    tip          = DOC.getElementById("loading"),
+    tip_message  = DOC.getElementById("loading-tip"),
 
     /**
      * Renders the host template.
@@ -229,7 +231,12 @@
       masonry.addElements(container, [result.example]);
     }, 2000);
     
-    var
-      io = io();
+    /*
+     * Here starts async tasks.
+     */
+    var resquest = pegasus("/request-token");
+    request.then(function (data, xhr) {
+      
+    });
 
-})(this, document, Math, Mustache, Masonry, io, when);
+})(this, document, Math, Mustache, Masonry, io, when, depot, pegasus);

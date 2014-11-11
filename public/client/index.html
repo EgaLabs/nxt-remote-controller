@@ -104,6 +104,8 @@
   </noscript>
   <link rel="stylesheet" media="all" href="/css/style.css">
   <script type="text/javascript" src="/res/js/Modernizr.js"></script>
+  <script type="text/javascript" src="/res/js/localstorage-fallback.min.js"></script>
+  <script type="text/javascript" src="/res/js/depot.min.js"></script>
 </head>
 <body>
   <section id="errors">
@@ -119,6 +121,9 @@
       </a>
     </div>
     <div id="count-hosts" class="padding">
+      <div id="loading" class="loading-tip hide">
+        <span id="loading-tip">Loading page...</span>
+      </div>
       <span id="description">Active host streamers:</span>
       <span id="active-hosts">-</span>
     </div>
@@ -126,27 +131,7 @@
   <section>
     <div id="container" class="masonry js-masonry"></div>
   </section>
-  <script type="text/javascript">
-  var path = [];
-  if (!Modernizr.websockets) {
-    path.push("css/error-nosockets.css");
-  } else if (!Modernizr.getusermedia) {
-    path.push("css/error-nomedia.css");
-  }
-  if (path.length > 0) {
-    Modernizr.load.call(this, ["css/error.css"].concat(path));
-  } else {
-	  Modernizr.load(
-	    [
-	      "/socket.io/socket.io.js",
-	      "/res/js/Masonry.min.js",
-	      "/res/js/Mustache.min.js",
-	      "/res/js/when-then.min.js",
-	      "js/script.js"
-	    ]
-	  );
-  }
-  </script>
+  <script async defer type="text/javascript" src="/js/loader.js"></script>
 <script type="text/x-mustache" id="host-template">
 <div class="host">
   <div class="image-container">

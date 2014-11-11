@@ -4,20 +4,31 @@ var
   validName  = new RegExp("^(((["+letters+"]+)((-["+letters+"]+)*)(('(["+letters+"]+)?)*)|())( ?)){1,4}$"),
   validEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   validCoord = /^[+-]?([0-9]|[1-9][0-9]|[1][0-7][0-9]|180)\.[0-9]{15}$/,
+  validToken = /^[a-fA-F0-9]{32}$/,
   anything   = /^.+$/,
-  storage    = depot("userdata"),
+  userdata   = depot("userdata"),
   fields     = ["name",    "email",    "latitude", "longitude", "location", "token"   ],
   validators = [validName, validEmail, validCoord, validCoord,  anything,   validToken],
-  data       = function (data) {
-    if (arguments.length === 0) return storage.get(0);
-    return storage.update(0, data);
-  };
+  storage    = function (data) {
+    if (!!data) return userdata.get(0);
+    return userdata.update(0, data);
+  },
+  i = 0,
+  privateData = null;
   
 /*
  * Init storage.
  */
-storage.save({});
-    
+if ( !storage() ) userdata.save({ name: "", email: "", latitude: "", longitude: "", location: "", token: "", timestamp: "" });
+
+privateData = storage();
+for (; i < fields.length; i++) {
+  if ( !validators[i].test(privateData[ fields[i] ]) ) {
+    storage({ token: "" });
+    window.location.href = "/login";
+  }
+}
+
 if (!Modernizr.websockets) {
   path.push("css/error-nosockets.css");
 } else if (!Modernizr.getusermedia) {
@@ -27,7 +38,7 @@ if (!Modernizr.websockets) {
 if (path.length > 0) {
   Modernizr.load.call(this, ["css/error.css"].concat(path));
 } else {
-  /**Modernizr.load(
+  Modernizr.load(
     [
       "/socket.io/socket.io.js",
       "/res/js/Masonry.min.js",
@@ -36,5 +47,5 @@ if (path.length > 0) {
       "/res/js/pegasus.min.js",
       "js/script.js"
     ]
-  );**/
+  );
 }

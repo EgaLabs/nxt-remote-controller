@@ -49,6 +49,7 @@ var express   = require("express");
 var io        = require("socket.io");
 var app       = express();
 var socketJwt = require("socketio-jwt");
+var jsonwt    = require("jsonwebtoken");
 var Users     = require("./Users.js");
 var users     = new Users();
 var User      = require("./User.js");
@@ -86,20 +87,18 @@ var redirect = function (request, response) {
    * Exit if request method is not GET.
    */
   if (request.method !== "GET") {
-	response.writeHead(405);
-	response.end("Unsupported request method. Only GET requests allowed.");
-	return;
+    response.writeHead(405);
+    response.end("Unsupported request method. Only GET requests allowed.");
+    return;
   }
 
   /*
    * Permanently redirect to HTTPS. Temporally disallowed for testing purposes.
    */
-  /*
   response.writeHead(301, {
     "Content-Length": "0",
     "Location": "https://" + secure_ip + ":" + secure_port + url.parse(resquest.url).pathname
   });
-   */
 
   /*
    * If redirect didn't worked we send the redirect path.
@@ -113,7 +112,7 @@ var redirect = function (request, response) {
   try {
     exists = fs.existsSync(reqPath) && fs.lstatSync(reqPath).isFile();
   } catch (e) {
-	quit("Unknown error: " + e.message);
+    quit("Unknown error: " + e.message);
   }
   readUri = exists ? reqPath : path + "/index.html";
 
@@ -140,7 +139,7 @@ try {
   if (e.errno === 34 || e.code === "ENOENT") {
     quit("The file " + e.path + " doesn't exists. Run the Shell script located at /sh-scripts/cert.sh.");
   } else if (e.code === "EACCESS") {
-	quit("Access error. You (or the program) don't have the required permission.");
+    quit("Access error. You (or the program) don't have the required permission.");
   }
   quit("Unknown error: " + e.message);
 }
@@ -179,14 +178,6 @@ _.each(config.paths, function (pathObject, index) {
   }
   
 });
-
-/*
- * Broken code.
- _.each(config.vhosts, function (file, location) {
-  var conf = require(_dirname + file);
-  if (!conf.app) throw new Error("Virtual host file must export server config to as \"app\".");
-  app.use( express.vhost(location, conf.app) );
-});*/
 
 /*
  * HTTPS server using express.
