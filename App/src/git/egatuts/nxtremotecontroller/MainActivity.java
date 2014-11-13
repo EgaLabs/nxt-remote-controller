@@ -33,17 +33,16 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
-import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 
-public class MainActivity extends Activity
+public class MainActivity extends ActionBarActivity
 {
-  
+
 	@Override
 	public void onCreate (Bundle savedInstanceState)
 	{
 	  super.onCreate(savedInstanceState);
 	  super.setContentView(R.layout.main_layout);
 	}
-	
 }

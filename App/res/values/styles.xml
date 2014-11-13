@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
-  <style name="AppBaseTheme" parent="android:Theme.Light"></style>
+  <style name="AppBaseTheme" parent="android:Theme" />
 
-  <style name="AppTheme" parent="AppBaseTheme"></style>
+  <style name="AppTheme" parent="AppBaseTheme" />
+
+  <style name="AppTheme.Indigo" parent="AppBaseTheme">
+
+    <item name="colorPrimary">@color/indigo_primary</item>
+    <item name="colorPrimaryDark">@color/indigo_primary_dark</item>
+    <!--item name="navigationBarColor">@color/indigo_navigation</item-->
+    <item name="colorAccent">@color/indigo_accent</item>
+    <!--item name="textColorPrimary">@color/indigo_text_primary</item-->
+    <!--item name="textColor">@color/indigo_text</item-->
+
+  </style>
 
 </resources>

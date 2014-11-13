@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
-  <item name="indigo_primary"    type="color">#3F51B5</item>
-  <item name="indigo_secondary"  type="color">#303F9F</item>
-  <item name="indigo_navigation" type="color">#1A237E</item>
+  <color name="indigo_primary">#3F51B5</color>
+  <color name="indigo_primary_dark">#303F9F</color>
+  <color name="indigo_navigation">#1A237E</color>
+  <color name="indigo_accent">#000000</color>
+  <color name="indigo_text_primary">#D9FFFFFF</color>
+  <color name="indigo_text">#D9000000</color>
 
 </resources>
