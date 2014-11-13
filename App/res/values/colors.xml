@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <item name="indigo_primary"    type="color">#3F51B5</item>
+  <item name="indigo_secondary"  type="color">#303F9F</item>
+  <item name="indigo_navigation" type="color">#1A237E</item>
+
+</resources>
