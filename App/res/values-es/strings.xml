@@ -4,6 +4,6 @@
   <string name="app_name">Control Remoto NXT</string>
   <string name="settings_label">Ajustes</string>
   
-  <string name="drawer_open">Ajustes abiertos</string>
-  <string name="drawer_close">Ajustes cerrados</string>
+  <string name="drawer_open">Abrir menú de navegación</string>
+  <string name="drawer_close">Cerrar menú de navegación</string>
 </resources>

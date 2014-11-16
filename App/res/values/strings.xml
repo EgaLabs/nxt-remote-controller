@@ -4,6 +4,6 @@
   <string name="app_name">NXT Remote Controller</string>
   <string name="settings_label">Settings</string>
   
-  <string name="drawer_open">Options opened</string>
-  <string name="drawer_close">Options closed</string>
+  <string name="drawer_open">Open navigation menu</string>
+  <string name="drawer_close">Close navigation menu</string>
 </resources>
