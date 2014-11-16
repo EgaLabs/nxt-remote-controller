@@ -2,5 +2,8 @@
 <resources>
 
   <string name="app_name">Control Remoto NXT</string>
-
+  <string name="settings_label">Ajustes</string>
+  
+  <string name="drawer_open">Ajustes abiertos</string>
+  <string name="drawer_close">Ajustes cerrados</string>
 </resources>

@@ -2,5 +2,8 @@
 <resources>
 
   <string name="app_name">Comandament NXT</string>
-
+  <string name="settings_label">Ajustos</string>
+  
+  <string name="drawer_open">Opcions obertes</string>
+  <string name="drawer_close">Opcions tancades</string>
 </resources>
