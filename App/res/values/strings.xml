@@ -2,7 +2,10 @@
 <resources>
 
   <string name="app_name">NXT Remote Controller</string>
+  
   <string name="settings_label">Settings</string>
+  <string name="help_label">Help</string>
+  <string name="donations_label">Donations</string>
   
   <string name="drawer_open">Open navigation menu</string>
   <string name="drawer_close">Close navigation menu</string>

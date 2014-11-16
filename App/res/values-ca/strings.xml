@@ -2,7 +2,10 @@
 <resources>
 
   <string name="app_name">Comandament NXT</string>
+  
   <string name="settings_label">Ajustos</string>
+  <string name="help_label">Ajuda</string>
+  <string name="donations_label">Donacions</string>
   
   <string name="drawer_open">Obrir el menú de navegació</string>
   <string name="drawer_close">Tancar el menú de navegació</string>
