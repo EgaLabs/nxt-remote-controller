@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <dimen name="activity_margin_h">16dp</dimen>
+  <dimen name="activity_margin_v">16dp</dimen>
+  
+  <dimen name="navigation_drawer_width">240dp</dimen>
+  <dimen name="toolbar_elevation">4dp</dimen>
+  
+  <dimen name="item_row_height">48dp</dimen>
+  <dimen name="item_row_margin_left">16dp</dimen>
+  <dimen name="item_row_margin_right">16dp</dimen>
+  <dimen name="item_row_margin_start">16dp</dimen>
+  <dimen name="item_row_margin_end">16dp</dimen>
+  <dimen name="item_row_drawable_padding">16dp</dimen>
+  <dimen name="item_row_text_size">14sp</dimen>
+  
+  <item name="item_row_alpha" format="float" type="dimen">0.87</item>
+</resources>
