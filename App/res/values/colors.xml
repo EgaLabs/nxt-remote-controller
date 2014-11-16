@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
+  <color name="item_row_text_color">#000000</color>
+    
+  <color name="window_background">#FFFFFF</color>
+  <color name="drawer_background">#F2F2F2</color>
 
   <color name="indigo_primary">#3F51B5</color>
   <color name="indigo_primary_dark">#303F9F</color>
   <color name="indigo_navigation">#1A237E</color>
-  <color name="indigo_accent">#000000</color>
-  <color name="indigo_text_primary">#D9FFFFFF</color>
-  <color name="indigo_text">#D9000000</color>
-
+  <color name="indigo_accent">#ff0000</color>
+  <color name="indigo_text_primary">#FFFFFF</color>
+  <color name="indigo_text">#FFFFFF</color>
 </resources>
