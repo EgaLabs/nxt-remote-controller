@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
-  <style name="AppBaseTheme" parent="Theme.AppCompat" />
-
-  <style name="AppTheme" parent="AppBaseTheme" />
+  <style name="ToolBarStyle" parent="ToolBarStyle.Base">
+    <item name="android:elevation">@dimen/toolbar_elevation</item>
+    <item name="android:transitionName">actionBar</item>
+  </style>
+  
+  <style name="AppTheme" parent="AppTheme.Base">
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:windowContentTransitions">true</item>
+  </style>
+  
+  <style name="AppTheme.Indigo" parent="AppTheme.Base.Indigo">
+    <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    <item name="android:navigationBarColor">@color/indigo_navigation</item>
+    <item name="android:statusBarColor">@color/indigo_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
 
 </resources>
