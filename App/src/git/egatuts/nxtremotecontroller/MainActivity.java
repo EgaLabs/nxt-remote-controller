@@ -35,14 +35,19 @@ package git.egatuts.nxtremotecontroller;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallback
 {
   
   NavigationDrawerFragment drawerFragment;
+  Fragment fragmented_view;
+  FragmentManager fragment_manager;
   Toolbar toolbar;
 
 	@Override
@@ -55,14 +60,39 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 	  super.setSupportActionBar(toolbar);
 	  super.getSupportActionBar().setDisplayShowHomeEnabled(true);
 	  
-	  drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.drawer_fragment);
+	  fragment_manager = getSupportFragmentManager();
+	  drawerFragment = (NavigationDrawerFragment) fragment_manager.findFragmentById(R.id.drawer_fragment);
 	  drawerFragment.setup(R.id.drawer_fragment, (DrawerLayout) super.findViewById(R.id.drawer_element), toolbar);
+	  
 	}
 	
 	@Override
 	public void onNavigationDrawerItemSelected (int position)
 	{
-	  Toast.makeText(this, "Elemento seleccionado " + position, Toast.LENGTH_LONG).show();
+	  Fragment fragmented_view = null;
+	  Intent intent = null;
+	  if (fragment_manager != null) fragment_manager = getSupportFragmentManager();
+	  
+	  /*switch (position) {
+	    case 0:
+	      fragmented_view = new HomeFragment();
+	    break;
+	    case 1:
+	      intent = new Intent(this, SettingsActivity.class);
+	    break;
+	    case 2:
+	      intent = new Intent(Intent.ACTION_VIEW);
+	      intent.setData(Uri.parse("https://github.com/Egatuts/nxt-remote-controller"));
+	    break;
+	    default:
+	    break;
+	  }
+	  
+	  if (fragmented_view != null) {
+	    fragment_manager.beginTransaction().replace(R.id.main_container, fragmented_view).commit();
+	  } else if (intent != null) {
+	    super.startActivity(intent);
+	  }*/
 	}
 	
 	@Override
