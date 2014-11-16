@@ -1,0 +1,265 @@
+package git.egatuts.nxtremotecontroller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallback
+{
+  
+  private static final String PREFERENCES_FILE = "app_settings";
+  private static final String CURRENT_POSITION = "drawer_current_position";
+  
+  private View fragment_container_view;
+  private DrawerLayout drawer_layout;
+  
+  private ActionBarDrawerToggle drawer_toggle;
+  
+  private static SharedPreferences shared_preferences;
+  private static SharedPreferences.Editor shared_preferences_editor;
+  
+  private int current_position;
+  private NavigationDrawerCallback custom_callback;
+  
+  private View inflated_view;
+  private LinearLayoutManager layout_manager;
+  private RecyclerView drawer_list;
+  private NavigationDrawerAdapter navigation_drawer_adapter;
+  
+  
+  
+  /*
+   * Getter and setter for drawer layout.
+   */
+  public void setDrawerLayout (DrawerLayout layout)
+  {
+    drawer_layout = layout;
+  }
+  
+  public DrawerLayout getDrawerLayout ()
+  {
+    return drawer_layout;
+  }
+  
+  
+  
+  /*
+   * Getter and setter for action bar drawer toggle.
+   */
+  public void setActionBarDrawerToggle (ActionBarDrawerToggle custom_drawer_toggle)
+  {
+    drawer_toggle = custom_drawer_toggle;
+  }
+  
+  public ActionBarDrawerToggle getActionBarDrawerToggle ()
+  {
+    return drawer_toggle;
+  }
+  
+  
+  
+  /*
+   * onDetach and onAttach methods.
+   */
+  @Override
+  public void onDetach ()
+  {
+    super.onDetach();
+    custom_callback = null;
+  }
+  
+  @Override
+  public void onAttach (Activity custom_activity)
+  {
+    super.onAttach(custom_activity);
+    try {
+      custom_callback = (NavigationDrawerCallback) custom_activity;
+    } catch (ClassCastException e) {
+      throw new ClassCastException("Activity MUST implement git.egatuts.nxtremotecontroller.NavigationDrawerCallback interface.");
+    }
+  }
+  
+  
+  
+  /*
+   * Opener and closer drawer.
+   */
+  public void openDrawer ()
+  {
+    drawer_layout.openDrawer(fragment_container_view);
+  }
+  
+  public void closeDrawer ()
+  {
+    drawer_layout.closeDrawer(fragment_container_view);
+  }
+  
+  public boolean isDrawerOpened ()
+  {
+    return drawer_layout != null && drawer_layout.isDrawerOpen(fragment_container_view);
+  }
+  
+  
+  
+  /*
+   * Saver and reader shared preferences.
+   */
+  public static void applySharedPreferences (final SharedPreferences.Editor editor)
+  {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+      editor.apply();
+    } else {
+      new AsyncTask<Void, Void, Void>() {
+        @Override
+        public Void doInBackground (Void... params) {
+          editor.commit();
+          return null;
+        }
+      }.execute();
+    }
+  }
+  
+  public static void saveSharedSetting(Context context, String key, String value) {
+    shared_preferences = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+    shared_preferences_editor = shared_preferences.edit();
+    shared_preferences_editor.putString(key, value);
+    applySharedPreferences(shared_preferences_editor);
+  }
+  
+  public static String readSharedSetting(Context context, String key, String default_value) {
+    shared_preferences = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+    return shared_preferences.getString(key, default_value);
+  }
+  
+  
+  
+  /*
+   * Select item and executes custom callback.
+   */
+  public void selectItem (int position)
+  {
+    current_position = position;
+    if (drawer_layout != null) {
+      drawer_layout.closeDrawer(fragment_container_view);
+    }
+    
+    if (custom_callback != null) {
+      custom_callback.onNavigationDrawerItemSelected(position);
+    }
+  }
+
+  @Override
+  public void onNavigationDrawerItemSelected(int position) {
+    selectItem(position);
+  }
+  
+  
+  
+  /*
+   * onConfigurationChanged and onSaveInstanceState methods.
+   * Both save the actual state or configuration when the Activity is destroyed or paused.
+   */
+  @Override
+  public void onConfigurationChanged (Configuration config)
+  {
+    super.onConfigurationChanged(config);
+    drawer_toggle.onConfigurationChanged(config);
+  }
+  
+  @Override
+  public void onSaveInstanceState (Bundle outState)
+  {
+    super.onSaveInstanceState(outState);
+    outState.putInt(CURRENT_POSITION, current_position);
+  }
+
+  
+  
+  /*
+   * onCreate and onCreateView methods.
+   */
+  @Override
+  public void onCreate (Bundle savedInstanceState)
+  {
+    super.onCreate(savedInstanceState);
+    if (savedInstanceState != null) {
+      current_position = savedInstanceState.getInt(CURRENT_POSITION);
+    }
+    
+  }
+  
+  @Override
+  public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+  {
+    inflated_view = inflater.inflate(R.layout.navigation_drawer_fragment, container, false);
+    drawer_list = (RecyclerView) inflated_view.findViewById(R.id.drawer_list);
+    layout_manager = new LinearLayoutManager(getActivity());
+    
+    layout_manager.setOrientation(LinearLayoutManager.VERTICAL);
+    drawer_list.setLayoutManager(layout_manager);
+    drawer_list.setHasFixedSize(true);
+    
+    final List<DrawerItem> drawer_menu = getMenu();
+    navigation_drawer_adapter = new NavigationDrawerAdapter(drawer_menu);
+    navigation_drawer_adapter.setNavigationDrawerCallback(this);
+    drawer_list.setAdapter(navigation_drawer_adapter);
+    selectItem(current_position);
+    return inflated_view;
+  }
+  
+  public void setup(int fragment_id, DrawerLayout custom_drawer_layout, Toolbar toolbar) {
+    fragment_container_view = getActivity().findViewById(fragment_id);
+    drawer_layout = custom_drawer_layout;
+    drawer_toggle = new ActionBarDrawerToggle(getActivity(), drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close) {
+      
+      @Override
+      public void onDrawerClosed(View drawerView) {
+        super.onDrawerClosed(drawerView);
+        if (!isAdded()) return;
+        getActivity().invalidateOptionsMenu();
+      }
+
+      @Override
+      public void onDrawerOpened(View drawerView) {
+        super.onDrawerOpened(drawerView);
+        if (!isAdded()) return;
+        getActivity().invalidateOptionsMenu();
+      }
+    };
+
+    drawer_layout.post(new Runnable() {
+      
+      @Override
+      public void run() {
+        drawer_toggle.syncState();
+      }
+      
+    });
+    
+    drawer_layout.setDrawerListener(drawer_toggle);
+  }
+  
+  public List<DrawerItem> getMenu ()
+  {
+    List<DrawerItem> items = new ArrayList<DrawerItem>();
+    items.add(new DrawerItem("Ajustes", getResources().getDrawable(android.R.drawable.ic_menu_preferences)));
+    return items;
+  }
+  
+}
