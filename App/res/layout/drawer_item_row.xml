@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_height="@dimen/item_row_height"
+              android:layout_width="match_parent">
+
+  <TextView android:id="@+id/item_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/item_row_margin_left"
+            android:layout_marginRight="@dimen/item_row_margin_right"
+            android:layout_marginStart="@dimen/item_row_margin_start"
+            android:layout_marginEnd="@dimen/item_row_margin_end"
+            android:drawablePadding="@dimen/item_row_drawable_padding"
+            android:textSize="@dimen/item_row_text_size"
+            android:alpha="@dimen/item_row_alpha"
+            android:textColor="@color/item_row_text_color"
+            android:gravity="center_vertical" />
+  
+</LinearLayout>
