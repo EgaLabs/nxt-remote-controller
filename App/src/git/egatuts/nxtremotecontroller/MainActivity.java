@@ -34,15 +34,59 @@
 package git.egatuts.nxtremotecontroller;
 
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
+import android.view.Menu;
+import android.widget.Toast;
 
-public class MainActivity extends ActionBarActivity
+public class MainActivity extends ActionBarActivity implements NavigationDrawerCallback
 {
+  
+  NavigationDrawerFragment drawerFragment;
+  Toolbar toolbar;
 
 	@Override
 	public void onCreate (Bundle savedInstanceState)
 	{
 	  super.onCreate(savedInstanceState);
 	  super.setContentView(R.layout.main_layout);
+	  
+	  toolbar = (Toolbar) super.findViewById(R.id.toolbar_element);
+	  super.setSupportActionBar(toolbar);
+	  super.getSupportActionBar().setDisplayShowHomeEnabled(true);
+	  
+	  drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.drawer_fragment);
+	  drawerFragment.setup(R.id.drawer_fragment, (DrawerLayout) super.findViewById(R.id.drawer_element), toolbar);
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu (Menu menu)
+	{
+	  
+	  try {
+	    super.getMenuInflater().inflate(R.menu.main_menu, menu);
+	  } catch (Exception e) {
+	    return false;
+	  }
+	  
+	  return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public void onNavigationDrawerItemSelected (int position)
+	{
+	  Toast.makeText(this, "Elemento seleccionado " + position, Toast.LENGTH_LONG);
+	}
+	
+	@Override
+	public void onBackPressed ()
+	{
+	  if (drawerFragment.isDrawerOpened()) {
+	    drawerFragment.closeDrawer();
+	  } else {
+	    super.onBackPressed();
+	  }
+	}
+	
 }
