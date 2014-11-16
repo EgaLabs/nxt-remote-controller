@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<PreferenceHeaders xmlns:android="http://schemas.android.com/apk/res/android">
+  <header android:fragment="git.egatuts.nxtremotecontroller.SettingsActivity$SettingsFragment"
+          android:title="Preferencias"
+          android:summary="Esto es una breve descripción."/>
+</PreferenceHeaders>
