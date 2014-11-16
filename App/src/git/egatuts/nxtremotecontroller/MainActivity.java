@@ -37,7 +37,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
-import android.view.Menu;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallback
@@ -61,22 +60,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu (Menu menu)
-	{
-	  
-	  try {
-	    super.getMenuInflater().inflate(R.menu.main_menu, menu);
-	  } catch (Exception e) {
-	    return false;
-	  }
-	  
-	  return super.onCreateOptionsMenu(menu);
-	}
-	
-	@Override
 	public void onNavigationDrawerItemSelected (int position)
 	{
-	  Toast.makeText(this, "Elemento seleccionado " + position, Toast.LENGTH_LONG);
+	  Toast.makeText(this, "Elemento seleccionado " + position, Toast.LENGTH_LONG).show();
 	}
 	
 	@Override
