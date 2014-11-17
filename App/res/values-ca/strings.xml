@@ -3,6 +3,7 @@
 
   <string name="app_name">Comandament NXT</string>
   
+  <string name="home_label">Inici</string>
   <string name="settings_label">Ajustos</string>
   <string name="help_label">Ajuda</string>
   <string name="donations_label">Donacions</string>
