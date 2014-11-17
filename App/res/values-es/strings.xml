@@ -4,6 +4,7 @@
   <string name="app_name">Control Remoto NXT</string>
   
   <string name="home_label">Inicio</string>
+  <string name="scan_label">Escanear</string>
   <string name="settings_label">Ajustes</string>
   <string name="help_label">Ayuda</string>
   <string name="donations_label">Donaciones</string>

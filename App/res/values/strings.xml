@@ -4,6 +4,7 @@
   <string name="app_name">NXT Remote Controller</string>
   
   <string name="home_label">Home</string>
+  <string name="scan_label">Scan</string>
   <string name="settings_label">Settings</string>
   <string name="help_label">Help</string>
   <string name="donations_label">Donations</string>
