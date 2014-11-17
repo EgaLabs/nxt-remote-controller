@@ -22,15 +22,15 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                       *
- *                                                                                                                           *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                        *
- *                                                                                                                           *
- * And the corresponding file at:                                                                                            *
- *                                                                                                                           *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                           *
+ *                                                                                                                               *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                            *
+ *                                                                                                                               *
+ * And the corresponding file at:                                                                                                *
+ *                                                                                                                               *
  *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/SettingsActivity.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
 import android.os.Bundle;

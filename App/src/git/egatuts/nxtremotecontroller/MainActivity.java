@@ -86,13 +86,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 	    break;
 	    default:
 	    break;
-	  }
+	  }*/
 	  
 	  if (fragmented_view != null) {
 	    fragment_manager.beginTransaction().replace(R.id.main_container, fragmented_view).commit();
 	  } else if (intent != null) {
 	    super.startActivity(intent);
-	  }*/
+	  }
 	}
 	
 	@Override
