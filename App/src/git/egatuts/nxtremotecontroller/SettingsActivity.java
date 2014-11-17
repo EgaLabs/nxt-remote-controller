@@ -34,39 +34,17 @@
 package git.egatuts.nxtremotecontroller;
 
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
-
-import java.util.List;
 
 public class SettingsActivity extends PreferenceActivity
 {
   
+  @SuppressWarnings("deprecation")
   @Override
   public void onCreate (Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-  }
-  
-  @Override
-  public void onBuildHeaders (List<Header> target)
-  {
-    super.loadHeadersFromResource(R.xml.preferences_layout, target);
-  }
-  
-  public class SettingsFragment extends PreferenceFragment
-  {
-    
-    @Override
-    public void onCreate (Bundle savedInstanceState)
-    {
-      super.onCreate(savedInstanceState);
-      
-      PreferenceManager.setDefaultValues(getActivity(), R.xml.advanced_preferences, false);
-      super.addPreferencesFromResource(R.xml.fragmented_preference_layout);
-    }
-    
+    super.addPreferencesFromResource(R.xml.preferences_layout);
   }
   
 }
