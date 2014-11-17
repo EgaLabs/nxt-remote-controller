@@ -38,6 +38,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.Toast;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -71,15 +72,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 	{
 	  Fragment fragmented_view = null;
 	  Intent intent = null;
-	  if (fragment_manager != null) fragment_manager = getSupportFragmentManager();
 	  
 	  switch (position) {
-	    /*case 0:
+	    case 0:
 	      fragmented_view = new HomeFragment();
 	    break;
 	    case 1:
+	    break;
+	    case 2:
 	      intent = new Intent(this, SettingsActivity.class);
-	    break;*/
+	    break;
 	    case 3:
 	      intent = new Intent(Intent.ACTION_VIEW);
 	      intent.setData(Uri.parse("https://github.com/Egatuts/nxt-remote-controller"));
@@ -93,7 +95,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 	  }
 	  
 	  if (fragmented_view != null) {
-	    fragment_manager.beginTransaction().replace(R.id.main_container, fragmented_view).commit();
+	    getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragmented_view).commit();
 	  } else if (intent != null) {
 	    super.startActivity(intent);
 	  }
