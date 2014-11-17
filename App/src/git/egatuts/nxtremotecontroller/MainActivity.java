@@ -78,6 +78,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 	      fragmented_view = new HomeFragment();
 	    break;
 	    case 1:
+	      fragmented_view = new ScanFragment();
 	    break;
 	    case 2:
 	      intent = new Intent(this, SettingsActivity.class);
