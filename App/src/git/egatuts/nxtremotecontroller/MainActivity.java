@@ -73,20 +73,24 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 	  Intent intent = null;
 	  if (fragment_manager != null) fragment_manager = getSupportFragmentManager();
 	  
-	  /*switch (position) {
-	    case 0:
+	  switch (position) {
+	    /*case 0:
 	      fragmented_view = new HomeFragment();
 	    break;
 	    case 1:
 	      intent = new Intent(this, SettingsActivity.class);
-	    break;
-	    case 2:
+	    break;*/
+	    case 3:
 	      intent = new Intent(Intent.ACTION_VIEW);
 	      intent.setData(Uri.parse("https://github.com/Egatuts/nxt-remote-controller"));
 	    break;
+	    case 4:
+	      intent = new Intent(Intent.ACTION_VIEW);
+	      intent.setData(Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9VPAAPMYC2HEJ"));
+	    break;
 	    default:
 	    break;
-	  }*/
+	  }
 	  
 	  if (fragmented_view != null) {
 	    fragment_manager.beginTransaction().replace(R.id.main_container, fragmented_view).commit();
