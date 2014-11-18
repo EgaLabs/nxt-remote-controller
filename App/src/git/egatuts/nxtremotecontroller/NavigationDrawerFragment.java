@@ -76,8 +76,6 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   private RecyclerView drawer_list;
   private NavigationDrawerAdapter navigation_drawer_adapter;
   
-  
-  
   /*
    * Getter and setter for drawer layout.
    */
@@ -91,8 +89,6 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     return drawer_layout;
   }
   
-  
-  
   /*
    * Getter and setter for action bar drawer toggle.
    */
@@ -105,8 +101,6 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   {
     return drawer_toggle;
   }
-  
-  
   
   /*
    * onDetach and onAttach methods.
@@ -129,8 +123,6 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     }
   }
   
-  
-  
   /*
    * Opener and closer drawer.
    */
@@ -148,8 +140,6 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   {
     return drawer_layout != null && drawer_layout.isDrawerOpen(fragment_container_view);
   }
-  
-  
   
   /*
    * Saver and reader shared preferences.
@@ -181,8 +171,6 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     return shared_preferences.getString(key, default_value);
   }
   
-  
-  
   /*
    * Select item and executes custom callback.
    */
@@ -202,9 +190,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   public void onNavigationDrawerItemSelected(int position) {
     selectItem(position);
   }
-  
-  
-  
+   
   /*
    * onConfigurationChanged and onSaveInstanceState methods.
    * Both save the actual state or configuration when the Activity is destroyed or paused.
@@ -222,8 +208,6 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     super.onSaveInstanceState(outState);
     outState.putInt(CURRENT_POSITION, current_position);
   }
-
-  
   
   /*
    * onCreate and onCreateView methods.
