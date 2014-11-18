@@ -15,4 +15,8 @@
   <string name="settings_category_server">Ajustos de connexió</string>
   <string name="settings_category_visual">Ajustos visuals</string>
   <string name="settings_category_misc">Miscel·lània</string>
+  
+  <string name="preference_title_address">Adreça del servidor</string>
+  <string name="preference_summary_address">La URL del servidor que administra les conexions dels sockets, sense escriure el protocol.</string>
+  <string name="preference_dialog_address">Quina és la adreça?</string>
 </resources>

@@ -15,4 +15,8 @@
   <string name="settings_category_server">Connection settings</string>
   <string name="settings_category_visual">Visual settings</string>
   <string name="settings_category_misc">Miscellaneous</string>
+  
+  <string name="preference_title_address">Server address</string>
+  <string name="preference_summary_address">The URL of the server handling the socket connection without the protocol scheme.</string>
+  <string name="preference_dialog_address">Which is the location?</string>
 </resources>
