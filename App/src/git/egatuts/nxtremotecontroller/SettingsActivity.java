@@ -34,17 +34,32 @@
 package git.egatuts.nxtremotecontroller;
 
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
-public class SettingsActivity extends PreferenceActivity
+public class SettingsActivity extends ActionBarActivity
 {
   
-  @SuppressWarnings("deprecation")
+  Toolbar toolbar;
+  
   @Override
   public void onCreate (Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    super.addPreferencesFromResource(R.xml.preferences_layout);
+    super.setContentView(R.layout.preference_layout);
+    
+    toolbar = (Toolbar) super.findViewById(R.id.toolbar_element);
+    super.setSupportActionBar(toolbar);
+    super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    
+    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        finish();
+      }
+    });
+    
   }
   
 }
