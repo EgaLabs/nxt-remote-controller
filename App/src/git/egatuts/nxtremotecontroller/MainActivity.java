@@ -38,7 +38,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.Toast;
+import android.view.WindowManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -46,7 +46,7 @@ import android.os.Bundle;
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallback
 {
   
-  NavigationDrawerFragment drawerFragment;
+  NavigationDrawerFragment drawer_fragment;
   Fragment fragmented_view;
   FragmentManager fragment_manager;
   Toolbar toolbar;
@@ -57,13 +57,17 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 	  super.onCreate(savedInstanceState);
 	  super.setContentView(R.layout.main_layout);
 	  
+	  getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+	  
 	  toolbar = (Toolbar) super.findViewById(R.id.toolbar_element);
 	  super.setSupportActionBar(toolbar);
+	  super.getSupportActionBar().setHomeButtonEnabled(true);
+	  super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	  super.getSupportActionBar().setDisplayShowHomeEnabled(true);
 	  
 	  fragment_manager = getSupportFragmentManager();
-	  drawerFragment = (NavigationDrawerFragment) fragment_manager.findFragmentById(R.id.drawer_fragment);
-	  drawerFragment.setup(R.id.drawer_fragment, (DrawerLayout) super.findViewById(R.id.drawer_element), toolbar);
+	  drawer_fragment = (NavigationDrawerFragment) fragment_manager.findFragmentById(R.id.drawer_fragment);
+	  drawer_fragment.setup(R.id.drawer_fragment, (DrawerLayout) super.findViewById(R.id.drawer_element), toolbar);
 	  
 	}
 	
@@ -99,17 +103,25 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 	    getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragmented_view).commit();
 	  } else if (intent != null) {
 	    super.startActivity(intent);
+	    drawer_fragment.getActionBarDrawerToggle().onDrawerSlide(null, 0.0f);
 	  }
 	}
 	
 	@Override
 	public void onBackPressed ()
 	{
-	  if (drawerFragment.isDrawerOpened()) {
-	    drawerFragment.closeDrawer();
+	  if (drawer_fragment.isDrawerOpened()) {
+	    drawer_fragment.closeDrawer();
 	  } else {
 	    super.onBackPressed();
 	  }
+	}
+	
+	@Override
+	public void onPostCreate (Bundle savedInstanceState)
+	{
+	  super.onPostCreate(savedInstanceState);
+	  drawer_fragment.getActionBarDrawerToggle().syncState();
 	}
 	
 }
