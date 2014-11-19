@@ -19,4 +19,5 @@
   <string name="preference_title_address">Dirección del servidor</string>
   <string name="preference_summary_address">La URL del servidor que administra las conexiones de los sockets, sin el protocolo.</string>
   <string name="preference_dialog_address">¿Cuál es la dirección?</string>
+  <string name="preference_value_address">localhost:8080</string>
 </resources>
