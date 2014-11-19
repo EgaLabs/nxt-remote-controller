@@ -11,4 +11,7 @@
   <color name="indigo_accent">#05114F</color>
   <color name="indigo_text_primary">#474747</color>
   <color name="indigo_text">#525252</color>
+  <color name="indigo_control_normal">#3F51B5</color>
+  <color name="indigo_control_activated">#05114F</color>
+  <color name="indigo_control_highlight">#3F05114F</color>
 </resources>
