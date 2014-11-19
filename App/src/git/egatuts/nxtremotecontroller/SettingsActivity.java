@@ -37,6 +37,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
 
 public class SettingsActivity extends ActionBarActivity
 {
@@ -48,6 +49,8 @@ public class SettingsActivity extends ActionBarActivity
   {
     super.onCreate(savedInstanceState);
     super.setContentView(R.layout.preference_layout);
+    
+    getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
     
     toolbar = (Toolbar) super.findViewById(R.id.toolbar_element);
     super.setSupportActionBar(toolbar);

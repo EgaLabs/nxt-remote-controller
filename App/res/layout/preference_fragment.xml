@@ -6,7 +6,8 @@
     <EditTextPreference android:key="preference_server_address"
                         android:title="@string/preference_title_address"
                         android:summary="@string/preference_summary_address"
-                        android:dialogTitle="@string/preference_dialog_address" />
+                        android:dialogTitle="@string/preference_dialog_address"
+                        android:defaultValue="@string/preference_value_address" />
   </PreferenceCategory>
   
   <PreferenceCategory android:title="@string/settings_category_visual">
