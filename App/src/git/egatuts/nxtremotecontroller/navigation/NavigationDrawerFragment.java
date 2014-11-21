@@ -31,7 +31,13 @@
  *                                                                                                                                       *
  *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/NavigationDrawerFragment.java  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-package git.egatuts.nxtremotecontroller;
+package git.egatuts.nxtremotecontroller.navigation;
+
+import git.egatuts.nxtremotecontroller.R;
+import git.egatuts.nxtremotecontroller.R.drawable;
+import git.egatuts.nxtremotecontroller.R.id;
+import git.egatuts.nxtremotecontroller.R.layout;
+import git.egatuts.nxtremotecontroller.R.string;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -33,6 +33,8 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
+import git.egatuts.nxtremotecontroller.navigation.NavigationDrawerCallback;
+import git.egatuts.nxtremotecontroller.navigation.NavigationDrawerFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;

@@ -31,7 +31,7 @@
  *                                                                                                                                     *
  *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/NavigationDrawerAdapter.java *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-package git.egatuts.nxtremotecontroller;
+package git.egatuts.nxtremotecontroller.navigation;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,6 +39,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import git.egatuts.nxtremotecontroller.R;
+import git.egatuts.nxtremotecontroller.R.id;
+import git.egatuts.nxtremotecontroller.R.layout;
 
 import java.util.List;
 

@@ -31,7 +31,7 @@
  *                                                                                                                                       *
  *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/NavigationDrawerCallback.java  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-package git.egatuts.nxtremotecontroller;
+package git.egatuts.nxtremotecontroller.navigation;
 
 public interface NavigationDrawerCallback
 {
