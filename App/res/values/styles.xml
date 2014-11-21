@@ -28,7 +28,7 @@
     <item name="android:textColorPrimary">@color/indigo_text_primary</item>
     <item name="colorControlNormal">@color/indigo_control_normal</item>
     <item name="colorControlActivated">@color/indigo_control_activated</item>
-    <item name="colorControlHighlight">@color/indigo_control_hightlight</item>
+    <item name="colorControlHighlight">@color/indigo_control_highlight</item>
   </style>
   
   <style name="AppTheme.Indigo" parent="AppTheme.Base.Indigo" />
