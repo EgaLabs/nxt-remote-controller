@@ -37,10 +37,10 @@ import android.graphics.drawable.Drawable;
 
 public class DrawerItem
 {
-  
+
   private String text;
   private Drawable drawable;
-  
+
   /*
    * Setters and getters for text.
    */
@@ -48,12 +48,12 @@ public class DrawerItem
   {
     text = custom_text;
   }
-  
+
   public String getText ()
   {
     return text;
   }
-  
+
   /*
    * Setters and getters for drawable.
    */
@@ -61,12 +61,12 @@ public class DrawerItem
   {
     drawable = custom_drawable;
   }
-  
+
   public Drawable getDrawable ()
   {
     return drawable;
   }
-  
+
   /*
    * Constructors.
    */
@@ -75,20 +75,20 @@ public class DrawerItem
     text = custom_text;
     drawable = custom_drawable;
   }
-  
+
   public DrawerItem (String custom_text, Drawable custom_drawable)
   {
     init(custom_text, custom_drawable);
   }
-  
+
   public DrawerItem (String custom_text)
   {
     init(custom_text, null);
   }
-  
+
   public DrawerItem (Drawable custom_drawable)
   {
     init(null, custom_drawable);
   }
-  
+
 }
