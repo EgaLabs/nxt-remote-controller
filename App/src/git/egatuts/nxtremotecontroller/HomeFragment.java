@@ -33,20 +33,51 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
+import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
+import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 public class HomeFragment extends Fragment
 {
   
+  private View view;
+  private RecyclerView recycler_view;
+  private LinearLayoutManager linear_layout_manager;
+  private PairedDeviceAdapter paired_devices_adapter;
+  private BluetoothUtils bluetooth_utils;
+  
   public HomeFragment () {}
   
   @Override
+  public void onCreate (Bundle savedInstanceState)
+  {
+    super.onCreate(savedInstanceState);
+    bluetooth_utils = new BluetoothUtils();
+  }
+  
+  @Override
   public View onCreateView (LayoutInflater inflater, ViewGroup parent_container, Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.home_fragment, parent_container, false);
+    view = inflater.inflate(R.layout.home_fragment, parent_container, false);
+    Toast.makeText(parent_container.getContext(), Integer.toString(bluetooth_utils.getDevices().size()), Toast.LENGTH_SHORT).show();
+    paired_devices_adapter = new PairedDeviceAdapter(bluetooth_utils.getDevices());
+    recycler_view = (RecyclerView) view.findViewById(R.id.paired_devices);
+    
+    linear_layout_manager = new LinearLayoutManager(parent_container.getContext());
+    //linear_layout_manager.setOrientation(LinearLayoutManager.VERTICAL);
+    linear_layout_manager.scrollToPosition(0);
+    
+    recycler_view.setAdapter(paired_devices_adapter);
+    recycler_view.setLayoutManager(linear_layout_manager);
+    recycler_view.setItemAnimator(new DefaultItemAnimator());
+    return view;
   }
   
 }

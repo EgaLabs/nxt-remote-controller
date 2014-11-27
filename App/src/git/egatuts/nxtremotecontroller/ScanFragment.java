@@ -33,21 +33,36 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 
 public class ScanFragment extends Fragment
 {
   
+  private BluetoothUtils bluetooth_utils;
+  private View view;
+  
   public ScanFragment () {}
+  
+  @Override
+  public void onAttach (Activity activity)
+  {
+    super.onAttach(activity);
+    bluetooth_utils = new BluetoothUtils();
+    Toast.makeText(getActivity(), "onAttach", Toast.LENGTH_SHORT).show();
+  }
   
   @Override
   public View onCreateView (LayoutInflater inflater, ViewGroup parent_container, Bundle savedInstanceState)
   {
-    return inflater.inflate(R.layout.scan_fragment, parent_container, false);
+    view = inflater.inflate(R.layout.scan_fragment, parent_container, false);
+    return view;
   }
 
 }
