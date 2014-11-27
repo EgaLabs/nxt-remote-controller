@@ -8,16 +8,21 @@
   <TextView
       android:id="@+id/paired_device_connection"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
+      android:layout_height="wrap_content">
+  </TextView>
 
   <TextView
       android:id="@+id/paired_device_name"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
+      android:layout_height="wrap_content"
+      android:text="tontoooo">
+  </TextView>
 
   <TextView
       android:id="@+id/paired_device_address"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
+      android:layout_height="wrap_content"
+      android:text="tu maaas">
+  </TextView>
 
 </LinearLayout>
