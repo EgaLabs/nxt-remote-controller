@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment
     recycler_view = (RecyclerView) view.findViewById(R.id.paired_devices);
     
     linear_layout_manager = new LinearLayoutManager(parent_container.getContext());
-    //linear_layout_manager.setOrientation(LinearLayoutManager.VERTICAL);
+    linear_layout_manager.setOrientation(LinearLayoutManager.VERTICAL);
     linear_layout_manager.scrollToPosition(0);
     
     recycler_view.setAdapter(paired_devices_adapter);
