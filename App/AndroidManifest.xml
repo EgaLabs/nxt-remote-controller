@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="git.egatuts.nxtremotecontroller"
-          android:versionCode="1"
-          android:versionName="1.0"
-          android:installLocation="auto">
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="git.egatuts.nxtremotecontroller"
+    android:versionCode="1"
+    android:versionName="1.0"
+    android:installLocation="auto">
 
-  <supports-screens android:normalScreens="true"
-                    android:xlargeScreens="true"
-                    android:largeScreens="true"
-                    android:smallScreens="true"
-                    android:anyDensity="true"
-                    android:resizeable="true" />
+  <supports-screens
+      android:normalScreens="true"
+      android:xlargeScreens="true"
+      android:largeScreens="true"
+      android:smallScreens="true"
+      android:anyDensity="true"
+      android:resizeable="true" />
 
   <uses-feature android:name="android.hardware.wifi" android:required="true" />
 
@@ -24,15 +26,17 @@
 
   <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="19" android:maxSdkVersion="21" />
 
-  <application android:allowBackup="true"
-               android:icon="@drawable/ic_launcher"
-               android:label="@string/app_name"
-               android:theme="@style/AppTheme">
+  <application
+      android:allowBackup="true"
+      android:icon="@drawable/ic_launcher"
+      android:label="@string/app_name"
+      android:theme="@style/AppTheme">
 
-    <activity android:name=".MainActivity"
-              android:label="@string/app_name"
-              android:configChanges="keyboardHidden|orientation|screenSize"
-              android:theme="@style/AppTheme.Indigo">
+    <activity
+        android:name=".MainActivity"
+        android:label="@string/app_name"
+        android:configChanges="keyboardHidden|orientation|screenSize"
+        android:theme="@style/AppTheme.Indigo">
 
       <intent-filter>    
         <action android:name="android.intent.action.MAIN" />
@@ -41,14 +45,16 @@
       </intent-filter>
 
     </activity>
-    
-    <activity android:name=".SettingsActivity"
-              android:configChanges="keyboardHidden|orientation|screenSize"
-              android:label="@string/settings_label"
-              android:theme="@style/AppTheme.Indigo" />
+
+    <activity
+        android:name=".SettingsActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize"
+        android:label="@string/settings_label"
+        android:theme="@style/AppTheme.Indigo" />
 
     <uses-library android:name="com.sec.android.app.multiwindow" android:required="false" />
-    <meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
+    
+    <meta-data android:name="com.sec.android.support.multiwindow"       android:value="true" />
     <meta-data android:name="com.sec.android.mutiwindow.DEFAULT_SIZE_W" android:value="632dp" />
     <meta-data android:name="com.sec.android.mutiwindow.DEFAULT_SIZE_H" android:value="598dp" />
     <meta-data android:name="com.sec.android.mutiwindow.MINIMUM_SIZE_W" android:value="632dp" />
