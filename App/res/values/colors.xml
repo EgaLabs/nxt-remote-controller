@@ -4,6 +4,9 @@
     
   <color name="window_background">#FFFFFF</color>
   <color name="drawer_background">#F2F2F2</color>
+  
+  <color name="paired_device_text_color_name">#000000</color>
+  <color name="paired_device_text_color_address">#999999</color>
 
   <color name="indigo_primary">#3F51B5</color>
   <color name="indigo_primary_dark">#132584</color>
@@ -14,4 +17,7 @@
   <color name="indigo_control_normal">#3F51B5</color>
   <color name="indigo_control_activated">#05114F</color>
   <color name="indigo_control_highlight">#3F05114F</color>
+  <color name="indigo_connectivity_background">#132584</color>
+  
+  <color name="connectivity_color">#fff</color>
 </resources>

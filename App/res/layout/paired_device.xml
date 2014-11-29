@@ -1,28 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-  <TextView
-      android:id="@+id/paired_device_connection"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
-  </TextView>
-
-  <TextView
-      android:id="@+id/paired_device_name"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="tontoooo">
-  </TextView>
-
-  <TextView
-      android:id="@+id/paired_device_address"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="tu maaas">
-  </TextView>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/connectivity_layout_style">
+  <TextView android:id="@+id/paired_device_connection" style="@style/connectivity_style" />
+    
+  <LinearLayout style="@style/device_info_layout_style">
+    <TextView android:id="@+id/paired_device_name" style="@style/device_info_style_name" />
+    
+    <TextView android:id="@+id/paired_device_address" style="@style/device_info_style_address" />
+  </LinearLayout>
 
 </LinearLayout>
