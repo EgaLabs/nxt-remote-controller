@@ -33,19 +33,29 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
+import git.egatuts.nxtremotecontroller.device.PairedDevice;
+import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
 
 public class ScanFragment extends Fragment
 {
   
   private BluetoothUtils bluetooth_utils;
   private View view;
+  private PairedDeviceAdapter paired_devices_adapter;
+  private LinearLayoutManager linear_layout_manager;
+  private RecyclerView recycler_view;
   
   public ScanFragment () {}
   
@@ -57,12 +67,26 @@ public class ScanFragment extends Fragment
     if (bluetooth_utils.isEnabled() == false) {
       getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new BluetoothFragment(this, bluetooth_utils)).commit();
     }
+    if (bluetooth_utils.isDiscovering())
+    {
+      bluetooth_utils.cancelDiscovery();
+    }
   }
   
   @Override
   public View onCreateView (LayoutInflater inflater, ViewGroup parent_container, Bundle savedInstanceState)
   {
-    view = inflater.inflate(R.layout.scan_fragment, parent_container, false);
+    view = inflater.inflate(R.layout.home_fragment, parent_container, false);
+    paired_devices_adapter = new PairedDeviceAdapter(new ArrayList<PairedDevice>(0));
+    recycler_view = (RecyclerView) view.findViewById(R.id.paired_devices);
+    
+    linear_layout_manager = new LinearLayoutManager(parent_container.getContext());
+    linear_layout_manager.setOrientation(LinearLayoutManager.VERTICAL);
+    linear_layout_manager.scrollToPosition(0);
+    
+    recycler_view.setAdapter(paired_devices_adapter);
+    recycler_view.setLayoutManager(linear_layout_manager);
+    recycler_view.setItemAnimator(new DefaultItemAnimator());
     return view;
   }
 
