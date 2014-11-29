@@ -60,13 +60,13 @@ public class HomeFragment extends Fragment
   {
     super.onCreate(savedInstanceState);
     bluetooth_utils = new BluetoothUtils();
+    if (bluetooth_utils.isEnabled() == false) {
+      getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new BluetoothFragment(this, bluetooth_utils)).commit();
+    }
   }
   
   @Override
   public View onCreateView (LayoutInflater inflater, ViewGroup parent_container, Bundle savedInstanceState) {
-    if (bluetooth_utils.isEnabled() == false) {
-      getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new BluetoothFragment(this, bluetooth_utils)).commit();
-    }
     view = inflater.inflate(R.layout.home_fragment, parent_container, false);
     paired_devices_adapter = new PairedDeviceAdapter(bluetooth_utils.getDevices());
     recycler_view = (RecyclerView) view.findViewById(R.id.paired_devices);

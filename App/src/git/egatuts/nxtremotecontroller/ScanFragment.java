@@ -39,7 +39,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 
 public class ScanFragment extends Fragment
@@ -55,14 +54,14 @@ public class ScanFragment extends Fragment
   {
     super.onAttach(activity);
     bluetooth_utils = new BluetoothUtils();
+    if (bluetooth_utils.isEnabled() == false) {
+      getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new BluetoothFragment(this, bluetooth_utils)).commit();
+    }
   }
   
   @Override
   public View onCreateView (LayoutInflater inflater, ViewGroup parent_container, Bundle savedInstanceState)
   {
-    if (bluetooth_utils.isEnabled() == false) {
-      getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new BluetoothFragment(this, bluetooth_utils)).commit();
-    }
     view = inflater.inflate(R.layout.scan_fragment, parent_container, false);
     return view;
   }
