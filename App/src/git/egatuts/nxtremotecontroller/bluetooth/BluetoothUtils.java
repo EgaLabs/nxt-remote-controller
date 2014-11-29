@@ -39,6 +39,16 @@ public class BluetoothUtils
     return getAdapter().isDiscovering();
   }
   
+  public boolean enable ()
+  {
+    return this.getAdapter().enable();
+  }
+  
+  public boolean disable ()
+  {
+    return this.getAdapter().disable();
+  }
+  
   public ArrayList<PairedDevice> getDevices ()
   {
     Set<BluetoothDevice> devices = bluetooth_adapter.getBondedDevices();
