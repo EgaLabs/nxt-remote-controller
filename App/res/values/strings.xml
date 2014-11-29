@@ -12,6 +12,9 @@
   <string name="drawer_open">Open navigation menu</string>
   <string name="drawer_close">Close navigation menu</string>
   
+  <string name="bluetooth_message">Bluetooth disabled.</string>
+  <string name="bluetooth_button">Enable</string>
+  
   <string name="settings_category_server">Connection settings</string>
   <string name="settings_category_visual">Visual settings</string>
   <string name="settings_category_misc">Miscellaneous</string>

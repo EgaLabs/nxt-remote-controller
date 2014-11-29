@@ -12,6 +12,9 @@
   <string name="drawer_open">Obrir el menú de navegació</string>
   <string name="drawer_close">Tancar el menú de navegació</string>
   
+  <string name="bluetooth_message">Bluetooth desactivat.</string>
+  <string name="bluetooth_button">Activar</string>
+  
   <string name="settings_category_server">Ajustos de connexió</string>
   <string name="settings_category_visual">Ajustos visuals</string>
   <string name="settings_category_misc">Miscel·lània</string>
