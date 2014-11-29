@@ -39,6 +39,16 @@ public class BluetoothUtils
     return getAdapter().isDiscovering();
   }
   
+  public boolean startDiscovery ()
+  {
+    return this.getAdapter().startDiscovery();
+  }
+  
+  public boolean cancelDiscovery ()
+  {
+    return this.getAdapter().startDiscovery();
+  }
+  
   public boolean enable ()
   {
     return this.getAdapter().enable();
