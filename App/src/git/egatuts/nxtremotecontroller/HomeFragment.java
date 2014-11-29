@@ -43,7 +43,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 public class HomeFragment extends Fragment
 {
@@ -65,8 +64,10 @@ public class HomeFragment extends Fragment
   
   @Override
   public View onCreateView (LayoutInflater inflater, ViewGroup parent_container, Bundle savedInstanceState) {
+    if (bluetooth_utils.isEnabled() == false) {
+      getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new BluetoothFragment(this, bluetooth_utils)).commit();
+    }
     view = inflater.inflate(R.layout.home_fragment, parent_container, false);
-    Toast.makeText(parent_container.getContext(), Integer.toString(bluetooth_utils.getDevices().size()), Toast.LENGTH_SHORT).show();
     paired_devices_adapter = new PairedDeviceAdapter(bluetooth_utils.getDevices());
     recycler_view = (RecyclerView) view.findViewById(R.id.paired_devices);
     
