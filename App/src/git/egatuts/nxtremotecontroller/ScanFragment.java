@@ -36,6 +36,9 @@ package git.egatuts.nxtremotecontroller;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothDevice;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -44,6 +47,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+import git.egatuts.nxtremotecontroller.bluetooth.BluetoothCallback;
+import git.egatuts.nxtremotecontroller.bluetooth.BluetoothReceiver;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
@@ -52,6 +58,7 @@ public class ScanFragment extends Fragment
 {
   
   private BluetoothUtils bluetooth_utils;
+  private BluetoothReceiver bluetooth_receiver;
   private View view;
   private PairedDeviceAdapter paired_devices_adapter;
   private LinearLayoutManager linear_layout_manager;
@@ -64,13 +71,24 @@ public class ScanFragment extends Fragment
   {
     super.onAttach(activity);
     bluetooth_utils = new BluetoothUtils();
+    
     if (bluetooth_utils.isEnabled() == false) {
       getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new BluetoothFragment(this, bluetooth_utils)).commit();
     }
-    if (bluetooth_utils.isDiscovering())
-    {
+    
+    if (bluetooth_utils.isDiscovering()) {
       bluetooth_utils.cancelDiscovery();
     }
+    bluetooth_utils.startDiscovery();
+    bluetooth_receiver = new BluetoothReceiver();
+    bluetooth_receiver.setOnDiscoveryListener(new BluetoothCallback.OnDiscoveryListener () {
+      @Override
+      public void onDiscover(PairedDevice paired_device, BluetoothDevice bluetooth_device, Intent intent) {
+        int parition = (Short.MAX_VALUE);
+        Toast.makeText(getActivity(), "Strength: " + intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE), Toast.LENGTH_SHORT).show();
+      }
+    });
+    getActivity().registerReceiver(bluetooth_receiver, BluetoothReceiver.getIntentFilter());
   }
   
   @Override
