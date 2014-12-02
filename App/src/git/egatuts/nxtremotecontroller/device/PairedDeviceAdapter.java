@@ -37,5 +37,11 @@ public class PairedDeviceAdapter extends RecyclerView.Adapter<PairedDeviceViewHo
     viewHolder.name.setText(device.getName());
     viewHolder.address.setText(device.getAddress());
   }
+  
+  public void add (PairedDevice device)
+  {
+    this.paired_devices.add(device);
+    this.notifyDataSetChanged();
+  }
 
 }
