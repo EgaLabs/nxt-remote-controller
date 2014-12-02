@@ -8,12 +8,14 @@ public class PairedDevice
   private String _name;
   private String _mac_address;
   private byte _signal;
+  private BluetoothDevice _bluetooth_device;
   
-  public PairedDevice (String name, String mac_address, byte signal)
+  public PairedDevice (String name, String mac_address, byte signal, BluetoothDevice device)
   {
     this._name = name;
     this._mac_address = mac_address;
     this._signal = signal;
+    this._bluetooth_device = device;
   }
   
   public String getName ()
@@ -58,9 +60,19 @@ public class PairedDevice
     this.setSignal(binary);
   }
   
+  public BluetoothDevice getBluetoothDevice ()
+  {
+    return _bluetooth_device;
+  }
+  
+  public void setBluetoothDevice (BluetoothDevice device)
+  {
+    _bluetooth_device = device;
+  }
+  
   public static PairedDevice from (BluetoothDevice device)
   {
-    return new PairedDevice(device.getName(), device.getAddress(), (byte) 0);
+    return new PairedDevice(device.getName(), device.getAddress(), (byte) 0, device);
   }
 
 }
