@@ -67,6 +67,14 @@ public class ScanFragment extends Fragment
   public ScanFragment () {}
   
   @Override
+  public void onDetach ()
+  {
+    super.onDetach();
+    getActivity().unregisterReceiver(bluetooth_receiver);
+    if (bluetooth_utils.isDiscovering()) bluetooth_utils.cancelDiscovery();
+  }
+  
+  @Override
   public void onAttach (Activity activity)
   {
     super.onAttach(activity);
@@ -83,9 +91,10 @@ public class ScanFragment extends Fragment
     bluetooth_receiver = new BluetoothReceiver();
     bluetooth_receiver.setOnDiscoveryListener(new BluetoothCallback.OnDiscoveryListener () {
       @Override
-      public void onDiscover(PairedDevice paired_device, BluetoothDevice bluetooth_device, Intent intent) {
-        int parition = (Short.MAX_VALUE);
-        Toast.makeText(getActivity(), "Strength: " + intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE), Toast.LENGTH_SHORT).show();
+      public void onDiscover(PairedDevice discovered_device, BluetoothDevice bluetooth_device, Intent intent) {
+        int raw_signal = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
+        paired_devices_adapter.add(discovered_device);
+        //Toast.makeText(getActivity(), "Strength: " + , Toast.LENGTH_SHORT).show();
       }
     });
     getActivity().registerReceiver(bluetooth_receiver, BluetoothReceiver.getIntentFilter());
