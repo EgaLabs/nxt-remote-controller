@@ -23,4 +23,14 @@
   <string name="preference_summary_address">La URL del servidor que administra las conexiones de los sockets, sin el protocolo.</string>
   <string name="preference_dialog_address">¿Cuál es la dirección?</string>
   <string name="preference_value_address">localhost:8080</string>
+  
+  <string name="preference_title_min_signal">Señal mínima</string>
+  <string name="preference_summary_min_signal">Señal mínima registrada para calcular el procentaje. Cuanto más bajo peor. El valor por defecto es -60dBm.</string>
+  <string name="preference_dialog_min_signal">¿Cuál es el valor mínimo?</string>
+  <string name="preference_value_min_signal">-60</string>
+  
+  <string name="preference_title_max_signal">Señal máxima</string>
+  <string name="preference_summary_max_signal">Señal máxima registrada para calcular el porcentaje. Cuanto más alto mejor. El valor por defecto es -60dBm.</string>
+  <string name="preference_dialog_max_signal">¿Cuál es el valor máximo?</string>
+  <string name="preference_value_max_signal">-60</string>
 </resources>

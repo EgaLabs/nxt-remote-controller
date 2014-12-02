@@ -16,6 +16,18 @@
   </PreferenceCategory>
 
   <PreferenceCategory android:title="@string/settings_category_misc">
+    <EditTextPreference
+        android:key="preference_minimum_signal"
+        android:title="@string/preference_title_min_signal"
+        android:summary="@string/preference_summary_min_signal"
+        android:dialogTitle="@string/preference_dialog_min_signal"
+        android:defaultValue="@string/preference_value_min_signal" />
+    <EditTextPreference
+        android:key="preference_maximum_signal"
+        android:title="@string/preference_title_max_signal"
+        android:summary="@string/preference_summary_max_signal"
+        android:dialogTitle="@string/preference_dialog_max_signal"
+        android:defaultValue="@string/preference_value_max_signal" />
   </PreferenceCategory>
 
 </PreferenceScreen>
