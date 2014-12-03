@@ -50,13 +50,13 @@ public class PairedDevice
   
   public int getConnectivity ()
   {
-    return ((Byte) this._signal).intValue() / 0xff;
+    return (int) ((float) (this._signal & 0xff) / 0xff * 100);
   }
   
   public void setConnectivity (int connectivity)
   {
     int sanitized = Math.min(100, Math.max(0, connectivity));
-    byte binary = (byte) (sanitized / 100 * 0xff);
+    byte binary = (byte) ((float) sanitized / 100 * 0xff);
     this.setSignal(binary);
   }
   
