@@ -27,10 +27,10 @@
   <string name="preference_title_min_signal">Senyal mínima</string>
   <string name="preference_summary_min_signal">Senyal mínima registrada per calcular el percentatge. Com més petit pitjor. El valor per defecte és -60dBm.</string>
   <string name="preference_dialog_min_signal">Quin és el valor mínim?</string>
-  <string name="preference_value_min_signal">-60</string>
+  <string name="preference_value_min_signal">0</string>
   
   <string name="preference_title_max_signal">Señal máxima</string>
   <string name="preference_summary_max_signal">Senyal màxima registrada per calcular el percentatge. Com més gran millor. El valor per defecte és -60dBm.</string>
   <string name="preference_dialog_max_signal">Quin és el valor màxim?</string>
-  <string name="preference_value_max_signal">-60</string>
+  <string name="preference_value_max_signal">-100</string>
 </resources>
