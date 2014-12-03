@@ -63,8 +63,12 @@ public class ScanFragment extends Fragment
   private PreferencesUtils.Editor preference_editor;
   private View view;
   private PairedDeviceAdapter paired_devices_adapter;
+  private PairedDevice discovered_device;
   private LinearLayoutManager linear_layout_manager;
   private RecyclerView recycler_view;
+  private boolean first_time;
+  private ArrayList<PairedDevice> discovered_devices;
+  private ArrayList<PairedDevice> lost_devices;
   final private String MAXIMUM_SIGNAL = "preference_maximum_signal";
   final private String MINIMUM_SIGNAL = "preference_minimum_signal";
   
@@ -75,6 +79,7 @@ public class ScanFragment extends Fragment
   {
     if (bluetooth_utils.isDiscovering()) bluetooth_utils.cancelDiscovery();
     getActivity().unregisterReceiver(bluetooth_receiver);
+    first_time = false;
     super.onDetach();
   }
   
@@ -87,6 +92,9 @@ public class ScanFragment extends Fragment
     preference_utils.privateMode();
     preference_editor = preference_utils.getEditor();
     preference_editor.edit();
+    discovered_devices = new ArrayList<PairedDevice>();
+    lost_devices = new ArrayList<PairedDevice>();
+    first_time = true;
     
     if (bluetooth_utils.isEnabled() == false) {
       getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new BluetoothFragment(this, bluetooth_utils)).commit();
@@ -100,11 +108,30 @@ public class ScanFragment extends Fragment
       @Override
       public void onFinish ()
       {
+        if (first_time == true) first_time = false;
+        lost_devices = paired_devices_adapter.diff(discovered_devices);
+        int index;
+        for (PairedDevice discovered_device : lost_devices) {
+          index = paired_devices_adapter.exists(discovered_device);
+          if (index != -1) {
+            paired_devices_adapter.remove(index);
+          }
+        }
+        for (PairedDevice discovered_device : discovered_devices) {
+          index = paired_devices_adapter.exists(discovered_device);
+          if (index != -1) {
+            paired_devices_adapter.update(index);
+          } else {
+            paired_devices_adapter.add(discovered_device);
+          }
+        }
+        discovered_devices.clear();
+        lost_devices.clear();
         bluetooth_utils.startDiscovery();
       }
       
       @Override
-      public void onDiscover(PairedDevice discovered_device, BluetoothDevice bluetooth_device, Intent intent) {
+      public void onDiscover(BluetoothDevice bluetooth_device, Intent intent) {
         int raw_signal = (int) intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
         int minimum_value = Integer.parseInt(preference_editor.getString(MINIMUM_SIGNAL, "0"));
         int maximum_value = Integer.parseInt(preference_editor.getString(MAXIMUM_SIGNAL, "-100"));
@@ -119,8 +146,27 @@ public class ScanFragment extends Fragment
         int total = maximum_value - minimum_value;
         int portion = raw_signal - minimum_value;
         float percentage = ((float) portion / (float) total) * 100;
-        discovered_device.setConnectivity((int) percentage);
-        paired_devices_adapter.add(discovered_device);
+        int position = paired_devices_adapter.exists(bluetooth_device);
+        if (first_time == false) {
+          if (position != -1) {
+            discovered_device = paired_devices_adapter.get(position);
+          } else {
+            discovered_device = PairedDevice.from(bluetooth_device);
+          }
+          Toast.makeText(getActivity(), discovered_device.getName(), Toast.LENGTH_SHORT).show();
+          discovered_device.setConnectivity((int) percentage);
+          discovered_devices.add(discovered_device);
+          return;
+        }
+        if (position != -1) {
+          discovered_device = paired_devices_adapter.get(position);
+          discovered_device.setConnectivity((int) percentage);
+          paired_devices_adapter.update(position);
+        } else {
+          discovered_device = PairedDevice.from(bluetooth_device);
+          discovered_device.setConnectivity((int) percentage);
+          paired_devices_adapter.add(discovered_device);
+        }
       }
       
     });
