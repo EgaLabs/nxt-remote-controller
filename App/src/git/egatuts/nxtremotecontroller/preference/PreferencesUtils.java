@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.preference.PreferenceManager;
 
 public class PreferencesUtils
 {
@@ -29,6 +30,11 @@ public class PreferencesUtils
   public void privateMode (String name)
   {
     _shared_preferences = _context.getSharedPreferences(name, Context.MODE_PRIVATE);
+  }
+  
+  public void privateMode ()
+  {
+    _shared_preferences = PreferenceManager.getDefaultSharedPreferences(_context);
   }
   
   public class Editor
