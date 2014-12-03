@@ -37,7 +37,6 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -53,25 +52,30 @@ import git.egatuts.nxtremotecontroller.bluetooth.BluetoothReceiver;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
+import git.egatuts.nxtremotecontroller.preference.PreferencesUtils;
 
 public class ScanFragment extends Fragment
 {
   
   private BluetoothUtils bluetooth_utils;
   private BluetoothReceiver bluetooth_receiver;
+  private PreferencesUtils preference_utils;
+  private PreferencesUtils.Editor preference_editor;
   private View view;
   private PairedDeviceAdapter paired_devices_adapter;
   private LinearLayoutManager linear_layout_manager;
   private RecyclerView recycler_view;
+  final private String MAXIMUM_SIGNAL = "preference_maximum_signal";
+  final private String MINIMUM_SIGNAL = "preference_minimum_signal";
   
   public ScanFragment () {}
   
   @Override
   public void onDetach ()
   {
-    super.onDetach();
-    getActivity().unregisterReceiver(bluetooth_receiver);
     if (bluetooth_utils.isDiscovering()) bluetooth_utils.cancelDiscovery();
+    getActivity().unregisterReceiver(bluetooth_receiver);
+    super.onDetach();
   }
   
   @Override
@@ -79,23 +83,46 @@ public class ScanFragment extends Fragment
   {
     super.onAttach(activity);
     bluetooth_utils = new BluetoothUtils();
+    preference_utils = new PreferencesUtils(activity);
+    preference_utils.privateMode();
+    preference_editor = preference_utils.getEditor();
+    preference_editor.edit();
     
     if (bluetooth_utils.isEnabled() == false) {
       getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new BluetoothFragment(this, bluetooth_utils)).commit();
     }
     
-    if (bluetooth_utils.isDiscovering()) {
-      bluetooth_utils.cancelDiscovery();
-    }
+    if (bluetooth_utils.isDiscovering()) bluetooth_utils.cancelDiscovery();
     bluetooth_utils.startDiscovery();
     bluetooth_receiver = new BluetoothReceiver();
     bluetooth_receiver.setOnDiscoveryListener(new BluetoothCallback.OnDiscoveryListener () {
+      
+      @Override
+      public void onFinish ()
+      {
+        bluetooth_utils.startDiscovery();
+      }
+      
       @Override
       public void onDiscover(PairedDevice discovered_device, BluetoothDevice bluetooth_device, Intent intent) {
-        int raw_signal = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
+        int raw_signal = (int) intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
+        int minimum_value = Integer.parseInt(preference_editor.getString(MINIMUM_SIGNAL, "0"));
+        int maximum_value = Integer.parseInt(preference_editor.getString(MAXIMUM_SIGNAL, "-100"));
+        if (raw_signal > maximum_value) {
+          maximum_value = raw_signal;
+          preference_editor.saveString(MAXIMUM_SIGNAL, Integer.toString(maximum_value));
+        }
+        if (raw_signal < minimum_value) {
+          minimum_value = raw_signal;
+          preference_editor.saveString(MINIMUM_SIGNAL, Integer.toString(minimum_value));
+        }
+        int total = maximum_value - minimum_value;
+        int portion = raw_signal - minimum_value;
+        float percentage = ((float) portion / (float) total) * 100;
+        discovered_device.setConnectivity((int) percentage);
         paired_devices_adapter.add(discovered_device);
-        //Toast.makeText(getActivity(), "Strength: " + , Toast.LENGTH_SHORT).show();
       }
+      
     });
     getActivity().registerReceiver(bluetooth_receiver, BluetoothReceiver.getIntentFilter());
   }
