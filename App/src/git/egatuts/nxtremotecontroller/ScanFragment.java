@@ -46,7 +46,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothCallback;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothReceiver;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
@@ -153,7 +152,6 @@ public class ScanFragment extends Fragment
           } else {
             discovered_device = PairedDevice.from(bluetooth_device);
           }
-          Toast.makeText(getActivity(), discovered_device.getName(), Toast.LENGTH_SHORT).show();
           discovered_device.setConnectivity((int) percentage);
           discovered_devices.add(discovered_device);
           return;
