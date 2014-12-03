@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothCallback.OnDiscoveryListener;
-import git.egatuts.nxtremotecontroller.device.PairedDevice;
 
 public class BluetoothReceiver extends BroadcastReceiver
 {
@@ -19,7 +18,7 @@ public class BluetoothReceiver extends BroadcastReceiver
     String action = intent.getAction();
     if (BluetoothDevice.ACTION_FOUND.equals(action)) {
       BluetoothDevice bluetooth_device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-      if (bluetooth_device != null) onDiscoveryListener.onDiscover(PairedDevice.from(bluetooth_device), bluetooth_device, intent);
+      if (bluetooth_device != null) onDiscoveryListener.onDiscover(bluetooth_device, intent);
     } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
       onDiscoveryListener.onFinish();
     }
