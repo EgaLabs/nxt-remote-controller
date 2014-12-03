@@ -10,6 +10,7 @@ public class BluetoothCallback
   public static interface OnDiscoveryListener
   {
     public void onDiscover (PairedDevice paired_device, BluetoothDevice bluetooth_device, Intent intent);
+    public void onFinish ();
   }
   
   public static interface OnConnectionListener

@@ -1,5 +1,6 @@
 package git.egatuts.nxtremotecontroller.bluetooth;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -16,10 +17,11 @@ public class BluetoothReceiver extends BroadcastReceiver
   public void onReceive (Context context, Intent intent)
   {
     String action = intent.getAction();
-    if (BluetoothDevice.ACTION_FOUND.equals(action))
-    {
+    if (BluetoothDevice.ACTION_FOUND.equals(action)) {
       BluetoothDevice bluetooth_device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-      onDiscoveryListener.onDiscover(PairedDevice.from(bluetooth_device), bluetooth_device, intent);
+      if (bluetooth_device != null) onDiscoveryListener.onDiscover(PairedDevice.from(bluetooth_device), bluetooth_device, intent);
+    } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+      onDiscoveryListener.onFinish();
     }
   }
   
@@ -35,7 +37,10 @@ public class BluetoothReceiver extends BroadcastReceiver
   
   public static IntentFilter getIntentFilter ()
   {
-    return new IntentFilter(BluetoothDevice.ACTION_FOUND);
+    IntentFilter filter = new IntentFilter();
+    filter.addAction(BluetoothDevice.ACTION_FOUND);
+    filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+    return filter;
   }
   
 }
