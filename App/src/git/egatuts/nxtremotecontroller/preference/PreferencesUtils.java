@@ -44,47 +44,80 @@ public class PreferencesUtils {
   private Context _context;
   private SharedPreferences _shared_preferences;
 
+  /*
+   * Constructor.
+   */
   public PreferencesUtils (Context context) {
     _context = context;
   }
 
-  public SharedPreferences getsharedPreferences () {
+  /*
+   * Getter for SharedPreferences.
+   */
+  public SharedPreferences getSharedPreferences () {
     return _shared_preferences;
   }
 
+  /*
+   * Returns a new instance of PreferenceUtils.Editor.
+   */
   public Editor getEditor () {
     return new Editor(_shared_preferences);
   }
 
+  /*
+   * Sets SharedPreferences mode to Context.MODE_PRIVATE with the given name.
+   */
   public void privateMode (String name) {
     _shared_preferences = _context.getSharedPreferences(name, Context.MODE_PRIVATE);
   }
 
+  /*
+   * Returns the default SharedPreferences mode.
+   */
   public void privateMode () {
     _shared_preferences = PreferenceManager.getDefaultSharedPreferences(_context);
   }
 
+  /*
+   * Editor subclass.
+   */
   public class Editor {
 
     private SharedPreferences _shared_preferences;
     private SharedPreferences.Editor _editor;
 
+    /*
+     * Constructor.
+     */
     public Editor (SharedPreferences preferences) {
       _shared_preferences = preferences;
     }
 
+    /*
+     * Returns SharedPreferences instance.
+     */
     public SharedPreferences getSharedPreferences () {
       return _shared_preferences;
     }
 
+    /*
+     * Returns SharedPrefences.Editor instance.
+     */
     public SharedPreferences.Editor getEditor () {
       return _editor;
     }
 
+    /*
+     * Initializes SharedPreferences edition.
+     */
     public void edit () {
       _editor = _shared_preferences.edit();
     }
 
+    /*
+     * Saves changes using AsyncTask if SharedPreferences.Editor.edit() is not available (API level < 10).
+     */
     public void save () {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
         _editor.apply();
@@ -99,36 +132,60 @@ public class PreferencesUtils {
       }
     }
 
+    /*
+     * Saves a string value. Can trigger this.save() method.
+     */
     public void saveString (String key, String value, boolean autosave) {
       _editor.putString(key, value);
       if (autosave == true) this.save();
     }
 
+    /*
+     * Saves a string value with (boolean) autosave always as true.
+     */
     public void saveString (String key, String value) {
       this.saveString(key, value, true);
     }
 
+    /*
+     * Returns a shared preference string value using a predefined value if not available.
+     */
     public String getString (String key, String default_value) {
       return _shared_preferences.getString(key, default_value);
     }
 
+    /*
+     * Returns a shared preference string value using empty string ("") as predefined value.
+     */
     public String getString (String key) {
       return _shared_preferences.getString(key, "");
     }
 
+    /*
+     * Saves an int value. Can trigger this.save() method.
+     */
     public void saveInt (String key, int value, boolean autosave) {
       _editor.putInt(key, value);
       if (autosave == true) this.save();
     }
 
+    /*
+     * Saves an int value with (boolean) autosave always as true.
+     */
     public void saveInt (String key, int value) {
       this.saveInt(key, value, true);
     }
 
+    /*
+     * Returns a shared preference int value using a predefined value if not available.
+     */
     public int getInt (String key, int default_value) {
       return _shared_preferences.getInt(key, default_value);
     }
 
+    /*
+     * Returns a shared preference int value using 0 as predefined value.
+     */
     public int getInt (String key) {
       return this.getInt(key, 0);
     }
