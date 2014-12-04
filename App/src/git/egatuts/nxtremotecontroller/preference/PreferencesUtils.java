@@ -124,7 +124,7 @@ public class PreferencesUtils {
       } else {
         new AsyncTask<Void, Void, Void> () {
           @Override
-          public Void doInBackground (Void...params) {
+          public Void doInBackground (Void... params) {
             _editor.commit();
             return null;
           }

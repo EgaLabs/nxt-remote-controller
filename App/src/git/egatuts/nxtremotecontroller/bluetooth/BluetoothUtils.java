@@ -35,6 +35,7 @@ package git.egatuts.nxtremotecontroller.bluetooth;
 
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -111,4 +112,20 @@ public class BluetoothUtils {
     return devices_set;
   }
 
+  /*
+   * Pairs a bluetooth device.
+   */
+  public void pair (PairedDevice device) {
+    this.pair(device.getBluetoothDevice());
+  }
+
+  public void pair (BluetoothDevice device) {
+    try {
+      Method method = device.getClass().getMethod("createBond", (Class[]) null);
+      method.invoke(device, (Object[]) null);
+    } catch (Exception error) {
+      error.printStackTrace();
+    }
+  }
+  
 }
