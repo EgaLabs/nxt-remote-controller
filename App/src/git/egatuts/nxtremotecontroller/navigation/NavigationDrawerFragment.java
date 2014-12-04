@@ -39,12 +39,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -58,16 +54,12 @@ import android.view.ViewGroup;
 
 public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallback {
 
-  private static final String PREFERENCES_FILE = "app_settings";
   private static final String CURRENT_POSITION = "drawer_current_position";
 
   private View fragment_container_view;
   private DrawerLayout drawer_layout;
 
   private ActionBarDrawerToggle drawer_toggle;
-
-  private static SharedPreferences shared_preferences;
-  private static SharedPreferences.Editor shared_preferences_editor;
 
   private int current_position;
   private NavigationDrawerCallback custom_callback;
@@ -131,34 +123,6 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
   public boolean isDrawerOpened () {
     return drawer_layout != null && drawer_layout.isDrawerOpen(fragment_container_view);
-  }
-
-  /*
-   * Saver and reader shared preferences.
-   */
-  public static void applySharedPreferences (final SharedPreferences.Editor editor) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-      editor.apply();
-    } else {
-      new AsyncTask < Void, Void, Void > () {@Override
-        public Void doInBackground(Void...params) {
-          editor.commit();
-          return null;
-        }
-      }.execute();
-    }
-  }
-
-  public static void saveSharedSetting (Context context, String key, String value) {
-    shared_preferences = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-    shared_preferences_editor = shared_preferences.edit();
-    shared_preferences_editor.putString(key, value);
-    applySharedPreferences(shared_preferences_editor);
-  }
-
-  public static String readSharedSetting (Context context, String key, String default_value) {
-    shared_preferences = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-    return shared_preferences.getString(key, default_value);
   }
 
   /*

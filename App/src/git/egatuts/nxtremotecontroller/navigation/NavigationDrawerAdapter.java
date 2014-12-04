@@ -39,17 +39,12 @@ import git.egatuts.nxtremotecontroller.navigation.DrawerItemViewHolder;
 import java.util.List;
 
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.support.v7.widget.RecyclerView;
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<DrawerItemViewHolder> {
-
-  private int selected_position;
-  private int touched_position;
-  private int last_position;
 
   private NavigationDrawerCallback drawer_callback;
   private List<DrawerItem> data;
@@ -82,27 +77,6 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<DrawerItemView
   }
 
   /*
-   * Records the last touched position and the last selected position.
-   */
-  private void touchPosition(int current_position) {
-    last_position = touched_position;
-    touched_position = current_position;
-    if (last_position >= 0) {
-      notifyItemChanged(last_position);
-    }
-    if (current_position >= 0) {
-      notifyItemChanged(current_position);
-    }
-  }
-
-  public void selectedPosition(int current_position) {
-    last_position = selected_position;
-    selected_position = current_position;
-    notifyItemChanged(last_position);
-    notifyItemChanged(current_position);
-  }
-
-  /*
    * Binder and creator for view holders.
    */
   @Override
@@ -116,29 +90,6 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<DrawerItemView
     TextView temp_view = view_holder.text_view;
     temp_view.setText(data.get(index).getText());
     temp_view.setCompoundDrawablesWithIntrinsicBounds(data.get(index).getDrawable(), null, null, null);
-
-    temp_view.setOnTouchListener(new View.OnTouchListener() {
-      @Override
-      public boolean onTouch(View v, MotionEvent event) {
-        switch (event.getAction()) {
-          case MotionEvent.ACTION_DOWN:
-            touchPosition(index);
-            return false;
-
-          case MotionEvent.ACTION_CANCEL:
-            touchPosition(-1);
-            return false;
-
-          case MotionEvent.ACTION_MOVE:
-            return false;
-
-          case MotionEvent.ACTION_UP:
-            touchPosition(-1);
-            return false;
-        }
-        return true;
-      }
-    });
 
     temp_view.setOnClickListener(new View.OnClickListener() {
       @Override
