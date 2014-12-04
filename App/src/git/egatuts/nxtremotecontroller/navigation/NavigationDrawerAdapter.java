@@ -22,16 +22,21 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                 *
- *                                                                                                                                     *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                  *
- *                                                                                                                                     *
- * And the corresponding file at:                                                                                                      *
- *                                                                                                                                     *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/NavigationDrawerAdapter.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                             *
+ *                                                                                                                                                 *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                              *
+ *                                                                                                                                                 *
+ * And the corresponding file at:                                                                                                                  *
+ *                                                                                                                                                 *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/navigation/NavigationDrawerAdapter.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.navigation;
+
+import git.egatuts.nxtremotecontroller.R;
+import git.egatuts.nxtremotecontroller.navigation.DrawerItemViewHolder;
+
+import java.util.List;
 
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -40,50 +45,31 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.support.v7.widget.RecyclerView;
 
-import git.egatuts.nxtremotecontroller.R;
-
-import java.util.List;
-
-public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.ViewHolder>
-{
-
-  private List<DrawerItem> data;
-  private NavigationDrawerCallback drawer_callback;
-  private View drawer_menu;
+public class NavigationDrawerAdapter extends RecyclerView.Adapter<DrawerItemViewHolder> {
 
   private int selected_position;
   private int touched_position;
   private int last_position;
 
-  public static class ViewHolder extends RecyclerView.ViewHolder
-  {
-    public TextView text_view;
-
-    public ViewHolder (View item)
-    {
-      super(item);
-      text_view = (TextView) item.findViewById(R.id.item_name);
-    }
-  }
+  private NavigationDrawerCallback drawer_callback;
+  private List<DrawerItem> data;
+  private View drawer_menu;
 
   /*
    * Constructor.
    */
-  public NavigationDrawerAdapter (List<DrawerItem> custom_data)
-  {
+  public NavigationDrawerAdapter(List<DrawerItem> custom_data) {
     data = custom_data;
   }
 
   /*
    * Getter and setter for NavigationDrawerCallback.
    */
-  public void setNavigationDrawerCallback (NavigationDrawerCallback custom_callback)
-  {
+  public void setNavigationDrawerCallback(NavigationDrawerCallback custom_callback) {
     drawer_callback = custom_callback;
   }
 
-  public NavigationDrawerCallback getNavigationDrawerCallback ()
-  {
+  public NavigationDrawerCallback getNavigationDrawerCallback() {
     return drawer_callback;
   }
 
@@ -98,8 +84,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
   /*
    * Records the last touched position and the last selected position.
    */
-  private void touchPosition (int current_position)
-  {
+  private void touchPosition(int current_position) {
     last_position = touched_position;
     touched_position = current_position;
     if (last_position >= 0) {
@@ -110,8 +95,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     }
   }
 
-  public void selectedPosition (int current_position)
-  {
+  public void selectedPosition(int current_position) {
     last_position = selected_position;
     selected_position = current_position;
     notifyItemChanged(last_position);
@@ -122,21 +106,18 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
    * Binder and creator for view holders.
    */
   @Override
-  public NavigationDrawerAdapter.ViewHolder onCreateViewHolder (ViewGroup parent, int index)
-  {
+  public DrawerItemViewHolder onCreateViewHolder(ViewGroup parent, int index) {
     drawer_menu = LayoutInflater.from(parent.getContext()).inflate(R.layout.drawer_item_row, parent, false);
-    return new ViewHolder(drawer_menu);
+    return new DrawerItemViewHolder(drawer_menu);
   }
 
   @Override
-  public void onBindViewHolder(NavigationDrawerAdapter.ViewHolder view_holder, final int index)
-  {
+  public void onBindViewHolder(DrawerItemViewHolder view_holder, final int index) {
     TextView temp_view = view_holder.text_view;
-    temp_view.setText( data.get(index).getText() );
+    temp_view.setText(data.get(index).getText());
     temp_view.setCompoundDrawablesWithIntrinsicBounds(data.get(index).getDrawable(), null, null, null);
 
     temp_view.setOnTouchListener(new View.OnTouchListener() {
-
       @Override
       public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()) {
@@ -157,7 +138,6 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         }
         return true;
       }
-
     });
 
     temp_view.setOnClickListener(new View.OnClickListener() {
@@ -166,7 +146,6 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         if (drawer_callback != null) drawer_callback.onNavigationDrawerItemSelected(index);
       }
     });
-
   }
 
 }

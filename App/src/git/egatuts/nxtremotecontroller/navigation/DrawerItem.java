@@ -22,21 +22,20 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                     *
- *                                                                                                                         *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                      *
- *                                                                                                                         *
- * And the corresponding file at:                                                                                          *
- *                                                                                                                         *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/DrawerItem.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                               *
+ *                                                                                                                                   *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                *
+ *                                                                                                                                   *
+ * And the corresponding file at:                                                                                                    *
+ *                                                                                                                                   *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/navigation/DrawerItem.java *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.navigation;
 
 import android.graphics.drawable.Drawable;
 
-public class DrawerItem
-{
+public class DrawerItem {
 
   private String text;
   private Drawable drawable;
@@ -44,51 +43,43 @@ public class DrawerItem
   /*
    * Setters and getters for text.
    */
-  public void setText (String custom_text)
-  {
+  public void setText(String custom_text) {
     text = custom_text;
   }
 
-  public String getText ()
-  {
+  public String getText() {
     return text;
   }
 
   /*
-   * Setters and getters for drawable.
+   * Setters and getters for Drawable item.
    */
-  public void setDrawable (Drawable custom_drawable)
-  {
+  public void setDrawable(Drawable custom_drawable) {
     drawable = custom_drawable;
   }
 
-  public Drawable getDrawable ()
-  {
+  public Drawable getDrawable() {
     return drawable;
   }
 
   /*
    * Constructors.
    */
-  private void init (String custom_text, Drawable custom_drawable)
-  {
+  private void init(String custom_text, Drawable custom_drawable) {
     text = custom_text;
     drawable = custom_drawable;
   }
 
-  public DrawerItem (String custom_text, Drawable custom_drawable)
-  {
+  public DrawerItem(String custom_text, Drawable custom_drawable) {
     init(custom_text, custom_drawable);
   }
 
-  public DrawerItem (String custom_text)
-  {
-    init(custom_text, null);
+  public DrawerItem(Drawable custom_drawable) {
+    init("", custom_drawable);
   }
 
-  public DrawerItem (Drawable custom_drawable)
-  {
-    init(null, custom_drawable);
+  public DrawerItem(String custom_text) {
+    init(custom_text, null);
   }
 
 }

@@ -22,15 +22,15 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                   *
- *                                                                                                                                       *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                    *
- *                                                                                                                                       *
- * And the corresponding file at:                                                                                                        *
- *                                                                                                                                       *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/NavigationDrawerFragment.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                             *
+ *                                                                                                                                                 *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                              *
+ *                                                                                                                                                 *
+ * And the corresponding file at:                                                                                                                  *
+ *                                                                                                                                                 *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/navigation/NavigationDrawerFragment.java *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.navigation;
 
 import git.egatuts.nxtremotecontroller.R;
@@ -56,8 +56,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallback
-{
+public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallback {
 
   private static final String PREFERENCES_FILE = "app_settings";
   private static final String CURRENT_POSITION = "drawer_current_position";
@@ -81,26 +80,22 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   /*
    * Getter and setter for drawer layout.
    */
-  public void setDrawerLayout (DrawerLayout layout)
-  {
+  public void setDrawerLayout (DrawerLayout layout) {
     drawer_layout = layout;
   }
 
-  public DrawerLayout getDrawerLayout ()
-  {
+  public DrawerLayout getDrawerLayout () {
     return drawer_layout;
   }
 
   /*
    * Getter and setter for action bar drawer toggle.
    */
-  public void setActionBarDrawerToggle (ActionBarDrawerToggle custom_drawer_toggle)
-  {
+  public void setActionBarDrawerToggle (ActionBarDrawerToggle custom_drawer_toggle) {
     drawer_toggle = custom_drawer_toggle;
   }
 
-  public ActionBarDrawerToggle getActionBarDrawerToggle ()
-  {
+  public ActionBarDrawerToggle getActionBarDrawerToggle () {
     return drawer_toggle;
   }
 
@@ -108,15 +103,13 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
    * onDetach and onAttach methods.
    */
   @Override
-  public void onDetach ()
-  {
+  public void onDetach () {
     super.onDetach();
     custom_callback = null;
   }
 
   @Override
-  public void onAttach (Activity custom_activity)
-  {
+  public void onAttach (Activity custom_activity) {
     super.onAttach(custom_activity);
     try {
       custom_callback = (NavigationDrawerCallback) custom_activity;
@@ -126,34 +119,29 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   }
 
   /*
-   * Opener and closer drawer.
+   * Drawer opener and closer.
    */
-  public void openDrawer ()
-  {
+  public void openDrawer () {
     drawer_layout.openDrawer(fragment_container_view);
   }
 
-  public void closeDrawer ()
-  {
+  public void closeDrawer () {
     drawer_layout.closeDrawer(fragment_container_view);
   }
 
-  public boolean isDrawerOpened ()
-  {
+  public boolean isDrawerOpened () {
     return drawer_layout != null && drawer_layout.isDrawerOpen(fragment_container_view);
   }
 
   /*
    * Saver and reader shared preferences.
    */
-  public static void applySharedPreferences (final SharedPreferences.Editor editor)
-  {
+  public static void applySharedPreferences (final SharedPreferences.Editor editor) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
       editor.apply();
     } else {
-      new AsyncTask<Void, Void, Void>() {
-        @Override
-        public Void doInBackground (Void... params) {
+      new AsyncTask < Void, Void, Void > () {@Override
+        public Void doInBackground(Void...params) {
           editor.commit();
           return null;
         }
@@ -161,16 +149,14 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     }
   }
 
-  public static void saveSharedSetting(Context context, String key, String value)
-  {
+  public static void saveSharedSetting (Context context, String key, String value) {
     shared_preferences = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
     shared_preferences_editor = shared_preferences.edit();
     shared_preferences_editor.putString(key, value);
     applySharedPreferences(shared_preferences_editor);
   }
 
-  public static String readSharedSetting(Context context, String key, String default_value)
-  {
+  public static String readSharedSetting (Context context, String key, String default_value) {
     shared_preferences = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
     return shared_preferences.getString(key, default_value);
   }
@@ -178,38 +164,33 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   /*
    * Select item and executes custom callback.
    */
-  public void selectItem (int position)
-  {
+  public void selectItem (int position) {
     current_position = position;
     if (drawer_layout != null) {
       drawer_layout.closeDrawer(fragment_container_view);
     }
-
     if (custom_callback != null) {
       custom_callback.onNavigationDrawerItemSelected(position);
     }
   }
 
   @Override
-  public void onNavigationDrawerItemSelected(int position)
-  {
+  public void onNavigationDrawerItemSelected (int position) {
     selectItem(position);
   }
- 
+
   /*
    * onConfigurationChanged and onSaveInstanceState methods.
    * Both save the actual state or configuration when the Activity is destroyed or paused.
    */
   @Override
-  public void onConfigurationChanged (Configuration config)
-  {
+  public void onConfigurationChanged (Configuration config) {
     super.onConfigurationChanged(config);
     drawer_toggle.onConfigurationChanged(config);
   }
 
   @Override
-  public void onSaveInstanceState (Bundle outState)
-  {
+  public void onSaveInstanceState (Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putInt(CURRENT_POSITION, current_position);
   }
@@ -218,8 +199,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
    * onCreate and onCreateView methods.
    */
   @Override
-  public void onCreate (Bundle savedInstanceState)
-  {
+  public void onCreate (Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     if (savedInstanceState != null) {
       current_position = savedInstanceState.getInt(CURRENT_POSITION);
@@ -227,8 +207,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   }
 
   @Override
-  public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-  {
+  public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     inflated_view = inflater.inflate(R.layout.navigation_drawer_fragment, container, false);
     drawer_list = (RecyclerView) inflated_view.findViewById(R.id.drawer_list);
     layout_manager = new LinearLayoutManager(getActivity());
@@ -245,12 +224,11 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     return inflated_view;
   }
 
-  public void setup(int fragment_id, DrawerLayout custom_drawer_layout, Toolbar toolbar)
-  {
+  public void setup (int fragment_id, DrawerLayout custom_drawer_layout, Toolbar toolbar) {
     fragment_container_view = getActivity().findViewById(fragment_id);
     drawer_layout = custom_drawer_layout;
-    drawer_toggle = new ActionBarDrawerToggle(getActivity(), drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close) {
 
+    drawer_toggle = new ActionBarDrawerToggle(getActivity(), drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close) {
       @Override
       public void onDrawerClosed(View drawerView) {
         super.onDrawerClosed(drawerView);
@@ -267,29 +245,27 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     };
 
     drawer_layout.post(new Runnable() {
-
       @Override
       public void run() {
         drawer_toggle.syncState();
       }
-
     });
 
     drawer_layout.setDrawerListener(drawer_toggle);
   }
 
-  private String getStr (int id)
-  {
+  /*
+   * Strings, drawables and menu getters.
+   */
+  private String getStr (int id) {
     return getResources().getString(id);
   }
 
-  private Drawable getDrw (int id)
-  {
+  private Drawable getDrw (int id) {
     return getResources().getDrawable(id);
   }
 
-  public List<DrawerItem> getMenu ()
-  {
+  public List<DrawerItem> getMenu() {
     List<DrawerItem> items = new ArrayList<DrawerItem>();
     items.add(new DrawerItem(getStr(R.string.home_label), getDrw(R.drawable.ic_home)));
     items.add(new DrawerItem(getStr(R.string.scan_label), getDrw(R.drawable.ic_scan)));
