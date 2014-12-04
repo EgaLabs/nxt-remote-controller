@@ -53,18 +53,18 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<DrawerItemView
   /*
    * Constructor.
    */
-  public NavigationDrawerAdapter(List<DrawerItem> custom_data) {
+  public NavigationDrawerAdapter (List<DrawerItem> custom_data) {
     data = custom_data;
   }
 
   /*
    * Getter and setter for NavigationDrawerCallback.
    */
-  public void setNavigationDrawerCallback(NavigationDrawerCallback custom_callback) {
+  public void setNavigationDrawerCallback (NavigationDrawerCallback custom_callback) {
     drawer_callback = custom_callback;
   }
 
-  public NavigationDrawerCallback getNavigationDrawerCallback() {
+  public NavigationDrawerCallback getNavigationDrawerCallback () {
     return drawer_callback;
   }
 
@@ -72,7 +72,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<DrawerItemView
    * Item counter.
    */
   @Override
-  public int getItemCount() {
+  public int getItemCount () {
     return data != null ? data.size() : 0;
   }
 
@@ -80,20 +80,20 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<DrawerItemView
    * Binder and creator for view holders.
    */
   @Override
-  public DrawerItemViewHolder onCreateViewHolder(ViewGroup parent, int index) {
+  public DrawerItemViewHolder onCreateViewHolder (ViewGroup parent, int index) {
     drawer_menu = LayoutInflater.from(parent.getContext()).inflate(R.layout.drawer_item_row, parent, false);
     return new DrawerItemViewHolder(drawer_menu);
   }
 
   @Override
-  public void onBindViewHolder(DrawerItemViewHolder view_holder, final int index) {
+  public void onBindViewHolder (DrawerItemViewHolder view_holder, final int index) {
     TextView temp_view = view_holder.text_view;
     temp_view.setText(data.get(index).getText());
     temp_view.setCompoundDrawablesWithIntrinsicBounds(data.get(index).getDrawable(), null, null, null);
 
-    temp_view.setOnClickListener(new View.OnClickListener() {
+    temp_view.setOnClickListener(new View.OnClickListener () {
       @Override
-      public void onClick(View v) {
+      public void onClick (View v) {
         if (drawer_callback != null) drawer_callback.onNavigationDrawerItemSelected(index);
       }
     });

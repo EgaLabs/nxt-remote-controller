@@ -35,6 +35,6 @@ package git.egatuts.nxtremotecontroller.navigation;
 
 public interface NavigationDrawerCallback {
 
-  public void onNavigationDrawerItemSelected(int position);
+  public void onNavigationDrawerItemSelected (int position);
 
 }

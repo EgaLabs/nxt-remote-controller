@@ -192,23 +192,23 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     fragment_container_view = getActivity().findViewById(fragment_id);
     drawer_layout = custom_drawer_layout;
 
-    drawer_toggle = new ActionBarDrawerToggle(getActivity(), drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close) {
+    drawer_toggle = new ActionBarDrawerToggle (getActivity(), drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close) {
       @Override
-      public void onDrawerClosed(View drawerView) {
+      public void onDrawerClosed (View drawerView) {
         super.onDrawerClosed(drawerView);
         if (!isAdded()) return;
         getActivity().invalidateOptionsMenu();
       }
 
       @Override
-      public void onDrawerOpened(View drawerView) {
+      public void onDrawerOpened (View drawerView) {
         super.onDrawerOpened(drawerView);
         if (!isAdded()) return;
         getActivity().invalidateOptionsMenu();
       }
     };
 
-    drawer_layout.post(new Runnable() {
+    drawer_layout.post(new Runnable () {
       @Override
       public void run() {
         drawer_toggle.syncState();
