@@ -52,6 +52,7 @@ public class BluetoothReceiver extends BroadcastReceiver {
     IntentFilter filter = new IntentFilter();
     filter.addAction(BluetoothDevice.ACTION_FOUND);
     filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+    filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
     return filter;
   }
 
@@ -76,6 +77,8 @@ public class BluetoothReceiver extends BroadcastReceiver {
       if (bluetooth_device != null) onDiscoveryListener.onDiscover(bluetooth_device, intent);
     } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
       onDiscoveryListener.onFinish();
+    } else if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
+      onDiscoveryListener.onStart();
     }
   }
 
