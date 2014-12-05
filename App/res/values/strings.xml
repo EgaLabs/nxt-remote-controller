@@ -33,4 +33,9 @@
   <string name="preference_summary_max_signal">Maximum registered strength signal used to calculate the percentage. The higher the value the better. Default value is -60dBm.</string>
   <string name="preference_dialog_max_signal">Which is the maximum value?</string>
   <string name="preference_value_max_signal">-100</string>
+  
+  <string name="preference_title_discovery_duration">Scan duration</string>
+  <string name="preference_summary_discovery_duration">Maximum discovery duration. Usually the maximum duration permitted by the system is 13 seconds more or less.</string>
+  <string name="preference_dialog_discovery_duration">Which is the duration?</string>
+  <string name="preference_value_discovery_duration">6</string>
 </resources>
