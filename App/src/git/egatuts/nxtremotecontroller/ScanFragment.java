@@ -66,7 +66,6 @@ public class ScanFragment extends Fragment
   
   final private String MAXIMUM_SIGNAL = "preference_maximum_signal";
   final private String MINIMUM_SIGNAL = "preference_minimum_signal";
-  final private String DISCOVERY_DURATION = "preference_discovery_duration";
   
   private BluetoothUtils bluetooth_utils;
   private BluetoothReceiver bluetooth_receiver;
@@ -79,7 +78,6 @@ public class ScanFragment extends Fragment
   private LinearLayoutManager linear_layout_manager;
   private RecyclerView recycler_view;
   private ButtonFloat button_float;
-  private boolean starting_discovery;
   private ArrayList<PairedDevice> discovered_devices;
   private ArrayList<PairedDevice> lost_devices;
   
@@ -92,24 +90,15 @@ public class ScanFragment extends Fragment
    * Cancels existing discovery and starts a new one.
    */
   public void startDiscovery () {
-    this.startDiscovery(Integer.parseInt(preference_editor.getString(DISCOVERY_DURATION, "5000")));
-  }
-  
-  public void startDiscovery (int miliseconds) {
     this.cancelDiscovery();
     bluetooth_utils.startDiscovery();
   }
   
   /*
    * Cancels existing discovery.
-   */
+   */  
   public void cancelDiscovery () {
-    this.cancelDiscovery(false);
-  }
-  
-  public void cancelDiscovery (boolean callback) {
     if (bluetooth_utils.isDiscovering()) bluetooth_utils.cancelDiscovery();
-    if (callback == true) discovery_callback.onFinish();
   }
   
   /*
@@ -216,7 +205,6 @@ public class ScanFragment extends Fragment
       @Override
       public void onFinish ()
       {
-        starting_discovery = false;
         lost_devices = paired_devices_adapter.diff(discovered_devices);
         int index;
         
@@ -317,13 +305,6 @@ public class ScanFragment extends Fragment
     button_float.setOnClickListener(new View.OnClickListener () {
       @Override
       public void onClick(View v) {
-        if (starting_discovery == true) {
-          changeIconTo(R.drawable.ic_sync);
-          cancelDiscovery();
-          starting_discovery = false;
-          return;
-        }
-        starting_discovery = true;
         changeIconTo(R.drawable.ic_cancel);
         startDiscovery();
       }

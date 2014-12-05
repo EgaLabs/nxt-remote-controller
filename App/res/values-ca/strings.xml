@@ -33,9 +33,4 @@
   <string name="preference_summary_max_signal">Senyal màxima registrada per calcular el percentatge. Com més gran millor. El valor per defecte és -60dBm.</string>
   <string name="preference_dialog_max_signal">Quin és el valor màxim?</string>
   <string name="preference_value_max_signal">-100</string>
-  
-  <string name="preference_title_discovery_duration">Duració d\'escaneig</string>
-  <string name="preference_summary_discovery_duration">Temps màxim que el dispositiu estarà escanejant dispositius pròxims. Es recomana que el valor no superi els 12 segons (valor en milisegons).</string>
-  <string name="preference_dialog_discovery_duration">Quina és la duració?</string>
-  <string name="preference_value_discovery_duration">5000</string>
 </resources>

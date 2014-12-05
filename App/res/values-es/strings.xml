@@ -33,9 +33,4 @@
   <string name="preference_summary_max_signal">Señal máxima registrada para calcular el porcentaje. Cuanto más alto mejor. El valor por defecto es -60dBm.</string>
   <string name="preference_dialog_max_signal">¿Cuál es el valor máximo?</string>
   <string name="preference_value_max_signal">-100</string>
-  
-  <string name="preference_title_discovery_duration">Duración de escaneo</string>
-  <string name="preference_summary_discovery_duration">Tiempo que el dispositivo estará escaneando dispositivos próximos. Se recomienda que el valor no supere los 12 segundos (valor en milisegundos).</string>
-  <string name="preference_dialog_discovery_duration">¿Cuál es la duración?</string>
-  <string name="preference_value_discovery_duration">5000</string>
 </resources>
