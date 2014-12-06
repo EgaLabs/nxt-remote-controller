@@ -2,17 +2,13 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    style="@style/relative_layout_style">
 
   <android.support.v7.widget.RecyclerView
       android:id="@+id/paired_devices"
-      android:layout_height="match_parent"
-      android:layout_width="match_parent"
-      android:scrollbars="vertical"
       tools:context=".MainActivity"
-      tools:listitem="@layout/paired_device" />
+      tools:listitem="@layout/paired_device"
+      style="@style/recycler_view" />
 
 </RelativeLayout>

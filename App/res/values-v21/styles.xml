@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-
-  <style name="ToolBarStyle" parent="ToolBarStyle.Base">
-    <item name="android:elevation">@dimen/toolbar_elevation</item>
+  
+  <!-- [Toolbar]  -->
+  <style name="toolbar_style" parent="wrap">
+    <item name="android:background">#3F51B5</item>
+    <item name="android:minHeight">@dimen/abc_action_bar_default_height_material</item>
+    <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    <item name="android:elevation">4dp</item>
     <item name="android:transitionName">actionBar</item>
   </style>
+  <!-- [/Toolbar] -->
   
+  
+  <!-- [Base style for theme (common metrics in all themes)]  -->
   <style name="AppTheme" parent="AppTheme.Base">
     <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     <item name="android:windowContentTransitions">true</item>
   </style>
+  <!-- [/Base style for theme (common metrics in all themes)] -->
   
+  
+  <!-- Indigo Theme -->
   <style name="AppTheme.Indigo" parent="AppTheme.Base.Indigo">
-    <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-    <item name="android:navigationBarColor">@color/indigo_navigation</item>
-    <item name="android:statusBarColor">@color/indigo_primary_dark</item>
-    <item name="android:windowBackground">@color/window_background</item>
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">#0B1A6C</item>
+    <item name="android:statusBarColor">#132584</item>
   </style>
+  <!-- Indigo Theme -->
 
 </resources>

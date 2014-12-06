@@ -3,28 +3,17 @@
     xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    style="@style/relative_layout_style">
     
   <android.support.v7.widget.RecyclerView
       android:id="@+id/discovered_devices"
-      android:layout_height="match_parent"
-      android:layout_width="match_parent"
-      android:scrollbars="vertical"
       tools:context=".MainActivity"
-      tools:listitem="@layout/paired_device" />
+      tools:listitem="@layout/paired_device"
+      style="@style/recycler_view" />
   
   <com.gc.materialdesign.views.ButtonFloat
       android:id="@+id/sync_button"
-      android:layout_width="65dp"
-      android:layout_height="65dp"
-      android:layout_marginRight="20dp"
-      android:layout_marginBottom="20dp"
-      android:layout_alignParentRight="true"
-      android:layout_alignParentBottom="true"
-      android:background="#33b5e5"
-      materialdesign:rippleSpeed="7" />
+      style="@style/float_button_style" />
 
 </RelativeLayout>

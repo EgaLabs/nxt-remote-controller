@@ -2,10 +2,4 @@
 <android.support.v7.widget.RecyclerView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawer_list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clickable="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:scrollbars="vertical"
-    android:background="@color/drawer_background" />
+    style="@style/drawer_recycler_view_style" />

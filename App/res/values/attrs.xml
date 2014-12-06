@@ -1,14 +1,2 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<resources>
-  <attr name="connectivity_layout_height" format="dimension" />
-  <attr name="connectivity_layout_margin" format="dimension" />
-  <attr name="connectivity_background"    format="reference" />
-  <attr name="connectivity_text_size"     format="dimension" />
-  <attr name="connectivity_color"         format="color" />
-  
-  <attr name="device_info_layout_margin_left"   format="dimension" />
-  <attr name="paired_device_text_size_name"     format="dimension" />
-  <attr name="paired_device_text_color_name"    format="color" />
-  <attr name="paired_device_text_size_address"  format="dimension" />
-  <attr name="paired_device_text_color_address" format="color" />
-</resources>
+<resources></resources>
