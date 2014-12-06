@@ -30,7 +30,7 @@
   <!-- [DrawerArrow]  -->
   <style name="drawer_arrow_style" parent="Widget.AppCompat.DrawerArrowToggle">
     <item name="spinBars">true</item>
-    <item name="color">@android:color/white</item>
+    <item name="color">?drawer_arrow_color</item>
   </style>
   <!-- [/DrawerArrow] -->
   
@@ -51,7 +51,7 @@
     
     <!-- [fragment]  -->
     <style name="fragment_drawer_style" parent="fragment">
-      <item name="android:layout_width">240dp</item>
+      <item name="android:layout_width">?drawer_width</item>
     </style>
     <!-- [/fragment] -->
     
@@ -62,7 +62,7 @@
     
     <!-- [Toolbar] -->
     <style name="toolbar_style" parent="wrap">
-      <item name="android:background">#3F51B5</item>
+      <item name="android:background">?toolbar_background</item>
       <item name="android:minHeight">@dimen/abc_action_bar_default_height_material</item>
       <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
       <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
@@ -76,7 +76,7 @@
   
     <!-- [RecyclerView]  -->
     <style name="drawer_recycler_view_style" parent="recycler_view">
-      <item name="android:background">#F2F2F2</item>
+      <item name="android:background">?drawer_background</item>
       <item name="android:focusable">true</item>
       <item name="android:clickable">true</item>
       <item name="android:focusableInTouchMode">true</item>
@@ -91,21 +91,21 @@
     <!-- [LinearLayout]  -->
     <style name="drawer_layout_style">
       <item name="android:layout_width">match_parent</item>
-      <item name="android:layout_height">48dp</item>
+      <item name="android:layout_height">?drawer_item_height</item>
     </style>
     <!-- [/LinearLayout] -->
     
     
     <!-- [TextView]  -->
     <style name="drawer_item_style" parent="match">
-      <item name="android:layout_marginStart">16dp</item>
-      <item name="android:layout_marginRight">16dp</item>
-      <item name="android:layout_marginEnd">16dp</item>
-      <item name="android:layout_marginLeft">16dp</item>
-      <item name="android:drawablePadding">16dp</item>
-      <item name="android:textSize">14sp</item>
-      <item name="android:textColor">#000000</item>
-      <item name="android:alpha">0.87</item>
+      <item name="android:layout_marginStart">?drawer_item_margin_start</item>
+      <item name="android:layout_marginRight">?drawer_item_margin_right</item>
+      <item name="android:layout_marginEnd">?drawer_item_margin_end</item>
+      <item name="android:layout_marginLeft">?drawer_item_margin_left</item>
+      <item name="android:drawablePadding">?drawer_item_icon_padding</item>
+      <item name="android:textSize">?drawer_item_text_size</item>
+      <item name="android:textColor">?drawer_item_text_color</item>
+      <item name="android:alpha">?drawer_item_alpha</item>
       <item name="android:gravity">center</item>
     </style>
     <!-- [/TextView] -->
@@ -140,8 +140,8 @@
     
     <!-- [TextView]  -->
     <style name="bluetooth_message_style" parent="wrap">
-      <item name="android:textColor">#333333</item>
-      <item name="android:textSize">20sp</item>
+      <item name="android:textColor">?bluetooth_message_text_color</item>
+      <item name="android:textSize">?bluetooth_message_text_size</item>
       <item name="android:gravity">center</item>
     </style>
     <!-- [/TextView] -->
@@ -170,11 +170,11 @@
     
     <!-- [ButtonFloat]  -->
     <style name="float_button_style">
-      <item name="android:layout_width">65dp</item>
-      <item name="android:layout_height">65dp</item>
-      <item name="android:layout_marginRight">20dp</item>
-      <item name="android:layout_marginBottom">20dp</item>
-      <item name="android:background">#33B5E5</item>
+      <item name="android:layout_width">?button_float_radius</item>
+      <item name="android:layout_height">?button_float_radius</item>
+      <item name="android:layout_marginRight">?button_float_margin</item>
+      <item name="android:layout_marginBottom">?button_float_margin</item>
+      <item name="android:background">?button_float_background</item>
       <item name="android:layout_alignParentRight">true</item>
       <item name="android:layout_alignParentBottom">true</item>
     </style>
@@ -188,18 +188,18 @@
     <!-- [LinearLayout]  -->
     <style name="device_layout_style" parent="match">
       <item name="android:orientation">horizontal</item>
-      <item name="android:layout_height">70dp</item>
-      <item name="android:layout_margin">15dp</item>
+      <item name="android:layout_height">?paired_device_height</item>
+      <item name="android:layout_margin">?paired_device_margin</item>
     </style>
     <!-- [/LinearLayout] -->
     
     
     <!-- [TextView]  -->
     <style name="device_signal_style" parent="match">
-      <item name="android:layout_width">70dp</item>
-      <item name="android:textColor">#FFFFFF</item>
-      <item name="android:textSize">25sp</item>
-      <item name="android:background">@drawable/indigo_connectivity_shape</item>
+      <item name="android:layout_width">?paired_device_height</item>
+      <item name="android:textColor">?paired_device_signal_text_color</item>
+      <item name="android:textSize">?paired_device_signal_text_size</item>
+      <item name="android:background">?paired_device_signal_shape</item>
       <item name="android:gravity">center</item>
     </style>
     <!-- [/TextView] -->
@@ -207,7 +207,7 @@
     
     <!-- [LinearLayout]  -->
     <style name="device_info_style" parent="row">
-      <item name="android:layout_marginLeft">20dp</item>
+      <item name="android:layout_marginLeft">?paired_device_info_margin</item>
       <item name="android:orientation">vertical</item>
       <item name="android:gravity">center</item>
     </style>
@@ -216,16 +216,16 @@
     
     <!-- [TextView]  -->
     <style name="device_name_style" parent="row">
-      <item name="android:textSize">20sp</item>
-      <item name="android:textColor">#000000</item>
+      <item name="android:textSize">?paired_device_name_text_size</item>
+      <item name="android:textColor">?paired_device_name_text_color</item>
     </style>
     <!-- [/TextView] -->
     
     
     <!-- [TextView]  -->
     <style name="device_address_style" parent="row">
-      <item name="android:textSize">14sp</item>
-      <item name="android:textColor">#999999</item>
+      <item name="android:textSize">?paired_device_address_text_size</item>
+      <item name="android:textColor">?paired_device_address_text_color</item>
     </style>
     <!-- [/TextView] -->
     
@@ -236,6 +236,34 @@
   <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
     <item name="android:textColor">#000000</item>
+    
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">#FFFFFF</item>
+    <item name="drawer_width">240dp</item>
+    <item name="drawer_background">#F2F2F2</item>
+    <item name="drawer_item_height">48dp</item>
+    <item name="drawer_item_margin_start">16dp</item>
+    <item name="drawer_item_margin_right">16dp</item>
+    <item name="drawer_item_margin_end">16dp</item>
+    <item name="drawer_item_margin_left">16dp</item>
+    <item name="drawer_item_icon_padding">16dp</item>
+    <item name="drawer_item_text_size">14sp</item>
+    <item name="drawer_item_text_color">#000000</item>
+    <item name="drawer_item_alpha">0.87</item>
+    <item name="bluetooth_message_text_color">#333333</item>
+    <item name="bluetooth_message_text_size">20sp</item>
+    <item name="button_float_radius">65dp</item>
+    <item name="button_float_margin">20dp</item>
+    <item name="paired_device_height">70dp</item>
+    <item name="paired_device_margin">15dp</item>
+    <item name="paired_device_signal_text_color">#FFFFFF</item>
+    <item name="paired_device_signal_text_size">25sp</item>
+    <item name="paired_device_info_margin">20dp</item>
+    <item name="paired_device_name_text_size">20dp</item>
+    <item name="paired_device_address_text_size">14dp</item>
+    <item name="paired_device_name_text_color">#000000</item>
+    <item name="paired_device_address_text_color">#999999</item>
+    <!-- [/Styles that applies to styles defined below] -->
   </style>
   
   <style name="AppTheme" parent="AppTheme.Base"></style>
@@ -253,6 +281,12 @@
     <item name="colorControlNormal">#3F51B5</item>
     <item name="colorControlActivated">#05114F</item>
     <item name="colorControlHighlight">#3F05114F</item>
+    
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">#3F51B5</item>
+    <item name="button_float_background">#33B5E5</item>
+    <item name="paired_device_signal_shape">@drawable/indigo_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
   </style>
   
   <style name="AppTheme.Indigo" parent="AppTheme.Base.Indigo" />
