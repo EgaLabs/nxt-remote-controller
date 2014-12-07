@@ -3,7 +3,7 @@
   
   <!-- [Toolbar]  -->
   <style name="toolbar_style" parent="wrap">
-    <item name="android:background">#3F51B5</item>
+    <item name="android:background">?toolbar_background</item>
     <item name="android:minHeight">@dimen/abc_action_bar_default_height_material</item>
     <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
@@ -24,8 +24,9 @@
   <!-- Indigo Theme -->
   <style name="AppTheme.Indigo" parent="AppTheme.Base.Indigo">
     <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
-    <item name="android:navigationBarColor">#0B1A6C</item>
-    <item name="android:statusBarColor">#132584</item>
+    <item name="android:navigationBarColor">@color/indigo_navigation</item>
+    <item name="android:statusBarColor">@color/indigo_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
   </style>
   <!-- Indigo Theme -->
 

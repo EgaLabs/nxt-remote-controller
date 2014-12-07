@@ -1,2 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<resources></resources>
+<resources>
+    
+  <!-- Miscelaneous -->
+  <color name="window_background">#FFFFFF</color>
+  
+  <!-- Drawer colors -->
+  <color name="drawer_arrow">#FFFFFF</color>
+  <color name="drawer_background">#F2F2F2</color>
+  <color name="drawer_item_color">#000000</color>
+  
+  <!-- Bluetooth -->
+  <color name="bluetooth">#333333</color>
+  
+  <!-- Paired device -->
+  <color name="paired_device_signal">#FFFFFF</color>
+  <color name="paired_device_name">#000000</color>
+  <color name="paired_device_address">#999999</color>
+  
+  <!-- Indigo theme colors -->
+  <color name="indigo_primary">#3F51B5</color>
+  <color name="indigo_primary_dark">#132584</color>
+  <color name="indigo_navigation">#0B1A6C</color>
+  <color name="indigo_accent">#05114F</color>
+  <color name="indigo_text_primary">#474747</color>
+  <color name="indigo_text">#525252</color>
+  <color name="indigo_control_normal">#3F51B5</color>
+  <color name="indigo_control_activated">#05114F</color>
+  <color name="indigo_control_highlight">#3F05114F</color>
+  <color name="indigo_button_float">#33B5E5</color>
+  
+</resources>
