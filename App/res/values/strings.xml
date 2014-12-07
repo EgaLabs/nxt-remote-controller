@@ -3,34 +3,55 @@
 
   <string name="app_name">NXT Remote Controller</string>
   
-  <string name="home_label">Home</string>
-  <string name="scan_label">Scan</string>
-  <string name="settings_label">Settings</string>
-  <string name="help_label">Help</string>
-  <string name="donations_label">Donations</string>
+  <!-- [NavigationDrawerFragment.java]  -->
+  <string name="home_drawer_label">Home</string>
+  <string name="scan_drawer_label">Scan</string>
+  <string name="settings_drawer_label">Settings</string>
+  <string name="help_drawer_label">Help</string>
+  <string name="donations_drawer_label">Donations</string>
+  <!-- [/NavigationDrawerFragment.java] -->
   
+  
+  <!-- [NavigationDrawerFragment.java]  -->
   <string name="drawer_open">Open navigation menu</string>
   <string name="drawer_close">Close navigation menu</string>
+  <!-- [/NavigationDrawerFragment.java] -->
   
+  
+  <!-- [bluetooth_enable.xml]  -->
   <string name="bluetooth_message">Bluetooth disabled.</string>
   <string name="bluetooth_button">Enable</string>
+  <string name="bluetooth_enabling">Enabling bluetooth...</string>
+  <!-- [/bluetooth_enable.xml] -->
   
+  
+  <!-- [preference_fragment.xml]  -->
   <string name="settings_category_server">Connection settings</string>
   <string name="settings_category_visual">Visual settings</string>
   <string name="settings_category_misc">Miscellaneous</string>
+  <!-- [/preference_fragment.xml] -->
   
+  
+  <!-- [preference_fragment.xml]  -->
   <string name="preference_title_address">Server address</string>
   <string name="preference_summary_address">The URL of the server handling the socket connection without the protocol scheme.</string>
   <string name="preference_dialog_address">Which is the location?</string>
   <string name="preference_value_address">localhost:8080</string>
+  <!-- [/preference_fragment.xml] -->
   
+  
+  <!-- [preference_fragment.xml]  -->
   <string name="preference_title_min_signal">Minimum signal</string>
   <string name="preference_summary_min_signal">Minimum registered strength signal used to calculate the percentage. The lower the value the worse. Default value is -60dBm.</string>
   <string name="preference_dialog_min_signal">Which is the minimum value?</string>
   <string name="preference_value_min_signal">0</string>
+  <!-- [/preference_fragment.xml] -->
   
+  
+  <!-- [preference_fragment.xml]  -->
   <string name="preference_title_max_signal">Maximum signal</string>
   <string name="preference_summary_max_signal">Maximum registered strength signal used to calculate the percentage. The higher the value the better. Default value is -60dBm.</string>
   <string name="preference_dialog_max_signal">Which is the maximum value?</string>
   <string name="preference_value_max_signal">-100</string>
+  <!-- [/preference_fragment.xml] -->
 </resources>
