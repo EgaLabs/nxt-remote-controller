@@ -1,2 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<resources></resources>
+<resources>
+    
+  <!-- Toolbar -->
+  <dimen name="toolbar_elevation">4dp</dimen>
+  
+  <!-- Drawer -->
+  <dimen name="drawer_width">240dp</dimen>
+  <dimen name="drawer_item_height">48dp</dimen>
+  <dimen name="drawer_item_margin">16dp</dimen>
+  <dimen name="drawer_item_icon_padding">16dp</dimen>
+  <dimen name="drawer_item_size">14sp</dimen>
+  <item name="drawer_item_alpha" format="float" type="dimen">0.87</item>
+  
+  <!-- Bluetooth -->
+  <dimen name="bluetooth">20sp</dimen>
+  
+  <!-- Button float -->
+  <dimen name="button_radius">65dp</dimen>
+  <dimen name="button_margin">20dp</dimen>
+  
+  <!-- Paired device -->
+  <dimen name="device_height">70dp</dimen>
+  <dimen name="device_margin">15dp</dimen>
+  <dimen name="device_signal_size">25sp</dimen>
+  <dimen name="device_info_margin">20dp</dimen>
+  <dimen name="device_name_size">20dp</dimen>
+  <dimen name="device_address_size">14dp</dimen>
+  
+</resources>

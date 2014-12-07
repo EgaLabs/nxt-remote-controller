@@ -241,28 +241,28 @@
     
     <!-- [Styles that applies to styles defined below]  -->
     <item name="drawer_arrow_color">@color/drawer_arrow</item>
-    <item name="drawer_width">240dp</item>
+    <item name="drawer_width">@dimen/drawer_width</item>
     <item name="drawer_background">@color/drawer_background</item>
-    <item name="drawer_item_height">48dp</item>
-    <item name="drawer_item_margin_start">16dp</item>
-    <item name="drawer_item_margin_right">16dp</item>
-    <item name="drawer_item_margin_end">16dp</item>
-    <item name="drawer_item_margin_left">16dp</item>
-    <item name="drawer_item_icon_padding">16dp</item>
-    <item name="drawer_item_text_size">14sp</item>
+    <item name="drawer_item_height">@dimen/drawer_item_height</item>
+    <item name="drawer_item_margin_start">@dimen/drawer_item_margin</item>
+    <item name="drawer_item_margin_right">@dimen/drawer_item_margin</item>
+    <item name="drawer_item_margin_end">@dimen/drawer_item_margin</item>
+    <item name="drawer_item_margin_left">@dimen/drawer_item_margin</item>
+    <item name="drawer_item_icon_padding">@dimen/drawer_item_icon_padding</item>
+    <item name="drawer_item_text_size">@dimen/drawer_item_size</item>
     <item name="drawer_item_text_color">@color/drawer_item_color</item>
-    <item name="drawer_item_alpha">0.87</item>
+    <item name="drawer_item_alpha">@dimen/drawer_item_alpha</item>
     <item name="bluetooth_message_text_color">@color/bluetooth</item>
-    <item name="bluetooth_message_text_size">20sp</item>
-    <item name="button_float_radius">65dp</item>
-    <item name="button_float_margin">20dp</item>
-    <item name="paired_device_height">70dp</item>
-    <item name="paired_device_margin">15dp</item>
+    <item name="bluetooth_message_text_size">@dimen/bluetooth</item>
+    <item name="button_float_radius">@dimen/button_radius</item>
+    <item name="button_float_margin">@dimen/button_margin</item>
+    <item name="paired_device_height">@dimen/device_height</item>
+    <item name="paired_device_margin">@dimen/device_margin</item>
     <item name="paired_device_signal_text_color">@color/paired_device_signal</item>
-    <item name="paired_device_signal_text_size">25sp</item>
-    <item name="paired_device_info_margin">20dp</item>
-    <item name="paired_device_name_text_size">20dp</item>
-    <item name="paired_device_address_text_size">14dp</item>
+    <item name="paired_device_signal_text_size">@dimen/device_signal_size</item>
+    <item name="paired_device_info_margin">@dimen/device_info_margin</item>
+    <item name="paired_device_name_text_size">@dimen/device_name_size</item>
+    <item name="paired_device_address_text_size">@dimen/device_address_size</item>
     <item name="paired_device_name_text_color">@color/paired_device_name</item>
     <item name="paired_device_address_text_color">@color/paired_device_address</item>
     <!-- [/Styles that applies to styles defined below] -->
