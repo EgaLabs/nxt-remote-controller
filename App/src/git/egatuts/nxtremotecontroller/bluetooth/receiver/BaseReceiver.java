@@ -22,15 +22,15 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                             *
- *                                                                                                                                 *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                              *
- *                                                                                                                                 *
- * And the corresponding file at:                                                                                                  *
- *                                                                                                                                 *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                         *
+ *                                                                                                                                             *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                          *
+ *                                                                                                                                             *
+ * And the corresponding file at:                                                                                                              *
+ *                                                                                                                                             *
  *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/bluetooth/receiver/BaseReceiver.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.bluetooth.receiver;
 
 import git.egatuts.nxtremotecontroller.bluetooth.listener.BaseListener;
