@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  
+
   <!-- [Toolbar]  -->
   <style name="toolbar_style" parent="wrap">
     <item name="android:background">?toolbar_background</item>
@@ -11,16 +11,16 @@
     <item name="android:transitionName">actionBar</item>
   </style>
   <!-- [/Toolbar] -->
-  
-  
+
+
   <!-- [Base style for theme (common metrics in all themes)]  -->
   <style name="AppTheme" parent="AppTheme.Base">
     <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     <item name="android:windowContentTransitions">true</item>
   </style>
   <!-- [/Base style for theme (common metrics in all themes)] -->
-  
-  
+
+
   <!-- Indigo Theme -->
   <style name="AppTheme.Indigo" parent="AppTheme.Base.Indigo">
     <item name="drawerArrowStyle">@style/drawer_arrow_style</item>

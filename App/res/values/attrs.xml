@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-    
+
   <!-- Toolbar attributes -->
   <attr name="toolbar_background" format="color" />
-    
+
   <!-- Drawer attributes -->
   <attr name="drawer_arrow_color"       format="color" />
   <attr name="drawer_width"             format="dimension" />
@@ -17,16 +17,16 @@
   <attr name="drawer_item_text_size"    format="dimension" />
   <attr name="drawer_item_text_color"   format="color" />
   <attr name="drawer_item_alpha"        format="float" />
-  
+
   <!-- Bluetooth attributes -->
   <attr name="bluetooth_message_text_color" format="color" />
   <attr name="bluetooth_message_text_size"  format="dimension" />
-  
+
   <!-- Float button attributes -->
   <attr name="button_float_radius"     format="dimension" />
   <attr name="button_float_margin"     format="dimension" />
   <attr name="button_float_background" format="color" />
-  
+
   <!-- Paired devices (recycler view item) attributes -->
   <attr name="paired_device_height"             format="dimension" />
   <attr name="paired_device_margin"             format="dimension" />

@@ -2,14 +2,14 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/bluetooth_layout_style">
-  
+
   <TextView
       android:text="@string/bluetooth_message"
       style="@style/bluetooth_message_style" />
-  
+
   <Button
       android:id="@+id/enable_bluetooth"
       android:text="@string/bluetooth_button"
       style="@style/bluetooth_button_style" />
-  
+
 </LinearLayout>
