@@ -29,61 +29,47 @@
  *                                                                                                                                                   *
  * And the corresponding file at:                                                                                                                    *
  *                                                                                                                                                   *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/device/PairedDeviceItemClickListener.java  *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/bluetooth/receiver/DiscoveryReceiver.java  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-package git.egatuts.nxtremotecontroller.device;
+package git.egatuts.nxtremotecontroller.bluetooth.receiver;
 
+import git.egatuts.nxtremotecontroller.bluetooth.listener.BaseListener;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.View;
+import android.content.IntentFilter;
 
-public class PairedDeviceItemClickListener implements RecyclerView.OnItemTouchListener {
-
-  private GestureDetector gesture_detector;
-  private OnItemClickListener click_listener;
+public class DiscoveryReceiver extends BaseReceiver {
 
   /*
-   * Interface for click listener.
+   * Constructors.
    */
-  public interface OnItemClickListener {
-    public void onItemClick(View view, int position);
+  public void init () {
+    this.BROADCAST_CALLBACKS_STATES.put("ON_DISCOVER_FINISH", true);
+    this.BROADCAST_CALLBACKS_STATES.put("ON_DISCOVER_START", true);
+    this.BROADCAST_CALLBACKS_STATES.put("ON_DEVICE_FOUND", true);
+  }
+
+  public DiscoveryReceiver (Context context) {
+    super(context);
+    init();
+  }
+
+  public DiscoveryReceiver (Context context, BaseListener listener) {
+    super(context, listener);
+    init();
   }
 
   /*
-   * Constructor.
-   */
-  public PairedDeviceItemClickListener (Context context, OnItemClickListener listener) {
-    click_listener = listener;
-    gesture_detector = new GestureDetector(context, new GestureDetector.OnGestureListener () {
-      @Override
-      public boolean onSingleTapUp (MotionEvent e) {
-        return true;
-      }
-      @Override public void onShowPress (MotionEvent e) {}
-      @Override public boolean onScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) { return false; }
-      @Override public void onLongPress (MotionEvent e) {}
-      @Override public boolean onFling (MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) { return false; }
-      @Override public boolean onDown (MotionEvent e) { return false; }
-    });
-  }
-
-  /*
-   * Detects touch/motion event and fires click listener if onSingleTapUp return true.
+   * Overwritten getIntentFilter method. Filters discovery start, finish and device found.
    */
   @Override
-  public boolean onInterceptTouchEvent (RecyclerView view, MotionEvent event) {
-    View item = view.findChildViewUnder(event.getX(), event.getY());
-    if (item != null && gesture_detector.onTouchEvent(event)) {
-      click_listener.onItemClick(item, view.getChildPosition(item));
-    }
-    return false;
+  public IntentFilter getIntentFilter () {
+    IntentFilter intent = new IntentFilter();
+    intent.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+    intent.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+    intent.addAction(BluetoothDevice.ACTION_FOUND);
+    return intent;
   }
-
-  /*
-   * Nothing to do here.
-   */
-  @Override public void onTouchEvent (RecyclerView arg0, MotionEvent arg1) {}
 
 }
