@@ -18,5 +18,5 @@ public abstract class DiscoveryListener extends BaseListener {
   @Override public void onDeviceClassChange         (Context context, Intent intent) {}
   //@Override public void onDeviceFound             (Context context, Intent intent) {}
   @Override public void onRemoteNameChange          (Context context, Intent intent) {}
-  
+
 }
