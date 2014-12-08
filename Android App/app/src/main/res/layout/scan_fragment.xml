@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RelativeLayout
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center_vertical"
+    style="@style/relative_layout_style"
+    android:background="#FFFFFF">
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/discovered_devices"
+      tools:context=".MainActivity"
+      tools:listitem="@layout/paired_device"
+      style="@style/recycler_view" />
+
+  <com.gc.materialdesign.views.ButtonFloat
+      android:id="@+id/sync_button"
+      style="@style/float_button_style" />
+
+</RelativeLayout>

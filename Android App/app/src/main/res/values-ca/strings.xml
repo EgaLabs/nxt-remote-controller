@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <string name="app_name">Comandament NXT</string>
+  
+  <!-- [NavigationDrawerFragment.java]  -->
+  <string name="home_drawer_label">Inici</string>
+  <string name="scan_drawer_label">Escanejar</string>
+  <string name="settings_drawer_label">Ajustos</string>
+  <string name="help_drawer_label">Ajuda</string>
+  <string name="donations_drawer_label">Donacions</string>
+  <!-- [/NavigationDrawerFragment.java] -->
+  
+  
+  <!-- [NavigationDrawerFragment.java]  -->
+  <string name="drawer_open">Obrir el menú de navegació</string>
+  <string name="drawer_close">Tancar el menú de navegació</string>
+  <!-- [/NavigationDrawerFragment.java] -->
+  
+  
+  <!-- [bluetooth_enable.xml]  -->
+  <string name="bluetooth_message">Bluetooth desactivat.</string>
+  <string name="bluetooth_button">Activar</string>
+  <string name="bluetooth_enabling">Activant bluetooth...</string>
+  <string name="bluetooth_disabling">Desactivant bluetooth...</string>
+  <!-- [/bluetooth_enable.xml] -->
+  
+  
+  <!-- [preference_fragment.xml]  -->
+  <string name="settings_category_server">Ajustos de connexió</string>
+  <string name="settings_category_visual">Ajustos visuals</string>
+  <string name="settings_category_misc">Miscel·lània</string>
+  <!-- [/preference_fragment.xml] -->
+  
+  
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_address">Adreça del servidor</string>
+  <string name="preference_summary_address">La URL del servidor que administra les conexions dels sockets, sense escriure el protocol.</string>
+  <string name="preference_dialog_address">Quina és la adreça?</string>
+  <string name="preference_value_address">localhost:8080</string>
+  <!-- [/preference_fragment.xml] -->
+  
+  
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_min_signal">Senyal mínima</string>
+  <string name="preference_summary_min_signal">Senyal mínima registrada per calcular el percentatge. Com més petit pitjor. El valor per defecte és -60dBm.</string>
+  <string name="preference_dialog_min_signal">Quin és el valor mínim?</string>
+  <string name="preference_value_min_signal">0</string>
+  <!-- [/preference_fragment.xml] -->
+  
+  
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_max_signal">Señal máxima</string>
+  <string name="preference_summary_max_signal">Senyal màxima registrada per calcular el percentatge. Com més gran millor. El valor per defecte és -60dBm.</string>
+  <string name="preference_dialog_max_signal">Quin és el valor màxim?</string>
+  <string name="preference_value_max_signal">-100</string>
+  <!-- [/preference_fragment.xml] -->
+</resources>
