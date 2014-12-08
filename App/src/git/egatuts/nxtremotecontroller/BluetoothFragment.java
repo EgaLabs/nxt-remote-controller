@@ -36,9 +36,9 @@ package git.egatuts.nxtremotecontroller;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 import git.egatuts.nxtremotecontroller.bluetooth.receiver.BluetoothEnableReceiver;
 import git.egatuts.nxtremotecontroller.bluetooth.listener.BluetoothEnableListener;
+
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.Context;
@@ -86,7 +86,7 @@ public class BluetoothFragment extends Fragment {
     });
     bluetooth_enable_receiver.registerReceiver();
   }
-  
+
   @Override
   public void onDetach () {
     super.onDetach();
