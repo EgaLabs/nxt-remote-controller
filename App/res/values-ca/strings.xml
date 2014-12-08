@@ -4,11 +4,11 @@
   <string name="app_name">Comandament NXT</string>
   
   <!-- [NavigationDrawerFragment.java]  -->
-  <string name="home_label">Inici</string>
-  <string name="scan_label">Escanejar</string>
-  <string name="settings_label">Ajustos</string>
-  <string name="help_label">Ajuda</string>
-  <string name="donations_label">Donacions</string>
+  <string name="home_drawer_label">Inici</string>
+  <string name="scan_drawer_label">Escanejar</string>
+  <string name="settings_drawer_label">Ajustos</string>
+  <string name="help_drawer_label">Ajuda</string>
+  <string name="donations_drawer_label">Donacions</string>
   <!-- [/NavigationDrawerFragment.java] -->
   
   

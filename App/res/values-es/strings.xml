@@ -4,11 +4,11 @@
   <string name="app_name">Control Remoto NXT</string>
   
   <!-- [NavigationDrawerFragment.java]  -->
-  <string name="home_label">Inicio</string>
-  <string name="scan_label">Escanear</string>
-  <string name="settings_label">Ajustes</string>
-  <string name="help_label">Ayuda</string>
-  <string name="donations_label">Donaciones</string>
+  <string name="home_drawer_label">Inicio</string>
+  <string name="scan_drawer_label">Escanear</string>
+  <string name="settings_drawer_label">Ajustes</string>
+  <string name="help_drawer_label">Ayuda</string>
+  <string name="donations_drawer_label">Donaciones</string>
   <!-- [/NavigationDrawerFragment.java] -->
   
   

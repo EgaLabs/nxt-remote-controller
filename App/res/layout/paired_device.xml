@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
     style="@style/device_layout_style">
+  
 
-  <TextView
+  
+    <TextView
       android:id="@+id/paired_device_connection"
       style="@style/device_signal_style" />
 
-  <LinearLayout style="@style/device_info_style">
-
-    <TextView
-        android:id="@+id/paired_device_name"
-        style="@style/device_name_style" />
-
-    <TextView
-        android:id="@+id/paired_device_address"
-        style="@style/device_address_style" />
-
-  </LinearLayout>
+    <LinearLayout style="@style/device_info_style">
+        
+      <TextView
+          android:id="@+id/paired_device_name"
+          style="@style/device_name_style" />
+        
+      <TextView
+          android:id="@+id/paired_device_address"
+          style="@style/device_address_style" />
+    
+    </LinearLayout>
 
 </LinearLayout>

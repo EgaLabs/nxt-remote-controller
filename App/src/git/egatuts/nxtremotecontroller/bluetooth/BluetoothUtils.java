@@ -35,10 +35,10 @@ package git.egatuts.nxtremotecontroller.bluetooth;
 
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Set;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 
@@ -115,17 +115,27 @@ public class BluetoothUtils {
   /*
    * Pairs a bluetooth device.
    */
-  public void pair (PairedDevice device) {
-    this.pair(device.getBluetoothDevice());
-  }
+  public void pair (Activity context, PairedDevice device) {
+    device.getBluetoothDevice().createBond();
+    /*try {
+      Intent intent = new Intent(BluetoothDevice.ACTION_PAIRING_REQUEST);
+      intent.putExtra(BluetoothDevice.EXTRA_DEVICE, device.getBluetoothDevice());
+      int type = device.getType();
+      intent.putExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, type);
+      if () {
+        intent.putExtra(BluetoothDevice.ACTION_PAIRING_REQUEST, device.get);
+      }
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      context.startActivity(intent);
+      //device.getClass().getMethod("setPairingConfirmation", boolean.class).invoke(device, true);
 
-  public void pair (BluetoothDevice device) {
-    try {
-      Method method = device.getClass().getMethod("createBond", (Class[]) null);
-      method.invoke(device, (Object[]) null);
+      //Intent intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
+      //context.startActivityForResult(intent);
+      //BluetoothSocket socket = device.createInsecureRfcommSocketToServiceRecord(UUID.fromString("0000110E-0000-1000-8000-00805F9B34FB"));
+      //socket.connect();
     } catch (Exception error) {
       error.printStackTrace();
-    }
+    }*/
   }
   
 }
