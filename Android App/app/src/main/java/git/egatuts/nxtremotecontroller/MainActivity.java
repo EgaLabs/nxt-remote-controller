@@ -38,6 +38,7 @@ import git.egatuts.nxtremotecontroller.fragment.HomeFragment;
 import git.egatuts.nxtremotecontroller.fragment.ScanFragment;
 import git.egatuts.nxtremotecontroller.navigation.NavigationDrawerCallback;
 import git.egatuts.nxtremotecontroller.navigation.NavigationDrawerFragment;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
@@ -51,36 +52,34 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity implements NavigationDrawerCallback
-{
-  
+public class MainActivity extends ActionBarActivity implements NavigationDrawerCallback {
+
   NavigationDrawerFragment drawer_fragment;
   BaseFragment fragmented_view;
-  BaseFragment fragment_active;
+  BaseFragment fragment_active = null;
   FragmentManager fragment_manager;
   Toolbar toolbar;
 
-	@Override
-	public void onCreate (Bundle savedInstanceState)
-	{
-	  super.onCreate(savedInstanceState);
-	  super.setContentView(R.layout.main_layout);
-	  
-	  getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-	  
-	  toolbar = (Toolbar) super.findViewById(R.id.toolbar_element);
-	  super.setSupportActionBar(toolbar);
-	  super.getSupportActionBar().setHomeButtonEnabled(true);
-	  super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-	  super.getSupportActionBar().setDisplayShowHomeEnabled(true);
-	  
-	  fragment_manager = getSupportFragmentManager();
-	  drawer_fragment = (NavigationDrawerFragment) fragment_manager.findFragmentById(R.id.drawer_fragment);
-	  drawer_fragment.setup(R.id.drawer_fragment, (DrawerLayout) super.findViewById(R.id.drawer_element), toolbar);
-	  
-	}
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    super.setContentView(R.layout.main_layout);
 
-  public Fragment getActiveFragment () {
+    getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+    toolbar = (Toolbar) super.findViewById(R.id.toolbar_element);
+    super.setSupportActionBar(toolbar);
+    super.getSupportActionBar().setHomeButtonEnabled(true);
+    super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    super.getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    fragment_manager = getSupportFragmentManager();
+    drawer_fragment = (NavigationDrawerFragment) fragment_manager.findFragmentById(R.id.drawer_fragment);
+    drawer_fragment.setup(R.id.drawer_fragment, (DrawerLayout) super.findViewById(R.id.drawer_element), toolbar);
+
+  }
+
+  public Fragment getActiveFragment() {
     List<Fragment> fragments = getSupportFragmentManager().getFragments();
     for (Fragment fragment : fragments) {
       if (fragment != null && fragment.isVisible()) {
@@ -89,70 +88,60 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     }
     return null;
   }
-	
-	@Override
-	public void onNavigationDrawerItemSelected (int position)
-	{
-    Toast.makeText(this, "ITEEEEM", Toast.LENGTH_SHORT).show();
-	  BaseFragment fragmented_view = null;
-	  Intent intent = null;
-	  
-	  switch (position) {
-	    case 0:
-	      fragmented_view = new HomeFragment();
-	    break;
-	    case 1:
-	      fragmented_view = new ScanFragment();
-	    break;
-	    case 2:
-	      intent = new Intent(this, SettingsActivity.class);
-	    break;
-	    case 3:
-	      intent = new Intent(Intent.ACTION_VIEW);
-	      intent.setData(Uri.parse("https://github.com/Egatuts/nxt-remote-controller"));
-	    break;
-	    case 4:
-	      intent = new Intent(Intent.ACTION_VIEW);
-	      intent.setData(Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9VPAAPMYC2HEJ"));
-	    break;
-	    default:
-	    break;
-	  }
-	  
-	  if (fragmented_view != null) {
-      //int count = fragment_manager.getBackStackEntryCount();
-      //BaseFragment fragment = (BaseFragment) fragment_manager.getFragments().get(count > 0 ? count - 1 : count);
-      //fragment.changeFragmentTo(fragmented_view, true);
-      //BaseFragment fragment = (BaseFragment) getActiveFragment();
-      //boolean transition;
-      //if (fragment == null) transition = false;
+
+  @Override
+  public void onNavigationDrawerItemSelected(int position) {
+    BaseFragment fragmented_view = null;
+    Intent intent = null;
+
+    switch (position) {
+      case 0:
+        fragmented_view = new HomeFragment();
+        break;
+      case 1:
+        fragmented_view = new ScanFragment();
+        break;
+      case 2:
+        intent = new Intent(this, SettingsActivity.class);
+        break;
+      case 3:
+        intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("https://github.com/Egatuts/nxt-remote-controller"));
+        break;
+      case 4:
+        intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9VPAAPMYC2HEJ"));
+        break;
+      default:
+        break;
+    }
+
+    if (fragmented_view != null) {
       if (fragment_active != null) {
         fragment_active.changeFragmentTo(fragmented_view, true);
       } else {
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragmented_view).commit();
       }
       fragment_active = fragmented_view;
-	  } else if (intent != null) {
-	    super.startActivity(intent);
-	    drawer_fragment.getActionBarDrawerToggle().onDrawerSlide(null, 0.0f);
-	  }
-	}
-	
-	@Override
-	public void onBackPressed ()
-	{
-	  if (drawer_fragment.isDrawerOpened()) {
-	    drawer_fragment.closeDrawer();
-	  } else {
-	    super.onBackPressed();
-	  }
-	}
-	
-	@Override
-	public void onPostCreate (Bundle savedInstanceState)
-	{
-	  super.onPostCreate(savedInstanceState);
-	  drawer_fragment.getActionBarDrawerToggle().syncState();
-	}
-	
+    } else if (intent != null) {
+      super.startActivity(intent);
+      drawer_fragment.getActionBarDrawerToggle().onDrawerSlide(null, 0.0f);
+    }
+  }
+
+  @Override
+  public void onBackPressed() {
+    if (drawer_fragment.isDrawerOpened()) {
+      drawer_fragment.closeDrawer();
+    } else {
+      super.onBackPressed();
+    }
+  }
+
+  @Override
+  public void onPostCreate(Bundle savedInstanceState) {
+    super.onPostCreate(savedInstanceState);
+    drawer_fragment.getActionBarDrawerToggle().syncState();
+  }
+
 }

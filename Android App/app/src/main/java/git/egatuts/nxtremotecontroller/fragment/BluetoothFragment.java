@@ -38,10 +38,12 @@ import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class BluetoothFragment extends BaseFragment {
 
@@ -54,20 +56,23 @@ public class BluetoothFragment extends BaseFragment {
 
   public BluetoothFragment () {}
 
-  /*
-   * We register the receiver to detect bluetooth changes.
-   */
-  @Override
-  public void onAttach (final Activity activity) {
-    super.onAttach(activity);
-    initListenersAndReceivers();
-    listenForBluetoothChanges();
-  }
-
   @Override
   public void onDetach () {
     super.onDetach();
     unlistenForBluetoothChanges();
+  }
+
+  @Override
+  public void onResume () {
+    super.onResume();
+    if (bluetooth_utils.isEnabled() == true) {
+      new Handler().postDelayed(new Runnable () {
+        @Override
+        public void run () {
+          changeFragmentTo(last_fragment, true);
+        }
+      }, 100);
+    }
   }
 
   public View onCreateView (LayoutInflater inflater, final ViewGroup parent, Bundle savedInstanceState) {

@@ -46,6 +46,9 @@
 
 
     <!-- [FrameLayout]  -->
+    <style name="frame_layout_style" parent="match">
+      <item name="android:background">#000000</item>
+    </style>
     <!-- [/FrameLayout] -->
 
 
@@ -135,6 +138,7 @@
     <style name="bluetooth_layout_style" parent="match">
       <item name="android:orientation">vertical</item>
       <item name="android:gravity">center</item>
+      <item name="android:background">#FFFFFF</item>
     </style>
     <!-- [/LinearLayout] -->
 
@@ -160,6 +164,8 @@
     <!-- [RelativeLayout]  -->
     <style name="relative_layout_style" parent="match">
       <item name="android:orientation">horizontal</item>
+      <item name="android:gravity">center_vertical</item>
+      <item name="android:background">#FFFFFF</item>
     </style>
     <!-- [/RelativeLayout] -->
 

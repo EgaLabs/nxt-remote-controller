@@ -34,11 +34,9 @@
 package git.egatuts.nxtremotecontroller.fragment;
 
 import git.egatuts.nxtremotecontroller.R;
-import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -54,26 +52,6 @@ public class HomeFragment extends BaseFragment {
   private PairedDeviceAdapter paired_devices_adapter;
   
   public HomeFragment () {}
-  
-  @Override
-  public void onCreate (Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    bluetooth_utils = new BluetoothUtils();
-    if (bluetooth_utils.isEnabled() == false) changeFragmentTo(new BluetoothFragment(bluetooth_utils), false);
-  }
-
-  @Override
-  public void onAttach (Activity activity) {
-    super.onAttach(activity);
-    initListenersAndReceivers();
-    listenForBluetoothChanges();
-  }
-
-  @Override
-  public void onDetach () {
-    super.onDetach();
-    unlistenForBluetoothChanges();
-  }
   
   @Override
   public View onCreateView (LayoutInflater inflater, ViewGroup parent_container, Bundle savedInstanceState) {

@@ -16,8 +16,7 @@
 
     <FrameLayout
         android:id="@+id/main_container"
-        style="@style/match"
-        android:background="#000000" />
+        style="@style/frame_layout_style" />
 
     <fragment
         android:id="@+id/drawer_fragment"

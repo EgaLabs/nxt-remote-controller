@@ -141,7 +141,7 @@ public abstract class BaseFragment extends Fragment {
           if (hasToChange == 1) new_fragment = last_fragment;
           if (!hasToShow && progress_dialog.isShowing()) {
             progress_dialog.setOnDismissListener(progress_dialog_on_dismiss);
-            if (System.currentTimeMillis() - show_date < 750) {
+            if (System.currentTimeMillis() - show_date < 500) {
               new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -165,4 +165,27 @@ public abstract class BaseFragment extends Fragment {
   public void unlistenForBluetoothChanges () {
     bluetooth_enable_receiver.unregisterReceiver();
   }
+
+  @Override
+  public void onAttach (Activity activity) {
+    super.onAttach(activity);
+    bluetooth_utils = new BluetoothUtils();
+    this.initListenersAndReceivers();
+  }
+
+  @Override
+  public void onResume () {
+    super.onResume();
+    if (bluetooth_utils.isEnabled() == false && !(this instanceof BluetoothFragment)) {
+      changeFragmentTo(new BluetoothFragment(bluetooth_utils), last_fragment != null? true : false);
+    }
+    this.listenForBluetoothChanges();
+  }
+
+  @Override
+  public void onPause () {
+    super.onPause();
+    this.unlistenForBluetoothChanges();
+  }
+
 }
