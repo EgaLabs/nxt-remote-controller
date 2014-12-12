@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/match">
 
   <include
@@ -11,7 +10,7 @@
 
   <fragment
       android:id="@+id/preference_fragment"
-      app:layout="@layout/preference_layout"
+      android:layout="@layout/preference_layout"
       android:name="git.egatuts.nxtremotecontroller.SettingsFragment"
       android:layout_below="@+id/toolbar_element"
       style="@style/fragment" />

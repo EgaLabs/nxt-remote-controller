@@ -22,25 +22,21 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                             *
- *                                                                                                                                                 *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                              *
- *                                                                                                                                                 *
- * And the corresponding file at:                                                                                                                  *
- *                                                                                                                                                 *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/navigation/NavigationDrawerFragment.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                                     *
+ *                                                                                                                                                                         *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                                      *
+ *                                                                                                                                                                         *
+ * And the corresponding file at:                                                                                                                                          *
+ *                                                                                                                                                                         *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/navigation/NavigationDrawerFragment.java *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.navigation;
-
-import git.egatuts.nxtremotecontroller.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -51,6 +47,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import git.egatuts.nxtremotecontroller.R;
 
 public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallback {
 
@@ -64,10 +65,10 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   private int current_position;
   private NavigationDrawerCallback custom_callback;
 
-  private View inflated_view;
-  private LinearLayoutManager layout_manager;
-  private RecyclerView drawer_list;
-  private NavigationDrawerAdapter navigation_drawer_adapter;
+  View inflated_view;
+  LinearLayoutManager layout_manager;
+  RecyclerView drawer_list;
+  NavigationDrawerAdapter navigation_drawer_adapter;
 
   /*
    * Getter and setter for drawer layout.
@@ -192,25 +193,27 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     fragment_container_view = getActivity().findViewById(fragment_id);
     drawer_layout = custom_drawer_layout;
 
-    drawer_toggle = new ActionBarDrawerToggle (getActivity(), drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close) {
+    drawer_toggle = new ActionBarDrawerToggle(getActivity(), drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close) {
       @Override
       public void onDrawerClosed (View drawerView) {
         super.onDrawerClosed(drawerView);
         if (!isAdded()) return;
-        getActivity().invalidateOptionsMenu();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+          getActivity().invalidateOptionsMenu();
       }
 
       @Override
       public void onDrawerOpened (View drawerView) {
         super.onDrawerOpened(drawerView);
         if (!isAdded()) return;
-        getActivity().invalidateOptionsMenu();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+          getActivity().invalidateOptionsMenu();
       }
     };
 
-    drawer_layout.post(new Runnable () {
+    drawer_layout.post(new Runnable() {
       @Override
-      public void run() {
+      public void run () {
         drawer_toggle.syncState();
       }
     });
@@ -229,7 +232,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     return getResources().getDrawable(id);
   }
 
-  public List<DrawerItem> getMenu() {
+  public List<DrawerItem> getMenu () {
     List<DrawerItem> items = new ArrayList<DrawerItem>();
     items.add(new DrawerItem(getStr(R.string.home_drawer_label), getDrw(R.drawable.ic_home)));
     items.add(new DrawerItem(getStr(R.string.scan_drawer_label), getDrw(R.drawable.ic_scan)));

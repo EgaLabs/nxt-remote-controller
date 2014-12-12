@@ -24,6 +24,11 @@
   <string name="bluetooth_message">Bluetooth desactivado.</string>
   <string name="bluetooth_button">Activar</string>
   <!-- [/bluetooth_enable.xml] -->
+
+
+  <!-- [scan_fragment.xml] -->
+  <string name="bluetooth_pairing">Emparejando dispositivo...</string>
+  <!-- [/scan_fragment.xml] -->
   
   
   <!-- [preference_fragment.xml]  -->

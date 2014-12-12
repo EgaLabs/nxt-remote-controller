@@ -22,15 +22,15 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                               *
- *                                                                                                                                   *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                *
- *                                                                                                                                   *
- * And the corresponding file at:                                                                                                    *
- *                                                                                                                                   *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/navigation/DrawerItem.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                       *
+ *                                                                                                                                                           *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                        *
+ *                                                                                                                                                           *
+ * And the corresponding file at:                                                                                                                            *
+ *                                                                                                                                                           *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/navigation/DrawerItem.java *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.navigation;
 
 import android.graphics.drawable.Drawable;

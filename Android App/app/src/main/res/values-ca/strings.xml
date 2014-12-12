@@ -24,6 +24,11 @@
   <string name="bluetooth_enabling">Activant bluetooth...</string>
   <string name="bluetooth_disabling">Desactivant bluetooth...</string>
   <!-- [/bluetooth_enable.xml] -->
+
+
+  <!-- [scan_fragment.xml] -->
+  <string name="bluetooth_pairing">Emparellant dispositiu...</string>
+  <!-- [/scan_fragment.xml] -->
   
   
   <!-- [preference_fragment.xml]  -->

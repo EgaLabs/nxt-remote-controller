@@ -22,15 +22,15 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                         *
- *                                                                                                                                             *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                          *
- *                                                                                                                                             *
- * And the corresponding file at:                                                                                                              *
- *                                                                                                                                             *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/bluetooth/listener/BaseListener.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                                 *
+ *                                                                                                                                                                     *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                                  *
+ *                                                                                                                                                                     *
+ * And the corresponding file at:                                                                                                                                      *
+ *                                                                                                                                                                     *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/bluetooth/listener/BaseListener.java *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.bluetooth.listener;
 
 import android.content.Context;
@@ -59,21 +59,32 @@ public abstract class BaseListener {
    * Methods for Broadcast Actions from BluetoothAdapter.
    */
   public abstract void onConnectionChange (Context context, Intent intent);
-  public abstract void onDiscoveryFinish  (Context context, Intent intent);
-  public abstract void onDiscoveryStart   (Context context, Intent intent);
-  public abstract void onLocalNameChange  (Context context, Intent intent);
-  public abstract void onScanModeChange   (Context context, Intent intent);
-  public abstract void onStateChange      (Context context, Intent intent);
+
+  public abstract void onDiscoveryFinish (Context context, Intent intent);
+
+  public abstract void onDiscoveryStart (Context context, Intent intent);
+
+  public abstract void onLocalNameChange (Context context, Intent intent);
+
+  public abstract void onScanModeChange (Context context, Intent intent);
+
+  public abstract void onStateChange (Context context, Intent intent);
 
   /*
    * Methods for Broadcast Actions from BluetoothDevice.
    */
-  public abstract void onLowLevelConnect           (Context context, Intent intent);
-  public abstract void onLowLevelDisconnect        (Context context, Intent intent);
+  public abstract void onLowLevelConnect (Context context, Intent intent);
+
+  public abstract void onLowLevelDisconnect (Context context, Intent intent);
+
   public abstract void onLowLevelDisconnectRequest (Context context, Intent intent);
-  public abstract void onBondStateChange           (Context context, Intent intent);
-  public abstract void onDeviceClassChange         (Context context, Intent intent);
-  public abstract void onDeviceFound               (Context context, Intent intent);
-  public abstract void onRemoteNameChange          (Context context, Intent intent);
+
+  public abstract void onBondStateChange (Context context, Intent intent);
+
+  public abstract void onDeviceClassChange (Context context, Intent intent);
+
+  public abstract void onDeviceFound (Context context, Intent intent);
+
+  public abstract void onRemoteNameChange (Context context, Intent intent);
 
 }

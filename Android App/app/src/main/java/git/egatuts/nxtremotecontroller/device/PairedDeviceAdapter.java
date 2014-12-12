@@ -22,20 +22,16 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                     *
- *                                                                                                                                         *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                      *
- *                                                                                                                                         *
- * And the corresponding file at:                                                                                                          *
- *                                                                                                                                         *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/device/PairedDeviceAdapter.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                             *
+ *                                                                                                                                                                 *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                              *
+ *                                                                                                                                                                 *
+ * And the corresponding file at:                                                                                                                                  *
+ *                                                                                                                                                                 *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/device/PairedDeviceAdapter.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.device;
-
-import git.egatuts.nxtremotecontroller.R;
-
-import java.util.ArrayList;
 
 import android.bluetooth.BluetoothDevice;
 import android.support.v7.widget.RecyclerView;
@@ -43,13 +39,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
+import git.egatuts.nxtremotecontroller.R;
+
 public class PairedDeviceAdapter extends RecyclerView.Adapter<PairedDeviceViewHolder> {
 
   private ArrayList<PairedDevice> paired_devices;
-  private ArrayList<PairedDevice> differences;
-  private PairedDevice device;
-  private boolean not_exists;
-  private int i;
+  ArrayList<PairedDevice> differences;
+  PairedDevice device;
+  boolean not_exists;
+  int i;
 
   /*
    * Constructor.
@@ -122,9 +122,9 @@ public class PairedDeviceAdapter extends RecyclerView.Adapter<PairedDeviceViewHo
   public ArrayList<PairedDevice> diff (ArrayList<PairedDevice> devices) {
     differences = new ArrayList<PairedDevice>();
     not_exists = true;
-    for (PairedDevice difference: paired_devices) {
+    for (PairedDevice difference : paired_devices) {
       not_exists = true;
-      for (PairedDevice device: devices) {
+      for (PairedDevice device : devices) {
         if (device.getAddress().equalsIgnoreCase(difference.getAddress())) not_exists = false;
       }
       if (not_exists) differences.add(difference);

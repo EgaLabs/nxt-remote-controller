@@ -22,24 +22,16 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                         *
- *                                                                                                                                             *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                          *
- *                                                                                                                                             *
- * And the corresponding file at:                                                                                                              *
- *                                                                                                                                             *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/bluetooth/receiver/BaseReceiver.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                                 *
+ *                                                                                                                                                                     *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                                  *
+ *                                                                                                                                                                     *
+ * And the corresponding file at:                                                                                                                                      *
+ *                                                                                                                                                                     *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/bluetooth/receiver/BaseReceiver.java *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.bluetooth.receiver;
-
-import git.egatuts.nxtremotecontroller.bluetooth.listener.BaseListener;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -47,9 +39,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+
+import git.egatuts.nxtremotecontroller.bluetooth.listener.BaseListener;
 
 public abstract class BaseReceiver extends BroadcastReceiver {
-  
+
   protected Context receiver_context;
   protected BaseListener receiver_listener;
   public HashMap<String, Boolean> BROADCAST_CALLBACKS_STATES = new HashMap<String, Boolean>() {
@@ -72,8 +73,8 @@ public abstract class BaseReceiver extends BroadcastReceiver {
   public static final HashMap<String, String> BROADCAST_CALLBACKS_METHODS = new HashMap<String, String>() {
     {
       put("ON_CONNECTION",                   "onConnectionChange");
-      put("ON_DISCOVER_FINISH",              "onDiscoverFinish");
-      put("ON_DISCOVER_START",               "onDiscoverStart");
+      put("ON_DISCOVER_FINISH",              "onDiscoveryFinish");
+      put("ON_DISCOVER_START",               "onDiscoveryStart");
       put("ON_LOCAL_NAME_CHANGE",            "onLocalNameChange");
       put("ON_SCAN_MODE_CHANGE",             "onScanModeChange");
       put("ON_STATE_CHANGE",                 "onStateChange");
@@ -88,7 +89,9 @@ public abstract class BaseReceiver extends BroadcastReceiver {
   };
   public static final HashMap<String, String> BROADCAST_ACTIONS = new HashMap<String, String>() {
     {
-      put("ON_CONNECTION",                   BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED);
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        put("ON_CONNECTION",                 BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED);
+      }
       put("ON_DISCOVER_FINISH",              BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
       put("ON_DISCOVER_START",               BluetoothAdapter.ACTION_DISCOVERY_STARTED);
       put("ON_LOCAL_NAME_CHANGE",            BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED);
@@ -162,18 +165,14 @@ public abstract class BaseReceiver extends BroadcastReceiver {
     Iterator<Entry<String, String>> actions_iterator = BROADCAST_ACTIONS.entrySet().iterator();
     Entry<String, String> pair;
     while (actions_iterator.hasNext()) {
-      pair = (Entry<String, String>) actions_iterator.next();
-      if (pair.getValue().equals(action) && BROADCAST_CALLBACKS_STATES.get(pair.getKey()) == true) {
+      pair = actions_iterator.next();
+      if (pair.getValue().equals(action) && BROADCAST_CALLBACKS_STATES.get(pair.getKey())) {
         String method_name = BROADCAST_CALLBACKS_METHODS.get(pair.getKey());
         try {
           Class<? extends BaseListener> clas = receiver_listener.getClass();
-          Method method = clas.getMethod(method_name, new Class[] { Context.class, Intent.class });
-          method.invoke(receiver_listener, new Object[] { context, intent} );
-        } catch (NoSuchMethodException e) {
-          e.printStackTrace();
-        } catch (IllegalAccessException e) {
-          e.printStackTrace();
-        } catch (InvocationTargetException e) {
+          Method method = clas.getMethod(method_name, new Class[]{Context.class, Intent.class});
+          method.invoke(receiver_listener, context, intent);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
           e.printStackTrace();
         }
       }

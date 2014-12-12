@@ -13,6 +13,7 @@
   <color name="bluetooth">#333333</color>
 
   <!-- Paired device -->
+  <color name="paired_device_ripple_color">#777777</color>
   <color name="paired_device_signal">#FFFFFF</color>
   <color name="paired_device_name">#000000</color>
   <color name="paired_device_address">#999999</color>
@@ -27,6 +28,7 @@
   <color name="indigo_control_normal">#3F51B5</color>
   <color name="indigo_control_activated">#05114F</color>
   <color name="indigo_control_highlight">#3F05114F</color>
+  <color name="indigo_progress_circular_color">#1E88E5</color>
   <color name="indigo_button_float">#33B5E5</color>
 
 </resources>

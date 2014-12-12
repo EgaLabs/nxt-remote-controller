@@ -22,25 +22,27 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                   *
- *                                                                                                                                       *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                    *
- *                                                                                                                                       *
- * And the corresponding file at:                                                                                                        *
- *                                                                                                                                       *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/bluetooth/BluetoothUtils.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                           *
+ *                                                                                                                                                               *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                            *
+ *                                                                                                                                                               *
+ * And the corresponding file at:                                                                                                                                *
+ *                                                                                                                                                               *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/bluetooth/BluetoothUtils.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.bluetooth;
 
-import git.egatuts.nxtremotecontroller.device.PairedDevice;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.os.Build;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Set;
 
-import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
+import git.egatuts.nxtremotecontroller.device.PairedDevice;
 
 public class BluetoothUtils {
 
@@ -105,7 +107,7 @@ public class BluetoothUtils {
     Set<BluetoothDevice> devices = bluetooth_adapter.getBondedDevices();
     ArrayList<PairedDevice> devices_set = new ArrayList<PairedDevice>();
     PairedDevice new_device;
-    for (BluetoothDevice old_device: devices) {
+    for (BluetoothDevice old_device : devices) {
       new_device = PairedDevice.from(old_device);
       devices_set.add(new_device);
     }
@@ -113,29 +115,21 @@ public class BluetoothUtils {
   }
 
   /*
-   * Pairs a bluetooth device.
+   * Pairs a bluetooth device using KitKat API if available.
    */
-  public void pair (Activity context, PairedDevice device) {
-    device.getBluetoothDevice().createBond();
-    /*try {
-      Intent intent = new Intent(BluetoothDevice.ACTION_PAIRING_REQUEST);
-      intent.putExtra(BluetoothDevice.EXTRA_DEVICE, device.getBluetoothDevice());
-      int type = device.getType();
-      intent.putExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, type);
-      if () {
-        intent.putExtra(BluetoothDevice.ACTION_PAIRING_REQUEST, device.get);
+  public boolean pair (PairedDevice paired_device) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      return paired_device.getBluetoothDevice().createBond();
+    } else {
+      try {
+        BluetoothDevice device = paired_device.getBluetoothDevice();
+        Method method = device.getClass().getMethod("createBond", (Class[]) null);
+        return (boolean) method.invoke(device, (Object[]) null);
+      } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+        e.printStackTrace();
       }
-      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-      context.startActivity(intent);
-      //device.getClass().getMethod("setPairingConfirmation", boolean.class).invoke(device, true);
-
-      //Intent intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
-      //context.startActivityForResult(intent);
-      //BluetoothSocket socket = device.createInsecureRfcommSocketToServiceRecord(UUID.fromString("0000110E-0000-1000-8000-00805F9B34FB"));
-      //socket.connect();
-    } catch (Exception error) {
-      error.printStackTrace();
-    }*/
+      return false;
+    }
   }
-  
+
 }

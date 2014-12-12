@@ -22,15 +22,15 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                               *
- *                                                                                                                                                   *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                                *
- *                                                                                                                                                   *
- * And the corresponding file at:                                                                                                                    *
- *                                                                                                                                                   *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/bluetooth/listener/DiscoveryListener.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                                       *
+ *                                                                                                                                                                           *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                                        *
+ *                                                                                                                                                                           *
+ * And the corresponding file at:                                                                                                                                            *
+ *                                                                                                                                                                           *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/bluetooth/listener/DiscoveryListener.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.bluetooth.listener;
 
 import android.content.Context;

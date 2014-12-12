@@ -38,10 +38,12 @@
   <!-- [Styles for main_layout.xml]  -->
 
     <!-- [include]  -->
+    <style name="include_style" parent="wrap"></style>
     <!-- [/include] -->
 
 
     <!-- [DrawerLayout]  -->
+    <style name="drawer_style" parent="match"></style>
     <!-- [/DrawerLayout] -->
 
 
@@ -100,20 +102,51 @@
 
 
     <!-- [TextView]  -->
-    <style name="drawer_item_style" parent="match">
-      <item name="android:layout_marginStart">?drawer_item_margin_start</item>
-      <item name="android:layout_marginRight">?drawer_item_margin_right</item>
-      <item name="android:layout_marginEnd">?drawer_item_margin_end</item>
-      <item name="android:layout_marginLeft">?drawer_item_margin_left</item>
-      <item name="android:drawablePadding">?drawer_item_icon_padding</item>
-      <item name="android:textSize">?drawer_item_text_size</item>
-      <item name="android:textColor">?drawer_item_text_color</item>
-      <item name="android:alpha">?drawer_item_alpha</item>
-      <item name="android:gravity">center_vertical</item>
+    <style name="drawer_item_style.base" parent="match">
+        <item name="android:layout_marginRight">?drawer_item_margin_right</item>
+        <item name="android:layout_marginLeft">?drawer_item_margin_left</item>
+        <item name="android:drawablePadding">?drawer_item_icon_padding</item>
+        <item name="android:textSize">?drawer_item_text_size</item>
+        <item name="android:textColor">?drawer_item_text_color</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
+    <style name="drawer_item_style" parent="drawer_item_style.base"></style>
     <!-- [/TextView] -->
 
   <!-- [/Styles for drawer_item_row.xml] -->
+
+
+  <!-- [Styles for progress_dialog.xml]  -->
+
+    <!-- [LinearLayout]  -->
+    <style name="progress_dialog_layout_style" parent="wrap">
+      <item name="android:layout_width">wrap_content</item>
+      <item name="android:orientation">horizontal</item>
+      <item name="android:layout_gravity">center</item>
+      <item name="android:background">@drawable/progress_dialog</item>
+    </style>
+    <!-- [/LinearLayout] -->
+
+    <!-- [ProgressBarCircularIIndeterminate]  -->
+    <style name="progress_bar_style">
+      <item name="android:layout_width">?progress_circular_size</item>
+      <item name="android:layout_height">?progress_circular_size</item>
+      <item name="android:layout_gravity">center_horizontal</item>
+      <item name="android:background">?progress_circular_color</item>
+    </style>
+    <!-- [/ProgressBarCircularIIndeterminate] -->
+
+    <!-- [TextView]  -->
+    <style name="progress_dialog_text_style" parent="match">
+      <item name="android:layout_width">wrap_content</item>
+      <item name="android:textColor">#333333</item>
+      <item name="android:gravity">center_vertical</item>
+      <item name="android:layout_marginLeft">15dp</item>
+      <item name="android:layout_marginRight">8dp</item>
+    </style>
+    <!-- [/TextView] -->
+
+  <!-- [/Styles for progress_dialog.xml] -->
 
 
   <!-- [Styles for preference_layout.xml]  -->
@@ -128,7 +161,7 @@
   <!-- [/Styles for preference_layout.xml] -->
 
 
-  <!-- [Styles for preference_fragment.xml]  -->  
+  <!-- [Styles for preference_fragment.xml]  -->
   <!-- [/Styles for preference_fragment.xml] -->
 
 
@@ -191,11 +224,17 @@
 
   <!-- [Styles for paired_device.xml]  -->
 
+    <!-- [RippleView] -->
+    <style name="device_ripple_style" parent="wrap">
+      <item name="rv_color">?paired_device_ripple_color</item>
+      <item name="rv_rippleDuration">?paired_device_ripple_duration</item>
+    </style>
+    <!-- [/RippleView] -->
+
     <!-- [LinearLayout]  -->
     <style name="device_layout_style" parent="match">
-      <item name="android:orientation">horizontal</item>
       <item name="android:layout_height">?paired_device_height</item>
-      <item name="android:layout_margin">?paired_device_margin</item>
+      <item name="android:layout_margin">?paired_device_padding</item>
     </style>
     <!-- [/LinearLayout] -->
 
@@ -225,6 +264,7 @@
     <style name="device_name_style" parent="row">
       <item name="android:textSize">?paired_device_name_text_size</item>
       <item name="android:textColor">?paired_device_name_text_color</item>
+      <item name="android:layout_toRightOf">@+id/paired_device_connection</item>
     </style>
     <!-- [/TextView] -->
 
@@ -233,6 +273,8 @@
     <style name="device_address_style" parent="row">
       <item name="android:textSize">?paired_device_address_text_size</item>
       <item name="android:textColor">?paired_device_address_text_color</item>
+      <item name="android:layout_toRightOf">@+id/paired_device_connection</item>
+      <item name="android:layout_below">@+id/paired_device_name</item>
     </style>
     <!-- [/TextView] -->
 
@@ -246,24 +288,34 @@
     <item name="android:windowBackground">@color/window_background</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_layout">@layout/navigation_drawer_fragment</item>
     <item name="drawer_arrow_color">@color/drawer_arrow</item>
     <item name="drawer_width">@dimen/drawer_width</item>
     <item name="drawer_background">@color/drawer_background</item>
     <item name="drawer_item_height">@dimen/drawer_item_height</item>
+
     <item name="drawer_item_margin_start">@dimen/drawer_item_margin</item>
     <item name="drawer_item_margin_right">@dimen/drawer_item_margin</item>
     <item name="drawer_item_margin_end">@dimen/drawer_item_margin</item>
     <item name="drawer_item_margin_left">@dimen/drawer_item_margin</item>
+
     <item name="drawer_item_icon_padding">@dimen/drawer_item_icon_padding</item>
     <item name="drawer_item_text_size">@dimen/drawer_item_size</item>
     <item name="drawer_item_text_color">@color/drawer_item_color</item>
     <item name="drawer_item_alpha">@dimen/drawer_item_alpha</item>
+
     <item name="bluetooth_message_text_color">@color/bluetooth</item>
     <item name="bluetooth_message_text_size">@dimen/bluetooth</item>
+
     <item name="button_float_radius">@dimen/button_radius</item>
     <item name="button_float_margin">@dimen/button_margin</item>
+
+    <item name="progress_circular_size">@dimen/progress_circular_size</item>
+
     <item name="paired_device_height">@dimen/device_height</item>
-    <item name="paired_device_margin">@dimen/device_margin</item>
+    <item name="paired_device_padding">@dimen/device_padding</item>
+    <item name="paired_device_ripple_color">@color/paired_device_ripple_color</item>
+    <item name="paired_device_ripple_duration">@integer/paired_device_ripple_duration</item>
     <item name="paired_device_signal_text_color">@color/paired_device_signal</item>
     <item name="paired_device_signal_text_size">@dimen/device_signal_size</item>
     <item name="paired_device_info_margin">@dimen/device_info_margin</item>
@@ -293,6 +345,7 @@
 
     <!-- [Styles that applies to styles defined below]  -->
     <item name="toolbar_background">@color/indigo_primary</item>
+    <item name="progress_circular_color">@color/indigo_progress_circular_color</item>
     <item name="button_float_background">@color/indigo_button_float</item>
     <item name="paired_device_signal_shape">@drawable/indigo_connectivity_shape</item>
     <!-- [/Styles that applies to styles defined below] -->

@@ -29,72 +29,54 @@
  *                                                                                                                                                                         *
  * And the corresponding file at:                                                                                                                                          *
  *                                                                                                                                                                         *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/navigation/NavigationDrawerAdapter.java  *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/bluetooth/receiver/PairingReceiver.java  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-package git.egatuts.nxtremotecontroller.navigation;
+package git.egatuts.nxtremotecontroller.bluetooth.receiver;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 
-import java.util.List;
+import git.egatuts.nxtremotecontroller.bluetooth.listener.BaseListener;
 
-import git.egatuts.nxtremotecontroller.R;
-
-public class NavigationDrawerAdapter extends RecyclerView.Adapter<DrawerItemViewHolder> {
-
-  private NavigationDrawerCallback drawer_callback;
-  private List<DrawerItem> data;
-  View drawer_menu;
+public class PairingReceiver extends BaseReceiver {
 
   /*
-   * Constructor.
+   * Constructors.
    */
-  public NavigationDrawerAdapter (List<DrawerItem> custom_data) {
-    data = custom_data;
+  public void init () {
+    this.BROADCAST_CALLBACKS_STATES.put("ON_BOND_STATE_CHANGE", true);
+  }
+
+  public PairingReceiver (Context context) {
+    super(context);
+    init();
+  }
+
+  public PairingReceiver (Context context, BaseListener listener) {
+    super(context, listener);
+    init();
   }
 
   /*
-   * Getter and setter for NavigationDrawerCallback.
+   * Returns the main used argument in the closure.
    */
-  public void setNavigationDrawerCallback (NavigationDrawerCallback custom_callback) {
-    drawer_callback = custom_callback;
-  }
-
-  public NavigationDrawerCallback getNavigationDrawerCallback () {
-    return drawer_callback;
-  }
-
-  /*
-   * Item counter.
-   */
-  @Override
-  public int getItemCount () {
-    return data != null ? data.size() : 0;
+  public static int[] getIntentExtraData (Intent intent) {
+    int[] states = {
+            intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothAdapter.ERROR),
+            intent.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothAdapter.ERROR)
+    };
+    return states;
   }
 
   /*
-   * Binder and creator for view holders.
+   * Overwritten getIntentFilter method. Filters discovery start, finish and device found.
    */
   @Override
-  public DrawerItemViewHolder onCreateViewHolder (ViewGroup parent, int index) {
-    drawer_menu = LayoutInflater.from(parent.getContext()).inflate(R.layout.drawer_item_row, parent, false);
-    return new DrawerItemViewHolder(drawer_menu);
-  }
-
-  @Override
-  public void onBindViewHolder (DrawerItemViewHolder view_holder, final int index) {
-    TextView temp_view = view_holder.text_view;
-    temp_view.setText(data.get(index).getText());
-    temp_view.setCompoundDrawablesWithIntrinsicBounds(data.get(index).getDrawable(), null, null, null);
-    temp_view.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick (View v) {
-        if (drawer_callback != null) drawer_callback.onNavigationDrawerItemSelected(index);
-      }
-    });
+  public IntentFilter getIntentFilter () {
+    return new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
   }
 
 }

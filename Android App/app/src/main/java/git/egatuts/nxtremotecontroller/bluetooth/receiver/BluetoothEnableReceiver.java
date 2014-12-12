@@ -22,22 +22,23 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                                     *
- *                                                                                                                                                         *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                                      *
- *                                                                                                                                                         *
- * And the corresponding file at:                                                                                                                          *
- *                                                                                                                                                         *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/bluetooth/receiver/BluetoothEnableReceiver.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                                             *
+ *                                                                                                                                                                                 *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                                              *
+ *                                                                                                                                                                                 *
+ * And the corresponding file at:                                                                                                                                                  *
+ *                                                                                                                                                                                 *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/bluetooth/receiver/BluetoothEnableReceiver.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.bluetooth.receiver;
 
-import git.egatuts.nxtremotecontroller.bluetooth.listener.BaseListener;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+
+import git.egatuts.nxtremotecontroller.bluetooth.listener.BaseListener;
 
 public class BluetoothEnableReceiver extends BaseReceiver {
 

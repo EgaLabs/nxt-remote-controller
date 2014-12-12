@@ -19,9 +19,12 @@
   <dimen name="button_radius">65dp</dimen>
   <dimen name="button_margin">20dp</dimen>
 
+  <!-- Progress dialog -->
+  <dimen name="progress_circular_size">32dp</dimen>
+
   <!-- Paired device -->
   <dimen name="device_height">70dp</dimen>
-  <dimen name="device_margin">15dp</dimen>
+  <dimen name="device_padding">15dp</dimen>
   <dimen name="device_signal_size">25sp</dimen>
   <dimen name="device_info_margin">20dp</dimen>
   <dimen name="device_name_size">20dp</dimen>

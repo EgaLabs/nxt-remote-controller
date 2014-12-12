@@ -22,21 +22,22 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                         *
- *                                                                                                                                             *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                          *
- *                                                                                                                                             *
- * And the corresponding file at:                                                                                                              *
- *                                                                                                                                             *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/navigation/DrawerItemViewHolder.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                                 *
+ *                                                                                                                                                                     *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                                  *
+ *                                                                                                                                                                     *
+ * And the corresponding file at:                                                                                                                                      *
+ *                                                                                                                                                                     *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/navigation/DrawerItemViewHolder.java *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.navigation;
 
-import git.egatuts.nxtremotecontroller.R;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import git.egatuts.nxtremotecontroller.R;
 
 public class DrawerItemViewHolder extends RecyclerView.ViewHolder {
 

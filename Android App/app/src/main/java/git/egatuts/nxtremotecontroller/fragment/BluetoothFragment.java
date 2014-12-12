@@ -22,28 +22,26 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                           *
- *                                                                                                                               *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                            *
- *                                                                                                                               *
- * And the corresponding file at:                                                                                                *
- *                                                                                                                               *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/BluetoothFragment.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                             *
+ *                                                                                                                                                                 *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                              *
+ *                                                                                                                                                                 *
+ * And the corresponding file at:                                                                                                                                  *
+ *                                                                                                                                                                 *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/fragment/BluetoothFragment.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.fragment;
 
-import git.egatuts.nxtremotecontroller.R;
-import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
-
 import android.os.Bundle;
-import android.app.Activity;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+
+import git.egatuts.nxtremotecontroller.R;
+import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 
 public class BluetoothFragment extends BaseFragment {
 
@@ -54,19 +52,26 @@ public class BluetoothFragment extends BaseFragment {
     setBluetoothUtils(utils);
   }
 
-  public BluetoothFragment () {}
+  public BluetoothFragment () {
+  }
 
+  /*
+   * onDetach unlisten for bluetooth changes.
+   */
   @Override
   public void onDetach () {
     super.onDetach();
     unlistenForBluetoothChanges();
   }
 
+  /*
+   * onResume we check again if bluetooth has changed and if it's disabled we change the fragment.
+   */
   @Override
   public void onResume () {
     super.onResume();
     if (bluetooth_utils.isEnabled() == true) {
-      new Handler().postDelayed(new Runnable () {
+      new Handler().postDelayed(new Runnable() {
         @Override
         public void run () {
           changeFragmentTo(last_fragment, true);
@@ -75,13 +80,17 @@ public class BluetoothFragment extends BaseFragment {
     }
   }
 
+  /*
+   * onCreateView inflates the view and set the clickListener for the button.
+   */
+  @Override
   public View onCreateView (LayoutInflater inflater, final ViewGroup parent, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.bluetooth_enable, parent, false);
     Button button = (Button) view.findViewById(R.id.enable_bluetooth);
-    button.setOnClickListener(new View.OnClickListener () {
+    button.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick (View v) {
-         bluetooth_utils.enable();
+        bluetooth_utils.enable();
       }
     });
     return view;

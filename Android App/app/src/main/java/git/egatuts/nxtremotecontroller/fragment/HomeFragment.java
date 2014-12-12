@@ -22,19 +22,16 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                       *
- *                                                                                                                           *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                        *
- *                                                                                                                           *
- * And the corresponding file at:                                                                                            *
- *                                                                                                                           *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/HomeFragment.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                       *
+ *                                                                                                                                                           *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                        *
+ *                                                                                                                                                           *
+ * And the corresponding file at:                                                                                                                            *
+ *                                                                                                                                                           *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/fragment/HomeFragment.java *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.fragment;
-
-import git.egatuts.nxtremotecontroller.R;
-import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -44,29 +41,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import git.egatuts.nxtremotecontroller.R;
+import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
+
 public class HomeFragment extends BaseFragment {
-  
+
   private View view;
   private RecyclerView recycler_view;
   private LinearLayoutManager linear_layout_manager;
   private PairedDeviceAdapter paired_devices_adapter;
-  
+
   public HomeFragment () {}
-  
+
+  /*
+   * We create the recycler view and it's adapter and inflate it with the bonded devices.
+   */
   @Override
   public View onCreateView (LayoutInflater inflater, ViewGroup parent_container, Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.home_fragment, parent_container, false);
     paired_devices_adapter = new PairedDeviceAdapter(bluetooth_utils.getDevices());
     recycler_view = (RecyclerView) view.findViewById(R.id.paired_devices);
-    
+
     linear_layout_manager = new LinearLayoutManager(parent_container.getContext());
     linear_layout_manager.setOrientation(LinearLayoutManager.VERTICAL);
     linear_layout_manager.scrollToPosition(0);
-    
+
     recycler_view.setAdapter(paired_devices_adapter);
     recycler_view.setLayoutManager(linear_layout_manager);
     recycler_view.setItemAnimator(new DefaultItemAnimator());
     return view;
   }
-  
+
 }

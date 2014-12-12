@@ -22,15 +22,15 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                             *
- *                                                                                                                                 *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                              *
- *                                                                                                                                 *
- * And the corresponding file at:                                                                                                  *
- *                                                                                                                                 *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/device/PairedDevice.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                     *
+ *                                                                                                                                                         *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                      *
+ *                                                                                                                                                         *
+ * And the corresponding file at:                                                                                                                          *
+ *                                                                                                                                                         *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/device/PairedDevice.java *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.device;
 
 import android.bluetooth.BluetoothDevice;
@@ -89,12 +89,12 @@ public class PairedDevice {
    * Getter and setter for connectivity.
    */
   public int getConnectivity () {
-    return (int)((float)(this._signal & 0xff) / 0xff * 100);
+    return (int) ((float) (this._signal & 0xff) / 0xff * 100);
   }
 
   public void setConnectivity (int connectivity) {
     int sanitized = Math.min(100, Math.max(0, connectivity));
-    byte binary = (byte)((float) sanitized / 100 * 0xff);
+    byte binary = (byte) ((float) sanitized / 100 * 0xff);
     this.setSignal(binary);
   }
 

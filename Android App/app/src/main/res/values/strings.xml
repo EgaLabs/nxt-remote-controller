@@ -26,6 +26,11 @@
     <!-- [/bluetooth_enable.xml] -->
 
 
+    <!-- [scan_fragment.xml] -->
+    <string name="bluetooth_pairing">Pairing device...</string>
+    <!-- [/scan_fragment.xml] -->
+
+
     <!-- [preference_fragment.xml] -->
     <string name="settings_category_server">Connection settings</string>
     <string name="settings_category_visual">Visual settings</string>

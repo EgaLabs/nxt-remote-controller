@@ -22,22 +22,23 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                               *
- *                                                                                                                                                   *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                                *
- *                                                                                                                                                   *
- * And the corresponding file at:                                                                                                                    *
- *                                                                                                                                                   *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/bluetooth/receiver/DiscoveryReceiver.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                                       *
+ *                                                                                                                                                                           *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                                        *
+ *                                                                                                                                                                           *
+ * And the corresponding file at:                                                                                                                                            *
+ *                                                                                                                                                                           *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/bluetooth/receiver/DiscoveryReceiver.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.bluetooth.receiver;
 
-import git.egatuts.nxtremotecontroller.bluetooth.listener.BaseListener;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.IntentFilter;
+
+import git.egatuts.nxtremotecontroller.bluetooth.listener.BaseListener;
 
 public class DiscoveryReceiver extends BaseReceiver {
 
@@ -65,8 +66,7 @@ public class DiscoveryReceiver extends BaseReceiver {
    */
   @Override
   public IntentFilter getIntentFilter () {
-    IntentFilter intent = new IntentFilter();
-    intent.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+    IntentFilter intent = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
     intent.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
     intent.addAction(BluetoothDevice.ACTION_FOUND);
     return intent;

@@ -22,20 +22,16 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                       *
- *                                                                                                                           *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                        *
- *                                                                                                                           *
- * And the corresponding file at:                                                                                            *
- *                                                                                                                           *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/ScanFragment.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                       *
+ *                                                                                                                                                           *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                        *
+ *                                                                                                                                                           *
+ * And the corresponding file at:                                                                                                                            *
+ *                                                                                                                                                           *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/fragment/ScanFragment.java *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.fragment;
-
-import java.util.ArrayList;
-
-import com.gc.materialdesign.views.ButtonFloat;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
@@ -55,15 +51,22 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
+import android.widget.Toast;
+
+import com.gc.materialdesign.views.ButtonFloat;
+
+import java.util.ArrayList;
 
 import git.egatuts.nxtremotecontroller.R;
-import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 import git.egatuts.nxtremotecontroller.bluetooth.listener.DiscoveryListener;
+import git.egatuts.nxtremotecontroller.bluetooth.listener.PairingListener;
 import git.egatuts.nxtremotecontroller.bluetooth.receiver.DiscoveryReceiver;
+import git.egatuts.nxtremotecontroller.bluetooth.receiver.PairingReceiver;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceItemClickListener;
 import git.egatuts.nxtremotecontroller.preference.PreferencesUtils;
+import git.egatuts.nxtremotecontroller.views.IndeterminateProgressDialog;
 
 public class ScanFragment extends BaseFragment {
 
@@ -72,13 +75,15 @@ public class ScanFragment extends BaseFragment {
 
   private DiscoveryReceiver discovery_receiver;
   private DiscoveryListener discovery_listener;
-  private PreferencesUtils preference_utils;
+  private PairingReceiver pairing_receiver;
+  private PairingListener pairing_listener;
+  PreferencesUtils preference_utils;
   private PreferencesUtils.Editor preference_editor;
-  private View view;
+  View view;
   private PairedDeviceAdapter paired_devices_adapter;
   private PairedDevice discovered_device;
-  private LinearLayoutManager linear_layout_manager;
-  private RecyclerView recycler_view;
+  LinearLayoutManager linear_layout_manager;
+  RecyclerView recycler_view;
   private ButtonFloat button_float;
   private ArrayList<PairedDevice> discovered_devices;
   private ArrayList<PairedDevice> lost_devices;
@@ -91,7 +96,10 @@ public class ScanFragment extends BaseFragment {
   private AnimationSet animation_show;
   private RotateAnimation rotate;
 
-  public ScanFragment () {}
+  private boolean isActive = false;
+
+  public ScanFragment () {
+  }
 
   /*
    * Cancels existing discovery and starts a new one.
@@ -103,30 +111,15 @@ public class ScanFragment extends BaseFragment {
 
   /*
    * Cancels existing discovery.
-   */  
+   */
   public void cancelDiscovery () {
     if (bluetooth_utils.isDiscovering()) bluetooth_utils.cancelDiscovery();
-  }
-
-  /*
-   * Registers BroadcastReceiver for Bluetooth discovery.
-   */
-  public void registerDiscoveryListener () {
-    getActivity().registerReceiver(discovery_receiver, discovery_receiver.getIntentFilter());
-  }
-
-  /*
-   * Unregisters BroadcastReceiver for Bluetooth discovery.
-   */
-  public void unregisterDiscoveryListener () {
-    getActivity().unregisterReceiver(discovery_receiver);
   }
 
   /*
    * Initializes components used in the class.
    */
   public void initializeComponents (Activity activity) {
-    bluetooth_utils = new BluetoothUtils();
 
     preference_utils = new PreferencesUtils(activity);
     preference_utils.privateMode();
@@ -138,11 +131,27 @@ public class ScanFragment extends BaseFragment {
     lost_devices = new ArrayList<PairedDevice>();
 
     discovery_receiver = new DiscoveryReceiver(activity);
+    pairing_receiver = new PairingReceiver(activity);
 
     /*
      * Callbacks for Bluetooth broadcasted intents.
      */
-    discovery_listener = new DiscoveryListener () {
+    pairing_listener = new PairingListener() {
+      @Override
+      public void onBondStateChange (Context context, Intent intent) {
+        int[] states = PairingReceiver.getIntentExtraData(intent);
+        int state = states[0];
+        if (state == BluetoothDevice.BOND_BONDING) {
+          Toast.makeText(getActivity(), "Emparejando", Toast.LENGTH_SHORT).show();
+        } else if (state == BluetoothDevice.BOND_BONDED) {
+          Toast.makeText(getActivity(), "Emparejado", Toast.LENGTH_SHORT).show();
+        } else if (state == BluetoothDevice.BOND_NONE) {
+          Toast.makeText(getActivity(), "Fallooooo", Toast.LENGTH_SHORT).show();
+        }
+      }
+    };
+
+    discovery_listener = new DiscoveryListener() {
       @Override
       public void onDiscoveryStart (Context context, Intent intent) {
         changeIconTo(R.drawable.ic_sync);
@@ -168,11 +177,11 @@ public class ScanFragment extends BaseFragment {
         discovered_devices.clear();
         lost_devices.clear();
         changeIconTo(R.drawable.ic_discover);
+        if (!isActive) discovery_receiver.unregisterReceiver();
       }
 
       @Override
       public void onDeviceFound (Context context, Intent intent) {
-
         /*
          * Get RSSI strength and maximum and minimum stored values.
          */
@@ -234,15 +243,15 @@ public class ScanFragment extends BaseFragment {
      */
     if (fade_out == null) {
       fade_out = new AlphaAnimation(
-        1.0f,  /* Start point (100%) */
-        0.0f   /* End   point (0%)   */
+              1.0f,  /* Start point (100%) */
+              0.0f   /* End   point (0%)   */
       );
       fade_out.setDuration(200);
     }
     if (fade_in == null) {
       fade_in = new AlphaAnimation(
-        0.0f,  /* Start point (0%)   */
-        1.0f   /* End   point (100%) */
+              0.0f,  /* Start point (0%)   */
+              1.0f   /* End   point (100%) */
       );
       fade_in.setDuration(200);
     }
@@ -255,19 +264,19 @@ public class ScanFragment extends BaseFragment {
      */
     if (scale_down == null) {
       scale_down = new ScaleAnimation(
-        1f, 0f,  /* Start and end point on X axis (from 100% to 0%) */
-        1f, 0f,  /* Start and end point on Y axis (from 100% to 0%) */
-        Animation.RELATIVE_TO_SELF, 0.5f,  /* Relative pivot point in the center (50%) */
-        Animation.RELATIVE_TO_SELF, 0.5f   /* Relative pivot point in the middle (50%) */
-      ); 
+              1f, 0f,  /* Start and end point on X axis (from 100% to 0%) */
+              1f, 0f,  /* Start and end point on Y axis (from 100% to 0%) */
+              Animation.RELATIVE_TO_SELF, 0.5f,  /* Relative pivot point in the center (50%) */
+              Animation.RELATIVE_TO_SELF, 0.5f   /* Relative pivot point in the middle (50%) */
+      );
       scale_down.setDuration(200);
     }
     if (scale_up == null) {
       scale_up = new ScaleAnimation(
-        0f, 1f,  /* Start and end point on X axis (from 0% to 100%) */
-        0f, 1f,  /* Start and end point on Y axis (from 0% to 100%) */
-        Animation.RELATIVE_TO_SELF, 0.5f,  /* Relative pivot point in the center (50%) */
-        Animation.RELATIVE_TO_SELF, 0.5f   /* Relative pivot point in the middle (50%) */
+              0f, 1f,  /* Start and end point on X axis (from 0% to 100%) */
+              0f, 1f,  /* Start and end point on Y axis (from 0% to 100%) */
+              Animation.RELATIVE_TO_SELF, 0.5f,  /* Relative pivot point in the center (50%) */
+              Animation.RELATIVE_TO_SELF, 0.5f   /* Relative pivot point in the middle (50%) */
       );
       scale_up.setDuration(200);
     }
@@ -280,9 +289,9 @@ public class ScanFragment extends BaseFragment {
      */
     if (rotate == null) {
       rotate = new RotateAnimation(
-        0f, 360f,  /* Start and end degrees rotation (from 0° to 360°) */
-        Animation.RELATIVE_TO_SELF, 0.5f,  /* Relative pivot point in the center (50%) */
-        Animation.RELATIVE_TO_SELF, 0.5f   /* Relative pivot point in the middle (50%) */
+              0f, 360f,  /* Start and end degrees rotation (from 0° to 360°) */
+              Animation.RELATIVE_TO_SELF, 0.5f,  /* Relative pivot point in the center (50%) */
+              Animation.RELATIVE_TO_SELF, 0.5f   /* Relative pivot point in the middle (50%) */
       );
       rotate.setDuration(1000);
     }
@@ -304,13 +313,20 @@ public class ScanFragment extends BaseFragment {
     animation_hide.addAnimation(fade_out);
     animation_hide.addAnimation(scale_down);
 
-    animation_hide.setAnimationListener(new AnimationListener () {
-      @Override public void onAnimationEnd (Animation animation) {
+    animation_hide.setAnimationListener(new AnimationListener() {
+      @Override
+      public void onAnimationEnd (Animation animation) {
         button_float.setIconDrawable(drawable);
         button_float.getIcon().startAnimation(animation_show);
       }
-      @Override public void onAnimationStart (Animation animation) {}
-      @Override public void onAnimationRepeat (Animation animation) {}
+
+      @Override
+      public void onAnimationStart (Animation animation) {
+      }
+
+      @Override
+      public void onAnimationRepeat (Animation animation) {
+      }
     });
 
     /*
@@ -319,14 +335,21 @@ public class ScanFragment extends BaseFragment {
     animation_show.addAnimation(fade_in);
     animation_show.addAnimation(scale_up);
 
-    animation_show.setAnimationListener(new AnimationListener () {
-      @Override public void onAnimationEnd (Animation animation) {
+    animation_show.setAnimationListener(new AnimationListener() {
+      @Override
+      public void onAnimationEnd (Animation animation) {
         if (bluetooth_utils.isDiscovering()) {
           button_float.getIcon().startAnimation(rotate);
         }
       }
-      @Override public void onAnimationStart (Animation animation) {}
-      @Override public void onAnimationRepeat (Animation animation) {}
+
+      @Override
+      public void onAnimationStart (Animation animation) {
+      }
+
+      @Override
+      public void onAnimationRepeat (Animation animation) {
+      }
     });
 
     /*
@@ -356,17 +379,25 @@ public class ScanFragment extends BaseFragment {
     recycler_view.setAdapter(paired_devices_adapter);
     recycler_view.setLayoutManager(linear_layout_manager);
     recycler_view.setItemAnimator(new DefaultItemAnimator());
-    recycler_view.addOnItemTouchListener(new PairedDeviceItemClickListener (getActivity(), new PairedDeviceItemClickListener.OnItemClickListener() {
+    recycler_view.addOnItemTouchListener(new PairedDeviceItemClickListener(getActivity(), new PairedDeviceItemClickListener.OnItemClickListener() {
       @Override
-      public void onItemClick(View view, int position) {
-        bluetooth_utils.pair(getActivity(), paired_devices_adapter.get(position));
+      public void onItemClick (View view, int position) {
+        pairing_receiver.registerReceiver();
+        progress_dialog = new IndeterminateProgressDialog(getActivity());
+        progress_dialog.setCancelable(false);
+        progress_dialog.show();
+        progress_dialog.setDoFirstAnimation(true);
+        progress_dialog.setText(R.string.bluetooth_pairing);
+
+        bluetooth_utils.pair(paired_devices_adapter.get(position));
+
       }
     }));
 
     button_float.setIconDrawable(getResources().getDrawable(R.drawable.ic_discover));
-    button_float.setOnClickListener(new View.OnClickListener () {
+    button_float.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
+      public void onClick (View v) {
         startDiscovery();
       }
     });
@@ -377,11 +408,34 @@ public class ScanFragment extends BaseFragment {
   public void onAttach (Activity activity) {
     super.onAttach(activity);
     this.initializeComponents(activity);
-    if (bluetooth_utils.isEnabled() == false) changeFragmentTo(new BluetoothFragment(bluetooth_utils), false);
-    discovery_receiver.setListener(discovery_listener);
-    this.registerDiscoveryListener();
-    this.initListenersAndReceivers();
     this.listenForBluetoothChanges();
+    discovery_receiver.setListener(discovery_listener);
+    pairing_receiver.setListener(pairing_listener);
+  }
+
+  @Override
+  public void onStart () {
+    super.onStart();
+    isActive = true;
+  }
+
+  @Override
+  public void onResume () {
+    super.onResume();
+    isActive = true;
+    discovery_receiver.registerReceiver();
+  }
+
+  @Override
+  public void onPause () {
+    super.onPause();
+    isActive = false;
+  }
+
+  @Override
+  public void onStop () {
+    super.onStop();
+    isActive = false;
   }
 
   /*
@@ -390,8 +444,8 @@ public class ScanFragment extends BaseFragment {
   @Override
   public void onDetach () {
     this.cancelDiscovery();
-    this.unregisterDiscoveryListener();
     this.unlistenForBluetoothChanges();
+    discovery_receiver.unregisterReceiver();
     super.onDetach();
   }
 

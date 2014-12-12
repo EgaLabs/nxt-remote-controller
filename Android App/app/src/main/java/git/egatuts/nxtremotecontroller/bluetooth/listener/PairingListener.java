@@ -22,32 +22,32 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                                                             *
- *                                                                                                                                                                                 *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                                                              *
- *                                                                                                                                                                                 *
- * And the corresponding file at:                                                                                                                                                  *
- *                                                                                                                                                                                 *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/bluetooth/listener/BluetoothEnableListener.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                                     *
+ *                                                                                                                                                                         *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                                      *
+ *                                                                                                                                                                         *
+ * And the corresponding file at:                                                                                                                                          *
+ *                                                                                                                                                                         *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/bluetooth/listener/PairingListener.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.bluetooth.listener;
 
 import android.content.Context;
 import android.content.Intent;
 
-public abstract class BluetoothEnableListener extends BaseListener {
+public abstract class PairingListener extends BaseListener {
 
   @Override public void onConnectionChange (Context context, Intent intent) {}
   @Override public void onDiscoveryFinish  (Context context, Intent intent) {}
   @Override public void onDiscoveryStart   (Context context, Intent intent) {}
   @Override public void onLocalNameChange  (Context context, Intent intent) {}
   @Override public void onScanModeChange   (Context context, Intent intent) {}
-  //@Override public void onStateChange    (Context context, Intent intent) {}
+  @Override public void onStateChange      (Context context, Intent intent) {}
   @Override public void onLowLevelConnect           (Context context, Intent intent) {}
   @Override public void onLowLevelDisconnect        (Context context, Intent intent) {}
   @Override public void onLowLevelDisconnectRequest (Context context, Intent intent) {}
-  @Override public void onBondStateChange           (Context context, Intent intent) {}
+  //@Override public void onBondStateChange         (Context context, Intent intent) {}
   @Override public void onDeviceClassChange         (Context context, Intent intent) {}
   @Override public void onDeviceFound               (Context context, Intent intent) {}
   @Override public void onRemoteNameChange          (Context context, Intent intent) {}
