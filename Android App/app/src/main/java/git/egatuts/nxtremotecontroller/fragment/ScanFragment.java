@@ -37,12 +37,14 @@ import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -434,6 +436,9 @@ public class ScanFragment extends BaseFragment {
     }));
 
     button_float.setIconDrawable(getResources().getDrawable(R.drawable.ic_discover));
+    TypedValue typed_value = new TypedValue();
+    this.getActivity().getTheme().resolveAttribute(R.attr.button_float_background, typed_value, true);
+    button_float.setBackgroundColor(typed_value.data);
     button_float.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick (View v) {

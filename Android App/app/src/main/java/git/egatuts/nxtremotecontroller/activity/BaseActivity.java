@@ -35,6 +35,12 @@ public class BaseActivity extends ActionBarActivity {
     this.setActiveTheme(this.getActiveTheme());
   }
 
+  @Override
+  public void onStart () {
+    super.onStart();
+    this.setActiveTheme(this.getActiveTheme());
+  }
+
   /*
    * Sets, shows and enables "up" the home button.
    */

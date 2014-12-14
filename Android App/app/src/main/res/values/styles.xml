@@ -68,6 +68,7 @@
   <!-- [Toolbar] -->
   <style name="toolbar_style" parent="wrap">
     <item name="android:background">?toolbar_background</item>
+    <item name="android:textColor">?toolbar_color</item>
     <item name="android:minHeight">@dimen/abc_action_bar_default_height_material</item>
     <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
@@ -290,7 +291,6 @@
 
     <!-- [Styles that applies to styles defined below]  -->
     <item name="drawer_layout">@layout/navigation_drawer_fragment</item>
-    <item name="drawer_arrow_color">@color/drawer_arrow</item>
     <item name="drawer_width">@dimen/drawer_width</item>
     <item name="drawer_background">@color/drawer_background</item>
     <item name="drawer_item_height">@dimen/drawer_item_height</item>
@@ -367,6 +367,8 @@
     <item name="colorControlHighlight">@color/blue_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/blue_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/blue_toolbar_color</item>
     <item name="toolbar_background">@color/blue_primary</item>
     <item name="progress_circular_color">@color/blue_progress_circular_color</item>
     <item name="button_float_background">@color/blue_button_float</item>
@@ -389,6 +391,8 @@
     <item name="colorControlHighlight">@color/blue_grey_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/blue_grey_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/blue_grey_toolbar_color</item>
     <item name="toolbar_background">@color/blue_grey_primary</item>
     <item name="progress_circular_color">@color/blue_grey_progress_circular_color</item>
     <item name="button_float_background">@color/blue_grey_button_float</item>
@@ -411,6 +415,8 @@
     <item name="colorControlHighlight">@color/brown_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/brown_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/brown_toolbar_color</item>
     <item name="toolbar_background">@color/brown_primary</item>
     <item name="progress_circular_color">@color/brown_progress_circular_color</item>
     <item name="button_float_background">@color/brown_button_float</item>
@@ -433,6 +439,8 @@
     <item name="colorControlHighlight">@color/cyan_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/cyan_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/cyan_toolbar_color</item>
     <item name="toolbar_background">@color/cyan_primary</item>
     <item name="progress_circular_color">@color/cyan_progress_circular_color</item>
     <item name="button_float_background">@color/cyan_button_float</item>
@@ -455,6 +463,8 @@
     <item name="colorControlHighlight">@color/deep_purple_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/deep_purple_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/deep_purple_toolbar_color</item>
     <item name="toolbar_background">@color/deep_purple_primary</item>
     <item name="progress_circular_color">@color/deep_purple_progress_circular_color</item>
     <item name="button_float_background">@color/deep_purple_button_float</item>
@@ -476,6 +486,8 @@
     <item name="colorControlHighlight">@color/green_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/green_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/green_toolbar_color</item>
     <item name="toolbar_background">@color/green_primary</item>
     <item name="progress_circular_color">@color/green_progress_circular_color</item>
     <item name="button_float_background">@color/green_button_float</item>
@@ -498,6 +510,8 @@
     <item name="colorControlHighlight">@color/deep_orange_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/deep_orange_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/deep_orange_toolbar_color</item>
     <item name="toolbar_background">@color/deep_orange_primary</item>
     <item name="progress_circular_color">@color/deep_orange_progress_circular_color</item>
     <item name="button_float_background">@color/deep_orange_button_float</item>
@@ -520,6 +534,8 @@
     <item name="colorControlHighlight">@color/indigo_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/indigo_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/indigo_toolbar_color</item>
     <item name="toolbar_background">@color/indigo_primary</item>
     <item name="progress_circular_color">@color/indigo_progress_circular_color</item>
     <item name="button_float_background">@color/indigo_button_float</item>
@@ -543,6 +559,8 @@
     <item name="colorControlHighlight">@color/light_blue_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/light_blue_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/light_blue_toolbar_color</item>
     <item name="toolbar_background">@color/light_blue_primary</item>
     <item name="progress_circular_color">@color/light_blue_progress_circular_color</item>
     <item name="button_float_background">@color/light_blue_button_float</item>
@@ -564,6 +582,8 @@
     <item name="colorControlHighlight">@color/light_green_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/light_green_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/light_green_toolbar_color</item>
     <item name="toolbar_background">@color/light_green_primary</item>
     <item name="progress_circular_color">@color/light_green_progress_circular_color</item>
     <item name="button_float_background">@color/light_green_button_float</item>
@@ -585,6 +605,8 @@
     <item name="colorControlHighlight">@color/lime_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/lime_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/lime_toolbar_color</item>
     <item name="toolbar_background">@color/lime_primary</item>
     <item name="progress_circular_color">@color/lime_progress_circular_color</item>
     <item name="button_float_background">@color/lime_button_float</item>
@@ -607,6 +629,8 @@
     <item name="colorControlHighlight">@color/orange_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/orange_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/orange_toolbar_color</item>
     <item name="toolbar_background">@color/orange_primary</item>
     <item name="progress_circular_color">@color/orange_progress_circular_color</item>
     <item name="button_float_background">@color/orange_button_float</item>
@@ -628,6 +652,8 @@
     <item name="colorControlHighlight">@color/pink_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/pink_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/pink_toolbar_color</item>
     <item name="toolbar_background">@color/pink_primary</item>
     <item name="progress_circular_color">@color/pink_progress_circular_color</item>
     <item name="button_float_background">@color/pink_button_float</item>
@@ -649,6 +675,8 @@
     <item name="colorControlHighlight">@color/purple_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/purple_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/purple_toolbar_color</item>
     <item name="toolbar_background">@color/purple_primary</item>
     <item name="progress_circular_color">@color/purple_progress_circular_color</item>
     <item name="button_float_background">@color/purple_button_float</item>
@@ -670,6 +698,8 @@
     <item name="colorControlHighlight">@color/red_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/red_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/red_toolbar_color</item>
     <item name="toolbar_background">@color/red_primary</item>
     <item name="progress_circular_color">@color/red_progress_circular_color</item>
     <item name="button_float_background">@color/red_button_float</item>
@@ -691,6 +721,8 @@
     <item name="colorControlHighlight">@color/teal_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/teal_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/teal_toolbar_color</item>
     <item name="toolbar_background">@color/teal_primary</item>
     <item name="progress_circular_color">@color/teal_progress_circular_color</item>
     <item name="button_float_background">@color/teal_button_float</item>
@@ -712,6 +744,8 @@
     <item name="colorControlHighlight">@color/yellow_control_highlight</item>
 
     <!-- [Styles that applies to styles defined below]  -->
+    <item name="drawer_arrow_color">@color/yellow_drawer_arrow_color</item>
+    <item name="toolbar_color">@color/yellow_toolbar_color</item>
     <item name="toolbar_background">@color/yellow_primary</item>
     <item name="progress_circular_color">@color/yellow_progress_circular_color</item>
     <item name="button_float_background">@color/yellow_button_float</item>

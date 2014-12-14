@@ -33,15 +33,47 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.preference.PreferenceFragment;
 
-public class SettingsFragment extends PreferenceFragment {
+import git.egatuts.nxtremotecontroller.activity.BaseActivity;
+
+public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
   @Override
   public void onCreate (Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     super.addPreferencesFromResource(R.layout.preference_fragment);
+    if (this.getActivity().getIntent().getBooleanExtra("restarted", false)) {
+      Intent killer_intent = new Intent();
+      killer_intent.setAction("nxtremotecontroller_restart");
+      this.getActivity().sendBroadcast(killer_intent);
+    }
+  }
+
+  @Override
+  public void onResume () {
+    super.onResume();
+    this.getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+  }
+
+  @Override
+  public void onPause () {
+    super.onPause();
+    this.getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+  }
+
+  @Override
+  public void onSharedPreferenceChanged (SharedPreferences preferences, String key) {
+    BaseActivity activity = (BaseActivity) this.getActivity();
+    if (key.equals("preference_theme")) {
+      Intent intent = new Intent(activity, activity.getClass());
+      intent.putExtra("restarted", true);
+      activity.finish();
+      activity.startActivity(intent);
+    }
   }
 
 }

@@ -21,13 +21,175 @@
   <!-- [/Base style for theme (common metrics in all themes)] -->
 
 
+  <!-- [Amber Theme]  -->
+  <style name="AppTheme.Amber" parent="AppTheme.Base.Amber">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/amber_navigation</item>
+    <item name="android:statusBarColor">@color/amber_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/Amber Theme] -->
+
+
+  <!-- [Blue Theme]  -->
+  <style name="AppTheme.Blue" parent="AppTheme.Base.Blue">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/blue_navigation</item>
+    <item name="android:statusBarColor">@color/blue_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/Blue Theme] -->
+
+
+  <!-- [BlueGrey Theme]  -->
+  <style name="AppTheme.BlueGrey" parent="AppTheme.Base.BlueGrey">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/blue_grey_navigation</item>
+    <item name="android:statusBarColor">@color/blue_grey_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/BlueGrey Theme] -->
+
+
+  <!-- [Brown Theme]  -->
+  <style name="AppTheme.Brown" parent="AppTheme.Base.Brown">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/brown_navigation</item>
+    <item name="android:statusBarColor">@color/brown_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/Brown Theme] -->
+
+
+  <!-- [Cyan Theme]  -->
+  <style name="AppTheme.Cyan" parent="AppTheme.Base.Cyan">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/cyan_navigation</item>
+    <item name="android:statusBarColor">@color/cyan_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/Cyan Theme] -->
+
+
+  <!-- [DeepPurple Theme]  -->
+  <style name="AppTheme.DeepPurple" parent="AppTheme.Base.DeepPurple">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/deep_purple_navigation</item>
+    <item name="android:statusBarColor">@color/deep_purple_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/DeepPurple Theme] -->
+
+  <!-- [Green Theme]  -->
+  <style name="AppTheme.Green" parent="AppTheme.Base.Green">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/green_navigation</item>
+    <item name="android:statusBarColor">@color/green_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/Green Theme] -->
+
+
+  <!-- [DeepOrange Theme]  -->
+  <style name="AppTheme.DeepOrange" parent="AppTheme.Base.DeepOrange">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/deep_orange_navigation</item>
+    <item name="android:statusBarColor">@color/deep_orange_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/DeepOrange Theme] -->
+
+
   <!-- Indigo Theme -->
-  <style name="AppTheme.Indigo" parent="AppTheme.Base.Indigo">
+  <style name="AppTheme.indigo" parent="AppTheme.Base.Indigo">
     <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
     <item name="android:navigationBarColor">@color/indigo_navigation</item>
     <item name="android:statusBarColor">@color/indigo_primary_dark</item>
     <item name="android:windowBackground">@color/window_background</item>
   </style>
   <!-- Indigo Theme -->
+
+
+  <!-- [LightBlue Theme]  -->
+  <style name="AppTheme.LightBlue" parent="AppTheme.Base.LightBlue">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/light_blue_navigation</item>
+    <item name="android:statusBarColor">@color/light_blue_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/LightBlue Theme] -->
+
+  <!-- [LightGreen Theme]  -->
+  <style name="AppTheme.LightGreen" parent="AppTheme.Base.LightGreen">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/light_green_navigation</item>
+    <item name="android:statusBarColor">@color/light_green_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/LightGreen Theme] -->
+
+  <!-- [Lime Theme]  -->
+  <style name="AppTheme.Lime" parent="AppTheme.Base.Lime">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/lime_navigation</item>
+    <item name="android:statusBarColor">@color/lime_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/Lime Theme] -->
+
+
+  <!-- [Orange Theme]  -->
+  <style name="AppTheme.Orange" parent="AppTheme.Base.Orange">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/orange_navigation</item>
+    <item name="android:statusBarColor">@color/orange_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/Orange Theme] -->
+
+  <!-- [Pink Theme]  -->
+  <style name="AppTheme.Pink" parent="AppTheme.Base.Pink">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/pink_navigation</item>
+    <item name="android:statusBarColor">@color/pink_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/Pink Theme] -->
+
+  <!-- [Purple Theme]  -->
+  <style name="AppTheme.Purple" parent="AppTheme.Base.Purple">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/purple_navigation</item>
+    <item name="android:statusBarColor">@color/purple_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/Purple Theme] -->
+
+  <!-- [Red Theme]  -->
+  <style name="AppTheme.Red" parent="AppTheme.Base.Red">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/red_navigation</item>
+    <item name="android:statusBarColor">@color/red_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/Red Theme] -->
+
+  <!-- [Teal Theme]  -->
+  <style name="AppTheme.Teal" parent="AppTheme.Base.Teal">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/teal_navigation</item>
+    <item name="android:statusBarColor">@color/teal_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/Teal Theme] -->
+
+  <!-- [Yellow Theme]  -->
+  <style name="AppTheme.Yellow" parent="AppTheme.Base.Yellow">
+    <item name="drawerArrowStyle">@style/drawer_arrow_style</item>
+    <item name="android:navigationBarColor">@color/yellow_navigation</item>
+    <item name="android:statusBarColor">@color/yellow_primary_dark</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <!-- [/Yellow Theme] -->
 
 </resources>

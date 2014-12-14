@@ -2,7 +2,8 @@
 <resources>
 
   <!-- Toolbar attributes -->
-  <attr name="toolbar_background" format="color"     />
+  <attr name="toolbar_background" format="color" />
+  <attr name="toolbar_color"      format="color" />
 
   <!-- Drawer attributes -->
   <attr name="drawer_layout"            format="reference" />
@@ -26,7 +27,7 @@
   <!-- Float button attributes -->
   <attr name="button_float_radius"     format="dimension" />
   <attr name="button_float_margin"     format="dimension" />
-  <attr name="button_float_background" format="color"     />
+  <attr name="button_float_background" format="color|reference"     />
 
   <!-- Progress dialog attributes -->
   <attr name="progress_circular_size"  format="dimension" />

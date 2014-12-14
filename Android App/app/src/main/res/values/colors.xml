@@ -5,7 +5,6 @@
   <color name="window_background">#FFFFFF</color>
 
   <!-- Drawer colors -->
-  <color name="drawer_arrow">#FFFFFF</color>
   <color name="drawer_background">#F2F2F2</color>
   <color name="drawer_item_color">#000000</color>
 
@@ -19,237 +18,273 @@
   <color name="paired_device_address">#999999</color>
 
   <!-- Amber theme colors -->
-  <color name="amber_primary">#FFC107</color>
-  <color name="amber_primary_dark">#132584</color>
-  <color name="amber_navigation">#0B1A6C</color>
-  <color name="amber_accent">#05114F</color>
-  <color name="amber_text_primary">#474747</color>
-  <color name="amber_text">#525252</color>
-  <color name="amber_control_normal">#FFC107</color>
-  <color name="amber_control_activated">#05114F</color>
-  <color name="amber_control_highlight">#3F05114F</color>
-  <color name="amber_progress_circular_color">#1E88E5</color>
-  <color name="amber_button_float">#33B5E5</color>
+  <color name="amber_primary">#FFCA28</color>                 <!-- 400 -->
+  <color name="amber_primary_dark">#FFB300</color>            <!-- 600 -->
+  <color name="amber_navigation">#FF6F00</color>              <!-- 900 -->
+  <color name="amber_accent">#3D1B00</color>                  <!-- 900 - 3º en colllor.com -->
+  <color name="amber_text_primary">#474747</color>            <!-- - -->
+  <color name="amber_text">#525252</color>                    <!-- - -->
+  <color name="amber_control_normal">#FFC107</color>          <!-- 500 -->
+  <color name="amber_control_activated">#3D1B00</color>       <!-- 900 - 3º en colllor.com -->
+  <color name="amber_control_highlight">#3F3D1B00</color>     <!-- 900 - 3º en colllor.com -->
+  <color name="amber_progress_circular_color">#FFC107</color> <!-- 500 -->
+  <color name="amber_button_float">#FFD54F</color>            <!-- 300 -->
+  <color name="amber_drawer_arrow_color">#DDDDDD</color>
+  <color name="amber_toolbar_color">#DDDDDD</color>
 
-    <!-- Blue theme colors -->
-    <color name="blue_primary">#2196F3</color>
-    <color name="blue_primary_dark">#132584</color>
-    <color name="blue_navigation">#0B1A6C</color>
-    <color name="blue_accent">#05114F</color>
-    <color name="blue_text_primary">#474747</color>
-    <color name="blue_text">#525252</color>
-    <color name="blue_control_normal">#2196F3</color>
-    <color name="blue_control_activated">#05114F</color>
-    <color name="blue_control_highlight">#3F05114F</color>
-    <color name="blue_progress_circular_color">#1E88E5</color>
-    <color name="blue_button_float">#33B5E5</color>
+  <!-- Blue theme colors -->
+  <color name="blue_primary">#42A5F5</color>                 <!-- 400 -->
+  <color name="blue_primary_dark">#1E88E5</color>            <!-- 600 -->
+  <color name="blue_navigation">#0D47A1</color>              <!-- 900 -->
+  <color name="blue_accent">#051939</color>                  <!-- 900 - 3º en colllor.com -->
+  <color name="blue_text_primary">#474747</color>            <!-- - -->
+  <color name="blue_text">#525252</color>                    <!-- - -->
+  <color name="blue_control_normal">#2196F3</color>          <!-- 500 -->
+  <color name="blue_control_activated">#051939</color>       <!-- 900 - 3º en colllor.com -->
+  <color name="blue_control_highlight">#3F051939</color>     <!-- 900 - 3º en colllor.com -->
+  <color name="blue_progress_circular_color">#2196F3</color> <!-- 500 -->
+  <color name="blue_button_float">#64B5F6</color>            <!-- 300 -->
+  <color name="blue_drawer_arrow_color">#FFFFFF</color>
+  <color name="blue_toolbar_color">#FFFFFF</color>
 
-    <!-- Blue Grey theme colors -->
-    <color name="blue_grey_primary">#607D8B</color>
-    <color name="blue_grey_primary_dark">#132584</color>
-    <color name="blue_grey_navigation">#0B1A6C</color>
-    <color name="blue_grey_accent">#05114F</color>
-    <color name="blue_grey_text_primary">#474747</color>
-    <color name="blue_grey_text">#525252</color>
-    <color name="blue_grey_control_normal">#607D8B</color>
-    <color name="blue_grey_control_activated">#05114F</color>
-    <color name="blue_grey_control_highlight">#3F05114F</color>
-    <color name="blue_grey_progress_circular_color">#1E88E5</color>
-    <color name="blue_grey_button_float">#33B5E5</color>
+  <!-- Blue Grey theme colors -->
+  <color name="blue_grey_primary">#78909C</color>                 <!-- 400 -->
+  <color name="blue_grey_primary_dark">#546E7A</color>            <!-- 600 -->
+  <color name="blue_grey_navigation">#263238</color>              <!-- 900 -->
+  <color name="blue_grey_accent">#192124</color>                  <!-- 900 - 3º en colllor.com -->
+  <color name="blue_grey_text_primary">#474747</color>            <!-- - -->
+  <color name="blue_grey_text">#525252</color>                    <!-- - -->
+  <color name="blue_grey_control_normal">#607D8B</color>          <!-- 500 -->
+  <color name="blue_grey_control_activated">#192124</color>       <!-- 900 - 3º en colllor.com -->
+  <color name="blue_grey_control_highlight">#3F192124</color>     <!-- 900 - 3º en colllor.com -->
+  <color name="blue_grey_progress_circular_color">#607D8B</color> <!-- 500 -->
+  <color name="blue_grey_button_float">#90A4AE</color>            <!-- 300 -->
+  <color name="blue_grey_drawer_arrow_color">#FFFFFF</color>
+  <color name="blue_grey_toolbar_color">#FFFFFF</color>
 
-    <!-- Brown theme colors -->
-    <color name="brown_primary">#795548</color>
-    <color name="brown_primary_dark">#132584</color>
-    <color name="brown_navigation">#0B1A6C</color>
-    <color name="brown_accent">#05114F</color>
-    <color name="brown_text_primary">#474747</color>
-    <color name="brown_text">#525252</color>
-    <color name="brown_control_normal">#795548</color>
-    <color name="brown_control_activated">#05114F</color>
-    <color name="brown_control_highlight">#3F05114F</color>
-    <color name="brown_progress_circular_color">#1E88E5</color>
-    <color name="brown_button_float">#33B5E5</color>
+  <!-- Brown theme colors -->
+  <color name="brown_primary">#8D6E63</color>                 <!-- 400 -->
+  <color name="brown_primary_dark">#6D4C41</color>            <!-- 600 -->
+  <color name="brown_navigation">#6D4C41</color>              <!-- 900 -->
+  <color name="brown_accent">#261B17</color>                  <!-- 900 - 3º en colllor.com -->
+  <color name="brown_text_primary">#474747</color>            <!-- - -->
+  <color name="brown_text">#525252</color>                    <!-- - -->
+  <color name="brown_control_normal">#795548</color>          <!-- 500 -->
+  <color name="brown_control_activated">#261B17</color>       <!-- 900 - 3º en colllor.com -->
+  <color name="brown_control_highlight">#3F261B17</color>     <!-- 900 - 3º en colllor.com -->
+  <color name="brown_progress_circular_color">#795548</color> <!-- 500 -->
+  <color name="brown_button_float">#A1887F</color>            <!-- 300 -->
+  <color name="brown_drawer_arrow_color">#FFFFFF</color>
+  <color name="brown_toolbar_color">#FFFFFF</color>
 
-    <!-- Cyan theme colors -->
-    <color name="cyan_primary">#00BCD4</color>
-    <color name="cyan_primary_dark">#132584</color>
-    <color name="cyan_navigation">#0B1A6C</color>
-    <color name="cyan_accent">#05114F</color>
-    <color name="cyan_text_primary">#474747</color>
-    <color name="cyan_text">#525252</color>
-    <color name="cyan_control_normal">#00BCD4</color>
-    <color name="cyan_control_activated">#05114F</color>
-    <color name="cyan_control_highlight">#3F05114F</color>
-    <color name="cyan_progress_circular_color">#1E88E5</color>
-    <color name="cyan_button_float">#33B5E5</color>
+  <!-- Cyan theme colors -->
+  <color name="cyan_primary">#26C6DA</color>
+  <color name="cyan_primary_dark">#00ACC1</color>
+  <color name="cyan_navigation">#006064</color>
+  <color name="cyan_accent">#003B3D</color>
+  <color name="cyan_text_primary">#474747</color>
+  <color name="cyan_text">#525252</color>
+  <color name="cyan_control_normal">#00BCD4</color>
+  <color name="cyan_control_activated">#003B3D</color>
+  <color name="cyan_control_highlight">#3F003B3D</color>
+  <color name="cyan_progress_circular_color">#00BCD4</color>
+  <color name="cyan_button_float">#4DD0E1</color>
+  <color name="cyan_drawer_arrow_color">#DDDDDD</color>
+  <color name="cyan_toolbar_color">#DDDDDD</color>
 
-    <!-- Deep Orange theme colors -->
-    <color name="deep_orange_primary">#FF5722</color>
-    <color name="deep_orange_primary_dark">#132584</color>
-    <color name="deep_orange_navigation">#0B1A6C</color>
-    <color name="deep_orange_accent">#05114F</color>
-    <color name="deep_orange_text_primary">#474747</color>
-    <color name="deep_orange_text">#525252</color>
-    <color name="deep_orange_control_normal">#FF5722</color>
-    <color name="deep_orange_control_activated">#05114F</color>
-    <color name="deep_orange_control_highlight">#3F05114F</color>
-    <color name="deep_orange_progress_circular_color">#1E88E5</color>
-    <color name="deep_orange_button_float">#33B5E5</color>
+  <!-- Deep Orange theme colors -->
+  <color name="deep_orange_primary">#FF7043</color>
+  <color name="deep_orange_primary_dark">#F4511E</color>
+  <color name="deep_orange_navigation">#BF360C</color>
+  <color name="deep_orange_accent">#3A1004</color>
+  <color name="deep_orange_text_primary">#474747</color>
+  <color name="deep_orange_text">#525252</color>
+  <color name="deep_orange_control_normal">#FF5722</color>
+  <color name="deep_orange_control_activated">#3A1004</color>
+  <color name="deep_orange_control_highlight">#3F3A1004</color>
+  <color name="deep_orange_progress_circular_color">#FF5722</color>
+  <color name="deep_orange_button_float">#FF8A65</color>
+  <color name="deep_orange_drawer_arrow_color">#FFFFFF</color>
+  <color name="deep_orange_toolbar_color">#FFFFFF</color>
 
-    <!-- Deep Purple theme colors -->
-    <color name="deep_purple_primary">#673AB7</color>
-    <color name="deep_purple_primary_dark">#132584</color>
-    <color name="deep_purple_navigation">#0B1A6C</color>
-    <color name="deep_purple_accent">#05114F</color>
-    <color name="deep_purple_text_primary">#474747</color>
-    <color name="deep_purple_text">#525252</color>
-    <color name="deep_purple_control_normal">#673AB7</color>
-    <color name="deep_purple_control_activated">#05114F</color>
-    <color name="deep_purple_control_highlight">#3F05114F</color>
-    <color name="deep_purple_progress_circular_color">#1E88E5</color>
-    <color name="deep_purple_button_float">#33B5E5</color>
+  <!-- Deep Purple theme colors -->
+  <color name="deep_purple_primary">#7E57C2</color>
+  <color name="deep_purple_primary_dark">#5E35B1</color>
+  <color name="deep_purple_navigation">#311B92</color>
+  <color name="deep_purple_accent">#110934</color>
+  <color name="deep_purple_text_primary">#474747</color>
+  <color name="deep_purple_text">#525252</color>
+  <color name="deep_purple_control_normal">#673AB7</color>
+  <color name="deep_purple_control_activated">#110934</color>
+  <color name="deep_purple_control_highlight">#3F110934</color>
+  <color name="deep_purple_progress_circular_color">#673AB7</color>
+  <color name="deep_purple_button_float">#9575CD</color>
+  <color name="deep_purple_drawer_arrow_color">#FFFFFF</color>
+  <color name="deep_purple_toolbar_color">#FFFFFF</color>
 
-    <!-- Green theme colors -->
-    <color name="green_primary">#4CAF50</color>
-    <color name="green_primary_dark">#132584</color>
-    <color name="green_navigation">#0B1A6C</color>
-    <color name="green_accent">#05114F</color>
-    <color name="green_text_primary">#474747</color>
-    <color name="green_text">#525252</color>
-    <color name="green_control_normal">#4CAF50</color>
-    <color name="green_control_activated">#05114F</color>
-    <color name="green_control_highlight">#3F05114F</color>
-    <color name="green_progress_circular_color">#1E88E5</color>
-    <color name="green_button_float">#33B5E5</color>
+  <!-- Green theme colors -->
+  <color name="green_primary">#66BB6A</color>
+  <color name="green_primary_dark">#43A047</color>
+  <color name="green_navigation">#1B5E20</color>
+  <color name="green_accent">#0E2F10</color>
+  <color name="green_text_primary">#474747</color>
+  <color name="green_text">#525252</color>
+  <color name="green_control_normal">#4CAF50</color>
+  <color name="green_control_activated">#0E2F10</color>
+  <color name="green_control_highlight">#3F0E2F10</color>
+  <color name="green_progress_circular_color">#4CAF50</color>
+  <color name="green_button_float">#81C784</color>
+  <color name="green_drawer_arrow_color">#DDDDDD</color>
+  <color name="green_toolbar_color">#DDDDDD</color>
 
-    <!-- Indigo theme colors -->
-    <color name="indigo_primary">#3F51B5</color>
-    <color name="indigo_primary_dark">#132584</color>
-    <color name="indigo_navigation">#0B1A6C</color>
-    <color name="indigo_accent">#05114F</color>
-    <color name="indigo_text_primary">#474747</color>
-    <color name="indigo_text">#525252</color>
-    <color name="indigo_control_normal">#3F51B5</color>
-    <color name="indigo_control_activated">#05114F</color>
-    <color name="indigo_control_highlight">#3F05114F</color>
-    <color name="indigo_progress_circular_color">#1E88E5</color>
-    <color name="indigo_button_float">#33B5E5</color>
+  <!-- Indigo theme colors -->
+  <color name="indigo_primary">#5C6BC0</color>
+  <color name="indigo_primary_dark">#3949AB</color>
+  <color name="indigo_navigation">#1A237E</color>
+  <color name="indigo_accent">#0A0E33</color>
+  <color name="indigo_text_primary">#474747</color>
+  <color name="indigo_text">#525252</color>
+  <color name="indigo_control_normal">#3F51B5</color>
+  <color name="indigo_control_activated">#0A0E33</color>
+  <color name="indigo_control_highlight">#3F0A0E33</color>
+  <color name="indigo_progress_circular_color">#3F51B5</color>
+  <color name="indigo_button_float">#7986CB</color>
+  <color name="indigo_drawer_arrow_color">#FFFFFF</color>
+  <color name="indigo_toolbar_color">#FFFFFF</color>
 
-    <!-- Light Blue theme colors -->
-    <color name="light_blue_primary">#03A9F4</color>
-    <color name="light_blue_primary_dark">#132584</color>
-    <color name="light_blue_navigation">#0B1A6C</color>
-    <color name="light_blue_accent">#05114F</color>
-    <color name="light_blue_text_primary">#474747</color>
-    <color name="light_blue_text">#525252</color>
-    <color name="light_blue_control_normal">#03A9F4</color>
-    <color name="light_blue_control_activated">#05114F</color>
-    <color name="light_blue_control_highlight">#3F05114F</color>
-    <color name="light_blue_progress_circular_color">#1E88E5</color>
-    <color name="light_blue_button_float">#33B5E5</color>
+  <!-- Light Blue theme colors -->
+  <color name="light_blue_primary">#29B6F6</color>
+  <color name="light_blue_primary_dark">#039BE5</color>
+  <color name="light_blue_navigation">#01579B</color>
+  <color name="light_blue_accent">#00233D</color>
+  <color name="light_blue_text_primary">#474747</color>
+  <color name="light_blue_text">#525252</color>
+  <color name="light_blue_control_normal">#03A9F4</color>
+  <color name="light_blue_control_activated">#00233D</color>
+  <color name="light_blue_control_highlight">#3F00233D</color>
+  <color name="light_blue_progress_circular_color">#03A9F4</color>
+  <color name="light_blue_button_float">#4FC3F7</color>
+  <color name="light_blue_drawer_arrow_color">#FFFFFF</color>
+  <color name="light_blue_toolbar_color">#FFFFFF</color>
 
-    <!-- Light Green theme colors -->
-    <color name="light_green_primary">#8BC34A</color>
-    <color name="light_green_primary_dark">#132584</color>
-    <color name="light_green_navigation">#0B1A6C</color>
-    <color name="light_green_accent">#05114F</color>
-    <color name="light_green_text_primary">#474747</color>
-    <color name="light_green_text">#525252</color>
-    <color name="light_green_control_normal">#8BC34A</color>
-    <color name="light_green_control_activated">#05114F</color>
-    <color name="light_green_control_highlight">#3F05114F</color>
-    <color name="light_green_progress_circular_color">#1E88E5</color>
-    <color name="light_green_button_float">#33B5E5</color>
+  <!-- Light Green theme colors -->
+  <color name="light_green_primary">#9CCC65</color>
+  <color name="light_green_primary_dark">#7CB342</color>
+  <color name="light_green_navigation">#33691E</color>
+  <color name="light_green_accent">#17300D</color>
+  <color name="light_green_text_primary">#474747</color>
+  <color name="light_green_text">#525252</color>
+  <color name="light_green_control_normal">#8BC34A</color>
+  <color name="light_green_control_activated">#17300D</color>
+  <color name="light_green_control_highlight">#3F17300D</color>
+  <color name="light_green_progress_circular_color">#8BC34A</color>
+  <color name="light_green_button_float">#AED581</color>
+  <color name="light_green_drawer_arrow_color">#FFFFFF</color>
+  <color name="light_green_toolbar_color">#FFFFFF</color>
 
-    <!-- Lime theme colors -->
-    <color name="lime_primary">#CDDC39</color>
-    <color name="lime_primary_dark">#132584</color>
-    <color name="lime_navigation">#0B1A6C</color>
-    <color name="lime_accent">#05114F</color>
-    <color name="lime_text_primary">#474747</color>
-    <color name="lime_text">#525252</color>
-    <color name="lime_control_normal">#CDDC39</color>
-    <color name="lime_control_activated">#05114F</color>
-    <color name="lime_control_highlight">#3F05114F</color>
-    <color name="lime_progress_circular_color">#1E88E5</color>
-    <color name="lime_button_float">#33B5E5</color>
+  <!-- Lime theme colors -->
+  <color name="lime_primary">#DCE775</color>
+  <color name="lime_primary_dark">#C0CA33</color>
+  <color name="lime_navigation">#827717</color>
+  <color name="lime_accent">#343009</color>
+  <color name="lime_text_primary">#474747</color>
+  <color name="lime_text">#525252</color>
+  <color name="lime_control_normal">#CDDC39</color>
+  <color name="lime_control_activated">#343009</color>
+  <color name="lime_control_highlight">#3F343009</color>
+  <color name="lime_progress_circular_color">#CDDC39</color>
+  <color name="lime_button_float">#DCE775</color>
+  <color name="lime_drawer_arrow_color">#FFFFFF</color>
+  <color name="lime_toolbar_color">#FFFFFF</color>
 
-    <!-- Orange theme colors -->
-    <color name="orange_primary">#FF9800</color>
-    <color name="orange_primary_dark">#132584</color>
-    <color name="orange_navigation">#0B1A6C</color>
-    <color name="orange_accent">#05114F</color>
-    <color name="orange_text_primary">#474747</color>
-    <color name="orange_text">#525252</color>
-    <color name="orange_control_normal">#FF9800</color>
-    <color name="orange_control_activated">#05114F</color>
-    <color name="orange_control_highlight">#3F05114F</color>
-    <color name="orange_progress_circular_color">#1E88E5</color>
-    <color name="orange_button_float">#33B5E5</color>
+  <!-- Orange theme colors -->
+  <color name="orange_primary">#FFA726</color>
+  <color name="orange_primary_dark">#FB8C00</color>
+  <color name="orange_navigation">#E65100</color>
+  <color name="orange_accent">#3D1500</color>
+  <color name="orange_text_primary">#474747</color>
+  <color name="orange_text">#525252</color>
+  <color name="orange_control_normal">#FF9800</color>
+  <color name="orange_control_activated">#3D1500</color>
+  <color name="orange_control_highlight">#3F3D1500</color>
+  <color name="orange_progress_circular_color">#FF9800</color>
+  <color name="orange_button_float">#FFB74D</color>
+  <color name="orange_drawer_arrow_color">#FFFFFF</color>
+  <color name="orange_toolbar_color">#FFFFFF</color>
 
-    <!-- Pink theme colors -->
-    <color name="pink_primary">#E91E63</color>
-    <color name="pink_primary_dark">#132584</color>
-    <color name="pink_navigation">#0B1A6C</color>
-    <color name="pink_accent">#05114F</color>
-    <color name="pink_text_primary">#474747</color>
-    <color name="pink_text">#525252</color>
-    <color name="pink_control_normal">#E91E63</color>
-    <color name="pink_control_activated">#05114F</color>
-    <color name="pink_control_highlight">#3F05114F</color>
-    <color name="pink_progress_circular_color">#1E88E5</color>
-    <color name="pink_button_float">#33B5E5</color>
+  <!-- Pink theme colors -->
+  <color name="pink_primary">#EC407A</color>
+  <color name="pink_primary_dark">#D81B60</color>
+  <color name="pink_navigation">#880E4F</color>
+  <color name="pink_accent">#370620</color>
+  <color name="pink_text_primary">#474747</color>
+  <color name="pink_text">#525252</color>
+  <color name="pink_control_normal">#E91E63</color>
+  <color name="pink_control_activated">#370620</color>
+  <color name="pink_control_highlight">#3F370620</color>
+  <color name="pink_progress_circular_color">#E91E63</color>
+  <color name="pink_button_float">#F06292</color>
+  <color name="pink_drawer_arrow_color">#FFFFFF</color>
+  <color name="pink_toolbar_color">#FFFFFF</color>
 
-    <!-- Purple theme colors -->
-    <color name="purple_primary">#9C27B0</color>
-    <color name="purple_primary_dark">#132584</color>
-    <color name="purple_navigation">#0B1A6C</color>
-    <color name="purple_accent">#05114F</color>
-    <color name="purple_text_primary">#474747</color>
-    <color name="purple_text">#525252</color>
-    <color name="purple_control_normal">#9C27B0</color>
-    <color name="purple_control_activated">#05114F</color>
-    <color name="purple_control_highlight">#3F05114F</color>
-    <color name="purple_progress_circular_color">#1E88E5</color>
-    <color name="purple_button_float">#33B5E5</color>
+  <!-- Purple theme colors -->
+  <color name="purple_primary">#AB47BC</color>
+  <color name="purple_primary_dark">#8E24AA</color>
+  <color name="purple_navigation">#4A148C</color>
+  <color name="purple_accent">#1C0836</color>
+  <color name="purple_text_primary">#474747</color>
+  <color name="purple_text">#525252</color>
+  <color name="purple_control_normal">#9C27B0</color>
+  <color name="purple_control_activated">#1C0836</color>
+  <color name="purple_control_highlight">#3F1C0836</color>
+  <color name="purple_progress_circular_color">#9C27B0</color>
+  <color name="purple_button_float">#BA68C8</color>
+  <color name="purple_drawer_arrow_color">#FFFFFF</color>
+  <color name="purple_toolbar_color">#FFFFFF</color>
 
-    <!-- Red theme colors -->
-    <color name="red_primary">#F44336</color>
-    <color name="red_primary_dark">#132584</color>
-    <color name="red_navigation">#0B1A6C</color>
-    <color name="red_accent">#05114F</color>
-    <color name="red_text_primary">#474747</color>
-    <color name="red_text">#525252</color>
-    <color name="red_control_normal">#F44336</color>
-    <color name="red_control_activated">#05114F</color>
-    <color name="red_control_highlight">#3F05114F</color>
-    <color name="red_progress_circular_color">#1E88E5</color>
-    <color name="red_button_float">#33B5E5</color>
+  <!-- Red theme colors -->
+  <color name="red_primary">#EF5350</color>
+  <color name="red_primary_dark">#E53935</color>
+  <color name="red_navigation">#B71C1C</color>
+  <color name="red_accent">#350808</color>
+  <color name="red_text_primary">#474747</color>
+  <color name="red_text">#525252</color>
+  <color name="red_control_normal">#F44336</color>
+  <color name="red_control_activated">#350808</color>
+  <color name="red_control_highlight">#3F350808</color>
+  <color name="red_progress_circular_color">#F44336</color>
+  <color name="red_button_float">#E57373</color>
+  <color name="red_drawer_arrow_color">#FFFFFF</color>
+  <color name="red_toolbar_color">#FFFFFF</color>
 
-    <!-- Teal theme colors -->
-    <color name="teal_primary">#009688</color>
-    <color name="teal_primary_dark">#132584</color>
-    <color name="teal_navigation">#0B1A6C</color>
-    <color name="teal_accent">#05114F</color>
-    <color name="teal_text_primary">#474747</color>
-    <color name="teal_text">#525252</color>
-    <color name="teal_control_normal">#009688</color>
-    <color name="teal_control_activated">#05114F</color>
-    <color name="teal_control_highlight">#3F05114F</color>
-    <color name="teal_progress_circular_color">#1E88E5</color>
-    <color name="teal_button_float">#33B5E5</color>
+  <!-- Teal theme colors -->
+  <color name="teal_primary">#26A69A</color>
+  <color name="teal_primary_dark">#00897B</color>
+  <color name="teal_navigation">#004D40</color>
+  <color name="teal_accent">#003D33</color>
+  <color name="teal_text_primary">#474747</color>
+  <color name="teal_text">#525252</color>
+  <color name="teal_control_normal">#009688</color>
+  <color name="teal_control_activated">#003D33</color>
+  <color name="teal_control_highlight">#3F003D33</color>
+  <color name="teal_progress_circular_color">#009688</color>
+  <color name="teal_button_float">#4DB6AC</color>
+  <color name="teal_drawer_arrow_color">#FFFFFF</color>
+  <color name="teal_toolbar_color">#FFFFFF</color>
 
-    <!-- Yellow theme colors -->
-    <color name="yellow_primary">#FFEB3B</color>
-    <color name="yellow_primary_dark">#132584</color>
-    <color name="yellow_navigation">#0B1A6C</color>
-    <color name="yellow_accent">#05114F</color>
-    <color name="yellow_text_primary">#474747</color>
-    <color name="yellow_text">#525252</color>
-    <color name="yellow_control_normal">#FFEB3B</color>
-    <color name="yellow_control_activated">#05114F</color>
-    <color name="yellow_control_highlight">#3F05114F</color>
-    <color name="yellow_progress_circular_color">#1E88E5</color>
-    <color name="yellow_button_float">#33B5E5</color>
+  <!-- Yellow theme colors -->
+  <color name="yellow_primary">#FFEE58</color>
+  <color name="yellow_primary_dark">#FDD835</color>
+  <color name="yellow_navigation">#F57F17</color>
+  <color name="yellow_accent">#3B1D02</color>
+  <color name="yellow_text_primary">#474747</color>
+  <color name="yellow_text">#525252</color>
+  <color name="yellow_control_normal">#FFEB3B</color>
+  <color name="yellow_control_activated">#3B1D02</color>
+  <color name="yellow_control_highlight">#3F3B1D02</color>
+  <color name="yellow_progress_circular_color">#FFEB3B</color>
+  <color name="yellow_button_float">#FFF176</color>
+  <color name="yellow_drawer_arrow_color">#FFFFFF</color>
+  <color name="yellow_toolbar_color">#FFFFFF</color>
 
 </resources>

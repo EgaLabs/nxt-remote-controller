@@ -33,35 +33,31 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.WindowManager;
 
-public class SettingsActivity extends ActionBarActivity {
+import git.egatuts.nxtremotecontroller.activity.BaseActivity;
 
-  Toolbar toolbar;
+public class SettingsActivity extends BaseActivity {
 
   @Override
   public void onCreate (Bundle savedInstanceState) {
+    final BaseActivity self = this;
     super.onCreate(savedInstanceState);
     super.setContentView(R.layout.preference_layout);
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
     toolbar = (Toolbar) super.findViewById(R.id.toolbar_element);
-    super.setSupportActionBar(toolbar);
-    super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+    this.setSupportToolbar();
     toolbar.setNavigationOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick (View v) {
-        finish();
+        Intent intent = new Intent(self, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        self.startActivity(intent);
+        self.finish();
       }
     });
-
   }
 
 }

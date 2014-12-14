@@ -1,0 +1,185 @@
+-- Merging decision tree log ---
+manifest
+ADDED from AndroidManifest.xml:2:1
+	package
+		ADDED from AndroidManifest.xml:4:5
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:versionName
+		ADDED from AndroidManifest.xml:6:5
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:versionCode
+		ADDED from AndroidManifest.xml:5:5
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	xmlns:android
+		ADDED from AndroidManifest.xml:3:5
+	android:installLocation
+		ADDED from AndroidManifest.xml:7:5
+supports-screens
+ADDED from AndroidManifest.xml:9:5
+	android:largeScreens
+		ADDED from AndroidManifest.xml:12:9
+	android:smallScreens
+		ADDED from AndroidManifest.xml:13:9
+	android:normalScreens
+		ADDED from AndroidManifest.xml:10:9
+	android:xlargeScreens
+		ADDED from AndroidManifest.xml:11:9
+	android:resizeable
+		ADDED from AndroidManifest.xml:15:9
+	android:anyDensity
+		ADDED from AndroidManifest.xml:14:9
+uses-feature#android.hardware.wifi
+ADDED from AndroidManifest.xml:17:5
+	android:required
+		ADDED from AndroidManifest.xml:17:56
+	android:name
+		ADDED from AndroidManifest.xml:17:19
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from AndroidManifest.xml:19:5
+	android:name
+		ADDED from AndroidManifest.xml:19:22
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from AndroidManifest.xml:20:5
+	android:name
+		ADDED from AndroidManifest.xml:20:22
+uses-permission#android.permission.BATTERY_STATS
+ADDED from AndroidManifest.xml:21:5
+	android:name
+		ADDED from AndroidManifest.xml:21:22
+uses-permission#android.permission.BLUETOOTH
+ADDED from AndroidManifest.xml:22:5
+	android:name
+		ADDED from AndroidManifest.xml:22:22
+uses-permission#android.permission.WAKE_LOCK
+ADDED from AndroidManifest.xml:23:5
+	android:name
+		ADDED from AndroidManifest.xml:23:22
+uses-permission#android.permission.INTERNET
+ADDED from AndroidManifest.xml:24:5
+	android:name
+		ADDED from AndroidManifest.xml:24:22
+uses-permission#android.permission.VIBRATE
+ADDED from AndroidManifest.xml:25:5
+	android:name
+		ADDED from AndroidManifest.xml:25:22
+uses-sdk
+ADDED from AndroidManifest.xml:27:5
+MERGED from NXTRemoteController:MaterialDesign:unspecified:7:5
+MERGED from com.android.support:support-v4:21.0.2:15:5
+MERGED from com.android.support:support-v4:21.0.2:15:5
+MERGED from com.android.support:appcompat-v7:21.0.2:15:5
+MERGED from com.android.support:support-v4:21.0.2:15:5
+MERGED from com.android.support:recyclerview-v7:21.0.2:15:5
+MERGED from com.android.support:support-v4:21.0.2:15:5
+MERGED from com.github.traex.rippleeffect:library:1.2.3:8:5
+MERGED from com.android.support:android-support-v4-preferencefragment:1.0.0:20:5
+MERGED from com.android.support:support-v4:21.0.2:15:5
+	android:maxSdkVersion
+		ADDED from AndroidManifest.xml:27:71
+	android:targetSdkVersion
+		ADDED from AndroidManifest.xml:27:41
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:minSdkVersion
+		ADDED from AndroidManifest.xml:27:15
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+application
+ADDED from AndroidManifest.xml:29:5
+MERGED from NXTRemoteController:MaterialDesign:unspecified:11:5
+MERGED from com.android.support:support-v4:21.0.2:16:5
+MERGED from com.android.support:support-v4:21.0.2:16:5
+MERGED from com.android.support:appcompat-v7:21.0.2:16:5
+MERGED from com.android.support:support-v4:21.0.2:16:5
+MERGED from com.android.support:recyclerview-v7:21.0.2:17:5
+MERGED from com.android.support:support-v4:21.0.2:16:5
+MERGED from com.github.traex.rippleeffect:library:1.2.3:12:5
+MERGED from com.android.support:android-support-v4-preferencefragment:1.0.0:24:5
+MERGED from com.android.support:support-v4:21.0.2:16:5
+	android:label
+		ADDED from AndroidManifest.xml:32:9
+	android:allowBackup
+		ADDED from AndroidManifest.xml:30:9
+	android:icon
+		ADDED from AndroidManifest.xml:31:9
+	android:theme
+		ADDED from AndroidManifest.xml:33:9
+activity#git.egatuts.nxtremotecontroller.MainActivity
+ADDED from AndroidManifest.xml:35:9
+	android:label
+		ADDED from AndroidManifest.xml:37:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:38:13
+	android:theme
+		ADDED from AndroidManifest.xml:39:13
+	android:name
+		ADDED from AndroidManifest.xml:36:13
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER+android.intent.category.MULTIWINDOW_LAUNCHER
+ADDED from AndroidManifest.xml:41:13
+action#android.intent.action.MAIN
+ADDED from AndroidManifest.xml:42:17
+	android:name
+		ADDED from AndroidManifest.xml:42:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:43:17
+	android:name
+		ADDED from AndroidManifest.xml:43:27
+category#android.intent.category.MULTIWINDOW_LAUNCHER
+ADDED from AndroidManifest.xml:44:17
+	android:name
+		ADDED from AndroidManifest.xml:44:27
+activity#git.egatuts.nxtremotecontroller.SettingsActivity
+ADDED from AndroidManifest.xml:49:9
+	android:label
+		ADDED from AndroidManifest.xml:52:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:51:13
+	android:theme
+		ADDED from AndroidManifest.xml:53:13
+	android:name
+		ADDED from AndroidManifest.xml:50:13
+uses-library#com.sec.android.app.multiwindow
+ADDED from AndroidManifest.xml:55:9
+	android:required
+		ADDED from AndroidManifest.xml:55:70
+	android:name
+		ADDED from AndroidManifest.xml:55:23
+meta-data#com.sec.android.support.multiwindow
+ADDED from AndroidManifest.xml:57:9
+	android:value
+		ADDED from AndroidManifest.xml:57:77
+	android:name
+		ADDED from AndroidManifest.xml:57:20
+meta-data#com.sec.android.mutiwindow.DEFAULT_SIZE_W
+ADDED from AndroidManifest.xml:58:9
+	android:value
+		ADDED from AndroidManifest.xml:58:77
+	android:name
+		ADDED from AndroidManifest.xml:58:20
+meta-data#com.sec.android.mutiwindow.DEFAULT_SIZE_H
+ADDED from AndroidManifest.xml:59:9
+	android:value
+		ADDED from AndroidManifest.xml:59:77
+	android:name
+		ADDED from AndroidManifest.xml:59:20
+meta-data#com.sec.android.mutiwindow.MINIMUM_SIZE_W
+ADDED from AndroidManifest.xml:60:9
+	android:value
+		ADDED from AndroidManifest.xml:60:77
+	android:name
+		ADDED from AndroidManifest.xml:60:20
+meta-data#com.sec.android.mutiwindow.MINIMUM_SIZE_H
+ADDED from AndroidManifest.xml:61:9
+	android:value
+		ADDED from AndroidManifest.xml:61:77
+	android:name
+		ADDED from AndroidManifest.xml:61:20
+activity#android.support.v7.widget.TestActivity
+ADDED from com.android.support:recyclerview-v7:21.0.2:18:9
+	android:label
+		ADDED from com.android.support:recyclerview-v7:21.0.2:18:19
+	android:name
+		ADDED from com.android.support:recyclerview-v7:21.0.2:18:60

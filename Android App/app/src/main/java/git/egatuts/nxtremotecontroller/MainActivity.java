@@ -33,7 +33,10 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,6 +45,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -59,12 +63,14 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
   NavigationDrawerFragment drawer_fragment;
   BaseFragment fragmented_view;
   BaseFragment fragment_active = null;
+  BroadcastReceiver killer_receiver;
 
   /*
    * When the activity is first created.
    */
   @Override
   public void onCreate (Bundle savedInstanceState) {
+    final BaseActivity self = this;
     super.onCreate(savedInstanceState);
     super.setContentView(R.layout.main_layout);
     toolbar = (Toolbar) super.findViewById(R.id.toolbar_element);
@@ -72,6 +78,16 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
     drawer_fragment = (NavigationDrawerFragment) fragment_manager.findFragmentById(R.id.drawer_fragment);
     drawer_fragment.setup(R.id.drawer_fragment, (DrawerLayout) super.findViewById(R.id.drawer_element), toolbar);
 
+    killer_receiver = new BroadcastReceiver() {
+      @Override
+      public void onReceive (Context context, Intent intent) {
+        String action = intent.getAction();
+        if (action.equals("nxtremotecontroller_restart")) {
+          self.finish();
+        }
+      }
+    };
+    this.registerReceiver(killer_receiver, new IntentFilter("nxtremotecontroller_restart"));
   }
 
   /*
@@ -128,6 +144,12 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
       drawer_fragment.getActionBarDrawerToggle().onDrawerSlide(null, 0.0f);
       super.startActivity(intent);
     }
+  }
+
+  @Override
+  public void onDestroy () {
+    this.unregisterReceiver(killer_receiver);
+    super.onDestroy();
   }
 
   /*

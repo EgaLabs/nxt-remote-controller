@@ -13,6 +13,7 @@
 
   <com.gc.materialdesign.views.ButtonFloat
       android:id="@+id/sync_button"
+      materialdesign:rippleSpeed="7"
       style="@style/float_button_style" />
 
 </RelativeLayout>
