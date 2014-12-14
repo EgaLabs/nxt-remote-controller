@@ -15,19 +15,23 @@
   <!-- [NavigationDrawerFragment.java]  -->
   <string name="drawer_open">Abrir menú de navegación</string>
   <string name="drawer_close">Cerrar menú de navegación</string>
-  <string name="bluetooth_enabling">Activando bluetooth...</string>
-  <string name="bluetooth_disabling">Desactivando bluetooth...</string>
+  <string name="bluetooth_enabling">Activando bluetooth&#8230;</string>
+  <string name="bluetooth_disabling">Desactivando bluetooth&#8230;</string>
   <!-- [/NavigationDrawerFragment.java] -->
   
   
   <!-- [bluetooth_enable.xml]  -->
   <string name="bluetooth_message">Bluetooth desactivado.</string>
   <string name="bluetooth_button">Activar</string>
+  <string name="bluetooth_paired">Dispositivo emparejado: %s</string>
+  <string name="bluetooth_failed_pairing">Emparejamiento fallido: %s</string>
+  <string name="bluetooth_already_paired">El dispositivo %s ya está emparejado</string>
   <!-- [/bluetooth_enable.xml] -->
 
 
   <!-- [scan_fragment.xml] -->
-  <string name="bluetooth_pairing">Emparejando dispositivo...</string>
+  <string name="bluetooth_preparing_pairing">Preparando proceso de emparejado&#8230;</string>
+  <string name="bluetooth_pairing">Emparejando dispositivo&#8230;</string>
   <!-- [/scan_fragment.xml] -->
   
   
@@ -44,8 +48,21 @@
   <string name="preference_dialog_address">¿Cuál es la dirección?</string>
   <string name="preference_value_address">localhost:8080</string>
   <!-- [/preference_fragment.xml] -->
-  
-  
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_theme">Tema</string>
+  <string name="preference_summary_theme">Define el tema de colores que se usará en toda la aplicación.</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_toast">Mostrar mensajes de estado</string>
+  <string name="preference_summary_toast">Muestra los avisos de emparejamiento de la aplicación. Se recomienda activar esta opción, a no ser que el sistema genere las notificaciones automáticamente.</string>
+  <string name="preference_value_toast">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
   <!-- [preference_fragment.xml]  -->
   <string name="preference_title_min_signal">Señal mínima</string>
   <string name="preference_summary_min_signal">Señal mínima registrada para calcular el procentaje. Cuanto más bajo peor. El valor por defecto es -60dBm.</string>

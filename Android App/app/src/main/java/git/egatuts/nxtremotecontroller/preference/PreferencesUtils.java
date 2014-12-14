@@ -190,6 +190,34 @@ public class PreferencesUtils {
       return this.getInt(key, 0);
     }
 
+    /*
+     * Saves a boolean value. Can trigger this.save() method.
+     */
+    public void saveBoolean (String key, boolean value, boolean autosave) {
+      _editor.putBoolean(key, value);
+      if (autosave) this.save();
+    }
+
+    /*
+     * Saves a boolean value with (boolean) autosave always as true.
+     */
+    public void saveBoolean (String key, boolean value) {
+      this.saveBoolean(key, value, true);
+    }
+
+    /*
+     * Returns a shared preference boolean value using a predefined value if not available.
+     */
+    public boolean getBoolean (String key, boolean default_value) {
+      return _shared_preferences.getBoolean(key, default_value);
+    }
+
+    /*
+     * Returns a shared preference boolean value using false as predefined value.
+     */
+    public boolean getBoolean (String key) {
+      return this.getBoolean(key, false);
+    }
   }
 
 }

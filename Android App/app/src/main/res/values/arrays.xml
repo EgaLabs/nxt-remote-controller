@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <!-- [preference_fragment.xml]  -->
+  <string-array name="theme_names">
+    <item>Amber</item>
+    <item>Blue</item>
+    <item>Blue Grey</item>
+    <item>Brown</item>
+    <item>Cyan</item>
+    <item>Deep Orange</item>
+    <item>Deep Purple</item>
+    <item>Green</item>
+    <item>Indigo</item>
+    <item>Light Blue</item>
+    <item>Light Green</item>
+    <item>Lime</item>
+    <item>Orange</item>
+    <item>Pink</item>
+    <item>Purple</item>
+    <item>Red</item>
+    <item>Teal</item>
+    <item>Yellow</item>
+  </string-array>
+
+  <string-array name="theme_values">
+    <item>AppTheme.Amber</item>
+    <item>AppTheme.Blue</item>
+    <item>AppTheme.BlueGrey</item>
+    <item>AppTheme.Brown</item>
+    <item>AppTheme.Cyan</item>
+    <item>AppTheme.DeepOrange</item>
+    <item>AppTheme.DeepPurple</item>
+    <item>AppTheme.Green</item>
+    <item>AppTheme.Indigo</item>
+    <item>AppTheme.LightBlue</item>
+    <item>AppTheme.LightGreen</item>
+    <item>AppTheme.Lime</item>
+    <item>AppTheme.Orange</item>
+    <item>AppTheme.Pink</item>
+    <item>AppTheme.Purple</item>
+    <item>AppTheme.Red</item>
+    <item>AppTheme.Teal</item>
+    <item>AppTheme.Yellow</item>
+  </string-array>
+  <!-- [/preference_fragment.xml] -->
+
+</resources>

@@ -43,6 +43,7 @@ import android.view.ViewGroup;
 
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
+import git.egatuts.nxtremotecontroller.device.PairedDeviceItemClickListener;
 
 public class HomeFragment extends BaseFragment {
 
@@ -69,6 +70,12 @@ public class HomeFragment extends BaseFragment {
     recycler_view.setAdapter(paired_devices_adapter);
     recycler_view.setLayoutManager(linear_layout_manager);
     recycler_view.setItemAnimator(new DefaultItemAnimator());
+    recycler_view.addOnItemTouchListener(new PairedDeviceItemClickListener (getActivity(), new PairedDeviceItemClickListener.OnItemClickListener () {
+      @Override
+      public void onItemClick (View view, int position) {
+
+      }
+    }));
     return view;
   }
 

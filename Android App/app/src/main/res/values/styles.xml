@@ -37,126 +37,127 @@
 
   <!-- [Styles for main_layout.xml]  -->
 
-    <!-- [include]  -->
-    <style name="include_style" parent="wrap"></style>
-    <!-- [/include] -->
+  <!-- [include]  -->
+  <style name="include_style" parent="wrap"></style>
+  <!-- [/include] -->
 
 
-    <!-- [DrawerLayout]  -->
-    <style name="drawer_style" parent="match"></style>
-    <!-- [/DrawerLayout] -->
+  <!-- [DrawerLayout]  -->
+  <style name="drawer_style" parent="match"></style>
+  <!-- [/DrawerLayout] -->
 
 
-    <!-- [FrameLayout]  -->
-    <style name="frame_layout_style" parent="match">
-      <item name="android:background">#000000</item>
-    </style>
-    <!-- [/FrameLayout] -->
+  <!-- [FrameLayout]  -->
+  <style name="frame_layout_style" parent="match">
+    <item name="android:background">#000000</item>
+  </style>
+  <!-- [/FrameLayout] -->
 
 
-    <!-- [fragment]  -->
-    <style name="fragment_drawer_style" parent="fragment">
-      <item name="android:layout_width">?drawer_width</item>
-    </style>
-    <!-- [/fragment] -->
+  <!-- [fragment]  -->
+  <style name="fragment_drawer_style" parent="fragment">
+    <item name="android:layout_width">?drawer_width</item>
+  </style>
+  <!-- [/fragment] -->
 
   <!-- [/Styles for main_layout.xml] -->
 
 
   <!-- [Styles for toolbar.xml]  -->
 
-    <!-- [Toolbar] -->
-    <style name="toolbar_style" parent="wrap">
-      <item name="android:background">?toolbar_background</item>
-      <item name="android:minHeight">@dimen/abc_action_bar_default_height_material</item>
-      <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-      <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-    </style>
-    <!-- [/Toolbar] -->
+  <!-- [Toolbar] -->
+  <style name="toolbar_style" parent="wrap">
+    <item name="android:background">?toolbar_background</item>
+    <item name="android:minHeight">@dimen/abc_action_bar_default_height_material</item>
+    <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+  </style>
+  <!-- [/Toolbar] -->
 
   <!-- [/Styles for toolbar.xml] -->
 
 
   <!-- [Styles for navigation_drawer_fragment.xml (some may be reusable)]  -->
 
-    <!-- [RecyclerView]  -->
-    <style name="drawer_recycler_view_style" parent="recycler_view">
-      <item name="android:background">?drawer_background</item>
-      <item name="android:focusable">true</item>
-      <item name="android:clickable">true</item>
-      <item name="android:focusableInTouchMode">true</item>
-    </style>
-    <!-- [/RecyclerView] -->
+  <!-- [RecyclerView]  -->
+  <style name="drawer_recycler_view_style" parent="recycler_view">
+    <item name="android:background">?drawer_background</item>
+    <item name="android:focusable">true</item>
+    <item name="android:clickable">true</item>
+    <item name="android:focusableInTouchMode">true</item>
+  </style>
+  <!-- [/RecyclerView] -->
 
   <!-- [/Styles for navigation_drawer_fragment.xml] -->
 
 
   <!-- [Styles for drawer_item_row.xml]  -->
 
-    <!-- [LinearLayout]  -->
-    <style name="drawer_layout_style">
-      <item name="android:layout_width">match_parent</item>
-      <item name="android:layout_height">?drawer_item_height</item>
-    </style>
-    <!-- [/LinearLayout] -->
+  <!-- [LinearLayout]  -->
+  <style name="drawer_layout_style">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">?drawer_item_height</item>
+  </style>
+  <!-- [/LinearLayout] -->
 
 
-    <!-- [TextView]  -->
-    <style name="drawer_item_style.base" parent="match">
-        <item name="android:layout_marginRight">?drawer_item_margin_right</item>
-        <item name="android:layout_marginLeft">?drawer_item_margin_left</item>
-        <item name="android:drawablePadding">?drawer_item_icon_padding</item>
-        <item name="android:textSize">?drawer_item_text_size</item>
-        <item name="android:textColor">?drawer_item_text_color</item>
-        <item name="android:gravity">center_vertical</item>
-    </style>
-    <style name="drawer_item_style" parent="drawer_item_style.base"></style>
-    <!-- [/TextView] -->
+  <!-- [TextView]  -->
+  <style name="drawer_item_style.base" parent="match">
+    <item name="android:layout_marginRight">?drawer_item_margin_right</item>
+    <item name="android:layout_marginLeft">?drawer_item_margin_left</item>
+    <item name="android:drawablePadding">?drawer_item_icon_padding</item>
+    <item name="android:textSize">?drawer_item_text_size</item>
+    <item name="android:textColor">?drawer_item_text_color</item>
+    <item name="android:gravity">center_vertical</item>
+  </style>
+
+  <style name="drawer_item_style" parent="drawer_item_style.base"></style>
+  <!-- [/TextView] -->
 
   <!-- [/Styles for drawer_item_row.xml] -->
 
 
   <!-- [Styles for progress_dialog.xml]  -->
 
-    <!-- [LinearLayout]  -->
-    <style name="progress_dialog_layout_style" parent="wrap">
-      <item name="android:layout_width">wrap_content</item>
-      <item name="android:orientation">horizontal</item>
-      <item name="android:layout_gravity">center</item>
-      <item name="android:background">@drawable/progress_dialog</item>
-    </style>
-    <!-- [/LinearLayout] -->
+  <!-- [LinearLayout]  -->
+  <style name="progress_dialog_layout_style" parent="wrap">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:orientation">horizontal</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:background">@drawable/progress_dialog</item>
+  </style>
+  <!-- [/LinearLayout] -->
 
-    <!-- [ProgressBarCircularIIndeterminate]  -->
-    <style name="progress_bar_style">
-      <item name="android:layout_width">?progress_circular_size</item>
-      <item name="android:layout_height">?progress_circular_size</item>
-      <item name="android:layout_gravity">center_horizontal</item>
-      <item name="android:background">?progress_circular_color</item>
-    </style>
-    <!-- [/ProgressBarCircularIIndeterminate] -->
+  <!-- [ProgressBarCircularIIndeterminate]  -->
+  <style name="progress_bar_style">
+    <item name="android:layout_width">?progress_circular_size</item>
+    <item name="android:layout_height">?progress_circular_size</item>
+    <item name="android:layout_gravity">center_horizontal</item>
+    <item name="android:background">?progress_circular_color</item>
+  </style>
+  <!-- [/ProgressBarCircularIIndeterminate] -->
 
-    <!-- [TextView]  -->
-    <style name="progress_dialog_text_style" parent="match">
-      <item name="android:layout_width">wrap_content</item>
-      <item name="android:textColor">#333333</item>
-      <item name="android:gravity">center_vertical</item>
-      <item name="android:layout_marginLeft">15dp</item>
-      <item name="android:layout_marginRight">8dp</item>
-    </style>
-    <!-- [/TextView] -->
+  <!-- [TextView]  -->
+  <style name="progress_dialog_text_style" parent="match">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:textColor">#333333</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:layout_marginLeft">15dp</item>
+    <item name="android:layout_marginRight">8dp</item>
+  </style>
+  <!-- [/TextView] -->
 
   <!-- [/Styles for progress_dialog.xml] -->
 
 
   <!-- [Styles for preference_layout.xml]  -->
 
-    <!-- [RelativeLayout]  -->
-    <!-- [/RelativeLayout] -->
+  <!-- [RelativeLayout]  -->
+  <!-- [/RelativeLayout] -->
 
 
-    <!-- [fragment]  -->
-    <!-- [/fragment] -->
+  <!-- [fragment]  -->
+  <!-- [/fragment] -->
 
   <!-- [/Styles for preference_layout.xml] -->
 
@@ -167,116 +168,116 @@
 
   <!-- [Styles for bluetooth_enable.xml]  -->
 
-    <!-- [LinearLayout]  -->
-    <style name="bluetooth_layout_style" parent="match">
-      <item name="android:orientation">vertical</item>
-      <item name="android:gravity">center</item>
-      <item name="android:background">#FFFFFF</item>
-    </style>
-    <!-- [/LinearLayout] -->
+  <!-- [LinearLayout]  -->
+  <style name="bluetooth_layout_style" parent="match">
+    <item name="android:orientation">vertical</item>
+    <item name="android:gravity">center</item>
+    <item name="android:background">#FFFFFF</item>
+  </style>
+  <!-- [/LinearLayout] -->
 
-    <!-- [TextView]  -->
-    <style name="bluetooth_message_style" parent="wrap">
-      <item name="android:textColor">?bluetooth_message_text_color</item>
-      <item name="android:textSize">?bluetooth_message_text_size</item>
-      <item name="android:gravity">center</item>
-    </style>
-    <!-- [/TextView] -->
+  <!-- [TextView]  -->
+  <style name="bluetooth_message_style" parent="wrap">
+    <item name="android:textColor">?bluetooth_message_text_color</item>
+    <item name="android:textSize">?bluetooth_message_text_size</item>
+    <item name="android:gravity">center</item>
+  </style>
+  <!-- [/TextView] -->
 
-    <!-- [Button]  -->
-    <style name="bluetooth_button_style" parent="wrap">
-      <item name="android:layout_width">wrap_content</item>
-    </style>
-    <!-- [/Button] -->
+  <!-- [Button]  -->
+  <style name="bluetooth_button_style" parent="wrap">
+    <item name="android:layout_width">wrap_content</item>
+  </style>
+  <!-- [/Button] -->
 
   <!-- [/Styles for bluetooth_enable.xml] -->
 
 
   <!-- [Styles for scan_fragment.xml (some may be reusable)]  -->
 
-    <!-- [RelativeLayout]  -->
-    <style name="relative_layout_style" parent="match">
-      <item name="android:orientation">horizontal</item>
-      <item name="android:gravity">center_vertical</item>
-      <item name="android:background">#FFFFFF</item>
-    </style>
-    <!-- [/RelativeLayout] -->
+  <!-- [RelativeLayout]  -->
+  <style name="relative_layout_style" parent="match">
+    <item name="android:orientation">horizontal</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:background">#FFFFFF</item>
+  </style>
+  <!-- [/RelativeLayout] -->
 
 
-    <!-- [RecyclerView]  -->
-    <!-- [/RecyclerView] -->
+  <!-- [RecyclerView]  -->
+  <!-- [/RecyclerView] -->
 
 
-    <!-- [ButtonFloat]  -->
-    <style name="float_button_style">
-      <item name="android:layout_width">?button_float_radius</item>
-      <item name="android:layout_height">?button_float_radius</item>
-      <item name="android:layout_marginRight">?button_float_margin</item>
-      <item name="android:layout_marginBottom">?button_float_margin</item>
-      <item name="android:background">?button_float_background</item>
-      <item name="android:layout_alignParentRight">true</item>
-      <item name="android:layout_alignParentBottom">true</item>
-    </style>
-    <!-- [/ButtonFloat] -->
+  <!-- [ButtonFloat]  -->
+  <style name="float_button_style">
+    <item name="android:layout_width">?button_float_radius</item>
+    <item name="android:layout_height">?button_float_radius</item>
+    <item name="android:layout_marginRight">?button_float_margin</item>
+    <item name="android:layout_marginBottom">?button_float_margin</item>
+    <item name="android:background">?button_float_background</item>
+    <item name="android:layout_alignParentRight">true</item>
+    <item name="android:layout_alignParentBottom">true</item>
+  </style>
+  <!-- [/ButtonFloat] -->
 
   <!-- [/Styles for scan_fragment.xml (and home_fragment.xml)] -->
 
 
   <!-- [Styles for paired_device.xml]  -->
 
-    <!-- [RippleView] -->
-    <style name="device_ripple_style" parent="wrap">
-      <item name="rv_color">?paired_device_ripple_color</item>
-      <item name="rv_rippleDuration">?paired_device_ripple_duration</item>
-    </style>
-    <!-- [/RippleView] -->
+  <!-- [RippleView] -->
+  <style name="device_ripple_style" parent="wrap">
+    <item name="rv_color">?paired_device_ripple_color</item>
+    <item name="rv_rippleDuration">?paired_device_ripple_duration</item>
+  </style>
+  <!-- [/RippleView] -->
 
-    <!-- [LinearLayout]  -->
-    <style name="device_layout_style" parent="match">
-      <item name="android:layout_height">?paired_device_height</item>
-      <item name="android:layout_margin">?paired_device_padding</item>
-    </style>
-    <!-- [/LinearLayout] -->
-
-
-    <!-- [TextView]  -->
-    <style name="device_signal_style" parent="match">
-      <item name="android:layout_width">?paired_device_height</item>
-      <item name="android:textColor">?paired_device_signal_text_color</item>
-      <item name="android:textSize">?paired_device_signal_text_size</item>
-      <item name="android:background">?paired_device_signal_shape</item>
-      <item name="android:gravity">center</item>
-    </style>
-    <!-- [/TextView] -->
+  <!-- [LinearLayout]  -->
+  <style name="device_layout_style" parent="match">
+    <item name="android:layout_height">?paired_device_height</item>
+    <item name="android:layout_margin">?paired_device_padding</item>
+  </style>
+  <!-- [/LinearLayout] -->
 
 
-    <!-- [LinearLayout]  -->
-    <style name="device_info_style" parent="row">
-      <item name="android:layout_height">match_parent</item>
-      <item name="android:layout_marginLeft">?paired_device_info_margin</item>
-      <item name="android:orientation">vertical</item>
-      <item name="android:gravity">center</item>
-    </style>
-    <!-- [/LinearLayout] -->
+  <!-- [TextView]  -->
+  <style name="device_signal_style" parent="match">
+    <item name="android:layout_width">?paired_device_height</item>
+    <item name="android:textColor">?paired_device_signal_text_color</item>
+    <item name="android:textSize">?paired_device_signal_text_size</item>
+    <item name="android:background">?paired_device_signal_shape</item>
+    <item name="android:gravity">center</item>
+  </style>
+  <!-- [/TextView] -->
 
 
-    <!-- [TextView]  -->
-    <style name="device_name_style" parent="row">
-      <item name="android:textSize">?paired_device_name_text_size</item>
-      <item name="android:textColor">?paired_device_name_text_color</item>
-      <item name="android:layout_toRightOf">@+id/paired_device_connection</item>
-    </style>
-    <!-- [/TextView] -->
+  <!-- [LinearLayout]  -->
+  <style name="device_info_style" parent="row">
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:layout_marginLeft">?paired_device_info_margin</item>
+    <item name="android:orientation">vertical</item>
+    <item name="android:gravity">center</item>
+  </style>
+  <!-- [/LinearLayout] -->
 
 
-    <!-- [TextView]  -->
-    <style name="device_address_style" parent="row">
-      <item name="android:textSize">?paired_device_address_text_size</item>
-      <item name="android:textColor">?paired_device_address_text_color</item>
-      <item name="android:layout_toRightOf">@+id/paired_device_connection</item>
-      <item name="android:layout_below">@+id/paired_device_name</item>
-    </style>
-    <!-- [/TextView] -->
+  <!-- [TextView]  -->
+  <style name="device_name_style" parent="row">
+    <item name="android:textSize">?paired_device_name_text_size</item>
+    <item name="android:textColor">?paired_device_name_text_color</item>
+    <item name="android:layout_toRightOf">@+id/paired_device_connection</item>
+  </style>
+  <!-- [/TextView] -->
+
+
+  <!-- [TextView]  -->
+  <style name="device_address_style" parent="row">
+    <item name="android:textSize">?paired_device_address_text_size</item>
+    <item name="android:textColor">?paired_device_address_text_color</item>
+    <item name="android:layout_toRightOf">@+id/paired_device_connection</item>
+    <item name="android:layout_below">@+id/paired_device_name</item>
+  </style>
+  <!-- [/TextView] -->
 
   <!-- [/Styles for paired_device.xml] -->
 
@@ -327,11 +328,186 @@
 
   </style>
 
-  <style name="AppTheme" parent="AppTheme.Base"></style>
+  <style name="AppTheme" parent="AppTheme.Base" />
   <!-- [/Base style for theme (common metrics in all themes)] -->
 
 
   <!-- COLOR THEMES -->
+
+  <!-- [Amber Theme]  -->
+  <style name="AppTheme.Base.Amber" parent="AppTheme">
+    <item name="colorPrimary">@color/amber_primary</item>
+    <item name="colorPrimaryDark">@color/amber_primary_dark</item>
+    <item name="colorAccent">@color/amber_accent</item>
+    <item name="android:textColorPrimary">@color/amber_text_primary</item>
+    <item name="colorControlNormal">@color/amber_control_normal</item>
+    <item name="colorControlActivated">@color/amber_control_activated</item>
+    <item name="colorControlHighlight">@color/amber_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/amber_primary</item>
+    <item name="progress_circular_color">@color/amber_progress_circular_color</item>
+    <item name="button_float_background">@color/amber_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/amber_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.Amber" parent="AppTheme.Base.Amber" />
+  <!-- [/Amber Theme] -->
+
+
+  <!-- [Blue Theme]  -->
+  <style name="AppTheme.Base.Blue" parent="AppTheme">
+    <item name="colorPrimary">@color/blue_primary</item>
+    <item name="colorPrimaryDark">@color/blue_primary_dark</item>
+    <item name="colorAccent">@color/blue_accent</item>
+    <item name="android:textColorPrimary">@color/blue_text_primary</item>
+    <item name="colorControlNormal">@color/blue_control_normal</item>
+    <item name="colorControlActivated">@color/blue_control_activated</item>
+    <item name="colorControlHighlight">@color/blue_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/blue_primary</item>
+    <item name="progress_circular_color">@color/blue_progress_circular_color</item>
+    <item name="button_float_background">@color/blue_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/blue_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.Blue" parent="AppTheme.Base.Blue" />
+  <!-- [/Blue Theme] -->
+
+
+  <!-- [BlueGrey Theme]  -->
+  <style name="AppTheme.Base.BlueGrey" parent="AppTheme">
+    <item name="colorPrimary">@color/blue_grey_primary</item>
+    <item name="colorPrimaryDark">@color/blue_grey_primary_dark</item>
+    <item name="colorAccent">@color/blue_grey_accent</item>
+    <item name="android:textColorPrimary">@color/blue_grey_text_primary</item>
+    <item name="colorControlNormal">@color/blue_grey_control_normal</item>
+    <item name="colorControlActivated">@color/blue_grey_control_activated</item>
+    <item name="colorControlHighlight">@color/blue_grey_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/blue_grey_primary</item>
+    <item name="progress_circular_color">@color/blue_grey_progress_circular_color</item>
+    <item name="button_float_background">@color/blue_grey_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/blue_grey_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.BlueGrey" parent="AppTheme.Base.BlueGrey" />
+  <!-- [/BlueGrey Theme] -->
+
+
+  <!-- [Brown Theme]  -->
+  <style name="AppTheme.Base.Brown" parent="AppTheme">
+    <item name="colorPrimary">@color/brown_primary</item>
+    <item name="colorPrimaryDark">@color/brown_primary_dark</item>
+    <item name="colorAccent">@color/brown_accent</item>
+    <item name="android:textColorPrimary">@color/brown_text_primary</item>
+    <item name="colorControlNormal">@color/brown_control_normal</item>
+    <item name="colorControlActivated">@color/brown_control_activated</item>
+    <item name="colorControlHighlight">@color/brown_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/brown_primary</item>
+    <item name="progress_circular_color">@color/brown_progress_circular_color</item>
+    <item name="button_float_background">@color/brown_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/brown_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.Brown" parent="AppTheme.Base.Brown" />
+  <!-- [/Brown Theme] -->
+
+
+  <!-- [Cyan Theme]  -->
+  <style name="AppTheme.Base.Cyan" parent="AppTheme">
+    <item name="colorPrimary">@color/cyan_primary</item>
+    <item name="colorPrimaryDark">@color/cyan_primary_dark</item>
+    <item name="colorAccent">@color/cyan_accent</item>
+    <item name="android:textColorPrimary">@color/cyan_text_primary</item>
+    <item name="colorControlNormal">@color/cyan_control_normal</item>
+    <item name="colorControlActivated">@color/cyan_control_activated</item>
+    <item name="colorControlHighlight">@color/cyan_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/cyan_primary</item>
+    <item name="progress_circular_color">@color/cyan_progress_circular_color</item>
+    <item name="button_float_background">@color/cyan_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/cyan_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.Cyan" parent="AppTheme.Base.Cyan" />
+  <!-- [/Cyan Theme] -->
+
+
+  <!-- [DeepPurple Theme]  -->
+  <style name="AppTheme.Base.DeepPurple" parent="AppTheme">
+    <item name="colorPrimary">@color/deep_purple_primary</item>
+    <item name="colorPrimaryDark">@color/deep_purple_primary_dark</item>
+    <item name="colorAccent">@color/deep_purple_accent</item>
+    <item name="android:textColorPrimary">@color/deep_purple_text_primary</item>
+    <item name="colorControlNormal">@color/deep_purple_control_normal</item>
+    <item name="colorControlActivated">@color/deep_purple_control_activated</item>
+    <item name="colorControlHighlight">@color/deep_purple_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/deep_purple_primary</item>
+    <item name="progress_circular_color">@color/deep_purple_progress_circular_color</item>
+    <item name="button_float_background">@color/deep_purple_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/deep_purple_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.DeepPurple" parent="AppTheme.Base.DeepPurple" />
+  <!-- [/DeepPurple Theme] -->
+
+  <!-- [Green Theme]  -->
+  <style name="AppTheme.Base.Green" parent="AppTheme">
+    <item name="colorPrimary">@color/green_primary</item>
+    <item name="colorPrimaryDark">@color/green_primary_dark</item>
+    <item name="colorAccent">@color/green_accent</item>
+    <item name="android:textColorPrimary">@color/green_text_primary</item>
+    <item name="colorControlNormal">@color/green_control_normal</item>
+    <item name="colorControlActivated">@color/green_control_activated</item>
+    <item name="colorControlHighlight">@color/green_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/green_primary</item>
+    <item name="progress_circular_color">@color/green_progress_circular_color</item>
+    <item name="button_float_background">@color/green_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/green_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.Green" parent="AppTheme.Base.Green" />
+  <!-- [/Green Theme] -->
+
+
+  <!-- [DeepOrange Theme]  -->
+  <style name="AppTheme.Base.DeepOrange" parent="AppTheme">
+    <item name="colorPrimary">@color/deep_orange_primary</item>
+    <item name="colorPrimaryDark">@color/deep_orange_primary_dark</item>
+    <item name="colorAccent">@color/deep_orange_accent</item>
+    <item name="android:textColorPrimary">@color/deep_orange_text_primary</item>
+    <item name="colorControlNormal">@color/deep_orange_control_normal</item>
+    <item name="colorControlActivated">@color/deep_orange_control_activated</item>
+    <item name="colorControlHighlight">@color/deep_orange_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/deep_orange_primary</item>
+    <item name="progress_circular_color">@color/deep_orange_progress_circular_color</item>
+    <item name="button_float_background">@color/deep_orange_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/deep_orange_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.DeepOrange" parent="AppTheme.Base.DeepOrange" />
+  <!-- [/DeepOrange Theme] -->
+
 
   <!-- Indigo Theme -->
   <style name="AppTheme.Base.Indigo" parent="AppTheme">
@@ -352,7 +528,198 @@
 
   </style>
 
-  <style name="AppTheme.Indigo" parent="AppTheme.Base.Indigo" />
+  <style name="AppTheme.Indigo" parent="AppTheme.Base.Indigo"/>
   <!-- Indigo Theme -->
+
+
+  <!-- [LightBlue Theme]  -->
+  <style name="AppTheme.Base.LightBlue" parent="AppTheme">
+    <item name="colorPrimary">@color/light_blue_primary</item>
+    <item name="colorPrimaryDark">@color/light_blue_primary_dark</item>
+    <item name="colorAccent">@color/light_blue_accent</item>
+    <item name="android:textColorPrimary">@color/light_blue_text_primary</item>
+    <item name="colorControlNormal">@color/light_blue_control_normal</item>
+    <item name="colorControlActivated">@color/light_blue_control_activated</item>
+    <item name="colorControlHighlight">@color/light_blue_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/light_blue_primary</item>
+    <item name="progress_circular_color">@color/light_blue_progress_circular_color</item>
+    <item name="button_float_background">@color/light_blue_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/light_blue_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.LightBlue" parent="AppTheme.Base.LightBlue" />
+  <!-- [/LightBlue Theme] -->
+
+  <!-- [LightGreen Theme]  -->
+  <style name="AppTheme.Base.LightGreen" parent="AppTheme">
+    <item name="colorPrimary">@color/light_green_primary</item>
+    <item name="colorPrimaryDark">@color/light_green_primary_dark</item>
+    <item name="colorAccent">@color/light_green_accent</item>
+    <item name="android:textColorPrimary">@color/light_green_text_primary</item>
+    <item name="colorControlNormal">@color/light_green_control_normal</item>
+    <item name="colorControlActivated">@color/light_green_control_activated</item>
+    <item name="colorControlHighlight">@color/light_green_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/light_green_primary</item>
+    <item name="progress_circular_color">@color/light_green_progress_circular_color</item>
+    <item name="button_float_background">@color/light_green_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/light_green_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.LightGreen" parent="AppTheme.Base.LightGreen" />
+  <!-- [/LightGreen Theme] -->
+
+  <!-- [Lime Theme]  -->
+  <style name="AppTheme.Base.Lime" parent="AppTheme">
+    <item name="colorPrimary">@color/lime_primary</item>
+    <item name="colorPrimaryDark">@color/lime_primary_dark</item>
+    <item name="colorAccent">@color/lime_accent</item>
+    <item name="android:textColorPrimary">@color/lime_text_primary</item>
+    <item name="colorControlNormal">@color/lime_control_normal</item>
+    <item name="colorControlActivated">@color/lime_control_activated</item>
+    <item name="colorControlHighlight">@color/lime_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/lime_primary</item>
+    <item name="progress_circular_color">@color/lime_progress_circular_color</item>
+    <item name="button_float_background">@color/lime_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/lime_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.Lime" parent="AppTheme.Base.Lime" />
+  <!-- [/Lime Theme] -->
+
+
+  <!-- [Orange Theme]  -->
+  <style name="AppTheme.Base.Orange" parent="AppTheme">
+    <item name="colorPrimary">@color/orange_primary</item>
+    <item name="colorPrimaryDark">@color/orange_primary_dark</item>
+    <item name="colorAccent">@color/orange_accent</item>
+    <item name="android:textColorPrimary">@color/orange_text_primary</item>
+    <item name="colorControlNormal">@color/orange_control_normal</item>
+    <item name="colorControlActivated">@color/orange_control_activated</item>
+    <item name="colorControlHighlight">@color/orange_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/orange_primary</item>
+    <item name="progress_circular_color">@color/orange_progress_circular_color</item>
+    <item name="button_float_background">@color/orange_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/orange_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.Orange" parent="AppTheme.Base.Orange" />
+  <!-- [/Orange Theme] -->
+
+  <!-- [Pink Theme]  -->
+  <style name="AppTheme.Base.Pink" parent="AppTheme">
+    <item name="colorPrimary">@color/pink_primary</item>
+    <item name="colorPrimaryDark">@color/pink_primary_dark</item>
+    <item name="colorAccent">@color/pink_accent</item>
+    <item name="android:textColorPrimary">@color/pink_text_primary</item>
+    <item name="colorControlNormal">@color/pink_control_normal</item>
+    <item name="colorControlActivated">@color/pink_control_activated</item>
+    <item name="colorControlHighlight">@color/pink_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/pink_primary</item>
+    <item name="progress_circular_color">@color/pink_progress_circular_color</item>
+    <item name="button_float_background">@color/pink_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/pink_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.Pink" parent="AppTheme.Base.Pink" />
+  <!-- [/Pink Theme] -->
+
+  <!-- [Purple Theme]  -->
+  <style name="AppTheme.Base.Purple" parent="AppTheme">
+    <item name="colorPrimary">@color/purple_primary</item>
+    <item name="colorPrimaryDark">@color/purple_primary_dark</item>
+    <item name="colorAccent">@color/purple_accent</item>
+    <item name="android:textColorPrimary">@color/purple_text_primary</item>
+    <item name="colorControlNormal">@color/purple_control_normal</item>
+    <item name="colorControlActivated">@color/purple_control_activated</item>
+    <item name="colorControlHighlight">@color/purple_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/purple_primary</item>
+    <item name="progress_circular_color">@color/purple_progress_circular_color</item>
+    <item name="button_float_background">@color/purple_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/purple_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.Purple" parent="AppTheme.Base.Purple" />
+  <!-- [/Purple Theme] -->
+
+  <!-- [Red Theme]  -->
+  <style name="AppTheme.Base.Red" parent="AppTheme">
+    <item name="colorPrimary">@color/red_primary</item>
+    <item name="colorPrimaryDark">@color/red_primary_dark</item>
+    <item name="colorAccent">@color/red_accent</item>
+    <item name="android:textColorPrimary">@color/red_text_primary</item>
+    <item name="colorControlNormal">@color/red_control_normal</item>
+    <item name="colorControlActivated">@color/red_control_activated</item>
+    <item name="colorControlHighlight">@color/red_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/red_primary</item>
+    <item name="progress_circular_color">@color/red_progress_circular_color</item>
+    <item name="button_float_background">@color/red_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/red_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.Red" parent="AppTheme.Base.Red" />
+  <!-- [/Red Theme] -->
+
+  <!-- [Teal Theme]  -->
+  <style name="AppTheme.Base.Teal" parent="AppTheme">
+    <item name="colorPrimary">@color/teal_primary</item>
+    <item name="colorPrimaryDark">@color/teal_primary_dark</item>
+    <item name="colorAccent">@color/teal_accent</item>
+    <item name="android:textColorPrimary">@color/teal_text_primary</item>
+    <item name="colorControlNormal">@color/teal_control_normal</item>
+    <item name="colorControlActivated">@color/teal_control_activated</item>
+    <item name="colorControlHighlight">@color/teal_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/teal_primary</item>
+    <item name="progress_circular_color">@color/teal_progress_circular_color</item>
+    <item name="button_float_background">@color/teal_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/teal_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.Teal" parent="AppTheme.Base.Teal" />
+  <!-- [/Teal Theme] -->
+
+  <!-- [Yellow Theme]  -->
+  <style name="AppTheme.Base.Yellow" parent="AppTheme">
+    <item name="colorPrimary">@color/yellow_primary</item>
+    <item name="colorPrimaryDark">@color/yellow_primary_dark</item>
+    <item name="colorAccent">@color/yellow_accent</item>
+    <item name="android:textColorPrimary">@color/yellow_text_primary</item>
+    <item name="colorControlNormal">@color/yellow_control_normal</item>
+    <item name="colorControlActivated">@color/yellow_control_activated</item>
+    <item name="colorControlHighlight">@color/yellow_control_highlight</item>
+
+    <!-- [Styles that applies to styles defined below]  -->
+    <item name="toolbar_background">@color/yellow_primary</item>
+    <item name="progress_circular_color">@color/yellow_progress_circular_color</item>
+    <item name="button_float_background">@color/yellow_button_float</item>
+    <item name="paired_device_signal_shape">@drawable/yellow_connectivity_shape</item>
+    <!-- [/Styles that applies to styles defined below] -->
+  </style>
+
+  <style name="AppTheme.Yellow" parent="AppTheme.Base.Yellow" />
+  <!-- [/Yellow Theme] -->
 
 </resources>

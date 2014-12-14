@@ -22,64 +22,62 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                       *
- *                                                                                                                           *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                        *
- *                                                                                                                           *
- * And the corresponding file at:                                                                                            *
- *                                                                                                                           *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/MainActivity.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                               *
+ *                                                                                                                                                   *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                *
+ *                                                                                                                                                   *
+ * And the corresponding file at:                                                                                                                    *
+ *                                                                                                                                                   *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/MainActivity.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.WindowManager;
+
+import java.util.List;
+
+import git.egatuts.nxtremotecontroller.activity.BaseActivity;
+import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 import git.egatuts.nxtremotecontroller.fragment.BaseFragment;
+import git.egatuts.nxtremotecontroller.fragment.BluetoothFragment;
 import git.egatuts.nxtremotecontroller.fragment.HomeFragment;
 import git.egatuts.nxtremotecontroller.fragment.ScanFragment;
 import git.egatuts.nxtremotecontroller.navigation.NavigationDrawerCallback;
 import git.egatuts.nxtremotecontroller.navigation.NavigationDrawerFragment;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
-import android.view.WindowManager;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.widget.Toast;
-
-import java.util.List;
-
-public class MainActivity extends ActionBarActivity implements NavigationDrawerCallback {
+public class MainActivity extends BaseActivity implements NavigationDrawerCallback {
 
   NavigationDrawerFragment drawer_fragment;
   BaseFragment fragmented_view;
   BaseFragment fragment_active = null;
-  FragmentManager fragment_manager;
-  Toolbar toolbar;
 
+  /*
+   * When the activity is first created.
+   */
   @Override
-  public void onCreate(Bundle savedInstanceState) {
+  public void onCreate (Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     super.setContentView(R.layout.main_layout);
-
-    getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
     toolbar = (Toolbar) super.findViewById(R.id.toolbar_element);
-    super.setSupportActionBar(toolbar);
-    super.getSupportActionBar().setHomeButtonEnabled(true);
-    super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    super.getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-    fragment_manager = getSupportFragmentManager();
+    this.setSupportToolbar();
     drawer_fragment = (NavigationDrawerFragment) fragment_manager.findFragmentById(R.id.drawer_fragment);
     drawer_fragment.setup(R.id.drawer_fragment, (DrawerLayout) super.findViewById(R.id.drawer_element), toolbar);
 
   }
 
-  public Fragment getActiveFragment() {
+  /*
+   * Returns the active/shown fragment.
+   */
+  public Fragment getActiveFragment () {
     List<Fragment> fragments = getSupportFragmentManager().getFragments();
     for (Fragment fragment : fragments) {
       if (fragment != null && fragment.isVisible()) {
@@ -89,33 +87,36 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     return null;
   }
 
+  /*
+   * When an item is selected on the navigation drawer.
+   */
   @Override
-  public void onNavigationDrawerItemSelected(int position) {
+  public void onNavigationDrawerItemSelected (int position) {
     BaseFragment fragmented_view = null;
     Intent intent = null;
 
     switch (position) {
       case 0:
         fragmented_view = new HomeFragment();
-        break;
+      break;
       case 1:
         fragmented_view = new ScanFragment();
-        break;
+      break;
       case 2:
         intent = new Intent(this, SettingsActivity.class);
-        break;
+      break;
       case 3:
         intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("https://github.com/Egatuts/nxt-remote-controller"));
-        break;
+      break;
       case 4:
         intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9VPAAPMYC2HEJ"));
-        break;
+      break;
       default:
-        break;
+      break;
     }
-
+    if (fragment_active != null && fragmented_view!= null && !bluetooth_utils.isEnabled()) return;
     if (fragmented_view != null) {
       if (fragment_active != null) {
         fragment_active.changeFragmentTo(fragmented_view, true);
@@ -124,13 +125,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
       }
       fragment_active = fragmented_view;
     } else if (intent != null) {
-      super.startActivity(intent);
       drawer_fragment.getActionBarDrawerToggle().onDrawerSlide(null, 0.0f);
+      super.startActivity(intent);
     }
   }
 
+  /*
+   * When the back button is pressed.
+   */
   @Override
-  public void onBackPressed() {
+  public void onBackPressed () {
     if (drawer_fragment.isDrawerOpened()) {
       drawer_fragment.closeDrawer();
     } else {
@@ -138,10 +142,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     }
   }
 
+  /*
+   * When the onCreate event has finished. Pretty useless but recommended on Google tutorial. It could be placed at the final of the onCreate.
+   */
   @Override
-  public void onPostCreate(Bundle savedInstanceState) {
-    super.onPostCreate(savedInstanceState);
+  public void onPostCreate (Bundle savedInstanceState) {
     drawer_fragment.getActionBarDrawerToggle().syncState();
+    super.onPostCreate(savedInstanceState);
   }
 
 }

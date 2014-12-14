@@ -22,47 +22,46 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                           *
- *                                                                                                                               *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                            *
- *                                                                                                                               *
- * And the corresponding file at:                                                                                                *
- *                                                                                                                               *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/SettingsActivity.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                   *
+ *                                                                                                                                                       *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                    *
+ *                                                                                                                                                       *
+ * And the corresponding file at:                                                                                                                        *
+ *                                                                                                                                                       *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/SettingsActivity.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
 
-public class SettingsActivity extends ActionBarActivity
-{
-  
+public class SettingsActivity extends ActionBarActivity {
+
   Toolbar toolbar;
-  
+
   @Override
-  public void onCreate (Bundle savedInstanceState)
-  {
+  public void onCreate (Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     super.setContentView(R.layout.preference_layout);
-    
-    getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-    
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
     toolbar = (Toolbar) super.findViewById(R.id.toolbar_element);
     super.setSupportActionBar(toolbar);
     super.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    
+
     toolbar.setNavigationOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
+      public void onClick (View v) {
         finish();
       }
     });
-    
+
   }
-  
+
 }

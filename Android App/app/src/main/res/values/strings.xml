@@ -21,13 +21,17 @@
     <!-- [bluetooth_enable.xml] -->
     <string name="bluetooth_message">Bluetooth disabled.</string>
     <string name="bluetooth_button">Enable</string>
-    <string name="bluetooth_enabling">Enabling bluetooth...</string>
-    <string name="bluetooth_disabling">Disabling bluetooth...</string>
+    <string name="bluetooth_enabling">Enabling bluetooth&#8230;</string>
+    <string name="bluetooth_disabling">Disabling bluetooth&#8230;</string>
     <!-- [/bluetooth_enable.xml] -->
 
 
     <!-- [scan_fragment.xml] -->
-    <string name="bluetooth_pairing">Pairing device...</string>
+    <string name="bluetooth_preparing_pairing">Preparing pairing process&#8230;</string>
+    <string name="bluetooth_pairing">Pairing device&#8230;</string>
+    <string name="bluetooth_paired">Paired device: %s</string>
+    <string name="bluetooth_failed_pairing">Failed pairing: %s</string>
+    <string name="bluetooth_already_paired">Device %s is already paired</string>
     <!-- [/scan_fragment.xml] -->
 
 
@@ -43,6 +47,20 @@
     <string name="preference_summary_address">The URL of the server handling the socket connection without the protocol scheme.</string>
     <string name="preference_dialog_address">Which is the location?</string>
     <string name="preference_value_address">localhost:8080</string>
+    <!-- [/preference_fragment.xml] -->
+
+
+    <!-- [preference_fragment.xml]  -->
+    <string name="preference_title_theme">Application theme</string>
+    <string name="preference_summary_theme">Sets the color theme to use in the whole application.</string>
+    <string name="preference_value_theme">R.style.AppTheme.Indigo</string>
+    <!-- [/preference_fragment.xml] -->
+
+
+    <!-- [preference_fragment.xml]  -->
+    <string name="preference_title_toast">Show status toast messages</string>
+    <string name="preference_summary_toast">Show pairing toast messages. It\'s recommended to enable this option unless your operative system generates them automatically.</string>
+    <string name="preference_value_toast">true</string>
     <!-- [/preference_fragment.xml] -->
 
 

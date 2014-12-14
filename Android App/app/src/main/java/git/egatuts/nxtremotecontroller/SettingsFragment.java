@@ -22,28 +22,26 @@
  * THE SOFTWARE.                                                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                           *
- *                                                                                                                               *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                            *
- *                                                                                                                               *
- * And the corresponding file at:                                                                                                *
- *                                                                                                                               *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/App/src/git/egatuts/nxtremotecontroller/SettingsFragment.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * You can find the entire project at:                                                                                                                   *
+ *                                                                                                                                                       *
+ *   https://github.com/Egatuts/nxt-remote-controller                                                                                                    *
+ *                                                                                                                                                       *
+ * And the corresponding file at:                                                                                                                        *
+ *                                                                                                                                                       *
+ *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/SettingsFragment.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
+import android.support.v4.preference.PreferenceFragment;
 
-public class SettingsFragment extends PreferenceFragment
-{
-  
+public class SettingsFragment extends PreferenceFragment {
+
   @Override
-  public void onCreate (Bundle savedInstanceState)
-  {
+  public void onCreate (Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     super.addPreferencesFromResource(R.layout.preference_fragment);
   }
-  
+
 }

@@ -21,13 +21,17 @@
   <!-- [bluetooth_enable.xml]  -->
   <string name="bluetooth_message">Bluetooth desactivat.</string>
   <string name="bluetooth_button">Activar</string>
-  <string name="bluetooth_enabling">Activant bluetooth...</string>
-  <string name="bluetooth_disabling">Desactivant bluetooth...</string>
+  <string name="bluetooth_enabling">Activant bluetooth&#8230;</string>
+  <string name="bluetooth_disabling">Desactivant bluetooth&#8230;</string>
   <!-- [/bluetooth_enable.xml] -->
 
 
   <!-- [scan_fragment.xml] -->
-  <string name="bluetooth_pairing">Emparellant dispositiu...</string>
+  <string name="bluetooth_preparing_pairing">Preparant emparellament&#8230;</string>
+  <string name="bluetooth_pairing">Emparellant dispositiu&#8230;</string>
+  <string name="bluetooth_paired">Dispositiu emparellat: %s</string>
+  <string name="bluetooth_failed_pairing">Emparellament erroni: %s</string>
+  <string name="bluetooth_already_paired">El dispositiu %s ja està emparellat</string>
   <!-- [/scan_fragment.xml] -->
   
   
@@ -43,6 +47,19 @@
   <string name="preference_summary_address">La URL del servidor que administra les conexions dels sockets, sense escriure el protocol.</string>
   <string name="preference_dialog_address">Quina és la adreça?</string>
   <string name="preference_value_address">localhost:8080</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_theme">Tema</string>
+  <string name="preference_summary_theme">Defineix el tema de colors que s\'usara en la totalitat de la aplicació.</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_toast">Mostrar missatges d\'estat</string>
+  <string name="preference_summary_toast">Mostra els missatges d\'alerta d\'estat d\'emparellament. Es recommana activar aquesta opció, a no ser que el sistema operatiu les generi automaticament.</string>
+  <string name="preference_value_toast">true</string>
   <!-- [/preference_fragment.xml] -->
   
   

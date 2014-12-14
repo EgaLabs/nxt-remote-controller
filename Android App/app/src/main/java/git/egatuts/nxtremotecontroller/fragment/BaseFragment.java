@@ -123,7 +123,6 @@ public abstract class BaseFragment extends Fragment {
    * Creates the receiver and the listener if are null.
    */
   public void initListenersAndReceivers () {
-    final BaseFragment self = this;
     if (progress_dialog == null) progress_dialog = new IndeterminateProgressDialog(getActivity());
     if (progress_dialog_on_dismiss == null)
       progress_dialog_on_dismiss = new DialogInterface.OnDismissListener() {

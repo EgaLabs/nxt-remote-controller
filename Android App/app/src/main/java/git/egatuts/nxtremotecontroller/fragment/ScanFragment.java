@@ -39,6 +39,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -96,7 +97,7 @@ public class ScanFragment extends BaseFragment {
   private AnimationSet animation_show;
   private RotateAnimation rotate;
 
-  private boolean isActive = false;
+  private boolean isPairing = false;
 
   public ScanFragment () {
   }
@@ -139,14 +140,39 @@ public class ScanFragment extends BaseFragment {
     pairing_listener = new PairingListener() {
       @Override
       public void onBondStateChange (Context context, Intent intent) {
+        if (!bluetooth_utils.isEnabled()) return;
         int[] states = PairingReceiver.getIntentExtraData(intent);
-        int state = states[0];
-        if (state == BluetoothDevice.BOND_BONDING) {
-          Toast.makeText(getActivity(), "Emparejando", Toast.LENGTH_SHORT).show();
-        } else if (state == BluetoothDevice.BOND_BONDED) {
-          Toast.makeText(getActivity(), "Emparejado", Toast.LENGTH_SHORT).show();
-        } else if (state == BluetoothDevice.BOND_NONE) {
-          Toast.makeText(getActivity(), "Fallooooo", Toast.LENGTH_SHORT).show();
+        BluetoothDevice bluetooth_device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+
+        /*
+         * When starts the bonding process.
+         */
+        if (states[0] == BluetoothDevice.BOND_BONDING && states[1] == BluetoothDevice.BOND_NONE) {
+          if (!progress_dialog.isShowing()) progress_dialog.show();
+          progress_dialog.setDoFirstAnimation(true);
+          progress_dialog.setText(R.string.bluetooth_pairing);
+
+        /*
+         * When finishes the bonding process successful.
+         */
+        } else if (states[0] == BluetoothDevice.BOND_BONDED && states[1] == BluetoothDevice.BOND_BONDING) {
+          isPairing = false;
+          if (progress_dialog.isShowing()) progress_dialog.dismiss();
+          if (preference_editor.getBoolean("preference_show_toast", true)) {
+            Toast.makeText(getActivity(), String.format(getResources().getString(R.string.bluetooth_paired), bluetooth_device.getName()), Toast.LENGTH_SHORT).show();
+          }
+          pairing_receiver.unregisterReceiver();
+
+        /*
+         * When fails the bonding process.
+         */
+        } else if (states[0] == BluetoothDevice.BOND_NONE && states[1] == BluetoothDevice.BOND_BONDING) {
+          isPairing = false;
+          if (progress_dialog.isShowing()) progress_dialog.dismiss();
+          if (preference_editor.getBoolean("preference_show_toast", true)) {
+            Toast.makeText(getActivity(), String.format(getResources().getString(R.string.bluetooth_failed_pairing), bluetooth_device.getName()), Toast.LENGTH_SHORT).show();
+          }
+          pairing_receiver.unregisterReceiver();
         }
       }
     };
@@ -159,6 +185,7 @@ public class ScanFragment extends BaseFragment {
 
       @Override
       public void onDiscoveryFinish (Context context, Intent intent) {
+        discovery_receiver.unregisterReceiver();
         lost_devices = paired_devices_adapter.diff(discovered_devices);
 
         /*
@@ -177,7 +204,6 @@ public class ScanFragment extends BaseFragment {
         discovered_devices.clear();
         lost_devices.clear();
         changeIconTo(R.drawable.ic_discover);
-        if (!isActive) discovery_receiver.unregisterReceiver();
       }
 
       @Override
@@ -317,6 +343,7 @@ public class ScanFragment extends BaseFragment {
       @Override
       public void onAnimationEnd (Animation animation) {
         button_float.setIconDrawable(drawable);
+        button_float.setIconDrawable(drawable);
         button_float.getIcon().startAnimation(animation_show);
       }
 
@@ -381,16 +408,28 @@ public class ScanFragment extends BaseFragment {
     recycler_view.setItemAnimator(new DefaultItemAnimator());
     recycler_view.addOnItemTouchListener(new PairedDeviceItemClickListener(getActivity(), new PairedDeviceItemClickListener.OnItemClickListener() {
       @Override
-      public void onItemClick (View view, int position) {
+      public void onItemClick (View view, final int position) {
+        if (isPairing) return;
+        isPairing = true;
         pairing_receiver.registerReceiver();
-        progress_dialog = new IndeterminateProgressDialog(getActivity());
-        progress_dialog.setCancelable(false);
-        progress_dialog.show();
+        final PairedDevice pairing_device = paired_devices_adapter.get(position);
+        if (!progress_dialog.isShowing()) progress_dialog.show();
         progress_dialog.setDoFirstAnimation(true);
-        progress_dialog.setText(R.string.bluetooth_pairing);
-
-        bluetooth_utils.pair(paired_devices_adapter.get(position));
-
+        progress_dialog.setText(R.string.bluetooth_preparing_pairing);
+        for (PairedDevice device : bluetooth_utils.getDevices()) {
+          if (device.getAddress().equalsIgnoreCase(pairing_device.getAddress())) {
+            isPairing = false;
+            new Handler().postDelayed(new Runnable () {
+              @Override
+              public void run () {
+                Toast.makeText(getActivity(), String.format(getResources().getString(R.string.bluetooth_already_paired), pairing_device.getName()), Toast.LENGTH_SHORT).show();
+                if (progress_dialog.isShowing()) progress_dialog.dismiss();
+              }
+            }, 500);
+            return;
+          }
+        }
+        bluetooth_utils.pair(pairing_device);
       }
     }));
 
@@ -398,6 +437,7 @@ public class ScanFragment extends BaseFragment {
     button_float.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick (View v) {
+        discovery_receiver.registerReceiver();
         startDiscovery();
       }
     });
@@ -409,33 +449,10 @@ public class ScanFragment extends BaseFragment {
     super.onAttach(activity);
     this.initializeComponents(activity);
     this.listenForBluetoothChanges();
+    progress_dialog = new IndeterminateProgressDialog(getActivity());
+    progress_dialog.setCancelable(false);
     discovery_receiver.setListener(discovery_listener);
     pairing_receiver.setListener(pairing_listener);
-  }
-
-  @Override
-  public void onStart () {
-    super.onStart();
-    isActive = true;
-  }
-
-  @Override
-  public void onResume () {
-    super.onResume();
-    isActive = true;
-    discovery_receiver.registerReceiver();
-  }
-
-  @Override
-  public void onPause () {
-    super.onPause();
-    isActive = false;
-  }
-
-  @Override
-  public void onStop () {
-    super.onStop();
-    isActive = false;
   }
 
   /*
@@ -446,6 +463,7 @@ public class ScanFragment extends BaseFragment {
     this.cancelDiscovery();
     this.unlistenForBluetoothChanges();
     discovery_receiver.unregisterReceiver();
+    pairing_receiver.unregisterReceiver();
     super.onDetach();
   }
 

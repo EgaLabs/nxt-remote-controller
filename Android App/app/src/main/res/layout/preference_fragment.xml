@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:theme="@style/AppTheme.Indigo">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
   <PreferenceCategory android:title="@string/settings_category_server">
     <EditTextPreference
@@ -13,6 +11,18 @@
   </PreferenceCategory>
 
   <PreferenceCategory android:title="@string/settings_category_visual">
+    <ListPreference
+        android:key="preference_theme"
+        android:title="@string/preference_title_theme"
+        android:summary="@string/preference_summary_theme"
+        android:defaultValue="@string/preference_value_theme"
+        android:entries="@array/theme_names"
+        android:entryValues="@array/theme_values" />
+    <CheckBoxPreference
+        android:key="preference_show_toast"
+        android:title="@string/preference_title_toast"
+        android:summary="@string/preference_summary_toast"
+        android:defaultValue="true" />
   </PreferenceCategory>
 
   <PreferenceCategory android:title="@string/settings_category_misc">

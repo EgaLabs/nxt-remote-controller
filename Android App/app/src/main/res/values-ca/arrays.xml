@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <!-- [preference_fragment.xml]  -->
+  <string-array name="theme_names">
+    <item>Ambre</item>
+    <item>Blau</item>
+    <item>Blau grisenc</item>
+    <item>Marró</item>
+    <item>Cian</item>
+    <item>Taronja profund</item>
+    <item>Lila profund</item>
+    <item>Verd</item>
+    <item>Indi</item>
+    <item>Blau clar</item>
+    <item>Verd clar</item>
+    <item>Llima</item>
+    <item>Taronja</item>
+    <item>Rosa</item>
+    <item>Lila</item>
+    <item>Vermell</item>
+    <item>Verd blavós (Turquesa)</item>
+    <item>Groc</item>
+  </string-array>
+  <!-- [/preference_fragment.xml] -->
+
+</resources>
