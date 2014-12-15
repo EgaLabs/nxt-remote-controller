@@ -33,6 +33,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -42,9 +43,15 @@ import git.egatuts.nxtremotecontroller.activity.BaseActivity;
 
 public class SettingsActivity extends BaseActivity {
 
+  public void goBack (Activity activity, Class<?> clas) {
+    Intent intent = new Intent(activity, clas);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+    activity.startActivity(intent);
+    super.overridePendingTransition(R.anim.transition_back_in, R.anim.transition_back_out);
+  }
+
   @Override
   public void onCreate (Bundle savedInstanceState) {
-    final BaseActivity self = this;
     super.onCreate(savedInstanceState);
     super.setContentView(R.layout.preference_layout);
     toolbar = (Toolbar) super.findViewById(R.id.toolbar_element);
@@ -52,12 +59,15 @@ public class SettingsActivity extends BaseActivity {
     toolbar.setNavigationOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick (View v) {
-        Intent intent = new Intent(self, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        self.startActivity(intent);
-        self.finish();
+        goBack(SettingsActivity.this, MainActivity.class);
       }
     });
+  }
+
+  @Override
+  public void onBackPressed () {
+    goBack(this, MainActivity.class);
+    super.onBackPressed();
   }
 
 }

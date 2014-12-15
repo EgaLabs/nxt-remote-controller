@@ -40,19 +40,15 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.WindowManager;
+import android.view.KeyEvent;
 import android.widget.Toast;
 
 import java.util.List;
 
 import git.egatuts.nxtremotecontroller.activity.BaseActivity;
-import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 import git.egatuts.nxtremotecontroller.fragment.BaseFragment;
-import git.egatuts.nxtremotecontroller.fragment.BluetoothFragment;
 import git.egatuts.nxtremotecontroller.fragment.HomeFragment;
 import git.egatuts.nxtremotecontroller.fragment.ScanFragment;
 import git.egatuts.nxtremotecontroller.navigation.NavigationDrawerCallback;
@@ -64,6 +60,9 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
   BaseFragment fragmented_view;
   BaseFragment fragment_active = null;
   BroadcastReceiver killer_receiver;
+  Intent intent;
+  int trans_in = 0;
+  int trans_out = 0;
 
   /*
    * When the activity is first created.
@@ -88,6 +87,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
       }
     };
     this.registerReceiver(killer_receiver, new IntentFilter("nxtremotecontroller_restart"));
+
   }
 
   /*
@@ -108,8 +108,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
    */
   @Override
   public void onNavigationDrawerItemSelected (int position) {
-    BaseFragment fragmented_view = null;
-    Intent intent = null;
+    fragmented_view = null;
+    intent = null;
 
     switch (position) {
       case 0:
@@ -120,6 +120,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
       break;
       case 2:
         intent = new Intent(this, SettingsActivity.class);
+        trans_out = R.anim.transition_out;
+        trans_in = R.anim.transition_in;
       break;
       case 3:
         intent = new Intent(Intent.ACTION_VIEW);
@@ -140,12 +142,27 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragmented_view).commit();
       }
       fragment_active = fragmented_view;
-    } else if (intent != null) {
-      drawer_fragment.getActionBarDrawerToggle().onDrawerSlide(null, 0.0f);
-      super.startActivity(intent);
     }
   }
 
+  /*
+   * When drawer is closed and the animation has finished.
+   * Used to avoid UI bugs like don't letting the drawer close completely.
+   */
+  @Override
+  public void onCloseDrawer () {
+    if (intent == null) return;
+    super.startActivity(intent);
+    if (trans_in != 0 || trans_out != 0) {
+      super.overridePendingTransition(trans_in, trans_out);
+    }
+  }
+
+  @Override public void onOpenDrawer () {}
+
+  /*
+   * When the activity is destroyed we no longer want to listen for the killer_receiver.
+   */
   @Override
   public void onDestroy () {
     this.unregisterReceiver(killer_receiver);
@@ -162,6 +179,19 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
     } else {
       super.onBackPressed();
     }
+  }
+
+  /*
+   * When the physical menu options button is pressed.
+   */
+  @Override
+  public boolean onKeyDown (int keyCode, KeyEvent event) {
+    if (keyCode == KeyEvent.KEYCODE_MENU) {
+      Toast.makeText(this, "menuuu", Toast.LENGTH_SHORT).show();
+      drawer_fragment.openDrawer();
+      return true;
+    }
+    return super.onKeyDown(keyCode, event);
   }
 
   /*

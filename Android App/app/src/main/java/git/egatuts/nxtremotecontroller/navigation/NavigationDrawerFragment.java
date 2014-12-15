@@ -112,7 +112,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   }
 
   /*
-   * Drawer opener and closer.
+   * Drawer opener, closer and checker.
    */
   public void openDrawer () {
     drawer_layout.openDrawer(fragment_container_view);
@@ -143,6 +143,9 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   public void onNavigationDrawerItemSelected (int position) {
     selectItem(position);
   }
+
+  @Override public void onCloseDrawer () {}
+  @Override public void onOpenDrawer () {}
 
   /*
    * onConfigurationChanged and onSaveInstanceState methods.
@@ -195,9 +198,10 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     drawer_toggle = new ActionBarDrawerToggle(getActivity(), drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close) {
       @Override
-      public void onDrawerClosed (View drawerView) {
+        public void onDrawerClosed (View drawerView) {
         super.onDrawerClosed(drawerView);
         if (!isAdded()) return;
+        if (custom_callback != null) custom_callback.onCloseDrawer();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
           getActivity().invalidateOptionsMenu();
       }
@@ -206,6 +210,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
       public void onDrawerOpened (View drawerView) {
         super.onDrawerOpened(drawerView);
         if (!isAdded()) return;
+        if (custom_callback != null) custom_callback.onOpenDrawer();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
           getActivity().invalidateOptionsMenu();
       }

@@ -37,4 +37,8 @@ public interface NavigationDrawerCallback {
 
   public void onNavigationDrawerItemSelected (int position);
 
+  public void onOpenDrawer();
+
+  public void onCloseDrawer();
+
 }
