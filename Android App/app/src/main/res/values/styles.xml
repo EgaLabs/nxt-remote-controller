@@ -38,12 +38,12 @@
   <!-- [Styles for main_layout.xml]  -->
 
   <!-- [include]  -->
-  <style name="include_style" parent="wrap"></style>
+  <style name="include_style" parent="wrap" />
   <!-- [/include] -->
 
 
   <!-- [DrawerLayout]  -->
-  <style name="drawer_style" parent="match"></style>
+  <style name="drawer_style" parent="match" />
   <!-- [/DrawerLayout] -->
 
 
@@ -112,7 +112,7 @@
     <item name="android:gravity">center_vertical</item>
   </style>
 
-  <style name="drawer_item_style" parent="drawer_item_style.base"></style>
+  <style name="drawer_item_style" parent="drawer_item_style.base" />
   <!-- [/TextView] -->
 
   <!-- [/Styles for drawer_item_row.xml] -->

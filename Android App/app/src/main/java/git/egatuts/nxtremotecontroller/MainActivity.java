@@ -153,6 +153,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
   public void onCloseDrawer () {
     if (intent == null) return;
     super.startActivity(intent);
+    super.finish();
     if (trans_in != 0 || trans_out != 0) {
       super.overridePendingTransition(trans_in, trans_out);
     }
@@ -187,7 +188,6 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
   @Override
   public boolean onKeyDown (int keyCode, KeyEvent event) {
     if (keyCode == KeyEvent.KEYCODE_MENU) {
-      Toast.makeText(this, "menuuu", Toast.LENGTH_SHORT).show();
       drawer_fragment.openDrawer();
       return true;
     }

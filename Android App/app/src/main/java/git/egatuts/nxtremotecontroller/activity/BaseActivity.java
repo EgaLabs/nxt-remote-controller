@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
@@ -32,12 +33,6 @@ public class BaseActivity extends ActionBarActivity {
     preference_editor = preference_utils.getEditor();
     preference_editor.edit();
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-    this.setActiveTheme(this.getActiveTheme());
-  }
-
-  @Override
-  public void onStart () {
-    super.onStart();
     this.setActiveTheme(this.getActiveTheme());
   }
 
