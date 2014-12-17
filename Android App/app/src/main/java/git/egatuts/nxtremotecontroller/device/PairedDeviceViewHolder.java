@@ -37,6 +37,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.andexert.library.RippleView;
+
 import git.egatuts.nxtremotecontroller.R;
 
 public class PairedDeviceViewHolder extends RecyclerView.ViewHolder {
@@ -44,12 +46,14 @@ public class PairedDeviceViewHolder extends RecyclerView.ViewHolder {
   public TextView connection;
   public TextView name;
   public TextView address;
+  public RippleView ripple_view;
 
   /*
    * Constructor.
    */
   public PairedDeviceViewHolder (View itemView) {
     super(itemView);
+    ripple_view = (RippleView) itemView.findViewById(R.id.ripple_view);
     connection = (TextView) itemView.findViewById(R.id.paired_device_connection);
     name = (TextView) itemView.findViewById(R.id.paired_device_name);
     address = (TextView) itemView.findViewById(R.id.paired_device_address);

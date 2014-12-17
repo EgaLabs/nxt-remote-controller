@@ -1,83 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">NXT Remote Controller</string>
+  <string name="app_name">NXT Remote Controller</string>
 
-    <!-- [NavigationDrawerFragment.java] -->
-    <string name="home_drawer_label">Home</string>
-    <string name="scan_drawer_label">Scan</string>
-    <string name="settings_drawer_label">Settings</string>
-    <string name="help_drawer_label">Help</string>
-    <string name="donations_drawer_label">Donations</string>
-    <!-- [/NavigationDrawerFragment.java] -->
-
-
-    <!-- [NavigationDrawerFragment.java] -->
-    <string name="drawer_open">Open navigation menu</string>
-    <string name="drawer_close">Close navigation menu</string>
-    <!-- [/NavigationDrawerFragment.java] -->
+  <!-- [NavigationDrawerFragment.java] -->
+  <string name="home_drawer_label">Home</string>
+  <string name="scan_drawer_label">Scan</string>
+  <string name="settings_drawer_label">Settings</string>
+  <string name="help_drawer_label">Help</string>
+  <string name="donations_drawer_label">Donations</string>
+  <!-- [/NavigationDrawerFragment.java] -->
 
 
-    <!-- [bluetooth_enable.xml] -->
-    <string name="bluetooth_message">Bluetooth disabled.</string>
-    <string name="bluetooth_button">Enable</string>
-    <string name="bluetooth_enabling">Enabling bluetooth&#8230;</string>
-    <string name="bluetooth_disabling">Disabling bluetooth&#8230;</string>
-    <!-- [/bluetooth_enable.xml] -->
+  <!-- [NavigationDrawerFragment.java] -->
+  <string name="drawer_open">Open navigation menu</string>
+  <string name="drawer_close">Close navigation menu</string>
+  <!-- [/NavigationDrawerFragment.java] -->
 
 
-    <!-- [scan_fragment.xml] -->
-    <string name="bluetooth_preparing_pairing">Preparing pairing process&#8230;</string>
-    <string name="bluetooth_pairing">Pairing device&#8230;</string>
-    <string name="bluetooth_paired">Paired device: %s</string>
-    <string name="bluetooth_failed_pairing">Failed pairing: %s</string>
-    <string name="bluetooth_already_paired">Device %s is already paired</string>
-    <!-- [/scan_fragment.xml] -->
+  <!-- [bluetooth_enable.xml] -->
+  <string name="bluetooth_message">Bluetooth disabled.</string>
+  <string name="bluetooth_button">Enable</string>
+  <string name="bluetooth_enabling">Enabling bluetooth&#8230;</string>
+  <string name="bluetooth_disabling">Disabling bluetooth&#8230;</string>
+  <!-- [/bluetooth_enable.xml] -->
 
 
-    <!-- [preference_fragment.xml] -->
-    <string name="settings_category_server">Connection settings</string>
-    <string name="settings_category_visual">Visual settings</string>
-    <string name="settings_category_misc">Miscellaneous</string>
-    <!-- [/preference_fragment.xml] -->
+  <!-- [scan_fragment.xml] -->
+  <string name="bluetooth_preparing_pairing">Preparing pairing process&#8230;</string>
+  <string name="bluetooth_pairing">Pairing device&#8230;</string>
+  <string name="bluetooth_paired">Paired device: %s</string>
+  <string name="bluetooth_failed_pairing">Failed pairing: %s</string>
+  <string name="bluetooth_already_paired">Device %s is already paired</string>
+  <!-- [/scan_fragment.xml] -->
 
 
-    <!-- [preference_fragment.xml] -->
-    <string name="preference_title_address">Server address</string>
-    <string name="preference_summary_address">The URL of the server handling the socket connection without the protocol scheme.</string>
-    <string name="preference_dialog_address">Which is the location?</string>
-    <string name="preference_value_address">localhost:8080</string>
-    <!-- [/preference_fragment.xml] -->
+  <!-- [HomeFragment.java]  -->
+  <string name="device_type_toy_title">Unknown device type.</string>
+  <string name="device_type_toy_message">The device %s is not paired as a bluetooth toy device.</string>
+  <string name="device_type_robot_title">Unknown device type.</string>
+  <string name="device_type_robot_message">The device %s is not paired as a bluetooth robot device. Do you want to continue anyway?</string>
+  <!-- [/HomeFragment.java] -->
 
 
-    <!-- [preference_fragment.xml]  -->
-    <string name="preference_title_theme">Application theme</string>
-    <string name="preference_summary_theme">Sets the color theme to use in the whole application.</string>
-    <string name="preference_value_theme">R.style.AppTheme.Indigo</string>
-    <!-- [/preference_fragment.xml] -->
+  <!-- [ControllerActivity.java]  -->
+  <string name="controller_window_title">"Device: "</string>
+  <!-- [/ControllerActivity.java] -->
 
 
-    <!-- [preference_fragment.xml]  -->
-    <string name="preference_title_toast">Show status toast messages</string>
-    <string name="preference_summary_toast">Show pairing toast messages. It\'s recommended to enable this option unless your operative system generates them automatically.</string>
-    <string name="preference_value_toast">true</string>
-    <!-- [/preference_fragment.xml] -->
+  <!-- [preference_fragment.xml] -->
+  <string name="settings_category_server">Connection settings</string>
+  <string name="settings_category_visual">Visual settings</string>
+  <string name="settings_category_misc">Miscellaneous</string>
+  <!-- [/preference_fragment.xml] -->
 
 
-    <!-- [preference_fragment.xml] -->
-    <string name="preference_title_min_signal">Minimum signal</string>
-    <string name="preference_summary_min_signal">Minimum registered strength signal used to calculate the percentage. The lower the value the worse. Default value is -60dBm.</string>
-    <string name="preference_dialog_min_signal">Which is the minimum value?</string>
-    <string name="preference_value_min_signal">0</string>
-    <!-- [/preference_fragment.xml] -->
+  <!-- [preference_fragment.xml] -->
+  <string name="preference_title_address">Server address</string>
+  <string name="preference_summary_address">The URL of the server handling the socket connection without the protocol scheme.</string>
+  <string name="preference_dialog_address">Which is the location?</string>
+  <string name="preference_value_address">localhost:8080</string>
+  <!-- [/preference_fragment.xml] -->
 
 
-    <!-- [preference_fragment.xml] -->
-    <string name="preference_title_max_signal">Maximum signal</string>
-    <string name="preference_summary_max_signal">Maximum registered strength signal used to calculate the percentage. The higher the value the better. Default value is -60dBm.</string>
-    <string name="preference_dialog_max_signal">Which is the maximum value?</string>
-    <string name="preference_value_max_signal">-100</string>
-    <!-- [/preference_fragment.xml] -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_theme">Application theme</string>
+  <string name="preference_summary_theme">Sets the color theme to use in the whole application.</string>
+  <string name="preference_value_theme">R.style.AppTheme.Indigo</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_toast">Show status toast messages</string>
+  <string name="preference_summary_toast">Show pairing toast messages. It\'s recommended to enable this option unless your operative system generates them automatically.</string>
+  <string name="preference_value_toast">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml] -->
+  <string name="preference_title_min_signal">Minimum signal</string>
+  <string name="preference_summary_min_signal">Minimum registered strength signal used to calculate the percentage. The lower the value the worse. Default value is -60dBm.</string>
+  <string name="preference_dialog_min_signal">Which is the minimum value?</string>
+  <string name="preference_value_min_signal">0</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml] -->
+  <string name="preference_title_max_signal">Maximum signal</string>
+  <string name="preference_summary_max_signal">Maximum registered strength signal used to calculate the percentage. The higher the value the better. Default value is -60dBm.</string>
+  <string name="preference_dialog_max_signal">Which is the maximum value?</string>
+  <string name="preference_value_max_signal">-100</string>
+  <!-- [/preference_fragment.xml] -->
 
 </resources>

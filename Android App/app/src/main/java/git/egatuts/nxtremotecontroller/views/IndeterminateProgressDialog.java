@@ -35,6 +35,7 @@ package git.egatuts.nxtremotecontroller.views;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.widget.TextView;
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
@@ -71,6 +72,10 @@ public class IndeterminateProgressDialog extends ProgressDialog {
 
   public void setText (String text) {
     ((TextView) findViewById(R.id.text_view)).setText(text);
+  }
+
+  public void setColor (int color) {
+    this.findViewById(R.id.progress_bar).setBackgroundColor(color);
   }
 
 }

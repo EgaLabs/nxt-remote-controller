@@ -48,7 +48,7 @@ public class SettingsActivity extends BaseActivity {
     intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
     activity.startActivity(intent);
     activity.finish();
-    super.overridePendingTransition(R.anim.transition_back_in, R.anim.transition_back_out);
+    super.overridePendingTransition(R.anim.settings_transition_back_in, R.anim.settings_transition_back_out);
   }
 
   @Override

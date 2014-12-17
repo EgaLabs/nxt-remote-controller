@@ -43,7 +43,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -120,8 +119,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
       break;
       case 2:
         intent = new Intent(this, SettingsActivity.class);
-        trans_out = R.anim.transition_out;
-        trans_in = R.anim.transition_in;
+        trans_out = R.anim.settings_transition_out;
+        trans_in = R.anim.settings_transition_in;
       break;
       case 3:
         intent = new Intent(Intent.ACTION_VIEW);

@@ -102,8 +102,8 @@
   <color name="deep_orange_control_normal">#FF5722</color>
   <color name="deep_orange_control_activated">#3A1004</color>
   <color name="deep_orange_control_highlight">#3F3A1004</color>
-  <color name="deep_orange_progress_circular_color">#FF5722</color>
-  <color name="deep_orange_button_float">#FF8A65</color>
+  <color name="deep_orange_progress_circular_color">#D84315</color>
+  <color name="deep_orange_button_float">#E64A19</color>
   <color name="deep_orange_drawer_arrow_color">#FFFFFF</color>
   <color name="deep_orange_toolbar_color">#FFFFFF</color>
 

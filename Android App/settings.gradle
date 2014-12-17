@@ -1,2 +1,1 @@
-include ':app', ':android-support-v4-preferencefragment'
-include ':MaterialDesign'
+include ':app', ':android-support-v4-preferencefragment', ':MaterialDesign', ':RippleEffect'

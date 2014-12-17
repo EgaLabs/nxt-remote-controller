@@ -34,7 +34,9 @@
 package git.egatuts.nxtremotecontroller.device;
 
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +48,7 @@ import git.egatuts.nxtremotecontroller.R;
 public class PairedDeviceAdapter extends RecyclerView.Adapter<PairedDeviceViewHolder> {
 
   private ArrayList<PairedDevice> paired_devices;
+  private Context context;
   ArrayList<PairedDevice> differences;
   PairedDevice device;
   boolean not_exists;
@@ -81,6 +84,9 @@ public class PairedDeviceAdapter extends RecyclerView.Adapter<PairedDeviceViewHo
   @Override
   public void onBindViewHolder (PairedDeviceViewHolder viewHolder, int index) {
     device = paired_devices.get(index);
+    TypedValue typed_value = new TypedValue();
+    context.getTheme().resolveAttribute(R.attr.button_float_background, typed_value, true);
+    viewHolder.ripple_view.setRippleColor(typed_value.data);
     viewHolder.connection.setText(Integer.toString(device.getConnectivity()));
     viewHolder.name.setText(device.getName());
     viewHolder.address.setText(device.getAddress());
@@ -148,6 +154,10 @@ public class PairedDeviceAdapter extends RecyclerView.Adapter<PairedDeviceViewHo
 
   public int exists (BluetoothDevice device) {
     return this.exists(device.getAddress());
+  }
+
+  public void setContext (Context context) {
+    this.context = context;
   }
 
 }

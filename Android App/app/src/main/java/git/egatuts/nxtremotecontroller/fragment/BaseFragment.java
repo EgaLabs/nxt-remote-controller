@@ -38,10 +38,12 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.TypedValue;
 
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
@@ -167,6 +169,9 @@ public abstract class BaseFragment extends Fragment {
             show_date = System.currentTimeMillis();
             if (!progress_dialog.isShowing()) progress_dialog.show();
             progress_dialog.setDoFirstAnimation(false);
+            TypedValue typed_value = new TypedValue();
+            getActivity().getTheme().resolveAttribute(R.attr.button_float_background, typed_value, true);
+            progress_dialog.setColor(typed_value.data);
             progress_dialog.setText(resource_text);
           }
           if (hasToChange != 0) {

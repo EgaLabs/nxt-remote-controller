@@ -345,7 +345,6 @@ public class ScanFragment extends BaseFragment {
       @Override
       public void onAnimationEnd (Animation animation) {
         button_float.setIconDrawable(drawable);
-        button_float.setIconDrawable(drawable);
         button_float.getIcon().startAnimation(animation_show);
       }
 
@@ -396,6 +395,7 @@ public class ScanFragment extends BaseFragment {
   @Override
   public View onCreateView (LayoutInflater inflater, ViewGroup parent_container, Bundle savedInstanceState) {
     paired_devices_adapter = new PairedDeviceAdapter(new ArrayList<PairedDevice>(0));
+    paired_devices_adapter.setContext(getActivity());
 
     view = inflater.inflate(R.layout.scan_fragment, parent_container, false);
     linear_layout_manager = new LinearLayoutManager(parent_container.getContext());

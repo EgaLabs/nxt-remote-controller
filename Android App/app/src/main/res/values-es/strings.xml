@@ -33,6 +33,19 @@
   <string name="bluetooth_preparing_pairing">Preparando proceso de emparejado&#8230;</string>
   <string name="bluetooth_pairing">Emparejando dispositivo&#8230;</string>
   <!-- [/scan_fragment.xml] -->
+
+
+  <!-- [home_fragment.xml]  -->
+  <string name="device_type_toy_title">Tipo de dispositivo desconocido</string>
+  <string name="device_type_toy_message">El dispositivo %s no se identifica como un juguete.</string>
+  <string name="device_type_robot_title">Tipo de dispositivo desconocido</string>
+  <string name="device_type_robot_message">El dispositivo %s no se identifica como un robot. ¿Quieres continuar de todos modos?</string>
+  <!-- [/home_fragment.xml] -->
+
+
+  <!-- [ControllerActivity.java]  -->
+  <string name="controller_window_title">"Dispositivo: "</string>
+  <!-- [/ControllerActivity.java] -->
   
   
   <!-- [preference_fragment.xml]  -->

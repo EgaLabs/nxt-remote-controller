@@ -71,8 +71,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     if (key.equals("preference_theme")) {
       Intent intent = new Intent(activity, activity.getClass());
       intent.putExtra("restarted", true);
-      activity.finish();
       activity.startActivity(intent);
+      activity.finish();
     }
   }
 

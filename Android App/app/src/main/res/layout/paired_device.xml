@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <com.andexert.library.RippleView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/device_ripple_style">
+    android:id="@+id/ripple_view"
+    style="@style/device_ripple_style"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
   <LinearLayout style="@style/device_layout_style">
 
     <TextView
         android:id="@+id/paired_device_connection"
-        style="@style/device_signal_style" />
+        style="@style/device_signal_style"/>
 
     <LinearLayout style="@style/device_info_style">
 
       <TextView
           android:id="@+id/paired_device_name"
-          style="@style/device_name_style" />
+          style="@style/device_name_style"/>
 
       <TextView
           android:id="@+id/paired_device_address"
-          style="@style/device_address_style" />
+          style="@style/device_address_style"/>
 
     </LinearLayout>
 

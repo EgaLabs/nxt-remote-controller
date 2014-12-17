@@ -28,7 +28,7 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.android.support:appcompat-v7:21.0.0'
     compile 'com.android.support:recyclerview-v7:21.0.3'
-    compile 'com.github.traex.rippleeffect:library:1.2.3'
     compile project(':android-support-v4-preferencefragment')
+    compile project(':RippleEffect')
     compile project(':MaterialDesign')
 }
