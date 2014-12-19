@@ -3,6 +3,8 @@
 
   <!-- Miscelaneous -->
   <color name="window_background">#FFFFFF</color>
+  <color name="text_color">#000000</color>
+  <color name="address_text_color">#999999</color>
 
   <!-- Drawer colors -->
   <color name="drawer_background">#F2F2F2</color>
@@ -14,188 +16,174 @@
   <!-- Paired device -->
   <color name="paired_device_ripple_color">#777777</color>
   <color name="paired_device_signal">#FFFFFF</color>
-  <color name="paired_device_name">#000000</color>
-  <color name="paired_device_address">#999999</color>
 
   <!-- Amber theme colors -->
   <color name="amber_primary">#FFCA28</color>                 <!-- 400 -->
   <color name="amber_primary_dark">#FFB300</color>            <!-- 600 -->
-  <color name="amber_navigation">#FF6F00</color>              <!-- 900 -->
-  <color name="amber_accent">#3D1B00</color>                  <!-- 900 - 3º en colllor.com -->
-  <color name="amber_text_primary">#474747</color>            <!-- - -->
-  <color name="amber_text">#525252</color>                    <!-- - -->
+  <color name="amber_navigation">#291200</color>              <!-- 900 -->
+  <color name="amber_accent">#291200</color>                  <!-- 900 - 2nd in colllor.com -->
+  <color name="amber_text_primary">#3D1B00</color>            <!-- 900 - 3rd in colllor.com -->
   <color name="amber_control_normal">#FFC107</color>          <!-- 500 -->
-  <color name="amber_control_activated">#3D1B00</color>       <!-- 900 - 3º en colllor.com -->
-  <color name="amber_control_highlight">#3F3D1B00</color>     <!-- 900 - 3º en colllor.com -->
-  <color name="amber_progress_circular_color">#FFC107</color> <!-- 500 -->
-  <color name="amber_button_float">#FFD54F</color>            <!-- 300 -->
-  <color name="amber_drawer_arrow_color">#DDDDDD</color>
-  <color name="amber_toolbar_color">#DDDDDD</color>
+  <color name="amber_control_activated">#3D1B00</color>       <!-- 900 - 3rd in colllor.com -->
+  <color name="amber_control_highlight">#3F3D1B00</color>     <!-- 900 - 3rd in colllor.com -->
+  <color name="amber_progress_circular_color">#E0AC00</color> <!-- A700 - 11th in colllor.com -->
+  <color name="amber_button_float">#E09600</color>            <!-- A400 - 11th in colllor.com -->
+  <color name="amber_drawer_arrow_color">#8C5A0D</color>      <!-- 900 - 4th in colllor.com with 0xAA (170) opacity and mixed with toolbar_background -->
+  <color name="amber_toolbar_color">#8C5A0D</color>           <!-- 900 - 4th in colllor.com with 0xAA (170) opacity and mixed with toolbar_background -->
 
   <!-- Blue theme colors -->
   <color name="blue_primary">#42A5F5</color>                 <!-- 400 -->
   <color name="blue_primary_dark">#1E88E5</color>            <!-- 600 -->
   <color name="blue_navigation">#0D47A1</color>              <!-- 900 -->
-  <color name="blue_accent">#051939</color>                  <!-- 900 - 3º en colllor.com -->
-  <color name="blue_text_primary">#474747</color>            <!-- - -->
-  <color name="blue_text">#525252</color>                    <!-- - -->
+  <color name="blue_accent">#031126</color>                  <!-- 900 - 2nd in colllor.com -->
+  <color name="blue_text_primary">#051939</color>            <!-- 900 - 3rd in colllor.com -->
   <color name="blue_control_normal">#2196F3</color>          <!-- 500 -->
-  <color name="blue_control_activated">#051939</color>       <!-- 900 - 3º en colllor.com -->
-  <color name="blue_control_highlight">#3F051939</color>     <!-- 900 - 3º en colllor.com -->
-  <color name="blue_progress_circular_color">#2196F3</color> <!-- 500 -->
-  <color name="blue_button_float">#64B5F6</color>            <!-- 300 -->
-  <color name="blue_drawer_arrow_color">#FFFFFF</color>
-  <color name="blue_toolbar_color">#FFFFFF</color>
+  <color name="blue_control_activated">#051939</color>       <!-- 900 - 3rd in colllor.com -->
+  <color name="blue_control_highlight">#3F051939</color>     <!-- 900 - 3rd in colllor.com -->
+  <color name="blue_progress_circular_color">#2962FF</color> <!-- A700 -->
+  <color name="blue_button_float">#2979FF</color>            <!-- A400 -->
+  <color name="blue_drawer_arrow_color">#1A4E84</color>      <!-- 900 - 4th in colllor.com with 0xAA (170) opacity and mixed with toolbar_background -->
+  <color name="blue_toolbar_color">#1A4E84</color>           <!-- 900 - 4th in colllor.com with 0xAA (170) opacity and mixed with toolbar_background -->
 
   <!-- Blue Grey theme colors -->
   <color name="blue_grey_primary">#78909C</color>                 <!-- 400 -->
   <color name="blue_grey_primary_dark">#546E7A</color>            <!-- 600 -->
   <color name="blue_grey_navigation">#263238</color>              <!-- 900 -->
-  <color name="blue_grey_accent">#192124</color>                  <!-- 900 - 3º en colllor.com -->
-  <color name="blue_grey_text_primary">#474747</color>            <!-- - -->
-  <color name="blue_grey_text">#525252</color>                    <!-- - -->
+  <color name="blue_grey_accent">#192124</color>                  <!-- 900 - 2nd in colllor.com -->
+  <color name="blue_grey_text_primary">#192124</color>            <!-- 900 - 3rd in colllor.com -->
   <color name="blue_grey_control_normal">#607D8B</color>          <!-- 500 -->
-  <color name="blue_grey_control_activated">#192124</color>       <!-- 900 - 3º en colllor.com -->
-  <color name="blue_grey_control_highlight">#3F192124</color>     <!-- 900 - 3º en colllor.com -->
-  <color name="blue_grey_progress_circular_color">#607D8B</color> <!-- 500 -->
-  <color name="blue_grey_button_float">#90A4AE</color>            <!-- 300 -->
-  <color name="blue_grey_drawer_arrow_color">#FFFFFF</color>
-  <color name="blue_grey_toolbar_color">#FFFFFF</color>
+  <color name="blue_grey_control_activated">#192124</color>       <!-- 900 - 3rd in colllor.com -->
+  <color name="blue_grey_control_highlight">#3F192124</color>     <!-- 900 - 3rd in colllor.com -->
+  <color name="blue_grey_progress_circular_color">#546E7A</color> <!-- 600 -->
+  <color name="blue_grey_button_float">#607D8B</color>            <!-- 500 -->
+  <color name="blue_grey_drawer_arrow_color">#F2F4F5</color>      <!-- 0xFFFFFF with 0xE6 (230) opacity and mixed with toolbar_background -->
+  <color name="blue_grey_toolbar_color">#F2F4F5</color>           <!-- 0xFFFFFF with 0xE6 (230) opacity and mixed with toolbar_background -->
 
   <!-- Brown theme colors -->
   <color name="brown_primary">#8D6E63</color>                 <!-- 400 -->
   <color name="brown_primary_dark">#6D4C41</color>            <!-- 600 -->
-  <color name="brown_navigation">#6D4C41</color>              <!-- 900 -->
-  <color name="brown_accent">#261B17</color>                  <!-- 900 - 3º en colllor.com -->
-  <color name="brown_text_primary">#474747</color>            <!-- - -->
-  <color name="brown_text">#525252</color>                    <!-- - -->
+  <color name="brown_navigation">#3E2723</color>              <!-- 900 -->
+  <color name="brown_accent">#1A100F</color>                  <!-- 900 - 2nd in colllor.com -->
+  <color name="brown_text_primary">#271916</color>            <!-- 900 - 3rd in colllor.com -->
   <color name="brown_control_normal">#795548</color>          <!-- 500 -->
-  <color name="brown_control_activated">#261B17</color>       <!-- 900 - 3º en colllor.com -->
-  <color name="brown_control_highlight">#3F261B17</color>     <!-- 900 - 3º en colllor.com -->
-  <color name="brown_progress_circular_color">#795548</color> <!-- 500 -->
-  <color name="brown_button_float">#A1887F</color>            <!-- 300 -->
-  <color name="brown_drawer_arrow_color">#FFFFFF</color>
-  <color name="brown_toolbar_color">#FFFFFF</color>
+  <color name="brown_control_activated">#271916</color>       <!-- 900 - 3rd in colllor.com -->
+  <color name="brown_control_highlight">#3F271916</color>     <!-- 900 - 3rd in colllor.com -->
+  <color name="brown_progress_circular_color">#6D4C41</color> <!-- 600 -->
+  <color name="brown_button_float">#795548</color>            <!-- 500 -->
+  <color name="brown_drawer_arrow_color">#F4F1F0</color>      <!-- 0xFFFFFF with 0xE6 (230) opacity and mixed with toolbar_background -->
+  <color name="brown_toolbar_color">#F4F1F0</color>           <!-- 0xFFFFFF with 0xE6 (230) opacity and mixed with toolbar_background  -->
 
   <!-- Cyan theme colors -->
-  <color name="cyan_primary">#26C6DA</color>
-  <color name="cyan_primary_dark">#00ACC1</color>
-  <color name="cyan_navigation">#006064</color>
-  <color name="cyan_accent">#003B3D</color>
-  <color name="cyan_text_primary">#474747</color>
-  <color name="cyan_text">#525252</color>
-  <color name="cyan_control_normal">#00BCD4</color>
-  <color name="cyan_control_activated">#003B3D</color>
-  <color name="cyan_control_highlight">#3F003B3D</color>
-  <color name="cyan_progress_circular_color">#00BCD4</color>
-  <color name="cyan_button_float">#4DD0E1</color>
-  <color name="cyan_drawer_arrow_color">#DDDDDD</color>
-  <color name="cyan_toolbar_color">#DDDDDD</color>
+  <color name="cyan_primary">#26C6DA</color>                 <!-- 400 -->
+  <color name="cyan_primary_dark">#00ACC1</color>            <!-- 600 -->
+  <color name="cyan_navigation">#006064</color>              <!-- 900 -->
+  <color name="cyan_accent">#002729</color>                  <!-- 900 - 2nd in colllor.com -->
+  <color name="cyan_text_primary">#003B3D</color>            <!-- 900 - 3rd in colllor.com -->
+  <color name="cyan_control_normal">#00BCD4</color>          <!-- 500 -->
+  <color name="cyan_control_activated">#003B3D</color>       <!-- 900 - 3rd in colllor.com -->
+  <color name="cyan_control_highlight">#3F003B3D</color>     <!-- 900 - 3rd in colllor.com -->
+  <color name="cyan_progress_circular_color">#00BCD4</color> <!-- A700 -->
+  <color name="cyan_button_float">#4DD0E1</color>            <!-- A400 -->
+  <color name="cyan_drawer_arrow_color">#0d7780</color>      <!-- 900 - 4th in colllor.com with 0xAA (170) opacity mixed with toolbar_background -->
+  <color name="cyan_toolbar_color">#0d7780</color>           <!-- 900 - 4th in colllor.com with 0xAA (170) opacity mixed with toolbar_background -->
 
   <!-- Deep Orange theme colors -->
-  <color name="deep_orange_primary">#FF7043</color>
-  <color name="deep_orange_primary_dark">#F4511E</color>
-  <color name="deep_orange_navigation">#BF360C</color>
-  <color name="deep_orange_accent">#3A1004</color>
-  <color name="deep_orange_text_primary">#474747</color>
-  <color name="deep_orange_text">#525252</color>
-  <color name="deep_orange_control_normal">#FF5722</color>
-  <color name="deep_orange_control_activated">#3A1004</color>
-  <color name="deep_orange_control_highlight">#3F3A1004</color>
-  <color name="deep_orange_progress_circular_color">#D84315</color>
-  <color name="deep_orange_button_float">#E64A19</color>
-  <color name="deep_orange_drawer_arrow_color">#FFFFFF</color>
-  <color name="deep_orange_toolbar_color">#FFFFFF</color>
+  <color name="deep_orange_primary">#FF7043</color>                 <!-- 400 -->
+  <color name="deep_orange_primary_dark">#F4511E</color>            <!-- 600 -->
+  <color name="deep_orange_navigation">#BF360C</color>              <!-- 900 -->
+  <color name="deep_orange_accent">#260B02</color>                  <!-- 900 - 2nd in colllor.com -->
+  <color name="deep_orange_text_primary">#3A1004</color>            <!-- 900 - 3rd in colllor.com -->
+  <color name="deep_orange_control_normal">#FF5722</color>          <!-- 500 -->
+  <color name="deep_orange_control_activated">#3A1004</color>       <!-- 900 - 3rd in colllor.com -->
+  <color name="deep_orange_control_highlight">#3F3A1004</color>     <!-- 900 - 3rd in colllor.com -->
+  <color name="deep_orange_progress_circular_color">#DD2C00</color> <!-- A700 -->
+  <color name="deep_orange_button_float">#FF3D00</color>            <!-- A400 -->
+  <color name="deep_orange_drawer_arrow_color">#FFF1ED</color>      <!-- 0xFFFFFF with 0xE6 (230) opacity and mixed with toolbar_background -->
+  <color name="deep_orange_toolbar_color">#FFF1ED</color>           <!-- 0xFFFFFF with 0xE6 (230) opacity and mixed with toolbar_background -->
 
   <!-- Deep Purple theme colors -->
-  <color name="deep_purple_primary">#7E57C2</color>
-  <color name="deep_purple_primary_dark">#5E35B1</color>
-  <color name="deep_purple_navigation">#311B92</color>
-  <color name="deep_purple_accent">#110934</color>
-  <color name="deep_purple_text_primary">#474747</color>
-  <color name="deep_purple_text">#525252</color>
-  <color name="deep_purple_control_normal">#673AB7</color>
-  <color name="deep_purple_control_activated">#110934</color>
-  <color name="deep_purple_control_highlight">#3F110934</color>
-  <color name="deep_purple_progress_circular_color">#673AB7</color>
-  <color name="deep_purple_button_float">#9575CD</color>
-  <color name="deep_purple_drawer_arrow_color">#FFFFFF</color>
-  <color name="deep_purple_toolbar_color">#FFFFFF</color>
+  <color name="deep_purple_primary">#7E57C2</color>                 <!-- 400 -->
+  <color name="deep_purple_primary_dark">#5E35B1</color>            <!-- 600 -->
+  <color name="deep_purple_navigation">#311B92</color>              <!-- 900 -->
+  <color name="deep_purple_accent">#0B0622</color>                  <!-- 900 - 2nd in colllor.com -->
+  <color name="deep_purple_text_primary">#110934</color>            <!-- 900 - 3rd in colllor.com -->
+  <color name="deep_purple_control_normal">#673AB7</color>          <!-- 500 -->
+  <color name="deep_purple_control_activated">#110934</color>       <!-- 900 - 3rd in colllor.com -->
+  <color name="deep_purple_control_highlight">#3F110934</color>     <!-- 900 - 3rd in colllor.com -->
+  <color name="deep_purple_progress_circular_color">#6200EA</color> <!-- A700 -->
+  <color name="deep_purple_button_float">#651FFF</color>            <!-- A400 -->
+  <color name="deep_purple_drawer_arrow_color">#F2EFF9</color>      <!-- 0xFFFFFF with 0xE6 (230) opacity and mixed with toolbar_background -->
+  <color name="deep_purple_toolbar_color">#F2EFF9</color>           <!-- 0xFFFFFF with 0xE6 (230) opacity and mixed with toolbar_background -->
 
   <!-- Green theme colors -->
-  <color name="green_primary">#66BB6A</color>
-  <color name="green_primary_dark">#43A047</color>
-  <color name="green_navigation">#1B5E20</color>
-  <color name="green_accent">#0E2F10</color>
-  <color name="green_text_primary">#474747</color>
-  <color name="green_text">#525252</color>
-  <color name="green_control_normal">#4CAF50</color>
-  <color name="green_control_activated">#0E2F10</color>
-  <color name="green_control_highlight">#3F0E2F10</color>
-  <color name="green_progress_circular_color">#4CAF50</color>
-  <color name="green_button_float">#81C784</color>
-  <color name="green_drawer_arrow_color">#DDDDDD</color>
-  <color name="green_toolbar_color">#DDDDDD</color>
+  <color name="green_primary">#66BB6A</color>                 <!-- 400 -->
+  <color name="green_primary_dark">#43A047</color>            <!-- 600 -->
+  <color name="green_navigation">#1B5E20</color>              <!-- 900 -->
+  <color name="green_accent">#09200B</color>                  <!-- 900 - 2nd in colllor.com -->
+  <color name="green_text_primary">#0E2F10</color>            <!-- 900 - 3rd in colllor.com -->
+  <color name="green_control_normal">#4CAF50</color>          <!-- 500 -->
+  <color name="green_control_activated">#0E2F10</color>       <!-- 900 - 3rd in colllor.com -->
+  <color name="green_control_highlight">#3F0E2F10</color>     <!-- 900 - 3rd in colllor.com -->
+  <color name="green_progress_circular_color">#008F3C</color> <!-- A700 - 7th in colllor.com -->
+  <color name="green_button_float">#00A354</color>            <!-- A400 - 8th in colllor.com -->
+  <color name="green_drawer_arrow_color">#F0F8F0</color>      <!-- 0xFFFFFF with 0xE6 (230) opacity and mixed with toolbar_background -->
+  <color name="green_toolbar_color">#F0F8F0</color>           <!-- 0xFFFFFF with 0xE6 (230) opacity and mixed with toolbar_background -->
 
   <!-- Indigo theme colors -->
-  <color name="indigo_primary">#5C6BC0</color>
-  <color name="indigo_primary_dark">#3949AB</color>
-  <color name="indigo_navigation">#1A237E</color>
-  <color name="indigo_accent">#0A0E33</color>
-  <color name="indigo_text_primary">#474747</color>
-  <color name="indigo_text">#525252</color>
-  <color name="indigo_control_normal">#3F51B5</color>
-  <color name="indigo_control_activated">#0A0E33</color>
-  <color name="indigo_control_highlight">#3F0A0E33</color>
-  <color name="indigo_progress_circular_color">#3F51B5</color>
-  <color name="indigo_button_float">#7986CB</color>
-  <color name="indigo_drawer_arrow_color">#FFFFFF</color>
-  <color name="indigo_toolbar_color">#FFFFFF</color>
+  <color name="indigo_primary">#5C6BC0</color>                 <!-- 400 -->
+  <color name="indigo_primary_dark">#3949AB</color>            <!-- 600 -->
+  <color name="indigo_navigation">#1A237E</color>              <!-- 900 -->
+  <color name="indigo_accent">#070922</color>                  <!-- 900 - 2nd in colllor.com -->
+  <color name="indigo_text_primary">#0A0E33</color>            <!-- 900 - 3rd in colllor.com -->
+  <color name="indigo_control_normal">#3F51B5</color>          <!-- 500 -->
+  <color name="indigo_control_activated">#0A0E33</color>       <!-- 900 - 3rd in colllor.com -->
+  <color name="indigo_control_highlight">#3F0A0E33</color>     <!-- 900 - 3rd in colllor.com -->
+  <color name="indigo_progress_circular_color">#011CB7</color> <!-- A700 - 9th -->
+  <color name="indigo_button_float">#011FCB</color>            <!-- A400 - 10th -->
+  <color name="indigo_drawer_arrow_color">#EFF0F9</color>      <!-- 0xFFFFFF with 0xE6 (230) opacity and mixed with toolbar_background -->
+  <color name="indigo_toolbar_color">#EFF0F9</color>           <!-- 0xFFFFFF with 0xE6 (230) opacity and mixed with toolbar_background -->
 
   <!-- Light Blue theme colors -->
-  <color name="light_blue_primary">#29B6F6</color>
-  <color name="light_blue_primary_dark">#039BE5</color>
-  <color name="light_blue_navigation">#01579B</color>
-  <color name="light_blue_accent">#00233D</color>
-  <color name="light_blue_text_primary">#474747</color>
-  <color name="light_blue_text">#525252</color>
-  <color name="light_blue_control_normal">#03A9F4</color>
-  <color name="light_blue_control_activated">#00233D</color>
-  <color name="light_blue_control_highlight">#3F00233D</color>
-  <color name="light_blue_progress_circular_color">#03A9F4</color>
-  <color name="light_blue_button_float">#4FC3F7</color>
-  <color name="light_blue_drawer_arrow_color">#FFFFFF</color>
-  <color name="light_blue_toolbar_color">#FFFFFF</color>
+  <color name="light_blue_primary">#29B6F6</color>                 <!-- 400 -->
+  <color name="light_blue_primary_dark">#039BE5</color>            <!-- 600 -->
+  <color name="light_blue_navigation">#01579B</color>              <!-- 900 -->
+  <color name="light_blue_accent">#001729</color>                  <!-- 900 - 2nd in colllor.com -->
+  <color name="light_blue_text_primary">#00233D</color>            <!-- 900 - 3rd in colllor.com -->
+  <color name="light_blue_control_normal">#03A9F4</color>          <!-- 500 -->
+  <color name="light_blue_control_activated">#00233D</color>       <!-- 900 - 3rd in colllor.com -->
+  <color name="light_blue_control_highlight">#3F00233D</color>     <!-- 900 - 3rd in colllor.com -->
+  <color name="light_blue_progress_circular_color">#00588F</color> <!-- A700 - 7th in colllor.com -->
+  <color name="light_blue_button_float">#0070A3</color>            <!-- A400 - 8th in colllor.com -->
+  <color name="light_blue_drawer_arrow_color">#0E5C88</color>      <!-- 900 - 4th in colllor.com with 0xAA (170) opacity and mixed with toolbar_background -->
+  <color name="light_blue_toolbar_color">#0E5C88</color>           <!-- 900 - 4th in colllor.com with 0xAA (170) opacity and mixed with toolbar_background -->
 
   <!-- Light Green theme colors -->
-  <color name="light_green_primary">#9CCC65</color>
-  <color name="light_green_primary_dark">#7CB342</color>
-  <color name="light_green_navigation">#33691E</color>
-  <color name="light_green_accent">#17300D</color>
-  <color name="light_green_text_primary">#474747</color>
-  <color name="light_green_text">#525252</color>
-  <color name="light_green_control_normal">#8BC34A</color>
-  <color name="light_green_control_activated">#17300D</color>
-  <color name="light_green_control_highlight">#3F17300D</color>
-  <color name="light_green_progress_circular_color">#8BC34A</color>
-  <color name="light_green_button_float">#AED581</color>
-  <color name="light_green_drawer_arrow_color">#FFFFFF</color>
-  <color name="light_green_toolbar_color">#FFFFFF</color>
+  <color name="light_green_primary">#9CCC65</color>                 <!-- 400 -->
+  <color name="light_green_primary_dark">#7CB342</color>            <!-- 600 -->
+  <color name="light_green_navigation">#33691E</color>              <!-- 900 -->
+  <color name="light_green_accent">#0F2009</color>                  <!-- 900 - 2nd in colllor.com -->
+  <color name="light_green_text_primary">#17300D</color>            <!-- 900 - 3rd in colllor.com -->
+  <color name="light_green_control_normal">#8BC34A</color>          <!-- 500 -->
+  <color name="light_green_control_activated">#17300D</color>       <!-- 900 - 3rd in colllor.com -->
+  <color name="light_green_control_highlight">#3F17300D</color>     <!-- 900 - 3rd in colllor.com -->
+  <color name="light_green_progress_circular_color">#3A810E</color> <!-- A700 - 7th in colllor.com -->
+  <color name="light_green_button_float">#49A300</color>            <!-- A400 - 8th in colllor.com -->
+  <color name="light_green_drawer_arrow_color">#496F2E</color>      <!-- 900 - 4th in colllor.com with 0xAA (170) opacity and mixed with toolbar_background -->
+  <color name="light_green_toolbar_color">#496F2E</color>           <!-- 900 - 4th in colllor.com with 0xAA (170) opacity and mixed with toolbar_background -->
 
   <!-- Lime theme colors -->
-  <color name="lime_primary">#DCE775</color>
-  <color name="lime_primary_dark">#C0CA33</color>
-  <color name="lime_navigation">#827717</color>
-  <color name="lime_accent">#343009</color>
-  <color name="lime_text_primary">#474747</color>
-  <color name="lime_text">#525252</color>
-  <color name="lime_control_normal">#CDDC39</color>
-  <color name="lime_control_activated">#343009</color>
-  <color name="lime_control_highlight">#3F343009</color>
-  <color name="lime_progress_circular_color">#CDDC39</color>
-  <color name="lime_button_float">#DCE775</color>
-  <color name="lime_drawer_arrow_color">#FFFFFF</color>
-  <color name="lime_toolbar_color">#FFFFFF</color>
+  <color name="lime_primary">#D4E157</color>                 <!-- 400 -->
+  <color name="lime_primary_dark">#C0CA33</color>            <!-- 600 -->
+  <color name="lime_navigation">#827717</color>              <!-- 900 -->
+  <color name="lime_accent">#232006</color>                  <!-- 900 - 2nd in colllor.com -->
+  <color name="lime_text_primary">#343009</color>            <!-- 900 - 3rd in colllor.com -->
+  <color name="lime_control_normal">#CDDC39</color>          <!-- 500 -->
+  <color name="lime_control_activated">#343009</color>       <!-- 900 - 3rd in colllor.com -->
+  <color name="lime_control_highlight">#3F343009</color>     <!-- 900 - 3rd in colllor.com -->
+  <color name="lime_progress_circular_color">#6B8F00</color> <!-- A700 - 7th in colllor.com -->
+  <color name="lime_button_float">#80A300</color>            <!-- A400 - 8th in colllor.com -->
+  <color name="lime_drawer_arrow_color">#496F2E</color>      <!-- 900 - 4th in colllor.com with 0xAA (170) opacity and mixed with toolbar_background -->
+  <color name="lime_toolbar_color">#496F2E</color>           <!-- 900 - 4th in colllor.com with 0xAA (170) opacity and mixed with toolbar_background -->
 
   <!-- Orange theme colors -->
   <color name="orange_primary">#FFA726</color>
