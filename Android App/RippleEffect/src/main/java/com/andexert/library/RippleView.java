@@ -272,4 +272,8 @@ public class RippleView extends RelativeLayout {
   public void setRippleColor (int color) {
     this.rippleColor = color;
   }
+
+  public void setRippleDuration (int duration) {
+    this.DURATION = duration;
+  }
 }

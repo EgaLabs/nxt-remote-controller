@@ -1,71 +1,116 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (c) 2014 EgaTuts & Esaú García - All Rights Reserved                *
- *                                                                               *
- * Open-source code licensed under the MIT License (the "License").              *
- *                                                                               *
- * Permission is hereby granted, free of charge, to any person obtaining a copy  *
- * of this software and associated documentation files (the "Software"), to deal *
- * in the Software without restriction, including without limitation the rights  *
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     *
- * copies of the Software, and to permit persons to whom the Software is         *
- * furnished to do so, subject to the following conditions:                      *
- *                                                                               *
- * The above copyright notice and this permission notice shall be included in    *
- * all copies or substantial portions of the Software.                           *
- *                                                                               *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR    *
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,      *
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE   *
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER        *
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, *
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN     *
- * THE SOFTWARE.                                                                 *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  Copyright (c) 2014 EgaTuts & Esaú García - All Rights Reserved                 *
+ *                                                                                 *
+ *  Open-source code licensed under the MIT License (the "License").               *
+ *                                                                                 *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy   *
+ *  of this software and associated documentation files (the "Software"), to deal  *
+ *  in the Software without restriction, including without limitation the rights   *
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell      *
+ *  copies of the Software, and to permit persons to whom the Software is          *
+ *  furnished to do so, subject to the following conditions:                       *
+ *                                                                                 *
+ *  The above copyright notice and this permission notice shall be included in     *
+ *  all copies or substantial portions of the Software.                            *
+ *                                                                                 *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     *
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE    *
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         *
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  *
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN      *
+ *  THE SOFTWARE.                                                                  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                                     *
- *                                                                                                                                                         *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                                      *
- *                                                                                                                                                         *
- * And the corresponding file at:                                                                                                                          *
- *                                                                                                                                                         *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/device/PairedDevice.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  You can find the entire project at:                                                                                                                      *
+ *                                                                                                                                                           *
+ *    https://github.com/Egatuts/nxt-remote-controller                                                                                                       *
+ *                                                                                                                                                           *
+ *  And the corresponding file at:                                                                                                                           *
+ *                                                                                                                                                           *
+ *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/device/PairedDevice.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.device;
 
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/*
+ *  Paired device that saves a BluetoothDevice and some of it's properties for easy/fast access.
+ */
 public class PairedDevice implements Parcelable {
 
-  private BluetoothDevice _bluetooth_device;
-  private String _name;
-  private String _mac_address;
-  private byte _signal;
+  /*
+   *  The original BluetoothDevice.
+   *  The name that the device uses to identify itself.
+   *  The supposedly unique MAC address used to identify each device.
+   *  The signal stored as a byte to save memory. An int type uses 32 bits of space.
+   */
+  private BluetoothDevice bluetoothDevice;
+  private String name;
+  private String address;
+  private byte signal;
 
   /*
-   * Parcelable methods to pass through an intent.
+   *  Totally useless, but must be implemented.
    */
   @Override
   public int describeContents () {
     return 0;
   }
 
+  /*
+   *  This function is called by the android system when it's passed through an intent.
+   *  It passes a Parcel where the class must be saved using only primitive values (int, byte, short, long)
+   *  or any object/class that also implements the classes Parcelable or Serializable.
+   */
   @Override
   public void writeToParcel (Parcel out, int flags) {
-    out.writeStringArray(new String[] { this._name, this._mac_address });
-    out.writeByte(this._signal);
-    out.writeParcelable(this._bluetooth_device, flags);
+    out.writeStringArray(new String[] { this.name, this.address });
+    out.writeByte(this.signal);
+    out.writeParcelable(this.bluetoothDevice, flags);
   }
 
+  /*
+   *  Field used by the android system used to recreate our objects, individually or as arrays.
+   *  you can always create a new constructor which accepts as argument a Parcel.
+   *
+   *  public YourClassConstructor (Parcel in) {
+   *    //Some calculations, etc...
+   *  }
+   *
+   *  And in your CREATOR field.
+   *
+   *  @Override
+   *  public YourClass createFromParcel (Parcel in) {
+   *    return new YourClass(in);
+   *  }
+   */
   public static final Parcelable.Creator<PairedDevice> CREATOR = new Parcelable.Creator<PairedDevice> () {
     @Override
     public PairedDevice createFromParcel (Parcel in) {
-      return new PairedDevice(in);
+
+      /*
+       *  We read each value from the Parcel.
+       */
+      String[] stringData = new String[2];
+      in.readStringArray(stringData);
+      byte signal = in.readByte();
+      BluetoothDevice device = in.readParcelable(BluetoothDevice.class.getClassLoader());
+
+      /*
+       *  We return a new device with those values.
+       */
+      return new PairedDevice(stringData[0], stringData[1], signal, device);
     }
 
+    /*
+     *  Very simple. Probably useless.
+     */
     @Override
     public PairedDevice[] newArray (int size) {
       return new PairedDevice[size];
@@ -73,65 +118,60 @@ public class PairedDevice implements Parcelable {
   };
 
   /*
-   * Constructor.
+   *  Constructor.
    */
-  public PairedDevice (Parcel source) {
-    String[] string_data = new String[2];
-    source.readStringArray(string_data);
-    byte signal_data = source.readByte();
-    BluetoothDevice device_data = source.readParcelable(BluetoothDevice.class.getClassLoader());
-
-    this._name = string_data[0];
-    this._mac_address = string_data[1];
-    this._signal = signal_data;
-    this._bluetooth_device = device_data;
+  public PairedDevice (String name, String address, byte signal, BluetoothDevice device) {
+    this.name            = name;
+    this.address         = address;
+    this.signal          = signal;
+    this.bluetoothDevice = device;
   }
 
-  public PairedDevice (String name, String mac_address, byte signal, BluetoothDevice device) {
-    this._name = name;
-    this._mac_address = mac_address;
-    this._signal = signal;
-    this._bluetooth_device = device;
+  public PairedDevice (String name, String address, int connectivity, BluetoothDevice device) {
+    this.name            = name;
+    this.address         = address;
+    this.setConnectivity(connectivity);
+    this.bluetoothDevice = device;
   }
 
   /*
-   * Getter and setter for name.
+   *  Getter and setter for device name.
    */
   public String getName () {
-    return this._name;
+    return this.name;
   }
 
   public void setName (String name) {
-    this._name = name;
+    this.name = name;
   }
 
   /*
-   * Getter and setter for address.
+   *  Getter and setter for mac address.
    */
   public String getAddress () {
-    return this._mac_address;
+    return this.address;
   }
 
   public void setAddress (String address) {
-    this._mac_address = address;
+    this.address = address;
   }
 
   /*
-   * Getter and setter for signal.
+   *  Getter and setter for signal strength.
    */
   public byte getSignal () {
-    return this._signal;
+    return this.signal;
   }
 
   public void setSignal (byte signal) {
-    this._signal = signal;
+    this.signal = signal;
   }
 
   /*
-   * Getter and setter for connectivity.
+   *  Getter and setter for connectivity (signal strength on 0 to 100 scale).
    */
   public int getConnectivity () {
-    return (int) ((float) (this._signal & 0xff) / 0xff * 100);
+    return (int) ((float) (this.signal & 0xff) / 0xff * 100);
   }
 
   public void setConnectivity (int connectivity) {
@@ -141,14 +181,14 @@ public class PairedDevice implements Parcelable {
   }
 
   /*
-   * Getter for device type.
+   *  Getter for device type.
    */
   public int getIntDeviceType () {
-    return this._bluetooth_device.getBluetoothClass().getDeviceClass();
+    return this.bluetoothDevice.getBluetoothClass().getDeviceClass();
   }
 
   /*
-   * Getters for toy devices.
+   *  Getters for toy devices.
    */
   public boolean isToyRobot () {
     return this.getIntDeviceType() == BluetoothClass.Device.TOY_ROBOT;
@@ -175,7 +215,7 @@ public class PairedDevice implements Parcelable {
   }
 
   /*
-   * Getters for wearable devices.
+   *  Getters for wearable devices.
    */
   public boolean isWearableGlasses () {
     return this.getIntDeviceType() == BluetoothClass.Device.WEARABLE_GLASSES;
@@ -202,7 +242,7 @@ public class PairedDevice implements Parcelable {
   }
 
   /*
-   * Getters for health devices.
+   *  Getters for health devices.
    */
   public boolean isHealthBloodPressureDevice () {
     return this.getIntDeviceType() == BluetoothClass.Device.HEALTH_BLOOD_PRESSURE;
@@ -237,7 +277,7 @@ public class PairedDevice implements Parcelable {
   }
 
   /*
-   * Getters for phone devices.
+   *  Getters for phone devices.
    */
   public boolean isPhoneCellular () {
     return this.getIntDeviceType() == BluetoothClass.Device.PHONE_CELLULAR;
@@ -264,7 +304,7 @@ public class PairedDevice implements Parcelable {
   }
 
   /*
-   * Getters for computer devices.
+   *  Getters for computer devices.
    */
   public boolean isComputerDesktop () {
     return this.getIntDeviceType() == BluetoothClass.Device.COMPUTER_DESKTOP;
@@ -295,7 +335,7 @@ public class PairedDevice implements Parcelable {
   }
 
   /*
-   * Getters for audio/video devices.
+   *  Getters for audio/video devices.
    */
   public boolean isCamcorder () {
     return this.getIntDeviceType() == BluetoothClass.Device.AUDIO_VIDEO_CAMCORDER;
@@ -362,10 +402,10 @@ public class PairedDevice implements Parcelable {
   }
 
   /*
-   * Getter for major types.
+   *  Getter for major types.
    */
   public int getIntMajorType () {
-    return this._bluetooth_device.getBluetoothClass().getMajorDeviceClass();
+    return this.bluetoothDevice.getBluetoothClass().getMajorDeviceClass();
   }
 
   public boolean isMajorPhone () {
@@ -409,19 +449,53 @@ public class PairedDevice implements Parcelable {
   }
 
   /*
-   * Getter and setter for bluetooth device.
+   *  Getter and setter for bluetooth device.
    */
   public BluetoothDevice getBluetoothDevice () {
-    return _bluetooth_device;
+    return bluetoothDevice;
   }
 
   public void setBluetoothDevice (BluetoothDevice device) {
-    _bluetooth_device = device;
+    bluetoothDevice = device;
   }
 
   /*
-   * Exports a BluetoothDevice as PairedDevice.
+   *  Calculates the connectivity percentage.
    */
+  public static int calculateConnectivity (int min, int max, int con) {
+    int total = max - min;
+    int portion = con - min;
+    return (int) (((float) portion / (float) total) * 100);
+  }
+
+  public static int calculateConnectivity (int min, int max, byte sig) {
+    return PairedDevice.calculateConnectivity(min, max, (int) ((float) (sig & 0xff) / 0xff * 100));
+  }
+
+  public static int calculateConnectivity (int min, int max, Intent intent) {
+    return PairedDevice.calculateConnectivity(min, max, (int) intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE));
+  }
+
+  /*
+   *  Exports a BluetoothDevice as PairedDevice.
+   */
+  public static PairedDevice from (BluetoothDevice device, int connectivity) {
+    return new PairedDevice(device.getName(), device.getAddress(), connectivity, device);
+  }
+
+  public static PairedDevice from (BluetoothDevice device, byte signal) {
+    return new PairedDevice(device.getName(), device.getAddress(), signal, device);
+  }
+
+  public static PairedDevice from (BluetoothDevice device, Intent intent, int min, int max) {
+    int connectivity = PairedDevice.calculateConnectivity(min, max, intent);
+    return new PairedDevice(device.getName(), device.getAddress(), connectivity, device);
+  }
+
+  public static PairedDevice from (Intent intent, int min, int max) {
+    return PairedDevice.from((BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE), intent, min, max);
+  }
+
   public static PairedDevice from (BluetoothDevice device) {
     return new PairedDevice(device.getName(), device.getAddress(), (byte) 0, device);
   }

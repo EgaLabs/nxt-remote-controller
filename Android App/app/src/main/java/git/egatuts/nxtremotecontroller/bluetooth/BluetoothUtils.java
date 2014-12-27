@@ -35,13 +35,18 @@ package git.egatuts.nxtremotecontroller.bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.os.Build;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.UUID;
 
+import git.egatuts.nxtremotecontroller.bluetooth.exception.ConnectionFailedException;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
 
 public class BluetoothUtils {
@@ -130,6 +135,32 @@ public class BluetoothUtils {
       }
       return false;
     }
+  }
+
+  /*
+   * Gets the socket of a device.
+   */
+  public BluetoothSocket getSocketFrom (PairedDevice device) throws ConnectionFailedException {
+    return this.getSocketFrom(device.getBluetoothDevice());
+  }
+
+  public BluetoothSocket getSocketFrom (BluetoothDevice device) throws ConnectionFailedException {
+    BluetoothSocket socket = null;
+    try{
+      socket = device.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
+    } catch (IOException e) {
+      e.printStackTrace();
+      try {
+        Method method = device.getClass().getMethod("createRfcommSocket", new Class[] { int.class });
+        socket = (BluetoothSocket) method.invoke(device, Integer.valueOf(1));
+      } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e2) {
+        e.printStackTrace();
+      } catch (Exception e3) {
+        e3.printStackTrace();
+        throw new ConnectionFailedException();
+      }
+    }
+    return socket;
   }
 
 }

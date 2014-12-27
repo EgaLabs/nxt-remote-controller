@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RelativeLayout
+    style="@style/match_w_h"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/match">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <include
-      android:id="@+id/toolbar_element"
-      layout="@layout/toolbar"
-      style="@style/wrap" />
+      android:id="@+id/toolbar"
+      style="@style/match_w_wrap_h"
+      layout="@layout/toolbar" />
 
   <android.support.v4.widget.DrawerLayout
       android:id="@+id/drawer_element"
-      android:layout_below="@+id/toolbar_element"
-      style="@style/match">
+      style="@style/match_w_h"
+      android:layout_below="@+id/toolbar">
 
     <FrameLayout
         android:id="@+id/main_container"
-        style="@style/frame_layout_style" />
+        style="@style/match_w_h"
+        android:background="#000000" />
 
     <fragment
         android:id="@+id/drawer_fragment"
         android:name="git.egatuts.nxtremotecontroller.navigation.NavigationDrawerFragment"
-        app:layout="@layout/navigation_drawer_fragment"
-        style="@style/fragment_drawer_style" />
+        style="@style/fragment"
+        android:layout_width="?git.egatuts.nxtremotecontroller:drawer_width"
+        app:layout="@layout/navigation_drawer_fragment" />
 
   </android.support.v4.widget.DrawerLayout>
 

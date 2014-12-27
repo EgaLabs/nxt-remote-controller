@@ -25,9 +25,9 @@
   <attr name="bluetooth_message_text_size"  format="dimension" />
 
   <!-- Float button attributes -->
-  <attr name="button_float_radius"     format="dimension" />
-  <attr name="button_float_margin"     format="dimension" />
-  <attr name="button_float_background" format="color|reference"     />
+  <attr name="button_float_radius"     format="dimension"       />
+  <attr name="button_float_margin"     format="dimension"       />
+  <attr name="button_float_background" format="color|reference" />
 
   <!-- Progress dialog attributes -->
   <attr name="progress_circular_size"  format="dimension" />
@@ -36,15 +36,16 @@
   <!-- Paired devices (recycler view item) attributes -->
   <attr name="paired_device_height"             format="dimension" />
   <attr name="paired_device_padding"            format="dimension" />
-  <attr name="paired_device_ripple_color"       format="color"     />
   <attr name="paired_device_ripple_duration"    format="integer"   />
   <attr name="paired_device_signal_text_color"  format="color"     />
   <attr name="paired_device_signal_text_size"   format="dimension" />
   <attr name="paired_device_info_margin"        format="dimension" />
-  <attr name="paired_device_signal_shape"       format="reference" />
   <attr name="paired_device_name_text_size"     format="dimension" />
   <attr name="paired_device_name_text_color"    format="color"     />
   <attr name="paired_device_address_text_size"  format="dimension" />
   <attr name="paired_device_address_text_color" format="color"     />
 
+  <attr name="tab_height"                    format="dimension" />
+  <attr name="tab_text_color_selector"       format="reference" />
+  <attr name="tab_background_color_selector" format="reference" />
 </resources>

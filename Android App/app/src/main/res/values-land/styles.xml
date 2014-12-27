@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- [Styles for toolbar.xml]  -->
+
+  <!-- [Toolbar] -->
+  <style name="toolbar_theme_style" parent="toolbar_theme_style.base">
+    <item name="actionBarSize">56dp</item>
+  </style>
+  <!-- [/Toolbar] -->
+
+  <!-- [/Styles for toolbar.xml] -->
+</resources>

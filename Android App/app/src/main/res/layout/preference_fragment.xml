@@ -22,18 +22,30 @@
         android:key="preference_show_toast"
         android:title="@string/preference_title_toast"
         android:summary="@string/preference_summary_toast"
-        android:defaultValue="true" />
+        android:defaultValue="@string/preference_value_toast" />
+    <CheckBoxPreference
+        android:key="preference_back_home"
+        android:title="@string/preference_title_back_home"
+        android:summary="@string/preference_summary_back_home"
+        android:defaultValue="@string/preference_value_back_home" />
+    <CheckBoxPreference
+        android:key="preference_disable_bluetooth"
+        android:title="@string/preference_title_disable_bluetooth"
+        android:summary="@string/preference_summary_disable_bluetooth"
+        android:defaultValue="@string/preference_value_disable_bluetooth" />
   </PreferenceCategory>
 
   <PreferenceCategory android:title="@string/settings_category_misc">
     <EditTextPreference
         android:key="preference_minimum_signal"
+        android:inputType="number"
         android:title="@string/preference_title_min_signal"
         android:summary="@string/preference_summary_min_signal"
         android:dialogTitle="@string/preference_dialog_min_signal"
         android:defaultValue="@string/preference_value_min_signal" />
     <EditTextPreference
         android:key="preference_maximum_signal"
+        android:inputType="number"
         android:title="@string/preference_title_max_signal"
         android:summary="@string/preference_summary_max_signal"
         android:dialogTitle="@string/preference_dialog_max_signal"

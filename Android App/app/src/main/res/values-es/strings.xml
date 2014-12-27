@@ -40,6 +40,13 @@
   <string name="device_type_toy_message">El dispositivo %s no se identifica como un juguete.</string>
   <string name="device_type_robot_title">Tipo de dispositivo desconocido</string>
   <string name="device_type_robot_message">El dispositivo %s no se identifica como un robot. ¿Quieres continuar de todos modos?</string>
+
+  <string name="preparing_connection_device">Preparando conexión&#8230;</string>
+  <string name="connecting_device">Conectando con el dispositivo&#8230;</string>
+  <string name="successful_connected">Conectado a %s</string>
+  <string name="connecting_error">No se ha podido conectar con %s</string>
+  <string name="create_socket_error">No se ha podido crear el Socket Bluetooth</string>
+  <string name="aborted_connection">Conexión abortada</string>
   <!-- [/home_fragment.xml] -->
 
 
@@ -73,6 +80,20 @@
   <string name="preference_title_toast">Mostrar mensajes de estado</string>
   <string name="preference_summary_toast">Muestra los avisos de emparejamiento de la aplicación. Se recomienda activar esta opción, a no ser que el sistema genere las notificaciones automáticamente.</string>
   <string name="preference_value_toast">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_back_home">Volver al inicio</string>
+  <string name="preference_summary_back_home">Cuando el proceso de emparejamiento ha finalizado correctamente la aplicación vuelve automáticamente a la pantalla de inicio.</string>
+  <string name="preference_value_back_home">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_disable_bluetooth">Desactivar Bluetooth</string>
+  <string name="preference_summary_disable_bluetooth">Desactiva el Bluetooth automáticamente al salir de la aplicación.</string>
+  <string name="preference_value_disable_bluetooth">true</string>
   <!-- [/preference_fragment.xml] -->
 
 

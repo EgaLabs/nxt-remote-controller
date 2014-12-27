@@ -1,475 +1,495 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (c) 2014 EgaTuts & Esaú García - All Rights Reserved                *
- *                                                                               *
- * Open-source code licensed under the MIT License (the "License").              *
- *                                                                               *
- * Permission is hereby granted, free of charge, to any person obtaining a copy  *
- * of this software and associated documentation files (the "Software"), to deal *
- * in the Software without restriction, including without limitation the rights  *
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     *
- * copies of the Software, and to permit persons to whom the Software is         *
- * furnished to do so, subject to the following conditions:                      *
- *                                                                               *
- * The above copyright notice and this permission notice shall be included in    *
- * all copies or substantial portions of the Software.                           *
- *                                                                               *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR    *
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,      *
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE   *
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER        *
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, *
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN     *
- * THE SOFTWARE.                                                                 *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  Copyright (c) 2014 EgaTuts & Esaú García - All Rights Reserved                 *
+ *                                                                                 *
+ *  Open-source code licensed under the MIT License (the "License").               *
+ *                                                                                 *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy   *
+ *  of this software and associated documentation files (the "Software"), to deal  *
+ *  in the Software without restriction, including without limitation the rights   *
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell      *
+ *  copies of the Software, and to permit persons to whom the Software is          *
+ *  furnished to do so, subject to the following conditions:                       *
+ *                                                                                 *
+ *  The above copyright notice and this permission notice shall be included in     *
+ *  all copies or substantial portions of the Software.                            *
+ *                                                                                 *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     *
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE    *
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         *
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  *
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN      *
+ *  THE SOFTWARE.                                                                  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                                       *
- *                                                                                                                                                           *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                                        *
- *                                                                                                                                                           *
- * And the corresponding file at:                                                                                                                            *
- *                                                                                                                                                           *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/fragment/ScanFragment.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  You can find the entire project at:                                                                                                                        *
+ *                                                                                                                                                             *
+ *    https://github.com/Egatuts/nxt-remote-controller                                                                                                         *
+ *                                                                                                                                                             *
+ *  And the corresponding file at:                                                                                                                             *
+ *                                                                                                                                                             *
+ *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/activity/ScanFragment.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.fragment;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
-import android.widget.Toast;
+import android.widget.ImageView;
 
-import com.gc.materialdesign.views.ButtonFloat;
+import com.andexert.library.RippleView;
 
 import java.util.ArrayList;
 
+import git.egatuts.nxtremotecontroller.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
-import git.egatuts.nxtremotecontroller.bluetooth.listener.DiscoveryListener;
-import git.egatuts.nxtremotecontroller.bluetooth.listener.PairingListener;
-import git.egatuts.nxtremotecontroller.bluetooth.receiver.DiscoveryReceiver;
-import git.egatuts.nxtremotecontroller.bluetooth.receiver.PairingReceiver;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceItemClickListener;
+import git.egatuts.nxtremotecontroller.listener.AnimationEndListener;
+import git.egatuts.nxtremotecontroller.listener.BluetoothDiscoveryListener;
+import git.egatuts.nxtremotecontroller.listener.BluetoothPairingListener;
 import git.egatuts.nxtremotecontroller.preference.PreferencesUtils;
-import git.egatuts.nxtremotecontroller.views.IndeterminateProgressDialog;
+import git.egatuts.nxtremotecontroller.receiver.BluetoothDiscoveryReceiver;
+import git.egatuts.nxtremotecontroller.receiver.BluetoothPairingReceiver;
+import git.egatuts.nxtremotecontroller.views.BaseIndeterminateProgressDialog;
 
-public class ScanFragment extends BaseFragment {
+/*
+ *  Fragment shown when selected scan option in drawer menu.
+ */
+public class ScanFragment extends ActivityBaseFragment {
 
-  final private String MAXIMUM_SIGNAL = "preference_maximum_signal";
-  final private String MINIMUM_SIGNAL = "preference_minimum_signal";
+  public static final String PREFERENCE_MAX_SIGNAL_KEY = "preference_maximum_signal";
+  public static final String PREFERENCE_MAX_SIGNAL_VALUE = "0";
+  public static final String PREFERENCE_MIN_SIGNAL_KEY = "preference_minimum_signal";
+  public static final String PREFERENCE_MIN_SIGNAL_VALUE = "-100";
 
-  private DiscoveryReceiver discovery_receiver;
-  private DiscoveryListener discovery_listener;
-  private PairingReceiver pairing_receiver;
-  private PairingListener pairing_listener;
-  PreferencesUtils preference_utils;
-  private PreferencesUtils.Editor preference_editor;
-  View view;
-  private PairedDeviceAdapter paired_devices_adapter;
-  private PairedDevice discovered_device;
-  LinearLayoutManager linear_layout_manager;
-  RecyclerView recycler_view;
-  private ButtonFloat button_float;
-  private ArrayList<PairedDevice> discovered_devices;
-  private ArrayList<PairedDevice> lost_devices;
+  public static final String PREFERENCE_SHOW_TOAST_KEY = "preference_show_toast";
+  public static final boolean PREFERENCE_SHOW_TOAST_VALUE = false;
+  public static final String PREFERENCE_GO_BACK_HOME_KEY = "preference_back_home";
+  public static final boolean PREFERENCE_GO_BACK_HOME_VALUE = true;
 
-  private AlphaAnimation fade_out;
-  private AlphaAnimation fade_in;
-  private AnimationSet animation_hide;
-  private ScaleAnimation scale_down;
-  private ScaleAnimation scale_up;
-  private AnimationSet animation_show;
-  private RotateAnimation rotate;
+  private ArrayList<PairedDevice> devicesFound;
+  private ArrayList<PairedDevice> devicesLost;
+  private PairedDeviceAdapter devicesAdapter;
+  private LinearLayoutManager linearLayoutManager;
+  private RecyclerView recyclerView;
+  private RippleView buttonFloat;
+  private ImageView buttonFloatImage;
+  private BluetoothDiscoveryReceiver bluetoothDiscoveryReceiver;
+  private BluetoothDiscoveryListener bluetoothDiscoveryListener;
+  private BluetoothPairingReceiver bluetoothPairingReceiver;
+  private BluetoothPairingListener bluetoothPairingListener;
+  private boolean isPairing;
 
-  private boolean isPairing = false;
-
-  public ScanFragment () {
-  }
-
-  /*
-   * Cancels existing discovery and starts a new one.
-   */
-  public void startDiscovery () {
-    this.cancelDiscovery();
-    bluetooth_utils.startDiscovery();
-  }
+  private AlphaAnimation fadeOutAnim;
+  private AlphaAnimation fadeInAnim;
+  private AnimationSet hideAnimSet;
+  private ScaleAnimation scaleUpAnim;
+  private ScaleAnimation scaleDownAnim;
+  private AnimationSet showAnimSet;
+  private RotateAnimation spinAnim;
 
   /*
-   * Cancels existing discovery.
+   *  Empty constructor.
    */
-  public void cancelDiscovery () {
-    if (bluetooth_utils.isDiscovering()) bluetooth_utils.cancelDiscovery();
-  }
+  public ScanFragment () {}
 
   /*
-   * Initializes components used in the class.
+   *  Changes the icon of the button float.
    */
-  public void initializeComponents (Activity activity) {
-
-    preference_utils = new PreferencesUtils(activity);
-    preference_utils.privateMode();
-
-    preference_editor = preference_utils.getEditor();
-    preference_editor.edit();
-
-    discovered_devices = new ArrayList<PairedDevice>();
-    lost_devices = new ArrayList<PairedDevice>();
-
-    discovery_receiver = new DiscoveryReceiver(activity);
-    pairing_receiver = new PairingReceiver(activity);
-
-    /*
-     * Callbacks for Bluetooth broadcasted intents.
-     */
-    pairing_listener = new PairingListener() {
-      @Override
-      public void onBondStateChange (Context context, Intent intent) {
-        if (!bluetooth_utils.isEnabled()) return;
-        int[] states = PairingReceiver.getIntentExtraData(intent);
-        BluetoothDevice bluetooth_device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-
-        /*
-         * When starts the bonding process.
-         */
-        if (states[0] == BluetoothDevice.BOND_BONDING && states[1] == BluetoothDevice.BOND_NONE) {
-          if (!progress_dialog.isShowing()) progress_dialog.show();
-          progress_dialog.setDoFirstAnimation(true);
-          progress_dialog.setText(R.string.bluetooth_pairing);
-
-        /*
-         * When finishes the bonding process successful.
-         */
-        } else if (states[0] == BluetoothDevice.BOND_BONDED && states[1] == BluetoothDevice.BOND_BONDING) {
-          isPairing = false;
-          if (progress_dialog.isShowing()) progress_dialog.dismiss();
-          if (preference_editor.getBoolean("preference_show_toast", true)) {
-            Toast.makeText(getActivity(), String.format(getResources().getString(R.string.bluetooth_paired), bluetooth_device.getName()), Toast.LENGTH_SHORT).show();
-          }
-          pairing_receiver.unregisterReceiver();
-
-        /*
-         * When fails the bonding process.
-         */
-        } else if (states[0] == BluetoothDevice.BOND_NONE && states[1] == BluetoothDevice.BOND_BONDING) {
-          isPairing = false;
-          if (progress_dialog.isShowing()) progress_dialog.dismiss();
-          if (preference_editor.getBoolean("preference_show_toast", true)) {
-            Toast.makeText(getActivity(), String.format(getResources().getString(R.string.bluetooth_failed_pairing), bluetooth_device.getName()), Toast.LENGTH_SHORT).show();
-          }
-          pairing_receiver.unregisterReceiver();
-        }
-      }
-    };
-
-    discovery_listener = new DiscoveryListener() {
-      @Override
-      public void onDiscoveryStart (Context context, Intent intent) {
-        changeIconTo(R.drawable.ic_sync);
-      }
-
-      @Override
-      public void onDiscoveryFinish (Context context, Intent intent) {
-        discovery_receiver.unregisterReceiver();
-        lost_devices = paired_devices_adapter.diff(discovered_devices);
-
-        /*
-         * Remove those devices from the View which were found before but not in this scan process.
-         */
-        for (PairedDevice discovered_device : lost_devices) {
-          int index = paired_devices_adapter.exists(discovered_device);
-          if (index != -1) {
-            paired_devices_adapter.remove(index);
-          }
-        }
-
-        /*
-         * Remove data sets and set float button icon.
-         */
-        discovered_devices.clear();
-        lost_devices.clear();
-        changeIconTo(R.drawable.ic_discover);
-      }
-
-      @Override
-      public void onDeviceFound (Context context, Intent intent) {
-        /*
-         * Get RSSI strength and maximum and minimum stored values.
-         */
-        int raw_signal = (int) intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
-        int minimum_value = Integer.parseInt(preference_editor.getString(MINIMUM_SIGNAL, "0"));
-        int maximum_value = Integer.parseInt(preference_editor.getString(MAXIMUM_SIGNAL, "-100"));
-
-        /*
-         * Save values if are less than minimum or more than maximum.
-         */
-        if (raw_signal > maximum_value) {
-          maximum_value = raw_signal;
-          preference_editor.saveString(MAXIMUM_SIGNAL, Integer.toString(maximum_value));
-        }
-        if (raw_signal < minimum_value) {
-          minimum_value = raw_signal;
-          preference_editor.saveString(MINIMUM_SIGNAL, Integer.toString(minimum_value));
-        }
-
-        /*
-         * Calculate the percentage of the signal.
-         */
-        int total = maximum_value - minimum_value;
-        int portion = raw_signal - minimum_value;
-        float percentage = ((float) portion / (float) total) * 100;
-        BluetoothDevice bluetooth_device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-        int position = paired_devices_adapter.exists(bluetooth_device);
-
-        /*
-         * If it as discovered before we update it's values (signal strength).
-         * If not simply add it.
-         */
-        if (position != -1) {
-          discovered_device = paired_devices_adapter.get(position);
-          discovered_device.setConnectivity((int) percentage);
-          paired_devices_adapter.update(position);
-        } else {
-          discovered_device = PairedDevice.from(bluetooth_device);
-          discovered_device.setConnectivity((int) percentage);
-          paired_devices_adapter.add(discovered_device);
-        }
-
-        /*
-         * We add it to the discovered devices ArrayList to calculate which devices are too far from the range.
-         */
-        discovered_devices.add(discovered_device);
-      }
-    };
-
-  }
-
-  /*
-   * Creates the animations if don't exits.
-   */
-  public void initAnimators () {
-
-    /*
-     * Fade out and scale down animations (hide).
-     */
-    if (fade_out == null) {
-      fade_out = new AlphaAnimation(
-              1.0f,  /* Start point (100%) */
-              0.0f   /* End   point (0%)   */
-      );
-      fade_out.setDuration(200);
-    }
-    if (fade_in == null) {
-      fade_in = new AlphaAnimation(
-              0.0f,  /* Start point (0%)   */
-              1.0f   /* End   point (100%) */
-      );
-      fade_in.setDuration(200);
-    }
-    if (animation_hide == null) {
-      animation_hide = new AnimationSet(true);
-    }
-
-    /*
-     * Fade in and scale up animations (show).
-     */
-    if (scale_down == null) {
-      scale_down = new ScaleAnimation(
-              1f, 0f,  /* Start and end point on X axis (from 100% to 0%) */
-              1f, 0f,  /* Start and end point on Y axis (from 100% to 0%) */
-              Animation.RELATIVE_TO_SELF, 0.5f,  /* Relative pivot point in the center (50%) */
-              Animation.RELATIVE_TO_SELF, 0.5f   /* Relative pivot point in the middle (50%) */
-      );
-      scale_down.setDuration(200);
-    }
-    if (scale_up == null) {
-      scale_up = new ScaleAnimation(
-              0f, 1f,  /* Start and end point on X axis (from 0% to 100%) */
-              0f, 1f,  /* Start and end point on Y axis (from 0% to 100%) */
-              Animation.RELATIVE_TO_SELF, 0.5f,  /* Relative pivot point in the center (50%) */
-              Animation.RELATIVE_TO_SELF, 0.5f   /* Relative pivot point in the middle (50%) */
-      );
-      scale_up.setDuration(200);
-    }
-    if (animation_show == null) {
-      animation_show = new AnimationSet(true);
-    }
-
-    /*
-     * Rotate right animation.
-     */
-    if (rotate == null) {
-      rotate = new RotateAnimation(
-              0f, 360f,  /* Start and end degrees rotation (from 0° to 360°) */
-              Animation.RELATIVE_TO_SELF, 0.5f,  /* Relative pivot point in the center (50%) */
-              Animation.RELATIVE_TO_SELF, 0.5f   /* Relative pivot point in the middle (50%) */
-      );
-      rotate.setDuration(1000);
-    }
-  }
-
-  /*
-   * Changes the Drawable icon of the float button based on it's resource id or Drawable.
-   */
-  public void changeIconTo (int resId) {
-    this.changeIconTo(getResources().getDrawable(resId));
-  }
-
-  public void changeIconTo (final Drawable drawable) {
-    this.initAnimators();
-
-    /*
-     * Animation hide.
-     */
-    animation_hide.addAnimation(fade_out);
-    animation_hide.addAnimation(scale_down);
-
-    animation_hide.setAnimationListener(new AnimationListener() {
+  public void changeButtonIcon (final Drawable drawable) {
+    final ScanFragment self = this;
+    this.hideAnimSet.setAnimationListener(new AnimationEndListener() {
       @Override
       public void onAnimationEnd (Animation animation) {
-        button_float.setIconDrawable(drawable);
-        button_float.getIcon().startAnimation(animation_show);
-      }
-
-      @Override
-      public void onAnimationStart (Animation animation) {
-      }
-
-      @Override
-      public void onAnimationRepeat (Animation animation) {
+        self.buttonFloatImage.setImageDrawable(drawable);
+        self.buttonFloatImage.startAnimation(self.showAnimSet);
       }
     });
-
-    /*
-     * Animation show.
-     */
-    animation_show.addAnimation(fade_in);
-    animation_show.addAnimation(scale_up);
-
-    animation_show.setAnimationListener(new AnimationListener() {
+    this.showAnimSet.setAnimationListener(new AnimationEndListener() {
       @Override
       public void onAnimationEnd (Animation animation) {
-        if (bluetooth_utils.isDiscovering()) {
-          button_float.getIcon().startAnimation(rotate);
+        if (self.getBluetoothUtils().isDiscovering()) {
+          self.buttonFloatImage.startAnimation(self.spinAnim);
         }
       }
-
-      @Override
-      public void onAnimationStart (Animation animation) {
-      }
-
-      @Override
-      public void onAnimationRepeat (Animation animation) {
-      }
     });
+    this.buttonFloatImage.startAnimation(this.hideAnimSet);
+  }
 
-    /*
-     * Animation spin.
-     */
-    rotate.setRepeatCount(Animation.INFINITE);
-    rotate.setRepeatMode(Animation.REVERSE);
-
-    button_float.getIcon().startAnimation(animation_hide);
+  public void changeButtonIcon (int resId) {
+    this.changeButtonIcon(this.getGlobalUtils().getDrawableResource(resId));
   }
 
   /*
-   * When the view is created.
+   *  Guess the state of the bonding process.
    */
-  @Override
-  public View onCreateView (LayoutInflater inflater, ViewGroup parent_container, Bundle savedInstanceState) {
-    paired_devices_adapter = new PairedDeviceAdapter(new ArrayList<PairedDevice>(0));
-    paired_devices_adapter.setContext(getActivity());
-
-    view = inflater.inflate(R.layout.scan_fragment, parent_container, false);
-    linear_layout_manager = new LinearLayoutManager(parent_container.getContext());
-    linear_layout_manager.setOrientation(LinearLayoutManager.VERTICAL);
-    linear_layout_manager.scrollToPosition(0);
-
-    recycler_view = (RecyclerView) view.findViewById(R.id.discovered_devices);
-    button_float = (ButtonFloat) view.findViewById(R.id.sync_button);
-
-    recycler_view.setAdapter(paired_devices_adapter);
-    recycler_view.setLayoutManager(linear_layout_manager);
-    recycler_view.setItemAnimator(new DefaultItemAnimator());
-    recycler_view.addOnItemTouchListener(new PairedDeviceItemClickListener(getActivity(), new PairedDeviceItemClickListener.OnItemClickListener() {
-      @Override
-      public void onItemClick (View view, final int position) {
-        if (isPairing) return;
-        isPairing = true;
-        pairing_receiver.registerReceiver();
-        final PairedDevice pairing_device = paired_devices_adapter.get(position);
-        if (!progress_dialog.isShowing()) progress_dialog.show();
-        progress_dialog.setDoFirstAnimation(true);
-        progress_dialog.setText(R.string.bluetooth_preparing_pairing);
-        for (PairedDevice device : bluetooth_utils.getDevices()) {
-          if (device.getAddress().equalsIgnoreCase(pairing_device.getAddress())) {
-            isPairing = false;
-            new Handler().postDelayed(new Runnable () {
-              @Override
-              public void run () {
-                Toast.makeText(getActivity(), String.format(getResources().getString(R.string.bluetooth_already_paired), pairing_device.getName()), Toast.LENGTH_SHORT).show();
-                if (progress_dialog.isShowing()) progress_dialog.dismiss();
-              }
-            }, 500);
-            return;
-          }
-        }
-        bluetooth_utils.pair(pairing_device);
-      }
-    }));
-
-    button_float.setIconDrawable(getResources().getDrawable(R.drawable.ic_discover));
-    TypedValue typed_value = new TypedValue();
-    this.getActivity().getTheme().resolveAttribute(R.attr.button_float_background, typed_value, true);
-    button_float.setBackgroundColor(typed_value.data);
-    button_float.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick (View v) {
-        discovery_receiver.registerReceiver();
-        startDiscovery();
-      }
-    });
-    return view;
+  private boolean isBonding (int[] states) {
+    if (states[0] == BluetoothDevice.BOND_BONDING && states[1] == BluetoothDevice.BOND_NONE) {
+      return true;
+    }
+    return false;
   }
 
+  private boolean isBonded (int[] states) {
+    if (states[0] == BluetoothDevice.BOND_BONDED && states[1] == BluetoothDevice.BOND_BONDING) {
+      return true;
+    }
+    return false;
+  }
+
+  private boolean isBondedFailed (int[] states) {
+    if (states[0] == BluetoothDevice.BOND_NONE && states[1] == BluetoothDevice.BOND_BONDING) {
+      return true;
+    }
+    return false;
+  }
+
+  private boolean isBondedRemoved (int[] states) {
+    if (states[0] == BluetoothDevice.BOND_NONE && states[1] == BluetoothDevice.BOND_BONDED) {
+      return true;
+    }
+    return false;
+  }
+
+  /*
+   *  When the Fragment is attached to the root activity we create all the animations,
+   *  animations sets, receivers, listeners, etc.
+   */
   @Override
   public void onAttach (Activity activity) {
     super.onAttach(activity);
-    this.initializeComponents(activity);
-    this.listenForBluetoothChanges();
-    progress_dialog = new IndeterminateProgressDialog(getActivity());
-    progress_dialog.setCancelable(false);
-    discovery_receiver.setListener(discovery_listener);
-    pairing_receiver.setListener(pairing_listener);
+    final ScanFragment self = this;
+
+    /*
+     *  FadeOut and FadeIn animations.
+     */
+    if (this.fadeOutAnim == null) {
+      this.fadeOutAnim = new AlphaAnimation(
+              1.0f,  /* Start point (100%) */
+              0.0f   /*   End point (0%)   */
+      );
+      this.fadeOutAnim.setDuration(200);
+    }
+    if (this.fadeInAnim == null) {
+      this.fadeInAnim = new AlphaAnimation(
+              0.0f,  /* Start point (0%) */
+              1.0f   /* End point (100%) */
+      );
+      this.fadeInAnim.setDuration(200);
+    }
+
+    /*
+     *  ScaleDown, ScaleUp animations and it's animation set.
+     */
+    if (this.scaleDownAnim == null) {
+      this.scaleDownAnim = new ScaleAnimation(
+              1.0f, 0.0f,  /* Start and end point of X axis (from 100% to 0%) */
+              1.0f, 0.0f,  /* Start and end point of Y axis (from 100% to 0%) */
+              Animation.RELATIVE_TO_SELF, 0.5f,  /* Relative to self pivot point in the center (X to 50%) */
+              Animation.RELATIVE_TO_SELF, 0.5f   /* Relative to self pivot point in the middle (Y to 50%) */
+      );
+      this.scaleDownAnim.setDuration(200);
+    }
+    if (this.scaleUpAnim == null) {
+      this.scaleUpAnim = new ScaleAnimation(
+              0.0f, 1.0f,  /* Start and end point of X axis (from 0% to 100%) */
+              0.0f, 1.0f,  /* Start and end point of Y axis (from 0% to 100%) */
+              Animation.RELATIVE_TO_SELF, 0.5f,  /* Relative to self pivot point in the center (X to 50%) */
+              Animation.RELATIVE_TO_SELF, 0.5f   /* Relative to self pivot point in the middle (Y to 50%) */
+      );
+      this.scaleUpAnim.setDuration(200);
+    }
+
+    /*
+     *  Hide and Show animation sets.
+     */
+    if (this.hideAnimSet == null) {
+      this.hideAnimSet = new AnimationSet(true);
+      this.hideAnimSet.addAnimation(this.fadeOutAnim);
+      this.hideAnimSet.addAnimation(this.scaleDownAnim);
+    }
+    if (this.showAnimSet == null) {
+      this.showAnimSet = new AnimationSet(true);
+      this.showAnimSet.addAnimation(this.fadeInAnim);
+      this.showAnimSet.addAnimation(this.scaleUpAnim);
+    }
+
+    /*
+     *  SpinAnim.
+     */
+    if (this.spinAnim == null) {
+      this.spinAnim = new RotateAnimation(
+              0f, 360f,  /* Start and end degrees (from 0º to 360º) */
+              Animation.RELATIVE_TO_SELF, 0.5f,  /* Relative to self pivot point in the center (X to 50%) */
+              Animation.RELATIVE_TO_SELF, 0.5f   /* Relative to self pivot point in the middle (Y to 50%) */
+      );
+      this.spinAnim.setDuration(1000);
+      this.spinAnim.setRepeatCount(Animation.INFINITE);
+      this.spinAnim.setRepeatMode(Animation.REVERSE);
+    }
+
+    /*
+     *  We create the receivers previously defined.
+     */
+    if (this.bluetoothDiscoveryReceiver == null) {
+      this.bluetoothDiscoveryReceiver = new BluetoothDiscoveryReceiver(this.getBaseActivity());
+    }
+    if (this.bluetoothPairingReceiver == null) {
+      this.bluetoothPairingReceiver = new BluetoothPairingReceiver(this.getBaseActivity());
+    }
+
+    /*
+     *  We create some variables we will use in the listeners.
+     */
+    this.devicesLost = new ArrayList<PairedDevice>();
+    this.devicesFound = new ArrayList<PairedDevice>();
+
+    /*
+     *  And now the discovery listener and the pairing listener.
+     */
+    if (this.bluetoothDiscoveryListener == null) {
+      this.bluetoothDiscoveryListener = new BluetoothDiscoveryListener() {
+        @Override
+        public void onDiscoveryStart (Context context, Intent intent) {
+          /*
+           *  We start the animation when the device is starting discovery.
+           */
+          self.changeButtonIcon(R.drawable.ic_sync);
+        }
+
+        @Override
+        public void onDiscoveryFinish (Context context, Intent intent) {
+          /*
+           *  When the discovery has finished we no longer want to listen for
+           *  new devices found because it's impossible to happen. We get the devices that
+           *  were discovered but this time not, so this means they are no longer available
+           *  and we remove them from the recycler view adapter.
+           */
+          self.bluetoothDiscoveryReceiver.unregisterReceiver();
+          self.devicesLost = self.devicesAdapter.diff(self.devicesFound);
+          int index;
+          for (PairedDevice deviceFound : self.devicesLost) {
+            index = self.devicesAdapter.exists(deviceFound);
+            if (index != -1) {
+              self.devicesAdapter.remove(index);
+            }
+          }
+
+          /*
+           *  We reset the arrays that let us know which devices are new
+           *  and which are now out of range and reset the button float icon.
+           */
+          self.devicesFound.clear();
+          self.devicesLost.clear();
+          self.changeButtonIcon(R.drawable.ic_discover);
+        }
+
+        @Override
+        public void onDeviceFound (Context context, Intent intent) {
+          /*
+           *  We update the data if the device was previously found
+           *  or we add it if it didn't existed before.
+           */
+          PairedDevice device = (PairedDevice) self.bluetoothDiscoveryReceiver.getIntentData(intent);
+          PreferencesUtils.Editor editor = self.getPreferencesEditor();
+          int min = Integer.parseInt(editor.getString(ScanFragment.PREFERENCE_MIN_SIGNAL_KEY, ScanFragment.PREFERENCE_MIN_SIGNAL_VALUE));
+          int max = Integer.parseInt(editor.getString(ScanFragment.PREFERENCE_MAX_SIGNAL_KEY, ScanFragment.PREFERENCE_MAX_SIGNAL_VALUE));
+          device.setConnectivity(PairedDevice.calculateConnectivity(min, max, intent));
+          int index = self.devicesAdapter.exists(device);
+          if (index != -1) {
+            self.devicesAdapter.get(index).setSignal(device.getSignal());
+            self.devicesAdapter.update(index);
+          } else {
+            self.devicesAdapter.add(device);
+          }
+
+          /*
+           *  We add the discovered device to the discovered devices array to guess
+           *  which devices are now out of range or simply not available.
+           */
+          self.devicesFound.add(device);
+        }
+      };
+    }
+    if (this.bluetoothPairingListener == null) {
+      this.bluetoothPairingListener = new BluetoothPairingListener() {
+        @Override
+        public void onBondStateChange (Context context, Intent intent) {
+          if (!self.getBluetoothUtils().isEnabled()) return;
+          int[] states = (int[]) self.bluetoothPairingReceiver.getIntentData(intent);
+          BaseIndeterminateProgressDialog progressDialog = self.getLongProgressDialog();
+          progressDialog.setCancelable(false);
+          boolean showToast = self.getPreferencesEditor()
+                  .getBoolean(ScanFragment.PREFERENCE_SHOW_TOAST_KEY, ScanFragment.PREFERENCE_SHOW_TOAST_VALUE);
+          int msg = 0;
+
+          /*
+           *  If the state changed and now it's pairing.
+           */
+          if (self.isBonding(states)) {
+            self.isPairing = true;
+            progressDialog.show();
+            progressDialog.setText(R.string.bluetooth_pairing);
+
+          /*
+           *  If the state changed and now it's paired.
+           */
+          } else if (self.isBonded(states)) {
+            self.isPairing = false;
+            msg = R.string.bluetooth_paired;
+            boolean goBack = self.getPreferencesEditor()
+                    .getBoolean(ScanFragment.PREFERENCE_GO_BACK_HOME_KEY, ScanFragment.PREFERENCE_GO_BACK_HOME_VALUE);
+            if (goBack) {
+              self.replaceFragmentWith(new HomeFragment(), self);
+            }
+
+          /*
+           *  If the state changed and the pairing process failed.
+           */
+          } else if (self.isBondedFailed(states)) {
+            self.isPairing = false;
+            msg = R.string.bluetooth_failed_pairing;
+          }
+
+          /*
+           *  If there is a message it means that the process ended.
+           *  Correctly or not.
+           */
+          if (msg != 0) {
+            self.bluetoothPairingReceiver.unregisterReceiver();
+            if (!showToast) return;
+            progressDialog.dismiss();
+            String name = ((BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)).getName();
+            String text = String.format(self.getGlobalUtils().getStringResource(msg), name);
+            self.getGlobalUtils().showToast(text);
+          }
+        }
+      };
+    }
+
+    /*
+     *  Now we link the listeners to the receivers.
+     */
+    this.bluetoothDiscoveryReceiver.setListener(this.bluetoothDiscoveryListener);
+    this.bluetoothPairingReceiver.setListener(this.bluetoothPairingListener);
   }
 
   /*
-   * Called when the fragment is detached from the parent Activity.
+   *  When the View is first created.
    */
   @Override
-  public void onDetach () {
-    this.cancelDiscovery();
-    this.unlistenForBluetoothChanges();
-    discovery_receiver.unregisterReceiver();
-    pairing_receiver.unregisterReceiver();
-    super.onDetach();
+  public View onCreateView (LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+    final ScanFragment self = this;
+    View view = inflater.inflate(R.layout.scan_fragment, parent, false);
+
+    /*
+     *  Creates the adapter and configures the linear layout manager.
+     */
+    this.devicesAdapter = new PairedDeviceAdapter(this, new ArrayList<PairedDevice>(0));
+    this.linearLayoutManager = new LinearLayoutManager(this.getBaseActivity());
+    this.linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+    this.linearLayoutManager.scrollToPosition(0);
+
+    /*
+     *  Defines the elements Views.
+     */
+    this.recyclerView = (RecyclerView) view.findViewById(R.id.discovered_devices);
+    this.buttonFloat = (RippleView) view.findViewById(R.id.button_float);
+    this.buttonFloatImage = (ImageView) view.findViewById(R.id.button_float_image);
+
+    /*
+     *  Creates the background drawable that let us shape the float button.
+     */
+    GradientDrawable background = new GradientDrawable();
+    GlobalUtils utils = this.getGlobalUtils();
+    int radius = utils.getAttribute(R.attr.button_float_radius);
+    int color = utils.getAttribute(R.attr.button_float_background);
+    background.setCornerRadius(radius);
+    background.setColor(color);
+
+    /*
+     *  Now we set the color of the background, the ripple color and the default image of the button.
+     */
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+      this.buttonFloat.setBackground(background);
+    } else {
+      this.buttonFloat.setBackgroundDrawable(background);
+    }
+    this.buttonFloatImage.setImageDrawable(utils.getDrawableResource(R.drawable.ic_discover));
+    this.buttonFloat.setRippleColor(utils.getDarkerColor(color, 0.65f));
+    this.buttonFloat.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick (View v) {
+        self.bluetoothDiscoveryReceiver.registerReceiver();
+        self.getBluetoothUtils().startDiscovery();
+      }
+    });
+
+    /*
+     *  We configure the recycler view.
+     */
+    this.recyclerView.setAdapter(this.devicesAdapter);
+    this.recyclerView.setLayoutManager(this.linearLayoutManager);
+    this.recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+    /*
+     *  When an item is clicked.
+     */
+    this.recyclerView.addOnItemTouchListener(new PairedDeviceItemClickListener(this.getBaseActivity(), new PairedDeviceItemClickListener.OnItemClickListener() {
+
+      /*
+       *  When we click a device we try to connect to it.
+       */
+      @Override
+      public void onItemClick (View view, int position) {
+        /*
+         *  If it's already pairing we do nothing. If not we check if it's already paired.
+         */
+        if (self.isPairing || !self.getBluetoothUtils().isEnabled()) return;
+        self.isPairing = true;
+        self.bluetoothPairingReceiver.registerReceiver();
+        final PairedDevice clickedDevice = self.devicesAdapter.get(position);
+        for (PairedDevice device : self.getBluetoothUtils().getDevices()) {
+          if (device.getAddress().equalsIgnoreCase(clickedDevice.getAddress())) {
+            String text = self.getGlobalUtils().getStringResource(R.string.bluetooth_already_paired);
+            text = String.format(text, clickedDevice.getName());
+            self.getGlobalUtils().showToast(text);
+            isPairing = false;
+            return;
+          }
+        }
+        self.getBluetoothUtils().pair(clickedDevice);
+      }
+
+      /*
+       *  When we do a long click on the item we show the button to remove the paired the device.
+       */
+      @Override
+      public void onItemLongClick (View view, int position) {
+        self.getGlobalUtils().showToast("LONG_CLICK");
+      }
+    }));
+
+    return view;
   }
 
 }

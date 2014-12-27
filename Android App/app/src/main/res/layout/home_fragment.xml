@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RelativeLayout
+    style="@style/match_w_h"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/relative_layout_style">
+    android:background="#FFFFFF"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
   <android.support.v7.widget.RecyclerView
       android:id="@+id/paired_devices"
-      tools:context=".MainActivity"
-      tools:listitem="@layout/paired_device"
-      style="@style/recycler_view" />
+      style="@style/recycler_view"
+      tools:context="git.egatuts.nxtremotecontroller.activity.MainActivity"
+      tools:listitem="@layout/paired_device" />
 
 </RelativeLayout>

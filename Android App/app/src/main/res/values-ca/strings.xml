@@ -40,6 +40,13 @@
   <string name="device_type_toy_message">El dispositiu %s no s\'identifica com una joguina.</string>
   <string name="device_type_robot_title">Tipus de dispositiu desconegut</string>
   <string name="device_type_robot_message">El dispositiu %s no s\'identifica com un robot. Vols conectar de totes maneres?</string>
+
+  <string name="preparing_connection_device">Preparant conexió&#8230;</string>
+  <string name="connecting_device">Conectant amb el dispositiu&#8230;</string>
+  <string name="successful_connected">Conectat a %s</string>
+  <string name="connecting_error">No s\'ha pogut connectar amb %s</string>
+  <string name="create_socket_error">No s\'ha pogut crear el Socket Bluetooth</string>
+  <string name="aborted_connection">Conexió abortada</string>
   <!-- [/home_fragment.xml] -->
 
 
@@ -73,6 +80,20 @@
   <string name="preference_title_toast">Mostrar missatges d\'estat</string>
   <string name="preference_summary_toast">Mostra els missatges d\'alerta d\'estat d\'emparellament. Es recommana activar aquesta opció, a no ser que el sistema operatiu les generi automaticament.</string>
   <string name="preference_value_toast">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_back_home">Tornar a inici</string>
+  <string name="preference_summary_back_home">Quan el procés d\'emparellament a acabat correctament la aplicació torna a la pantalla d\'inici automàticament.</string>
+  <string name="preference_value_back_home">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_disable_bluetooth">Desactivar Bluetooth</string>
+  <string name="preference_summary_disable_bluetooth">Desactiva el Bluetooth automàticament al sortir de la aplicació.</string>
+  <string name="preference_value_disable_bluetooth">true</string>
   <!-- [/preference_fragment.xml] -->
 
 

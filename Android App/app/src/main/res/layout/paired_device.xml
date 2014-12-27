@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <com.andexert.library.RippleView
     android:id="@+id/ripple_view"
-    style="@style/device_ripple_style"
+    style="@style/match_w_wrap_h"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <LinearLayout style="@style/device_layout_style">
+  <LinearLayout
+      style="@style/match_w_h"
+      android:layout_height="?git.egatuts.nxtremotecontroller:paired_device_height"
+      android:layout_margin="?git.egatuts.nxtremotecontroller:paired_device_padding">
 
     <TextView
         android:id="@+id/paired_device_connection"
-        style="@style/device_signal_style"/>
+        style="@style/match_w_h"
+        android:layout_width="?git.egatuts.nxtremotecontroller:paired_device_height"
+        android:gravity="center"
+        android:textColor="?git.egatuts.nxtremotecontroller:paired_device_signal_text_color"
+        android:textSize="?git.egatuts.nxtremotecontroller:paired_device_signal_text_size"/>
 
-    <LinearLayout style="@style/device_info_style">
+    <LinearLayout
+        style="@style/fill_w_match_h"
+        android:layout_marginLeft="?git.egatuts.nxtremotecontroller:paired_device_info_margin"
+        android:layout_marginStart="?git.egatuts.nxtremotecontroller:paired_device_info_margin"
+        android:gravity="center"
+        android:orientation="vertical">
 
       <TextView
           android:id="@+id/paired_device_name"
-          style="@style/device_name_style"/>
+          style="@style/fill_w_wrap_h"
+
+          android:textColor="?paired_device_name_text_color"
+          android:textSize="?paired_device_name_text_size" />
 
       <TextView
           android:id="@+id/paired_device_address"
-          style="@style/device_address_style"/>
+          style="@style/fill_w_wrap_h"
+          android:textColor="?paired_device_address_text_color"
+          android:textSize="?paired_device_address_text_size" />
 
     </LinearLayout>
 

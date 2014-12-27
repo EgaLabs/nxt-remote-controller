@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<android.support.v7.widget.Toolbar style="@style/toolbar_style" />
+<android.support.v7.widget.Toolbar
+    style="@style/toolbar_style"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?git.egatuts.nxtremotecontroller:toolbar_background"
+    android:textColor="?git.egatuts.nxtremotecontroller:toolbar_color"
+    android:textSize="@dimen/abc_text_size_title_material_toolbar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:theme="@style/toolbar_theme_style" />

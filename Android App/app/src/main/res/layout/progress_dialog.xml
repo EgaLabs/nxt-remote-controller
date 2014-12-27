@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LinearLayout
+    style="@style/wrap_w_h"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
-    style="@style/progress_dialog_layout_style">
+    android:layout_gravity="center"
+    android:background="@drawable/progress_dialog"
+    android:orientation="horizontal">
 
   <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
       android:id="@+id/progress_bar"
-      style="@style/progress_bar_style"
+      android:layout_width="?git.egatuts.nxtremotecontroller:progress_circular_size"
+      android:layout_height="?git.egatuts.nxtremotecontroller:progress_circular_size"
+      android:layout_gravity="center_horizontal"
+      android:background="?git.egatuts.nxtremotecontroller:progress_circular_color"
       materialdesign:ringWidth="2dp" />
 
   <TextView
       android:id="@+id/text_view"
-      style="@style/progress_dialog_text_style" />
+      style="@style/wrap_w_match_h"
+      android:layout_marginLeft="15dp"
+      android:layout_marginStart="15dp"
+      android:layout_marginRight="8dp"
+      android:layout_marginEnd="8dp"
+      android:gravity="center_vertical"
+      android:textColor="#333333" />
 
 </LinearLayout>

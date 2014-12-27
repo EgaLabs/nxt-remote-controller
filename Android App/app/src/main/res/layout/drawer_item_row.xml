@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LinearLayout
+    style="@style/match_w_h"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/drawer_layout_style">
+    android:layout_height="?git.egatuts.nxtremotecontroller:drawer_item_height">
 
   <TextView
       android:id="@+id/item_name"
-      style="@style/drawer_item_style" />
+      style="@style/drawer_item_style"
+      android:layout_marginEnd="?git.egatuts.nxtremotecontroller:drawer_item_margin_right"
+      android:layout_marginLeft="?git.egatuts.nxtremotecontroller:drawer_item_margin_left"
+      android:layout_marginRight="?git.egatuts.nxtremotecontroller:drawer_item_margin_right"
+      android:layout_marginStart="?git.egatuts.nxtremotecontroller:drawer_item_margin_left"
+      android:drawablePadding="?git.egatuts.nxtremotecontroller:drawer_item_icon_padding"
+      android:gravity="center_vertical"
+      android:textColor="?git.egatuts.nxtremotecontroller:drawer_item_text_color"
+      android:textSize="?git.egatuts.nxtremotecontroller:drawer_item_text_size" />
 
 </LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout
+    style="@style/fill_w_wrap_h"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="?toolbar_background"
+    android:minHeight="?tab_height">
+
+  <TextView
+      android:id="@+id/tab_title"
+      style="@style/tab_style" />
+
+</LinearLayout>

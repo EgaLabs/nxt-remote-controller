@@ -40,6 +40,13 @@
   <string name="device_type_toy_message">The device %s is not paired as a bluetooth toy device.</string>
   <string name="device_type_robot_title">Unknown device type.</string>
   <string name="device_type_robot_message">The device %s is not paired as a bluetooth robot device. Do you want to continue anyway?</string>
+
+  <string name="preparing_connection_device">Preparing connection&#8230;</string>
+  <string name="connecting_device">Connecting to device&#8230;</string>
+  <string name="successful_connected">Connected to %s</string>
+  <string name="connecting_error">Could not connect to %s</string>
+  <string name="create_socket_error">Could not create Bluetooth Socket</string>
+  <string name="aborted_connection">Connection aborted</string>
   <!-- [/HomeFragment.java] -->
 
 
@@ -74,6 +81,20 @@
   <string name="preference_title_toast">Show status toast messages</string>
   <string name="preference_summary_toast">Show pairing toast messages. It\'s recommended to enable this option unless your operative system generates them automatically.</string>
   <string name="preference_value_toast">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_back_home">Go back to home screen</string>
+  <string name="preference_summary_back_home">When the pairing process has succeed automatically goes to the home tab.</string>
+  <string name="preference_value_back_home">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_disable_bluetooth">Disable Bluetooth</string>
+  <string name="preference_summary_disable_bluetooth">Automatically disables the bluetooth when exiting the app.</string>
+  <string name="preference_value_disable_bluetooth">true</string>
   <!-- [/preference_fragment.xml] -->
 
 

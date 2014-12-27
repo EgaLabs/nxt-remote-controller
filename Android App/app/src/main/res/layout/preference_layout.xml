@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/match">
+    style="@style/match_w_h"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
   <include
-      android:id="@+id/toolbar_element"
-      layout="@layout/toolbar"
-      style="@style/wrap" />
+      android:id="@+id/toolbar"
+      style="@style/match_w_wrap_h"
+      layout="@layout/toolbar" />
 
   <fragment
       android:id="@+id/preference_fragment"
-      android:layout="@layout/preference_layout"
-      android:name="git.egatuts.nxtremotecontroller.SettingsFragment"
-      android:layout_below="@+id/toolbar_element"
-      style="@style/fragment" />
+      android:name="git.egatuts.nxtremotecontroller.fragment.SettingsFragment"
+      style="@style/fragment"
+      android:layout_below="@+id/toolbar"
+      android:layout="@layout/preference_layout" />
 
 </RelativeLayout>

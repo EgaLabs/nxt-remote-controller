@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RelativeLayout
-    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    style="@style/match_w_h"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/relative_layout_style">
+    android:background="#FFFFFF"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
   <android.support.v7.widget.RecyclerView
       android:id="@+id/discovered_devices"
-      tools:context=".MainActivity"
-      tools:listitem="@layout/paired_device"
-      style="@style/recycler_view" />
+      style="@style/recycler_view"
+      tools:context="git.egatuts.nxtremotecontroller.activity.MainActivity"
+      tools:listitem="@layout/paired_device" />
 
-  <com.gc.materialdesign.views.ButtonFloat
-      android:id="@+id/sync_button"
-      materialdesign:rippleSpeed="7"
-      style="@style/float_button_style" />
+  <com.andexert.library.RippleView
+      android:id="@+id/button_float"
+      style="@style/wrap_w_h"
+      android:layout_alignParentBottom="true"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentRight="true"
+      android:layout_marginBottom="?git.egatuts.nxtremotecontroller:button_float_margin"
+      android:layout_marginEnd="?git.egatuts.nxtremotecontroller:button_float_margin"
+      android:layout_marginRight="?git.egatuts.nxtremotecontroller:button_float_margin"
+      ripple:rv_alpha="210"
+      ripple:rv_centered="true"
+      ripple:rv_rippleDuration="200">
+
+    <ImageView
+        android:id="@+id/button_float_image"
+        android:layout_width="?git.egatuts.nxtremotecontroller:button_float_radius"
+        android:layout_height="?git.egatuts.nxtremotecontroller:button_float_radius"
+        android:padding="20dp"
+        android:src="@drawable/ic_discover" />
+
+  </com.andexert.library.RippleView>
 
 </RelativeLayout>
