@@ -98,6 +98,13 @@
 
 
   <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_auto_discovery">Iniciar proceso de escaneo</string>
+  <string name="preference_summary_auto_discovery">Automáticamente empieza el proceso de escaneo cuando se hace click en la pestaña <i>Escanear</i>.</string>
+  <string name="preference_value_auto_discovery">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
   <string name="preference_title_min_signal">Señal mínima</string>
   <string name="preference_summary_min_signal">Señal mínima registrada para calcular el procentaje. Cuanto más bajo peor. El valor por defecto es -60dBm.</string>
   <string name="preference_dialog_min_signal">¿Cuál es el valor mínimo?</string>

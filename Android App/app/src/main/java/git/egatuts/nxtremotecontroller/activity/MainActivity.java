@@ -78,6 +78,8 @@ public class MainActivity extends UltraBaseActivity implements NavigationDrawerC
 
   public static final String PREFERENCE_BLUETOOTH_DISABLE_KEY = "preference_disable_bluetooth";
   public static final boolean PREFERENCE_BLUETOOTH_DISABLE_VALUE = false;
+  public static final String PREFERENCE_START_DISCOVERY_KEY = "preference_auto_discovery";
+  public static final boolean PREFERENCE_START_DISCOVERY_VALUE = true;
 
   private static final int NAVIGATION_HOME = 0;
   private static final int NAVIGATION_SCAN = 1;
@@ -206,7 +208,7 @@ public class MainActivity extends UltraBaseActivity implements NavigationDrawerC
    */
   @Override
   public void onPostCreate (Bundle savedInstanceState) {
-    //this.drawerFragment.getActionBarDrawerToggle().syncState();
+    this.drawerFragment.getActionBarDrawerToggle().syncState();
     this.appKillerReceiver.registerReceiver();
     super.onPostCreate(savedInstanceState);
   }
@@ -246,7 +248,9 @@ public class MainActivity extends UltraBaseActivity implements NavigationDrawerC
         this.viewFragment = new HomeFragment();
         break;
       case MainActivity.NAVIGATION_SCAN:
-        this.viewFragment = ScanFragment.newInstance(this.devicesAdapter);
+        boolean autoStart = this.getPreferencesEditor()
+                .getBoolean(MainActivity.PREFERENCE_START_DISCOVERY_KEY, MainActivity.PREFERENCE_START_DISCOVERY_VALUE);
+        this.viewFragment = ScanFragment.newInstance(this.devicesAdapter, autoStart);
         break;
       case MainActivity.NAVIGATION_SETTINGS:
         this.intent = new Intent(this, SettingsActivity.class);

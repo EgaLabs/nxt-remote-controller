@@ -98,6 +98,13 @@
   <!-- [/preference_fragment.xml] -->
 
 
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_auto_discovery">Start scan process</string>
+  <string name="preference_summary_auto_discovery">Automatically starts the scan process when the tab <i>Scan</i> is clicked.</string>
+  <string name="preference_value_auto_discovery">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
   <!-- [preference_fragment.xml] -->
   <string name="preference_title_min_signal">Minimum signal</string>
   <string name="preference_summary_min_signal">Minimum registered strength signal used to calculate the percentage. The lower the value the worse. Default value is -60dBm.</string>

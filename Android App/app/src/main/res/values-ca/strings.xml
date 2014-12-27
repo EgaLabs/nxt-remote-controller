@@ -98,6 +98,13 @@
 
 
   <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_auto_discovery">Iniciar procés d\'escanjat</string>
+  <string name="preference_summary_auto_discovery">Automàticament inicia el procés d\'escaneig quan es fa click a la pestanya <i>Escanejar</i>.</string>
+  <string name="preference_value_auto_discovery">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
   <string name="preference_title_min_signal">Senyal mínima</string>
   <string name="preference_summary_min_signal">Senyal mínima registrada per calcular el percentatge. Com més petit pitjor. El valor per defecte és -60dBm.</string>
   <string name="preference_dialog_min_signal">Quin és el valor mínim?</string>

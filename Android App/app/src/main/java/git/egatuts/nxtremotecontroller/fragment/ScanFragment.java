@@ -50,6 +50,7 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
@@ -76,7 +77,7 @@ import git.egatuts.nxtremotecontroller.views.BaseIndeterminateProgressDialog;
 /*
  *  Fragment shown when selected scan option in drawer menu.
  */
-public class ScanFragment extends ActivityBaseFragment {
+public class ScanFragment extends ActivityBaseFragment implements Animation.AnimationListener {
 
   public static final String PREFERENCE_MAX_SIGNAL_KEY = "preference_maximum_signal";
   public static final String PREFERENCE_MAX_SIGNAL_VALUE = "0";
@@ -100,6 +101,7 @@ public class ScanFragment extends ActivityBaseFragment {
   private BluetoothPairingReceiver bluetoothPairingReceiver;
   private BluetoothPairingListener bluetoothPairingListener;
   private boolean isPairing;
+  private boolean autoStart;
 
   private AlphaAnimation fadeOutAnim;
   private AlphaAnimation fadeInAnim;
@@ -200,11 +202,23 @@ public class ScanFragment extends ActivityBaseFragment {
   }
 
   /*
+   *  Getter and setter for auto start.
+   */
+  public void setAutoStart (boolean autoStart) {
+    this.autoStart = autoStart;
+  }
+
+  public boolean getAutoStart (boolean autoStart) {
+    return this.autoStart;
+  }
+
+  /*
    *  Static method used to create a new instance of the fragment.
    */
-  public static ScanFragment newInstance (PairedDeviceAdapter adapter) {
+  public static ScanFragment newInstance (PairedDeviceAdapter adapter, boolean autoStart) {
     ScanFragment fragment = new ScanFragment();
     fragment.setDevicesAdapter(adapter);
+    fragment.setAutoStart(autoStart);
     return fragment;
   }
 
@@ -553,6 +567,33 @@ public class ScanFragment extends ActivityBaseFragment {
     }));
 
     return view;
+  }
+
+  /*
+   *  When the fragment is replaced it does an animation so we check the animation has finished
+   *  and then we perform the click to the button float if necessary.
+   */
+  @Override public void onAnimationStart (Animation animation) {}
+  @Override public void onAnimationRepeat (Animation animation) {}
+
+  @Override
+  public void onAnimationEnd (Animation animation) {
+    if (this.autoStart) {
+      this.autoStart = false;
+      this.buttonFloat.performClick();
+    }
+  }
+
+  @Override
+  public Animation onCreateAnimation (int transit, boolean enter, int nextAnim) {
+    Animation anim = super.onCreateAnimation(transit, enter, nextAnim);
+    if (anim == null && nextAnim != 0) {
+      anim = AnimationUtils.loadAnimation(getActivity(), nextAnim);
+    }
+    if (anim != null) {
+      anim.setAnimationListener(this);
+    }
+    return anim;
   }
 
 }

@@ -33,6 +33,11 @@
         android:title="@string/preference_title_disable_bluetooth"
         android:summary="@string/preference_summary_disable_bluetooth"
         android:defaultValue="@string/preference_value_disable_bluetooth" />
+    <CheckBoxPreference
+        android:key="preference_auto_discovery"
+        android:title="@string/preference_title_auto_discovery"
+        android:summary="@string/preference_summary_auto_discovery"
+        android:defaultValue="@string/preference_value_auto_discovery" />
   </PreferenceCategory>
 
   <PreferenceCategory android:title="@string/settings_category_misc">
