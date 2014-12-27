@@ -47,6 +47,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 
 import git.egatuts.nxtremotecontroller.R;
+import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
 import git.egatuts.nxtremotecontroller.fragment.ActivityBaseFragment;
 import git.egatuts.nxtremotecontroller.fragment.BluetoothFragment;
 import git.egatuts.nxtremotecontroller.fragment.FragmentPendingTransition;
@@ -85,6 +86,7 @@ public class MainActivity extends UltraBaseActivity implements NavigationDrawerC
   private static final int NAVIGATION_DONATE = 4;
 
   private NavigationDrawerFragment drawerFragment;
+  private PairedDeviceAdapter devicesAdapter;
   private ActivityBaseFragment viewFragment;
   private ActivityBaseFragment activeFragment;
   private ActivityBaseFragment lastFragment;
@@ -118,6 +120,13 @@ public class MainActivity extends UltraBaseActivity implements NavigationDrawerC
       this.progressDialog = new ShortIndeterminateProgressDialog(this);
     }
     return this.progressDialog;
+  }
+
+  /*
+   *  Saves the adapter.
+   */
+  public void saveAdapter (PairedDeviceAdapter adapter) {
+    this.devicesAdapter = adapter;
   }
 
   /*
@@ -237,7 +246,7 @@ public class MainActivity extends UltraBaseActivity implements NavigationDrawerC
         this.viewFragment = new HomeFragment();
         break;
       case MainActivity.NAVIGATION_SCAN:
-        this.viewFragment = new ScanFragment();
+        this.viewFragment = ScanFragment.newInstance(this.devicesAdapter);
         break;
       case MainActivity.NAVIGATION_SETTINGS:
         this.intent = new Intent(this, SettingsActivity.class);

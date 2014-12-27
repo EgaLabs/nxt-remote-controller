@@ -57,9 +57,11 @@ import android.widget.ImageView;
 import com.andexert.library.RippleView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import git.egatuts.nxtremotecontroller.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
+import git.egatuts.nxtremotecontroller.activity.MainActivity;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceItemClickListener;
@@ -110,7 +112,8 @@ public class ScanFragment extends ActivityBaseFragment {
   /*
    *  Empty constructor.
    */
-  public ScanFragment () {}
+  public ScanFragment () {
+  }
 
   /*
    *  Changes the icon of the button float.
@@ -168,6 +171,50 @@ public class ScanFragment extends ActivityBaseFragment {
       return true;
     }
     return false;
+  }
+
+  /*
+   *  Saves the adapter passing it to the activity.
+   */
+  public void saveAdapter (PairedDeviceAdapter adapter) {
+    ((MainActivity) this.getBaseActivity()).saveAdapter(adapter);
+  }
+
+  /*
+   *  Getter and setter for device adapter.
+   */
+  public void setDevicesAdapter (PairedDeviceAdapter adapter) {
+    this.devicesAdapter = adapter;
+  }
+
+  public void setDevicesAdapter (ArrayList<PairedDevice> devices) {
+    this.devicesAdapter = new PairedDeviceAdapter(this, devices);
+  }
+
+  public void setDevicesAdapter (PairedDevice[] devices) {
+    this.setDevicesAdapter(new ArrayList<PairedDevice>(Arrays.asList(devices)));
+  }
+
+  public PairedDeviceAdapter getDevicesAdapter () {
+    return this.devicesAdapter;
+  }
+
+  /*
+   *  Static method used to create a new instance of the fragment.
+   */
+  public static ScanFragment newInstance (PairedDeviceAdapter adapter) {
+    ScanFragment fragment = new ScanFragment();
+    fragment.setDevicesAdapter(adapter);
+    return fragment;
+  }
+
+  /*
+   *  When the fragment is destroyed we save the adapter.
+   */
+  @Override
+  public void onDestroy () {
+    this.saveAdapter(this.devicesAdapter);
+    super.onDestroy();
   }
 
   /*
@@ -399,12 +446,16 @@ public class ScanFragment extends ActivityBaseFragment {
   @Override
   public View onCreateView (LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
     final ScanFragment self = this;
-    View view = inflater.inflate(R.layout.scan_fragment, parent, false);
 
     /*
      *  Creates the adapter and configures the linear layout manager.
+     *  We use the previous devices if available.
      */
-    this.devicesAdapter = new PairedDeviceAdapter(this, new ArrayList<PairedDevice>(0));
+
+    ArrayList<PairedDevice> devices;
+    View view = inflater.inflate(R.layout.scan_fragment, parent, false);
+
+    if (this.devicesAdapter == null) this.devicesAdapter = new PairedDeviceAdapter(this, new ArrayList<PairedDevice>(0));
     this.linearLayoutManager = new LinearLayoutManager(this.getBaseActivity());
     this.linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
     this.linearLayoutManager.scrollToPosition(0);
@@ -426,7 +477,7 @@ public class ScanFragment extends ActivityBaseFragment {
     background.setCornerRadius(radius);
     background.setColor(color);
 
-    /*
+      /*
      *  Now we set the color of the background, the ripple color and the default image of the button.
      */
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -434,6 +485,12 @@ public class ScanFragment extends ActivityBaseFragment {
     } else {
       this.buttonFloat.setBackgroundDrawable(background);
     }
+
+    /*
+     *  If the user was stupid and exited the fragment when it was discovering
+     *  and now enters it again it will still be searching so we start the animation
+     *  and re-register the BroadcastReceiver.
+     */
     this.buttonFloatImage.setImageDrawable(utils.getDrawableResource(R.drawable.ic_discover));
     this.buttonFloat.setRippleColor(utils.getDarkerColor(color, 0.65f));
     this.buttonFloat.setOnClickListener(new View.OnClickListener() {

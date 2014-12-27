@@ -109,6 +109,13 @@ public class PairedDeviceAdapter extends RecyclerView.Adapter<PairedDeviceViewHo
   }
 
   /*
+   *  Returns all the devices stored in the adapter. Remember they are Parcelable :)
+   */
+  public PairedDevice[] getAll () {
+    return (PairedDevice[]) this.pairedDevices.toArray();
+  }
+
+  /*
    *  Returns size of the added data.
    */
   @Override

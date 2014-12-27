@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
+import git.egatuts.nxtremotecontroller.device.PairedDeviceItemClickListener;
 
 /*
  *  Default Activity fragment that shows all bonded devices.
@@ -71,6 +72,17 @@ public class HomeFragment extends ActivityBaseFragment {
     this.recyclerView.setAdapter(this.pairedDeviceAdapter);
     this.recyclerView.setLayoutManager(this.linearLayoutManager);
     this.recyclerView.setItemAnimator(new DefaultItemAnimator());
+    this.recyclerView.addOnItemTouchListener(new PairedDeviceItemClickListener(this.getBaseActivity(), new PairedDeviceItemClickListener.OnItemClickListener() {
+      @Override
+      public void onItemClick (View view, int position) {
+
+      }
+
+      @Override
+      public void onItemLongClick (View view, int position) {
+
+      }
+    }));
 
     return view;
   }
