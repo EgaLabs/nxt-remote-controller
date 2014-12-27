@@ -491,7 +491,13 @@ public class ScanFragment extends ActivityBaseFragment {
      *  and now enters it again it will still be searching so we start the animation
      *  and re-register the BroadcastReceiver.
      */
-    this.buttonFloatImage.setImageDrawable(utils.getDrawableResource(R.drawable.ic_discover));
+    if (this.getBluetoothUtils().isDiscovering()) {
+      this.bluetoothDiscoveryReceiver.registerReceiver();
+      this.buttonFloatImage.setImageDrawable(utils.getDrawableResource(R.drawable.ic_sync));
+      this.buttonFloatImage.startAnimation(this.spinAnim);
+    } else {
+      this.buttonFloatImage.setImageDrawable(utils.getDrawableResource(R.drawable.ic_discover));
+    }
     this.buttonFloat.setRippleColor(utils.getDarkerColor(color, 0.65f));
     this.buttonFloat.setOnClickListener(new View.OnClickListener() {
       @Override
