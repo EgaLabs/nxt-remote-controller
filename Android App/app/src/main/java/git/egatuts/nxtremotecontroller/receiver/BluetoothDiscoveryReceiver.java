@@ -39,16 +39,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
-import git.egatuts.nxtremotecontroller.activity.UltraBaseActivity;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
-import git.egatuts.nxtremotecontroller.fragment.ScanFragment;
-import git.egatuts.nxtremotecontroller.listener.UltraBaseListener;
-import git.egatuts.nxtremotecontroller.preference.PreferencesUtils;
+import git.egatuts.nxtremotecontroller.listener.BaseListener;
 
 /*
  *  BluetoothDiscoveryReceiver class used to register a BroadcastReceiver using an BluetoothDiscoveryListener.
  */
-public class BluetoothDiscoveryReceiver extends UltraBaseReceiver {
+public class BluetoothDiscoveryReceiver extends BaseReceiver {
 
   /*
    *  Constructors.
@@ -64,7 +61,7 @@ public class BluetoothDiscoveryReceiver extends UltraBaseReceiver {
     this.init();
   }
 
-  public BluetoothDiscoveryReceiver (Context context, UltraBaseListener listener) {
+  public BluetoothDiscoveryReceiver (Context context, BaseListener listener) {
     super(context, listener);
     this.init();
   }

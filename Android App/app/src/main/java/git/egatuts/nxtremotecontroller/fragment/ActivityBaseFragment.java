@@ -42,7 +42,7 @@ import git.egatuts.nxtremotecontroller.views.BaseIndeterminateProgressDialog;
  *  Defines the default transaction animations.
  *  Prevents the fragment to be resumed if Bluetooth is not enabled.
  */
-public abstract class ActivityBaseFragment extends UltraBaseFragment implements FragmentPendingTransition {
+public abstract class ActivityBaseFragment extends BaseFragment implements FragmentPendingTransition {
 
   /*
    *  Getter and setter for the lastFragment parent's activity property.
@@ -51,7 +51,7 @@ public abstract class ActivityBaseFragment extends UltraBaseFragment implements 
     ((MainActivity) this.getActivity()).setLastFragment(fragment);
   }
 
-  public UltraBaseFragment getLastFragment () {
+  public BaseFragment getLastFragment () {
     return ((MainActivity) this.getActivity()).getLastFragment();
   }
 
@@ -70,7 +70,7 @@ public abstract class ActivityBaseFragment extends UltraBaseFragment implements 
    *  Transitions.
    */
   @Override
-  public int[] onForward (UltraBaseFragment fragment) {
+  public int[] onForward (BaseFragment fragment) {
     return new int[] { R.anim.transaction_in, R.anim.transaction_out };
   }
 
@@ -96,7 +96,7 @@ public abstract class ActivityBaseFragment extends UltraBaseFragment implements 
    *  Overridden default method to replace fragment.
    */
   @Override
-  public void replaceFragmentWith (UltraBaseFragment fragment, FragmentPendingTransition transitionInterface) {
+  public void replaceFragmentWith (BaseFragment fragment, FragmentPendingTransition transitionInterface) {
     if (!(fragment instanceof BluetoothFragment)) {
       this.setLastFragment((ActivityBaseFragment) fragment);
     }

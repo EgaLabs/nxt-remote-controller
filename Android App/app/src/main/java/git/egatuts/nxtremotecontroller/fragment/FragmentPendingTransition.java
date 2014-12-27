@@ -40,7 +40,7 @@ public interface FragmentPendingTransition {
   /*
    *  Returns an Array with the resources that define the animation done when a new fragment replaces the active one.
    */
-  public int[] onForward (UltraBaseFragment fragment);
+  public int[] onForward (BaseFragment fragment);
 
   /*
    *  Returns an Array with the resources that define the animation done when the fragment is replaced.

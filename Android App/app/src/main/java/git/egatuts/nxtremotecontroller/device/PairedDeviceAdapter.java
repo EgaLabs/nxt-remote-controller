@@ -45,8 +45,8 @@ import java.util.ArrayList;
 
 import git.egatuts.nxtremotecontroller.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
-import git.egatuts.nxtremotecontroller.activity.UltraBaseActivity;
-import git.egatuts.nxtremotecontroller.fragment.UltraBaseFragment;
+import git.egatuts.nxtremotecontroller.activity.BaseActivity;
+import git.egatuts.nxtremotecontroller.fragment.BaseFragment;
 
 /*
  *  Extended class of the RecyclerView.Adapter to show the paired/found devices.
@@ -77,11 +77,11 @@ public class PairedDeviceAdapter extends RecyclerView.Adapter<PairedDeviceViewHo
     this.signalDrawable = tmpDrawable;
   }
 
-  public PairedDeviceAdapter (UltraBaseFragment context, ArrayList<PairedDevice> devices) {
+  public PairedDeviceAdapter (BaseFragment context, ArrayList<PairedDevice> devices) {
     this(context.getGlobalUtils(), devices);
   }
 
-  public PairedDeviceAdapter (UltraBaseActivity context, ArrayList<PairedDevice> devices) {
+  public PairedDeviceAdapter (BaseActivity context, ArrayList<PairedDevice> devices) {
     this(context.getGlobalUtils(), devices);
   }
 
@@ -89,11 +89,11 @@ public class PairedDeviceAdapter extends RecyclerView.Adapter<PairedDeviceViewHo
     this.utils = utils;
   }
 
-  public PairedDeviceAdapter (UltraBaseFragment context) {
+  public PairedDeviceAdapter (BaseFragment context) {
     this(context.getGlobalUtils());
   }
 
-  public PairedDeviceAdapter (UltraBaseActivity context) {
+  public PairedDeviceAdapter (BaseActivity context) {
     this(context.getGlobalUtils());
   }
 

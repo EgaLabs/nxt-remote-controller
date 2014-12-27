@@ -49,11 +49,11 @@ import android.view.KeyEvent;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
 import git.egatuts.nxtremotecontroller.fragment.ActivityBaseFragment;
+import git.egatuts.nxtremotecontroller.fragment.BaseFragment;
 import git.egatuts.nxtremotecontroller.fragment.BluetoothFragment;
 import git.egatuts.nxtremotecontroller.fragment.FragmentPendingTransition;
 import git.egatuts.nxtremotecontroller.fragment.HomeFragment;
 import git.egatuts.nxtremotecontroller.fragment.ScanFragment;
-import git.egatuts.nxtremotecontroller.fragment.UltraBaseFragment;
 import git.egatuts.nxtremotecontroller.listener.AppKillerListener;
 import git.egatuts.nxtremotecontroller.listener.BluetoothEnableListener;
 import git.egatuts.nxtremotecontroller.navigation.NavigationDrawerCallback;
@@ -70,7 +70,7 @@ import git.egatuts.nxtremotecontroller.views.ShortIndeterminateProgressDialog;
  *  Keep in mind that it doesn't load by default a fragment, it relays
  *  on the NavigationDrawerCallback#onNavigationItemSelected.
  */
-public class MainActivity extends UltraBaseActivity implements NavigationDrawerCallback, ActivityPendingTransition {
+public class MainActivity extends BaseActivity implements NavigationDrawerCallback, ActivityPendingTransition {
 
   public static final String ACTION_RESTART_APP = "restart_app";
   public static final String URL_HELP = "https://github.com/Egatuts/nxt-remote-controller";
@@ -134,7 +134,7 @@ public class MainActivity extends UltraBaseActivity implements NavigationDrawerC
   /*
    *  "Overridden" method replaceFragmentWith because we know the id of the frame layout.
    */
-  public void replaceFragmentWith (UltraBaseFragment fragment, FragmentPendingTransition transitionInterface) {
+  public void replaceFragmentWith (BaseFragment fragment, FragmentPendingTransition transitionInterface) {
     super.replaceFragmentWith(R.id.main_container, fragment, transitionInterface);
   }
 

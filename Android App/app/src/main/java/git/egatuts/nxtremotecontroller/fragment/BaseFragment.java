@@ -29,88 +29,54 @@
  *                                                                                                                                                                 *
  *  And the corresponding file at:                                                                                                                                 *
  *                                                                                                                                                                 *
- *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/activity/SettingsActivity.java  *
+ *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/fragment/BaseFragment.java *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-package git.egatuts.nxtremotecontroller.activity;
+package git.egatuts.nxtremotecontroller.fragment;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 
-import git.egatuts.nxtremotecontroller.R;
+import git.egatuts.nxtremotecontroller.GlobalUtils;
+import git.egatuts.nxtremotecontroller.activity.BaseActivity;
+import git.egatuts.nxtremotecontroller.activity.MainActivity;
+import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
+import git.egatuts.nxtremotecontroller.preference.PreferencesUtils;
 
-/*
- *  Main settings activity which only purpose is to inflate the view with the PreferenceFragment.
- */
-public class SettingsActivity extends BaseActivity implements ActivityPendingTransition {
+public abstract class BaseFragment extends Fragment {
 
-  private boolean themeChanged = false;
-
-  /*
-   *  Constant used as Intent extra data to know when to send a
-   *  broadcast intent to the AppKillerReceiver to kill the MainActivity.
-   */
-  public static final String EXTRA_KILL_APP = "restart";
-
-  /**
-   * @see ActivityPendingTransition#onForward(android.content.Intent)
-   */
-  @Override
-  public int[] onForward (Intent intent) {
-    return new int[] {};
-  }
-
-  /**
-   * @see ActivityPendingTransition#onBackward()
-   */
-  @Override
-  public int[] onBackward () {
-    return new int[] { R.anim.settings_transition_back_in, R.anim.settings_transition_back_out };
-  }
+  protected BaseFragment newFragment;
 
   /*
-   *  Goes to the previous activity finishing the actual one.
+   *  Getters for BaseActivity methods.
    */
-  private void goToPreviousActivity () {
-    if (this.themeChanged) super.startActivity(this, MainActivity.class);
-    super.finish(this);
+  public BaseActivity getBaseActivity () {
+    return (BaseActivity) this.getActivity();
+  }
+  public BluetoothUtils getBluetoothUtils () {
+    return this.getBaseActivity().getBluetoothUtils();
+  }
+
+  public FragmentManager getSupportFragmentManager () {
+    return this.getBaseActivity().getFragmentmanager();
+  }
+
+  public GlobalUtils getGlobalUtils () {
+    return this.getBaseActivity().getGlobalUtils();
+  }
+
+  public PreferencesUtils getPreferencesUtils () {
+    return this.getBaseActivity().getPreferencesUtils();
+  }
+
+  public PreferencesUtils.Editor getPreferencesEditor () {
+    return this.getPreferencesUtils().getEditor();
   }
 
   /*
-   *  Sets the theme to the one selected on the preferences.
-   *  Sets the View#OnclickListener() to the navigation toolbar button to simulate back button press.
+   *  Replaces the active fragment.
    */
-  @Override
-  public void onCreate (Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    super.setActiveTheme(super.getPreferenceTheme());
-    super.setContentView(R.layout.preference_layout);
-    toolbar = (Toolbar) findViewById(R.id.toolbar);
-    super.setSupportToolbar();
-    if (this.getIntent().getBooleanExtra(SettingsActivity.EXTRA_KILL_APP, false)) {
-      this.themeChanged = true;
-    }
-
-    /*
-     *  When the toolbar home button we go to the previous activity killing
-     *  the actual one to avoid going back through the history stack and
-     *  avoid some themes bugs.
-     */
-    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick (View v) {
-        SettingsActivity.this.goToPreviousActivity();
-      }
-    });
+  public void replaceFragmentWith (BaseFragment fragment, FragmentPendingTransition transitionInterface) {
+    ((MainActivity) this.getActivity()).replaceFragmentWith(fragment, transitionInterface);
   }
 
-  /*
-   *  When the back button is pressed, it does the same as pressing the home/up toolbar button.
-   */
-  @Override
-  public void onBackPressed () {
-    this.goToPreviousActivity();
-    super.onBackPressed();
-  }
 }

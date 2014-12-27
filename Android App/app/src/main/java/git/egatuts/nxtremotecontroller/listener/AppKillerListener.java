@@ -37,9 +37,9 @@ import android.content.Context;
 import android.content.Intent;
 
 /*
- *  Extended class of UltraBaseListener which purpose is to listen for an event fired from SettingsFragment.
+ *  Extended class of BaseListener which purpose is to listen for an event fired from SettingsFragment.
  */
-public abstract class AppKillerListener extends UltraBaseListener {
+public abstract class AppKillerListener extends BaseListener {
 
   @Override public void onConnectionChange (Context context, Intent intent) {}
   @Override public void onDiscoveryFinish  (Context context, Intent intent) {}

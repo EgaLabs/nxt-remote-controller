@@ -29,88 +29,53 @@
  *                                                                                                                                                                 *
  *  And the corresponding file at:                                                                                                                                 *
  *                                                                                                                                                                 *
- *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/activity/SettingsActivity.java  *
+ *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/listener/BaseListener.java *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-package git.egatuts.nxtremotecontroller.activity;
+package git.egatuts.nxtremotecontroller.listener;
 
+import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-
-import git.egatuts.nxtremotecontroller.R;
 
 /*
- *  Main settings activity which only purpose is to inflate the view with the PreferenceFragment.
+ *  Most base listener which defines all the possible events.
  */
-public class SettingsActivity extends BaseActivity implements ActivityPendingTransition {
-
-  private boolean themeChanged = false;
+public abstract class BaseListener {
 
   /*
-   *  Constant used as Intent extra data to know when to send a
-   *  broadcast intent to the AppKillerReceiver to kill the MainActivity.
+   *  Methods for Broadcast Actions from BluetoothAdapter.
    */
-  public static final String EXTRA_KILL_APP = "restart";
+  public abstract void onConnectionChange (Context context, Intent intent);
 
-  /**
-   * @see ActivityPendingTransition#onForward(android.content.Intent)
-   */
-  @Override
-  public int[] onForward (Intent intent) {
-    return new int[] {};
-  }
+  public abstract void onDiscoveryFinish (Context context, Intent intent);
 
-  /**
-   * @see ActivityPendingTransition#onBackward()
-   */
-  @Override
-  public int[] onBackward () {
-    return new int[] { R.anim.settings_transition_back_in, R.anim.settings_transition_back_out };
-  }
+  public abstract void onDiscoveryStart (Context context, Intent intent);
+
+  public abstract void onLocalNameChange (Context context, Intent intent);
+
+  public abstract void onScanModeChange (Context context, Intent intent);
+
+  public abstract void onStateChange (Context context, Intent intent);
 
   /*
-   *  Goes to the previous activity finishing the actual one.
+   *  Methods for Broadcast Actions from BluetoothDevice.
    */
-  private void goToPreviousActivity () {
-    if (this.themeChanged) super.startActivity(this, MainActivity.class);
-    super.finish(this);
-  }
+  public abstract void onLowLevelConnect (Context context, Intent intent);
+
+  public abstract void onLowLevelDisconnect (Context context, Intent intent);
+
+  public abstract void onLowLevelDisconnectRequest (Context context, Intent intent);
+
+  public abstract void onBondStateChange (Context context, Intent intent);
+
+  public abstract void onDeviceClassChange (Context context, Intent intent);
+
+  public abstract void onDeviceFound (Context context, Intent intent);
+
+  public abstract void onRemoteNameChange (Context context, Intent intent);
 
   /*
-   *  Sets the theme to the one selected on the preferences.
-   *  Sets the View#OnclickListener() to the navigation toolbar button to simulate back button press.
+   *  Our unique intent.
    */
-  @Override
-  public void onCreate (Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    super.setActiveTheme(super.getPreferenceTheme());
-    super.setContentView(R.layout.preference_layout);
-    toolbar = (Toolbar) findViewById(R.id.toolbar);
-    super.setSupportToolbar();
-    if (this.getIntent().getBooleanExtra(SettingsActivity.EXTRA_KILL_APP, false)) {
-      this.themeChanged = true;
-    }
+  public abstract void onAppNeedsRestart (Context context, Intent intent);
 
-    /*
-     *  When the toolbar home button we go to the previous activity killing
-     *  the actual one to avoid going back through the history stack and
-     *  avoid some themes bugs.
-     */
-    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick (View v) {
-        SettingsActivity.this.goToPreviousActivity();
-      }
-    });
-  }
-
-  /*
-   *  When the back button is pressed, it does the same as pressing the home/up toolbar button.
-   */
-  @Override
-  public void onBackPressed () {
-    this.goToPreviousActivity();
-    super.onBackPressed();
-  }
 }

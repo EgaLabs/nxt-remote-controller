@@ -38,12 +38,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 
 import git.egatuts.nxtremotecontroller.activity.MainActivity;
-import git.egatuts.nxtremotecontroller.listener.UltraBaseListener;
+import git.egatuts.nxtremotecontroller.listener.BaseListener;
 
 /*
  * AppKillerReceiver class used to register a BroadcastReceiver using an AppKillerListener.
  */
-public class AppKillerReceiver extends UltraBaseReceiver {
+public class AppKillerReceiver extends BaseReceiver {
 
   /*
    *  Constructors.
@@ -57,7 +57,7 @@ public class AppKillerReceiver extends UltraBaseReceiver {
     this.init();
   }
 
-  public AppKillerReceiver (Context context, UltraBaseListener listener) {
+  public AppKillerReceiver (Context context, BaseListener listener) {
     super(context, listener);
     this.init();
   }

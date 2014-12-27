@@ -6,7 +6,7 @@ import android.os.Handler;
 
 import java.io.IOException;
 
-import git.egatuts.nxtremotecontroller.activity.UltraBaseActivity;
+import git.egatuts.nxtremotecontroller.activity.BaseActivity;
 import git.egatuts.nxtremotecontroller.bluetooth.exception.ConnectionFailedException;
 import git.egatuts.nxtremotecontroller.bluetooth.threads.ConnectThread;
 import git.egatuts.nxtremotecontroller.bluetooth.threads.ConnectedThread;
@@ -19,7 +19,7 @@ public class NXTConnector {
   private Handler handler;
   private BluetoothUtils bluetooth_utils;
   private BluetoothSocket socket;
-  private UltraBaseActivity activity;
+  private BaseActivity activity;
 
   private ConnectThread connect_thread;
   private ConnectedThread connected_thread;

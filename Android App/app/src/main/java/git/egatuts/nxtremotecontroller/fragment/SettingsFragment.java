@@ -38,11 +38,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.preference.PreferenceFragment;
 
-import git.egatuts.nxtremotecontroller.activity.ActivityPendingTransition;
+import git.egatuts.nxtremotecontroller.activity.BaseActivity;
 import git.egatuts.nxtremotecontroller.activity.MainActivity;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.SettingsActivity;
-import git.egatuts.nxtremotecontroller.activity.UltraBaseActivity;
 
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -53,8 +52,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
    */
   @Override
   public void onSharedPreferenceChanged (SharedPreferences sharedPreferences, String key) {
-    UltraBaseActivity context = (UltraBaseActivity) this.getActivity();
-    if (key.equals(UltraBaseActivity.PREFERENCE_THEME_NAME)) {
+    BaseActivity context = (BaseActivity) this.getActivity();
+    if (key.equals(BaseActivity.PREFERENCE_THEME_NAME)) {
       Intent intent = new Intent(context, context.getClass());
       intent.putExtra(SettingsActivity.EXTRA_KILL_APP, true);
       context.startActivity(intent);
@@ -69,7 +68,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
   @Override
   public void onCreate (Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    UltraBaseActivity activity = (UltraBaseActivity) this.getActivity();
+    BaseActivity activity = (BaseActivity) this.getActivity();
     super.addPreferencesFromResource(R.layout.preference_fragment);
     if (activity.getIntent().getBooleanExtra(SettingsActivity.EXTRA_KILL_APP, false)) {
       Intent intent = new Intent();

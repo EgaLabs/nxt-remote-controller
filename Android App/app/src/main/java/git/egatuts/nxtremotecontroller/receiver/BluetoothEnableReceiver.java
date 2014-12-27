@@ -38,12 +38,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
-import git.egatuts.nxtremotecontroller.listener.UltraBaseListener;
+import git.egatuts.nxtremotecontroller.listener.BaseListener;
 
 /*
  *  BluetoothEnableReceiver class used to register a BroadcastReceiver using an BluetoothDiscoveryListener.
  */
-public class BluetoothEnableReceiver extends UltraBaseReceiver {
+public class BluetoothEnableReceiver extends BaseReceiver {
 
   /*
    *  Constructors.
@@ -57,7 +57,7 @@ public class BluetoothEnableReceiver extends UltraBaseReceiver {
     this.init();
   }
 
-  public BluetoothEnableReceiver (Context context, UltraBaseListener listener) {
+  public BluetoothEnableReceiver (Context context, BaseListener listener) {
     super(context, listener);
     this.init();
   }

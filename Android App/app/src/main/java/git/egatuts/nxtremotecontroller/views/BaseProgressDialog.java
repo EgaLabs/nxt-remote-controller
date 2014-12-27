@@ -37,17 +37,16 @@ import android.app.ProgressDialog;
 import android.view.View;
 import android.widget.TextView;
 
-import git.egatuts.nxtremotecontroller.activity.MainActivity;
-import git.egatuts.nxtremotecontroller.activity.UltraBaseActivity;
+import git.egatuts.nxtremotecontroller.activity.BaseActivity;
 
 /*
  *  Base progress dialog class.
  */
 public abstract class BaseProgressDialog extends ProgressDialog {
 
-  protected UltraBaseActivity activity;
+  protected BaseActivity activity;
 
-  public BaseProgressDialog (UltraBaseActivity activity) {
+  public BaseProgressDialog (BaseActivity activity) {
     super(activity);
     this.setCancelable(false);
     this.activity = activity;

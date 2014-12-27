@@ -37,9 +37,9 @@ import android.content.Context;
 import android.content.Intent;
 
 /*
- *  Extended class of UltraBaseListener which listens for bonding states changes.
+ *  Extended class of BaseListener which listens for bonding states changes.
  */
-public abstract class BluetoothPairingListener extends UltraBaseListener {
+public abstract class BluetoothPairingListener extends BaseListener {
 
   @Override public void onConnectionChange (Context context, Intent intent) {}
   @Override public void onDiscoveryFinish  (Context context, Intent intent) {}

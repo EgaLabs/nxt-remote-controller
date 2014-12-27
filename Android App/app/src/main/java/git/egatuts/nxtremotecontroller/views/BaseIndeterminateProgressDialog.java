@@ -38,7 +38,7 @@ import android.view.View;
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 
 import git.egatuts.nxtremotecontroller.R;
-import git.egatuts.nxtremotecontroller.activity.UltraBaseActivity;
+import git.egatuts.nxtremotecontroller.activity.BaseActivity;
 
 /*
  *  Extended class of ProgressDialog used in all the application only
@@ -49,7 +49,7 @@ public class BaseIndeterminateProgressDialog extends BaseProgressDialog {
   /*
    *  Constructor.
    */
-  public BaseIndeterminateProgressDialog (UltraBaseActivity activity) {
+  public BaseIndeterminateProgressDialog (BaseActivity activity) {
     super(activity);
   }
 

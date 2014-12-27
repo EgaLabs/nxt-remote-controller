@@ -42,7 +42,7 @@ public class DefaultFragmentPendingTransition implements FragmentPendingTransiti
    *  Empty method.
    */
   @Override
-  public int[] onForward (UltraBaseFragment fragment) {
+  public int[] onForward (BaseFragment fragment) {
     return new int[] { 0, 0 };
   }
 

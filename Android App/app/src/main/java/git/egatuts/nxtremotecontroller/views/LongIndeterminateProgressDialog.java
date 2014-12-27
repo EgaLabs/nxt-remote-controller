@@ -33,7 +33,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.views;
 
-import git.egatuts.nxtremotecontroller.activity.UltraBaseActivity;
+import git.egatuts.nxtremotecontroller.activity.BaseActivity;
 
 /*
  *  Progress dialog class used to show a progress dialog when the app is doing some
@@ -44,7 +44,7 @@ public class LongIndeterminateProgressDialog extends BaseIndeterminateProgressDi
   /*
    *  Constructor.
    */
-  public LongIndeterminateProgressDialog (UltraBaseActivity activity) {
+  public LongIndeterminateProgressDialog (BaseActivity activity) {
     super(activity);
   }
 
