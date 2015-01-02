@@ -15,7 +15,7 @@
  *                                                                                 *
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     *
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       *
- *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE    *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE    *
  *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         *
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  *
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN      *
@@ -46,11 +46,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 
+import com.andexert.library.RippleView;
+
 import git.egatuts.nxtremotecontroller.R;
+import git.egatuts.nxtremotecontroller.device.PairedDevice;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
 import git.egatuts.nxtremotecontroller.fragment.ActivityBaseFragment;
 import git.egatuts.nxtremotecontroller.fragment.BaseFragment;
 import git.egatuts.nxtremotecontroller.fragment.BluetoothFragment;
+import git.egatuts.nxtremotecontroller.fragment.DefaultFragmentPendingTransition;
 import git.egatuts.nxtremotecontroller.fragment.FragmentPendingTransition;
 import git.egatuts.nxtremotecontroller.fragment.HomeFragment;
 import git.egatuts.nxtremotecontroller.fragment.ScanFragment;
@@ -61,8 +65,6 @@ import git.egatuts.nxtremotecontroller.navigation.NavigationDrawerFragment;
 import git.egatuts.nxtremotecontroller.receiver.AppKillerReceiver;
 import git.egatuts.nxtremotecontroller.receiver.BluetoothEnableReceiver;
 import git.egatuts.nxtremotecontroller.views.BaseIndeterminateProgressDialog;
-import git.egatuts.nxtremotecontroller.views.LongIndeterminateProgressDialog;
-import git.egatuts.nxtremotecontroller.views.ShortIndeterminateProgressDialog;
 
 /*
  *  Main activity created when the app is called from the android launcher.
@@ -89,13 +91,17 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
 
   private NavigationDrawerFragment drawerFragment;
   private PairedDeviceAdapter devicesAdapter;
-  private ActivityBaseFragment viewFragment;
+  private ActivityBaseFragment selectedFragment;
   private ActivityBaseFragment activeFragment;
   private ActivityBaseFragment lastFragment;
   private Intent intent;
+  private Intent controlIntent;
   private AppKillerReceiver appKillerReceiver;
   private boolean selfDestroyed = false;
   private ProgressDialog.OnDismissListener progressDialogOnDismiss;
+  private RippleView rippleView;
+  private RippleView.AnimationFinishListener rippleViewListener;
+  private PairedDevice device;
   private BluetoothEnableReceiver bluetoothEnableReceiver;
   private long showingTime;
 
@@ -110,18 +116,15 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
     return this.lastFragment;
   }
 
-  public BaseIndeterminateProgressDialog getLongProgressDialog () {
-    if (!(this.progressDialog instanceof LongIndeterminateProgressDialog)) {
-      this.progressDialog = new LongIndeterminateProgressDialog(this);
-    }
-    return this.progressDialog;
+  /*
+   *  Getter and setter for the activeFragment property.
+   */
+  public void setActiveFragment (ActivityBaseFragment fragment) {
+    this.activeFragment = fragment;
   }
 
-  public BaseIndeterminateProgressDialog getShortProgressDialog () {
-    if (!(this.progressDialog instanceof  ShortIndeterminateProgressDialog)) {
-      this.progressDialog = new ShortIndeterminateProgressDialog(this);
-    }
-    return this.progressDialog;
+  public ActivityBaseFragment getActiveFragment () {
+    return this.activeFragment;
   }
 
   /*
@@ -132,10 +135,46 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
   }
 
   /*
-   *  "Overridden" method replaceFragmentWith because we know the id of the frame layout.
+   *  Replaces a fragment with a new one using optional transitions.
    */
-  public void replaceFragmentWith (BaseFragment fragment, FragmentPendingTransition transitionInterface) {
-    super.replaceFragmentWith(R.id.main_container, fragment, transitionInterface);
+  public void replaceFragmentWith (int id, ActivityBaseFragment fragment, FragmentPendingTransition transitionInterface) {
+    FragmentPendingTransition transition = transitionInterface != null ? transitionInterface : new DefaultFragmentPendingTransition();
+    int[] transitions = transition.onForward(fragment);
+    this.activeFragment = fragment;
+    this.fragmentManager
+            .beginTransaction()
+            .setCustomAnimations(transitions[0], transitions[1])
+            .replace(id, fragment)
+            .commit();
+  }
+
+  public void replaceFragmentWith (ActivityBaseFragment fragment, FragmentPendingTransition transitionInterface) {
+    this.replaceFragmentWith(R.id.main_container, fragment, transitionInterface);
+  }
+
+  /*
+   *  Starts the controller activity resetting all the variables used to work with the listeners :(.
+   */
+  private void startControlDevice (Intent intent) {
+    this.device = null;
+    this.rippleView = null;
+    this.controlIntent = null;
+    super.startActivity(intent, this);
+  }
+
+  /*
+   *  Checks if the RippleView is running the ripple animation
+   */
+  public void controlDevice (final RippleView view, final PairedDevice device) {
+    final MainActivity self = this;
+    final Intent intent = new Intent(this, ControllerActivity.class);
+    intent.putExtra("device", device);
+    this.controlIntent = intent;
+    if (!view.isRunning()) {
+      self.startControlDevice(intent);
+    } else {
+      view.setAnimationFinishListener(self.rippleViewListener);
+    }
   }
 
   /*
@@ -229,6 +268,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
     super.startActivity(this.intent, this);
     this.selfDestroyed = true;
     if (this.intent.getAction() == "") super.finish();
+    this.intent = null;
   }
 
   /*
@@ -236,7 +276,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
    */
   @Override
   public void onNavigationDrawerItemSelected (int position) {
-    this.viewFragment = null;
+    this.selectedFragment = null;
     this.intent = null;
 
     /*
@@ -245,12 +285,12 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
      */
     switch (position) {
       case MainActivity.NAVIGATION_HOME:
-        this.viewFragment = new HomeFragment();
+        this.selectedFragment = new HomeFragment();
         break;
       case MainActivity.NAVIGATION_SCAN:
         boolean autoStart = this.getPreferencesEditor()
                 .getBoolean(MainActivity.PREFERENCE_START_DISCOVERY_KEY, MainActivity.PREFERENCE_START_DISCOVERY_VALUE);
-        this.viewFragment = ScanFragment.newInstance(this.devicesAdapter, autoStart);
+        this.selectedFragment = ScanFragment.newInstance(this.devicesAdapter, autoStart);
         break;
       case MainActivity.NAVIGATION_SETTINGS:
         this.intent = new Intent(this, SettingsActivity.class);
@@ -270,18 +310,15 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
     /*
      *  We check which of the two actions we should execute.
      */
-    if (this.activeFragment != null && this.viewFragment != null && !this.bluetoothUtils.isEnabled()) {
+    if (this.activeFragment != null && this.selectedFragment != null && !this.bluetoothUtils.isEnabled()) {
       return;
     }
-    if (this.viewFragment != null) {
+    if (this.selectedFragment != null) {
       if (this.activeFragment != null) {
-        this.activeFragment.replaceFragmentWith(this.viewFragment, this.viewFragment);
+        this.activeFragment.replaceFragmentWith(this.selectedFragment);
       } else {
-        this.fragmentManager.beginTransaction()
-                .replace(R.id.main_container, this.viewFragment)
-                .commit();
+        this.replaceFragmentWith(this.selectedFragment, null);
       }
-      this.activeFragment = this.viewFragment;
     }
   }
 
@@ -342,10 +379,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
         new Handler().postDelayed(new Runnable() {
           @Override
           public void run () {
-            if (!(self.viewFragment instanceof BluetoothFragment)) {
-              self.setLastFragment(self.viewFragment);
-            }
-            self.replaceFragmentWith(self.viewFragment, self.viewFragment);
+            self.replaceFragmentWith(self.selectedFragment, self.activeFragment);
           }
         }, 200);
       }
@@ -387,8 +421,8 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
           progress.show();
           progress.setText(text);
         } else if (hasToChange != 0) {
-          if (hasToChange == 1) self.viewFragment = (ActivityBaseFragment) self.getLastFragment();
-          if (hasToChange == 2) self.viewFragment = new BluetoothFragment();
+          if (hasToChange == 1) self.selectedFragment = self.lastFragment;
+          if (hasToChange == 2) self.selectedFragment = new BluetoothFragment();
           if (!hasToShow && progress.isShowing()) {
             progress.setOnDismissListener(self.progressDialogOnDismiss);
             if (System.currentTimeMillis() - self.showingTime < 500) {
@@ -405,6 +439,12 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
         }
       }
     });
+    this.rippleViewListener = new RippleView.AnimationFinishListener() {
+      @Override
+      public void onFinish () {
+        self.startControlDevice(self.controlIntent);
+      }
+    };
   }
 
 }

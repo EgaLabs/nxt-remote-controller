@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
+  <!-- JoystickView attributes -->
+  <declare-styleable name="JoystickView">
+    <attr name="joystickColor"  format="color" />
+    <attr name="joystickStroke" format="color" />
+  </declare-styleable>
+
   <!-- Toolbar attributes -->
   <attr name="toolbar_background" format="color" />
   <attr name="toolbar_color"      format="color" />

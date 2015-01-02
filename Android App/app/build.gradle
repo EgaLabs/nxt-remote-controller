@@ -20,14 +20,14 @@ android {
 }
 
 repositories {
-    mavenCentral();
+    mavenCentral()
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:support-v4:21.0.2'
     compile 'com.android.support:appcompat-v7:21.0.0'
-    compile 'com.android.support:recyclerview-v7:21.0.3'
+    compile 'com.android.support:recyclerview-v7:21.0.2'
     compile project(':android-support-v4-preferencefragment')
     compile project(':RippleEffect')
     compile project(':MaterialDesign')

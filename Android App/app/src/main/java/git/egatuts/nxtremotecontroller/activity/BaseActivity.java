@@ -15,22 +15,22 @@
  *                                                                                 *
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     *
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       *
- *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE    *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE    *
  *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         *
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  *
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN      *
  *  THE SOFTWARE.                                                                  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *  You can find the entire project at:                                                                                                                            *
- *                                                                                                                                                                 *
- *    https://github.com/Egatuts/nxt-remote-controller                                                                                                             *
- *                                                                                                                                                                 *
- *  And the corresponding file at:                                                                                                                                 *
- *                                                                                                                                                                 *
- *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/activity/BaseActivity.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  You can find the entire project at:                                                                                                                        *
+ *                                                                                                                                                             *
+ *    https://github.com/Egatuts/nxt-remote-controller                                                                                                         *
+ *                                                                                                                                                             *
+ *  And the corresponding file at:                                                                                                                             *
+ *                                                                                                                                                             *
+ *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/activity/BaseActivity.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.activity;
 
 import android.content.Context;
@@ -46,11 +46,10 @@ import android.view.WindowManager;
 import git.egatuts.nxtremotecontroller.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
-import git.egatuts.nxtremotecontroller.fragment.BaseFragment;
-import git.egatuts.nxtremotecontroller.fragment.DefaultFragmentPendingTransition;
-import git.egatuts.nxtremotecontroller.fragment.FragmentPendingTransition;
 import git.egatuts.nxtremotecontroller.preference.PreferencesUtils;
 import git.egatuts.nxtremotecontroller.views.BaseIndeterminateProgressDialog;
+import git.egatuts.nxtremotecontroller.views.LongIndeterminateProgressDialog;
+import git.egatuts.nxtremotecontroller.views.ShortIndeterminateProgressDialog;
 
 /*
  *  Most basic class to extend Activity (ActionBarActivity) classes.
@@ -87,7 +86,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     return this.bluetoothUtils;
   }
 
-  public FragmentManager getFragmentmanager () {
+  public FragmentManager getBaseFragmentManager () {
     return this.fragmentManager;
   }
 
@@ -129,7 +128,7 @@ public abstract class BaseActivity extends ActionBarActivity {
   }
 
   /*
-   * Getter for the Theme saved in the default SharedPreferences.
+   *  Getter for the Theme saved in the default SharedPreferences.
    */
   protected String getPreferenceTheme () {
     String defaultValue = globalUtils.getStringResource(BaseActivity.PREFERENCE_THEME_VALUE);
@@ -191,16 +190,23 @@ public abstract class BaseActivity extends ActionBarActivity {
   }
 
   /*
-   *  Replaces a fragment with a new one using optional transitions.
+   *  Returns a short progress dialog (doFirstAnimation = false and setCancelable = false)
    */
-  public void replaceFragmentWith (int id, BaseFragment fragment, FragmentPendingTransition transitionInterface) {
-    FragmentPendingTransition transition = transitionInterface != null ? transitionInterface : new DefaultFragmentPendingTransition();
-    int[] transitions = transition.onForward(fragment);
-    this.fragmentManager
-            .beginTransaction()
-            .setCustomAnimations(transitions[0], transitions[1])
-            .replace(id, fragment)
-            .commit();
+  public BaseIndeterminateProgressDialog getShortProgressDialog () {
+    if ( !(this.progressDialog instanceof ShortIndeterminateProgressDialog) ) {
+      this.progressDialog = new ShortIndeterminateProgressDialog(this);
+    }
+    return this.progressDialog;
+  }
+
+  /*
+   *  Returns a long progress dialog (doFirstAnimation = true and setCancelable = true)
+   */
+  public BaseIndeterminateProgressDialog getLongProgressDialog () {
+    if ( !(this.progressDialog instanceof LongIndeterminateProgressDialog) ) {
+      this.progressDialog = new LongIndeterminateProgressDialog(this);
+    }
+    return this.progressDialog;
   }
 
   @Override

@@ -46,6 +46,7 @@ public class ShortIndeterminateProgressDialog extends BaseIndeterminateProgressD
    */
   public ShortIndeterminateProgressDialog (BaseActivity activity) {
     super(activity);
+    super.setCancelable(false);
   }
 
   /*
@@ -54,7 +55,6 @@ public class ShortIndeterminateProgressDialog extends BaseIndeterminateProgressD
   @Override
   public void onPostShow () {
     super.onPostShow();
-    super.setCancelable(false);
     super.setDoFirstAnimation(false);
   }
 

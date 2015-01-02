@@ -41,18 +41,20 @@
   <string name="device_type_robot_title">Tipus de dispositiu desconegut</string>
   <string name="device_type_robot_message">El dispositiu %s no s\'identifica com un robot. Vols conectar de totes maneres?</string>
 
-  <string name="preparing_connection_device">Preparant conexió&#8230;</string>
-  <string name="connecting_device">Conectant amb el dispositiu&#8230;</string>
-  <string name="successful_connected">Conectat a %s</string>
-  <string name="connecting_error">No s\'ha pogut connectar amb %s</string>
-  <string name="create_socket_error">No s\'ha pogut crear el Socket Bluetooth</string>
-  <string name="aborted_connection">Conexió abortada</string>
+  <string name="connecting_preparing_connection">Preparant conexió&#8230;</string>
+  <string name="connecting_creating_socket">Creant socket&#8230;</string>
+  <string name="connecting_connecting">Conectant amb el dispositiu&#8230;</string>
+  <string name="connecting_connected">Conectat amb %s</string>
+  <string name="connecting_disconnected">Desconectat de %s</string>
+  <string name="connecting_unexpected_error">Error inesperat</string>
+  <string name="connecting_socket_error">No s\'ha pogut crear el socket</string>
+  <string name="connecting_request_failed">El dispositiu no ha acceptat la conexió</string>
+  <string name="connecting_connection_closed">La conexió s\'ha tancat</string>
+  <string name="connecting_connection_lost">La conexió s\'ha perdut</string>
+  <string name="connecting_aborted">Conexió abortada</string>
+  <string name="connecting_reconnect_title">La conexió ha fallat.</string>
+  <string name="connecting_reconnect_message">S\'ha perdut la conexió amb el dispositiu %s. Voldríes reconectar?</string>
   <!-- [/home_fragment.xml] -->
-
-
-  <!-- [ControllerActivity.java]  -->
-  <string name="controller_window_title">"Dispositiu: "</string>
-  <!-- [/ControllerActivity.java] -->
 
 
   <!-- [preference_fragment.xml]  -->
@@ -118,4 +120,14 @@
   <string name="preference_dialog_max_signal">Quin és el valor màxim?</string>
   <string name="preference_value_max_signal">-100</string>
   <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [ControllerActivity.java]  -->
+  <string name="controller_window_title">"Dispositiu: "</string>
+  <string name="controller_tab_local_title">Local</string>
+  <string name="controller_tab_local_spec">local</string>
+  <string name="controller_tab_online_title">En linea</string>
+  <string name="controller_tab_online_spec">en linea</string>
+  <!-- [/ControllerActivity.java] -->
+
 </resources>

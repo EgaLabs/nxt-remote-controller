@@ -1,36 +1,36 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (c) 2014 EgaTuts & Esaú García - All Rights Reserved                *
- *                                                                               *
- * Open-source code licensed under the MIT License (the "License").              *
- *                                                                               *
- * Permission is hereby granted, free of charge, to any person obtaining a copy  *
- * of this software and associated documentation files (the "Software"), to deal *
- * in the Software without restriction, including without limitation the rights  *
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     *
- * copies of the Software, and to permit persons to whom the Software is         *
- * furnished to do so, subject to the following conditions:                      *
- *                                                                               *
- * The above copyright notice and this permission notice shall be included in    *
- * all copies or substantial portions of the Software.                           *
- *                                                                               *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR    *
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,      *
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE   *
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER        *
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, *
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN     *
- * THE SOFTWARE.                                                                 *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  Copyright (c) 2014 EgaTuts & Esaú García - All Rights Reserved                 *
+ *                                                                                 *
+ *  Open-source code licensed under the MIT License (the "License").               *
+ *                                                                                 *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy   *
+ *  of this software and associated documentation files (the "Software"), to deal  *
+ *  in the Software without restriction, including without limitation the rights   *
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell      *
+ *  copies of the Software, and to permit persons to whom the Software is          *
+ *  furnished to do so, subject to the following conditions:                       *
+ *                                                                                 *
+ *  The above copyright notice and this permission notice shall be included in     *
+ *  all copies or substantial portions of the Software.                            *
+ *                                                                                 *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     *
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE    *
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         *
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  *
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN      *
+ *  THE SOFTWARE.                                                                  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                             *
- *                                                                                                                                                 *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                              *
- *                                                                                                                                                 *
- * And the corresponding file at:                                                                                                                  *
- *                                                                                                                                                 *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/GlobalUtils.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  You can find the entire project at:                                                                                                              *
+ *                                                                                                                                                   *
+ *    https://github.com/Egatuts/nxt-remote-controller                                                                                               *
+ *                                                                                                                                                   *
+ *  And the corresponding file at:                                                                                                                   *
+ *                                                                                                                                                   *
+ *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/GlobalUtils.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
 import android.app.AlertDialog;
@@ -43,6 +43,11 @@ import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /*
  *  Utility-belt class used almost in all the parts of the Android Application with a few static
  *  methods in order to not need to create an instance of the class. Also available as non-static
@@ -53,7 +58,7 @@ public class GlobalUtils {
   protected Context context;
 
   /*
-   *  Constrcutors.
+   *  Constructors.
    */
   public GlobalUtils (Context context) {
     this.context = context;
@@ -458,6 +463,13 @@ public class GlobalUtils {
   }
 
   /*
+   *  Formats a string.
+   */
+  public String format (int resId, String data) {
+    return String.format(this.getStringResource(resId), data);
+  }
+
+  /*
    *  Shows a toast.
    */
   public static void showToast (Context context, String message) {
@@ -466,6 +478,14 @@ public class GlobalUtils {
 
   public void showToast (String message) {
     GlobalUtils.showToast(this.context, message);
+  }
+
+  public void showToast (int resId) {
+    this.showToast(this.getStringResource(resId));
+  }
+
+  public void showToast (int resId, String message) {
+    this.showToast(this.format(resId, message));
   }
 
   /*
@@ -485,11 +505,29 @@ public class GlobalUtils {
             .setPositiveButton(android.R.string.yes, null);
   }
 
-  public AlertDialog.Builder createAlertDialog (int resIdTitle, String resIdMessage) {
+  public AlertDialog.Builder createAlertDialog (int resIdTitle, int resIdMessage) {
     return new AlertDialog.Builder(this.context)
             .setTitle(this.getStringResource(resIdTitle))
-            .setMessage(this.getStringResource(resIdMessage))
-            .setPositiveButton(android.R.string.yes, null);
+            .setMessage(this.getStringResource(resIdMessage));
+  }
+
+  /*
+   *  Joins multiple arrays.
+   */
+  public static byte[] concatBytes (byte[]... arrays) {
+    int length = 0;
+    for (byte[] array : arrays) {
+      length += array.length;
+    }
+    byte[] result = new byte[length];
+    int index = 0;
+    for (byte[] array : arrays) {
+      for (byte data : array) {
+        result[index] = data;
+        index++;
+      }
+    }
+    return result;
   }
 
 }

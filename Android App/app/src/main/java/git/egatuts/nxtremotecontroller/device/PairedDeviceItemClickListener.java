@@ -15,7 +15,7 @@
  *                                                                                 *
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     *
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       *
- *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE    *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE    *
  *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         *
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  *
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN      *
@@ -68,39 +68,40 @@ public class PairedDeviceItemClickListener implements RecyclerView.OnItemTouchLi
    *  Constructor.
    */
   public PairedDeviceItemClickListener (Context context, OnItemClickListener listener) {
+    final PairedDeviceItemClickListener self = this;
     this.listener = listener;
     this.gestureDetector = new GestureDetector(context, new GestureDetector.OnGestureListener() {
       @Override
       public boolean onSingleTapUp (MotionEvent e) {
-        PairedDeviceItemClickListener.this.result = PairedDeviceItemClickListener.GESTURE_TAP_UP;
+        self.result = PairedDeviceItemClickListener.GESTURE_TAP_UP;
         return false;
       }
 
       @Override
       public void onShowPress (MotionEvent e) {
-        PairedDeviceItemClickListener.this.result = PairedDeviceItemClickListener.GESTURE_NONE;
+        self.result = PairedDeviceItemClickListener.GESTURE_NONE;
       }
 
       @Override
       public boolean onScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        PairedDeviceItemClickListener.this.result = PairedDeviceItemClickListener.GESTURE_NONE;
+        self.result = PairedDeviceItemClickListener.GESTURE_NONE;
         return false;
       }
 
       @Override
       public void onLongPress (MotionEvent e) {
-        PairedDeviceItemClickListener.this.result = PairedDeviceItemClickListener.GESTURE_LONG_PRESS;
+        self.result = PairedDeviceItemClickListener.GESTURE_LONG_PRESS;
       }
 
       @Override
       public boolean onFling (MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        PairedDeviceItemClickListener.this.result = PairedDeviceItemClickListener.GESTURE_NONE;
+        self.result = PairedDeviceItemClickListener.GESTURE_NONE;
         return false;
       }
 
       @Override
       public boolean onDown (MotionEvent e) {
-        PairedDeviceItemClickListener.this.result = PairedDeviceItemClickListener.GESTURE_NONE;
+        self.result = PairedDeviceItemClickListener.GESTURE_NONE;
         return false;
       }
     });

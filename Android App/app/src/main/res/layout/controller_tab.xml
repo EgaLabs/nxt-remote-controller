@@ -7,6 +7,9 @@
 
   <TextView
       android:id="@+id/tab_title"
-      style="@style/tab_style" />
+      style="@style/fill_w_match_h"
+      android:gravity="center"
+      android:textSize="16sp"
+      android:textStyle="bold" />
 
 </LinearLayout>

@@ -6,7 +6,7 @@
 
   <include
       android:id="@+id/toolbar"
-      style="@style/match_w_wrap_h"
+      style="@style/toolbar_style"
       layout="@layout/toolbar" />
 
   <android.support.v4.widget.DrawerLayout

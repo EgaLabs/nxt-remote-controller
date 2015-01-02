@@ -15,7 +15,7 @@
  *                                                                               *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR    *
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,      *
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE   *
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE   *
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER        *
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, *
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN     *
@@ -41,20 +41,23 @@ import android.os.Build;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
 
-import git.egatuts.nxtremotecontroller.bluetooth.exception.ConnectionFailedException;
+import git.egatuts.nxtremotecontroller.exception.SocketCreationException;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
 
+/*
+ *  Global utility-belt class used to access properties from the bluetooth adapter and do some
+ *  dirty work like pairing a device using Java Reflection.
+ */
 public class BluetoothUtils {
 
   private BluetoothAdapter bluetooth_adapter;
 
   /*
-   * Constructor.
+   *  Constructor.
    */
   private void initAdapter () {
     bluetooth_adapter = BluetoothAdapter.getDefaultAdapter();
@@ -65,7 +68,7 @@ public class BluetoothUtils {
   }
 
   /*
-   * Returns the adapter if exists or creates a new instance.
+   *  Returns the adapter if exists or creates a new instance.
    */
   public BluetoothAdapter getAdapter () {
     if (bluetooth_adapter == null) initAdapter();
@@ -73,7 +76,7 @@ public class BluetoothUtils {
   }
 
   /*
-   * State checkers for enabled and discovering.
+   *  State checkers for enabled and discovering.
    */
   public boolean isEnabled () {
     return getAdapter().isEnabled();
@@ -84,7 +87,7 @@ public class BluetoothUtils {
   }
 
   /*
-   * Starts and cancels bluetooth discovery.
+   *  Starts and cancels bluetooth discovery.
    */
   public boolean startDiscovery () {
     return this.getAdapter().startDiscovery();
@@ -95,7 +98,7 @@ public class BluetoothUtils {
   }
 
   /*
-   * Enables and disables bluetooth adapter.
+   *  Enables and disables bluetooth adapter.
    */
   public boolean enable () {
     return this.getAdapter().enable();
@@ -106,7 +109,7 @@ public class BluetoothUtils {
   }
 
   /*
-   * Returns all bonded devices as an ArrayList of PairedDevice instances.
+   *  Returns all bonded devices as an ArrayList of PairedDevice instances.
    */
   public ArrayList<PairedDevice> getDevices () {
     Set<BluetoothDevice> devices = bluetooth_adapter.getBondedDevices();
@@ -120,7 +123,7 @@ public class BluetoothUtils {
   }
 
   /*
-   * Pairs a bluetooth device using KitKat API if available.
+   *  Pairs a bluetooth device using KitKat API if available.
    */
   public boolean pair (PairedDevice paired_device) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -138,13 +141,13 @@ public class BluetoothUtils {
   }
 
   /*
-   * Gets the socket of a device.
+   *  Gets the socket of a device.
    */
-  public BluetoothSocket getSocketFrom (PairedDevice device) throws ConnectionFailedException {
+  public BluetoothSocket getSocketFrom (PairedDevice device) throws SocketCreationException {
     return this.getSocketFrom(device.getBluetoothDevice());
   }
 
-  public BluetoothSocket getSocketFrom (BluetoothDevice device) throws ConnectionFailedException {
+  public BluetoothSocket getSocketFrom (BluetoothDevice device) throws SocketCreationException {
     BluetoothSocket socket = null;
     try{
       socket = device.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
@@ -157,7 +160,7 @@ public class BluetoothUtils {
         e.printStackTrace();
       } catch (Exception e3) {
         e3.printStackTrace();
-        throw new ConnectionFailedException();
+        throw new SocketCreationException();
       }
     }
     return socket;

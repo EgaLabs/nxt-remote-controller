@@ -15,7 +15,7 @@
  *                                                                                 *
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     *
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       *
- *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE    *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE    *
  *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         *
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  *
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN      *
@@ -29,7 +29,7 @@
  *                                                                                                                                                             *
  *  And the corresponding file at:                                                                                                                             *
  *                                                                                                                                                             *
- *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/activity/ScanFragment.java  *
+ *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/fragment/ScanFragment.java  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.fragment;
 
@@ -114,8 +114,7 @@ public class ScanFragment extends ActivityBaseFragment implements Animation.Anim
   /*
    *  Empty constructor.
    */
-  public ScanFragment () {
-  }
+  public ScanFragment () {}
 
   /*
    *  Changes the icon of the button float.
@@ -440,8 +439,7 @@ public class ScanFragment extends ActivityBaseFragment implements Animation.Anim
             if (!showToast) return;
             progressDialog.dismiss();
             String name = ((BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)).getName();
-            String text = String.format(self.getGlobalUtils().getStringResource(msg), name);
-            self.getGlobalUtils().showToast(text);
+            self.getGlobalUtils().showToast(msg, name);
           }
         }
       };
@@ -547,9 +545,7 @@ public class ScanFragment extends ActivityBaseFragment implements Animation.Anim
         final PairedDevice clickedDevice = self.devicesAdapter.get(position);
         for (PairedDevice device : self.getBluetoothUtils().getDevices()) {
           if (device.getAddress().equalsIgnoreCase(clickedDevice.getAddress())) {
-            String text = self.getGlobalUtils().getStringResource(R.string.bluetooth_already_paired);
-            text = String.format(text, clickedDevice.getName());
-            self.getGlobalUtils().showToast(text);
+            self.getGlobalUtils().showToast(R.string.bluetooth_already_paired, clickedDevice.getName());
             isPairing = false;
             return;
           }
@@ -584,6 +580,9 @@ public class ScanFragment extends ActivityBaseFragment implements Animation.Anim
     }
   }
 
+  /*
+   *  When the animation is created we add the listener defined above.
+   */
   @Override
   public Animation onCreateAnimation (int transit, boolean enter, int nextAnim) {
     Animation anim = super.onCreateAnimation(transit, enter, nextAnim);

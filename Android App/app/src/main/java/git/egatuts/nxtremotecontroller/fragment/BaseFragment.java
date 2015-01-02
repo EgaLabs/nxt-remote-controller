@@ -15,22 +15,22 @@
  *                                                                                 *
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     *
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       *
- *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE    *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE    *
  *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         *
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  *
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN      *
  *  THE SOFTWARE.                                                                  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *  You can find the entire project at:                                                                                                                            *
- *                                                                                                                                                                 *
- *    https://github.com/Egatuts/nxt-remote-controller                                                                                                             *
- *                                                                                                                                                                 *
- *  And the corresponding file at:                                                                                                                                 *
- *                                                                                                                                                                 *
- *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/fragment/BaseFragment.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  You can find the entire project at:                                                                                                                        *
+ *                                                                                                                                                             *
+ *    https://github.com/Egatuts/nxt-remote-controller                                                                                                         *
+ *                                                                                                                                                             *
+ *  And the corresponding file at:                                                                                                                             *
+ *                                                                                                                                                             *
+ *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/fragment/BaseFragment.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.fragment;
 
 import android.support.v4.app.Fragment;
@@ -38,9 +38,9 @@ import android.support.v4.app.FragmentManager;
 
 import git.egatuts.nxtremotecontroller.GlobalUtils;
 import git.egatuts.nxtremotecontroller.activity.BaseActivity;
-import git.egatuts.nxtremotecontroller.activity.MainActivity;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 import git.egatuts.nxtremotecontroller.preference.PreferencesUtils;
+import git.egatuts.nxtremotecontroller.views.BaseIndeterminateProgressDialog;
 
 public abstract class BaseFragment extends Fragment {
 
@@ -56,8 +56,8 @@ public abstract class BaseFragment extends Fragment {
     return this.getBaseActivity().getBluetoothUtils();
   }
 
-  public FragmentManager getSupportFragmentManager () {
-    return this.getBaseActivity().getFragmentmanager();
+  public FragmentManager getBaseFragmentManager () {
+    return this.getBaseActivity().getBaseFragmentManager();
   }
 
   public GlobalUtils getGlobalUtils () {
@@ -72,11 +72,12 @@ public abstract class BaseFragment extends Fragment {
     return this.getPreferencesUtils().getEditor();
   }
 
-  /*
-   *  Replaces the active fragment.
-   */
-  public void replaceFragmentWith (BaseFragment fragment, FragmentPendingTransition transitionInterface) {
-    ((MainActivity) this.getActivity()).replaceFragmentWith(fragment, transitionInterface);
+  public BaseIndeterminateProgressDialog getShortProgressDialog () {
+    return this.getBaseActivity().getShortProgressDialog();
+  }
+
+  public BaseIndeterminateProgressDialog getLongProgressDialog () {
+    return this.getBaseActivity().getLongProgressDialog();
   }
 
 }

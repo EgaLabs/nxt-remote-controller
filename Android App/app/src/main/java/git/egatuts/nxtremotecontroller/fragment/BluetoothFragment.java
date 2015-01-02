@@ -15,7 +15,7 @@
  *                                                                                 *
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     *
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       *
- *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE    *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE    *
  *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         *
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  *
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN      *
@@ -34,7 +34,6 @@
 package git.egatuts.nxtremotecontroller.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,25 +47,6 @@ import git.egatuts.nxtremotecontroller.R;
  *  Automatically replaced when the user starts again the bluetooth.
  */
 public class BluetoothFragment extends ActivityBaseFragment {
-
-  /*
-   *  If the application was paused and the user enabled the bluetooth
-   *  we wait a little bit and do the fragment transaction animation to not make it smoother.
-   */
-  @Override
-  public void onResume () {
-    super.onResume();
-    final BluetoothFragment self = this;
-    if (this.getBluetoothUtils().isEnabled()) {
-      new Handler().postDelayed(new Runnable () {
-        @Override
-        public void run () {
-          ActivityBaseFragment lastFragment = (ActivityBaseFragment) self.getLastFragment();
-          self.replaceFragmentWith(lastFragment, lastFragment);
-        }
-      }, 100);
-    }
-  }
 
   /*
    *  Inflates the view and sets the click listener to the button.

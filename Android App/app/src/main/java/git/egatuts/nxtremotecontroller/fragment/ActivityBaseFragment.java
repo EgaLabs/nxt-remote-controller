@@ -15,7 +15,7 @@
  *                                                                                 *
  *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     *
  *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       *
- *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE    *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE    *
  *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         *
  *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  *
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN      *
@@ -33,6 +33,8 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.fragment;
 
+import android.os.Handler;
+
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.MainActivity;
 import git.egatuts.nxtremotecontroller.views.BaseIndeterminateProgressDialog;
@@ -44,26 +46,55 @@ import git.egatuts.nxtremotecontroller.views.BaseIndeterminateProgressDialog;
  */
 public abstract class ActivityBaseFragment extends BaseFragment implements FragmentPendingTransition {
 
+  protected boolean isGoingToChange;
+
   /*
    *  Getter and setter for the lastFragment parent's activity property.
    */
   public void setLastFragment (ActivityBaseFragment fragment) {
-    ((MainActivity) this.getActivity()).setLastFragment(fragment);
+    ((MainActivity) this.getBaseActivity()).setLastFragment(fragment);
   }
 
-  public BaseFragment getLastFragment () {
-    return ((MainActivity) this.getActivity()).getLastFragment();
+  public ActivityBaseFragment getLastFragment () {
+    return ((MainActivity) this.getBaseActivity()).getLastFragment();
   }
 
   /*
-   *  Getter and setter for parent's progress dialog.
+   *  Getter and setter for the activeFragment parent's activity property.
    */
-  public BaseIndeterminateProgressDialog getShortProgressDialog () {
-    return ((MainActivity) this.getActivity()).getShortProgressDialog();
+  public void setActiveFragment (ActivityBaseFragment fragment) {
+    ((MainActivity) this.getBaseActivity()).setActiveFragment(fragment);
   }
 
-  public BaseIndeterminateProgressDialog getLongProgressDialog () {
-    return ((MainActivity) this.getActivity()).getLongProgressDialog();
+  public ActivityBaseFragment getActiveFragment () {
+    return ((MainActivity) this.getBaseActivity()).getActiveFragment();
+  }
+
+  /*
+   *  Getter and setter for the isGoingToChange flag.
+   */
+  public void isGoingToChange (boolean flag) {
+    this.isGoingToChange = flag;
+  }
+
+  public boolean isGoingToChange () {
+    return this.isGoingToChange;
+  }
+
+  /*
+   *  Overridden default method to replace fragment.
+   */
+  public void replaceFragmentWith (ActivityBaseFragment fragment, FragmentPendingTransition transitionInterface) {
+    if (fragment instanceof BluetoothFragment) {
+      this.setLastFragment(this);
+    } else {
+      this.setLastFragment(fragment);
+    }
+    ((MainActivity) this.getBaseActivity()).replaceFragmentWith(fragment, transitionInterface);
+  }
+
+  public void replaceFragmentWith (ActivityBaseFragment fragment) {
+    this.replaceFragmentWith(fragment, this);
   }
 
   /*
@@ -84,23 +115,34 @@ public abstract class ActivityBaseFragment extends BaseFragment implements Fragm
    */
   @Override
   public void onResume () {
-    if (!this.getBluetoothUtils().isEnabled() && !(this instanceof BluetoothFragment)) {
-      FragmentPendingTransition transaction = this.getLastFragment() != null ? this : null;
-      this.setLastFragment(this);
-      this.replaceFragmentWith(new BluetoothFragment(), null);
-    }
     super.onResume();
-  }
+    final ActivityBaseFragment self = this;
+    boolean isBluetoothFragment = this instanceof BluetoothFragment;
+    boolean isBluetoothEnabled = this.getBluetoothUtils().isEnabled();
+    ActivityBaseFragment fragment = null;
+    ActivityBaseFragment last = null;
 
-  /*
-   *  Overridden default method to replace fragment.
-   */
-  @Override
-  public void replaceFragmentWith (BaseFragment fragment, FragmentPendingTransition transitionInterface) {
-    if (!(fragment instanceof BluetoothFragment)) {
-      this.setLastFragment((ActivityBaseFragment) fragment);
+    if (!isBluetoothEnabled && !isBluetoothFragment) {
+      last = this;
+      fragment = new BluetoothFragment();
+    } else if (isBluetoothEnabled && isBluetoothFragment) {
+      fragment = this.getLastFragment();
     }
-    super.replaceFragmentWith(fragment, transitionInterface);
+    if (fragment != null) {
+      this.isGoingToChange(true);
+      final ActivityBaseFragment tmpFragment = fragment;
+      final ActivityBaseFragment tmpLast = last;
+      new Handler().postDelayed(new Runnable() {
+        @Override
+        public void run () {
+          if (tmpLast != null) {
+            self.replaceFragmentWith(tmpFragment, self.getLastFragment());
+          } else {
+            self.replaceFragmentWith(tmpFragment);
+          }
+        }
+      }, 100);
+    }
   }
 
 }

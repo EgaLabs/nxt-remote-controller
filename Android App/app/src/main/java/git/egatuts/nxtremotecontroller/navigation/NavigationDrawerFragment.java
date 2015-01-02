@@ -1,36 +1,36 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (c) 2014 EgaTuts & Esaú García - All Rights Reserved                *
- *                                                                               *
- * Open-source code licensed under the MIT License (the "License").              *
- *                                                                               *
- * Permission is hereby granted, free of charge, to any person obtaining a copy  *
- * of this software and associated documentation files (the "Software"), to deal *
- * in the Software without restriction, including without limitation the rights  *
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     *
- * copies of the Software, and to permit persons to whom the Software is         *
- * furnished to do so, subject to the following conditions:                      *
- *                                                                               *
- * The above copyright notice and this permission notice shall be included in    *
- * all copies or substantial portions of the Software.                           *
- *                                                                               *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR    *
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,      *
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE   *
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER        *
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, *
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN     *
- * THE SOFTWARE.                                                                 *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  Copyright (c) 2014 EgaTuts & Esaú García - All Rights Reserved                 *
+ *                                                                                 *
+ *  Open-source code licensed under the MIT License (the "License").               *
+ *                                                                                 *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy   *
+ *  of this software and associated documentation files (the "Software"), to deal  *
+ *  in the Software without restriction, including without limitation the rights   *
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell      *
+ *  copies of the Software, and to permit persons to whom the Software is          *
+ *  furnished to do so, subject to the following conditions:                       *
+ *                                                                                 *
+ *  The above copyright notice and this permission notice shall be included in     *
+ *  all copies or substantial portions of the Software.                            *
+ *                                                                                 *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     *
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE    *
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         *
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  *
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN      *
+ *  THE SOFTWARE.                                                                  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * You can find the entire project at:                                                                                                                                     *
- *                                                                                                                                                                         *
- *   https://github.com/Egatuts/nxt-remote-controller                                                                                                                      *
- *                                                                                                                                                                         *
- * And the corresponding file at:                                                                                                                                          *
- *                                                                                                                                                                         *
- *   https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/navigation/NavigationDrawerFragment.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  You can find the entire project at:                                                                                                                                      *
+ *                                                                                                                                                                           *
+ *    https://github.com/Egatuts/nxt-remote-controller                                                                                                                       *
+ *                                                                                                                                                                           *
+ *  And the corresponding file at:                                                                                                                                           *
+ *                                                                                                                                                                           *
+ *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/navigation/NavigationDrawerFragment.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.navigation;
 
 import android.app.Activity;
@@ -53,6 +53,9 @@ import java.util.List;
 
 import git.egatuts.nxtremotecontroller.R;
 
+/*
+ *  Fragment used to create the drawer menu.
+ */
 public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallback {
 
   private static final String CURRENT_POSITION = "drawer_current_position";
@@ -71,7 +74,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   NavigationDrawerAdapter navigation_drawer_adapter;
 
   /*
-   * Getter and setter for drawer layout.
+   *  Getter and setter for drawer layout.
    */
   public void setDrawerLayout (DrawerLayout layout) {
     drawer_layout = layout;
@@ -82,7 +85,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   }
 
   /*
-   * Getter and setter for action bar drawer toggle.
+   *  Getter and setter for action bar drawer toggle.
    */
   public void setActionBarDrawerToggle (ActionBarDrawerToggle custom_drawer_toggle) {
     drawer_toggle = custom_drawer_toggle;
@@ -93,7 +96,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   }
 
   /*
-   * onDetach and onAttach methods.
+   *  onDetach and onAttach methods.
    */
   @Override
   public void onDetach () {
@@ -112,7 +115,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   }
 
   /*
-   * Drawer opener, closer and checker.
+   *  Drawer opener, closer and checker.
    */
   public void openDrawer () {
     drawer_layout.openDrawer(fragment_container_view);
@@ -127,7 +130,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   }
 
   /*
-   * Select item and executes custom callback.
+   *  Select item and executes custom callback.
    */
   public void selectItem (int position) {
     current_position = position;
@@ -148,8 +151,8 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   @Override public void onOpenDrawer () {}
 
   /*
-   * onConfigurationChanged and onSaveInstanceState methods.
-   * Both save the actual state or configuration when the Activity is destroyed or paused.
+   *  onConfigurationChanged and onSaveInstanceState methods.
+   *  Both save the actual state or configuration when the Activity is destroyed or paused.
    */
   @Override
   public void onConfigurationChanged (Configuration config) {
@@ -164,7 +167,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   }
 
   /*
-   * onCreate and onCreateView methods.
+   *  onCreate and onCreateView methods.
    */
   @Override
   public void onCreate (Bundle savedInstanceState) {
@@ -227,7 +230,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
   }
 
   /*
-   * Strings, drawables and menu getters.
+   *  Strings, drawables and menu getters.
    */
   private String getStr (int id) {
     return getResources().getString(id);

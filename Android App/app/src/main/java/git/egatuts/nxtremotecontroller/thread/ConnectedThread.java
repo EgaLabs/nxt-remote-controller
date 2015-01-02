@@ -79,11 +79,21 @@ public class ConnectedThread extends BaseThread {
    *  Sends a byte[] of data to the robot.
    */
   public void write (byte[] buffer) {
+    if (!this.isRunning()) {
+      this.connector.setConnectionClosed();
+      return;
+    }
     try {
       this.output.write(buffer);
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  @Override
+  public void stopThread () {
+    super.stopThread();
+    if (this.connector.getSocket() != null) this.connector.setConnectionClosed();
   }
 
   @Override
@@ -95,8 +105,9 @@ public class ConnectedThread extends BaseThread {
       try {
         bytes = this.input.read(buffer);
       } catch (IOException e) {
-        this.connector.setConnectionClosed();
         e.printStackTrace();
+        if (this.isRunning()) this.connector.setConnectionLost();
+        break;
       }
     }
   }

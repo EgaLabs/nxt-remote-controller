@@ -71,20 +71,6 @@
     <!-- [/TextView] -->
   <!-- [/Styles for drawer_item_row.xml] -->
 
-
-  <!-- [Styles for controller_tab.xml]  -->
-    <!-- [TextView]  -->
-    <style name="tab_style">
-      <item name="android:layout_width">fill_parent</item>
-      <item name="android:layout_height">?tab_height</item>
-      <item name="android:minHeight">?tab_height</item>
-      <item name="android:gravity">center</item>
-      <item name="android:textStyle">bold</item>
-      <item name="android:textSize">16dp</item>
-    </style>
-    <!-- [/TextView] -->
-  <!-- [/Styles for controller_tab.xml] -->
-
   <style name="AppTheme.Base.TitleTextStyle" parent="@android:style/TextAppearance.Medium">
     <item name="android:textSize">20sp</item>
   </style>
@@ -130,7 +116,7 @@
     <item name="paired_device_address_text_size">@dimen/device_address_size</item>
     <item name="paired_device_address_text_color">@color/address_text_color</item>
 
-    <item name="tab_height">56dp</item>
+    <item name="tab_height">55dp</item>
     <!-- [/Styles that applies to styles defined below] -->
 
   </style>
