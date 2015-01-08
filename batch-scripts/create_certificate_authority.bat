@@ -12,13 +12,13 @@ cd ../certificate_authority/private
 ## AND IN CONSECUENCE ALL THE SIGNED CERTIFICATES.
 openssl genrsa -aes256 –out EgaTrust.key 4096
 
-## Decrypted version od the private key in order to use in automated
+## Decrypted version of the private key in order to use in automated
 ## environments where human intervention is impossible.
 openssl rsa -in EgaTrust.key -outform PEM -pubout -out EgaTrust.pem
 
 ## We ensure the integrity of the both private keys (encrypted and decrypted)
 ## by setting the file permissions to read-only to all users and groups.
-chmod 0400 ./*
+icacls *.* /t /e /g everyone:r
 
 ## Generates the certificate request of our Certificate Authority (EgaTrust.csr)
 ## using our private encrypted key (EgaTrust.key) and

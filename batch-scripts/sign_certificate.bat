@@ -11,6 +11,9 @@ cd ../certificate_authority
 ## EgaTrust.crt (Certificate Authority) using
 ## EgaTrust.key (Certificate Authority private encrypted key) and
 ## EgaTrust.cnf (Certificate Authority config file)
+mkdir newcerts
+echo $null >> index.txt
+echo 1000 >> serial.txt
 openssl ca -config EgaTrust.cnf -policy policy_anything -keyfile private/EgaTrust.key -cert EgaTrust.crt -out ../certificates/localhost.crt -infiles ../certificates/localhost.csr
 
 ## Go back to the issued certificates folder.

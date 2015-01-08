@@ -11,15 +11,13 @@
   },
   "redirect": "/public/redirect",
   "paths": [
-  
     {
       "virtual": "/",
       "real": "/public/client",
       "static": {
         "maxage": 86400000
       }
-    },
-    
+    }, 
     {
       "virtual": "/res",
       "real": "/public/res",
@@ -27,19 +25,15 @@
         "maxage": 86400000
       }
     },
-    
     {
-      "virtual": "/host/create",
-      "real": "/public/create",
+      "virtual": "/login",
+      "real": "/public/login",
       "static": {
         "maxage": 86400000
       }
     },
-    
     {
       "settings": "/server/router/host.js"
     }
-    
   ]
-  
 }

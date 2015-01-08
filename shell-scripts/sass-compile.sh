@@ -1,3 +1,4 @@
+#!/bin/bash
 cd ..
 cd public
 cd client

@@ -1,3 +1,4 @@
+#!/bin/bash
 #############################################################################################
 ## Copyright 2014-2015, Egatuts & Esaú García                                              ##
 ## Open-source project shared under MIT License (http://opensource.org/licenses/MIT)       ##
@@ -12,7 +13,7 @@ cd ../certificate_authority/private
 ## AND IN CONSECUENCE ALL THE SIGNED CERTIFICATES.
 openssl genrsa -aes256 –out EgaTrust.key 4096
 
-## Decrypted version od the private key in order to use in automated
+## Decrypted version of the private key in order to use in automated
 ## environments where human intervention is impossible.
 openssl rsa -in EgaTrust.key -outform PEM -pubout -out EgaTrust.pem
 

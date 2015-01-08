@@ -1,3 +1,4 @@
+#!/bin/bash
 #############################################################################################
 ## Copyright 2014-2015, Egatuts & Esaú García                                              ##
 ## Open-source project shared under MIT License (http://opensource.org/licenses/MIT)       ##
@@ -17,7 +18,7 @@ openssl rsa -in localhost.key -outform PEM -pubout -out localhost.pem
 
 ## Certificate Request which needs to be signed by a Root/Intermediate Certificate Authority.
 ## All certificates signed by a trusted CA become trusted too. We will use our own self-signed CA.
-openssl req -sha256 -new -key localhost.key -out localhost.csr
+openssl req -sha256 -new -key localhost.key -out localhost.csr -config localhost.cnf
 
 ## Self-signed certificate with a duration of ~1 year.
 ## It is not sigend by our CA so if you use this, it won't be trusted unless you add it manually.

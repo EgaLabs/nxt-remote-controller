@@ -1,9 +1,12 @@
 {
   "ignores": [
-    "Android", "batch-scripts",
-    "certificates", "misc",
-    "node_modules", "server",
-    "shell-scripts", "LICENSE",
-    "*.json", "*.md"
+    "Android App",  "batch-scripts",
+    "certificates", "certificate_authority"
+    "misc",         "node_modules",
+    "server",       "shell-scripts",
+    "LICENSE",      "*.json",
+    "*.md",         "*.png"
+    "*.jpg",        "*.js"
+    "*.html",       "*.rb"
   ]
 }

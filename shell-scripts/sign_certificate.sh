@@ -1,3 +1,4 @@
+#!/bin/bash
 #############################################################################################
 ## Copyright 2014-2015, Egatuts & Esaú García                                              ##
 ## Open-source project shared under MIT License (http://opensource.org/licenses/MIT)       ##
@@ -11,6 +12,10 @@ cd ../certificate_authority
 ## EgaTrust.crt (Certificate Authority) using
 ## EgaTrust.key (Certificate Authority private encrypted key) and
 ## EgaTrust.cnf (Certificate Authority config file)
+mkdir newcerts
+touch index.txt
+touch serial.txt
+echo 1000 > serial.txt
 openssl ca -config EgaTrust.cnf -policy policy_anything -keyfile private/EgaTrust.key -cert EgaTrust.crt -out ../certificates/localhost.crt -infiles ../certificates/localhost.csr
 
 ## Go back to the issued certificates folder.
