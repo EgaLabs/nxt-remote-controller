@@ -3,14 +3,14 @@
  * @author Esaú García (EgaTuts).
  * @version 1.0.0
  */
-(function (root, DOC, M, Mustache, Masonry, io, W, storage, pegasus) {
+(function (root, DOC, M, Mustache, Masonry, io, W, depot, marmottajax) {
   "use strict";
-  
+
   /*
    * First of all we add a little modification to the when-then library
    * to add a custom method that allows delaying async tasks.
    */
-  
+
   /**
    * Allows delaying the callback function when the async tasks have finished.
    */
@@ -25,9 +25,9 @@
         fn.apply(self, args);
       }, timeout);
     });
-    
+
   };
-  
+
   /*
    * We start defining our custom methods.
    */
@@ -129,11 +129,21 @@
     renderTemplate = function (settings) {
       return _render(template.innerHTML, settings);
     },
-    
+
+    /*
+     * Updates user data if arguments passed,
+     or returns it's value if no arguments passed.
+     */
+    userdata = depot("userdata"),
+    storage = function (data) {
+      if (!data) return userdata.get(userdata.ids[0]);
+      return userdata.update(userdata.ids[0], data);
+    },
+
     /*
      * The Masonry main instance.
      */
-    
+
     len         = 0,
     columnWidth = 280,
     gutter      = 32,
@@ -141,26 +151,26 @@
     maxColumns  = null,
     tempColumns = null,
     tempWidth   = null,
-    
+
     /*
      * Returns the width that takes up a n number of columns.
-     * 
+     *
      * f(x) = |x| * width + (|x| - 1) * gutter
      */
     sizeOfColumns = function (x) {
       return x * 280 + (x - 1) * 32;
     },
-    
+
     /**
      * Returns the number of columns that can fit up in the given width. Is the inverted sizeOfColumns'() function.
-     * 
+     *
      * @param {number} x The free space to fill with columns.
      * @return {number} A natural and integer number.
      */
     possibleColumns = function (x) {
       return ( (x + 32) / 312) | 0;
     },
-    
+
     /**
      * Resizes the main container.
      * @param {element} parent The main container of all columns.
@@ -175,68 +185,119 @@
       tempWidth   = tempColumns * columnWidth + (tempColumns - 1) * gutter;
       parent.style.width = tempWidth + "px";
     },
-    
+
     masonry = new Masonry(container, {
       itemSelector: ".host",
       layoutMode: "fitRows",
       columnWidth: columnWidth,
       gutter: gutter
     });
-    
-    Masonry.prototype.addElements = function (parent, elements) {
-      for ( var i = 0; i < elements.length; i++ ) {
-        this.trigger("beforeLayoutComplete", [parent, elements[i], this.items.length + 1]);
-        parent.appendChild( elements[i] );
-        this.appended( elements[i] );
-        this.layout();
-      }
-    };
 
-    /*
-     * Assigning resizing functions.
-     */
-    root.onresize = function () {
-      containerResizer(container, null, masonry.items.length);
-    };
-    masonry.on("beforeLayoutComplete", containerResizer);
-    
-    W(function (pass) {
-      var addCard = _render(add_template.innerHTML, {
-        image: "/res/img/misc/add-icon.png",
-        location: "/host/create/",
-        title: "¿Not what you expected?",
-        description: "Be a streamer.",
-        alt: "¡Be a streamer!"
-      });
-      pass("addCard", addCard);
-    }).delay(function (res) {
-      masonry.addElements(container, [res.addCard]);
-    }, 500);
-    
-    W(function (pass) {
-      var example = renderTemplate({
-        email: "example@domain.com", 
-        image: "/img/example.png",
-        name: "Example",
-        location: "Spain",
-        latitude: function () {
-          return _fixed(_range(-90, 90), 7);
-        },
-        longitude: function () {
-          return _fixed(_range(-180, 180), 7);
-        }
-      });
-      pass("example", example)
-    }).delay(function (result) {
-      masonry.addElements(container, [result.example]);
-    }, 2000);
-    
-    /*
-     * Here starts async tasks.
-     */
-    var resquest = pegasus("/request-token");
-    request.then(function (data, xhr) {
-      
+  Masonry.prototype.addElements = function (parent, elements) {
+    for ( var i = 0; i < elements.length; i++ ) {
+      this.trigger("beforeLayoutComplete", [parent, elements[i], this.items.length + 1]);
+      parent.appendChild( elements[i] );
+      this.appended( elements[i] );
+      this.layout();
+    }
+  };
+
+  /*
+   * Assigning resizing functions.
+   */
+  root.onresize = function () {
+    containerResizer(container, null, masonry.items.length);
+  };
+  masonry.on("beforeLayoutComplete", containerResizer);
+
+  W(function (pass) {
+    var addCard = _render(add_template.innerHTML, {
+      image: "/res/img/misc/add-icon.png",
+      location: "/login/",
+      title: "¿Not what you expected?",
+      description: "Be a streamer.",
+      alt: "¡Be a streamer!"
+    });
+    pass("addCard", addCard);
+  }).delay(function (res) {
+   masonry.addElements(container, [res.addCard]);
+  }, 500);
+
+  W(function (pass) {
+    var lat = _range(-90, 90),
+    lng = _range(-180, 180);
+    var example = renderTemplate({
+      email: "example@domain.com",
+      image: "/img/example.png",
+      name: "Example",
+      short_location: "Spain",
+      long_location: "Spain",
+      short_latitude: _fixed(lat, 5),
+      long_latitude: lat,
+      short_longitude: _fixed(lng, 5),
+      long_longitude: lng
+    });
+    pass("example", example)
+  }).delay(function (result) {
+    masonry.addElements(container, [result.example]);
+  }, 2000);
+
+  /*
+   * Here starts async tasks.
+   */
+  var requestToken = function () {
+    marmottajax.post({
+      url: "/request-token",
+      options: storage(),
+      json: true
+    }).then(function (data) {
+      if (data.state == -1) {
+        window.location.href = "/login";
+        return;
+      }
+      storage(data);
+      connect();
+    });
+  }
+  var connect = function () {
+    var socket = io.connect("", {
+      query: "token=" + storage().token
     });
 
-})(this, document, Math, Mustache, Masonry, io, when, depot, pegasus);
+    socket.on('hosts', function (hosts) {
+      console.log(hosts);
+      for (var i = 0; i < hosts.length; i++) {
+        var h = hosts[i];
+        masonry.addElements(container, renderTemplate({
+          email: h.email,
+          name: h.name,
+          image: "https://gravatar.com/avatar/" + md5(h.email) + ".png?s=150&d=blank",
+          short_latitude: _fixed(h.latitude, 5),
+          long_latitude: h.latitude,
+          short_longitude: _fixed(h.longitude, 5),
+          long_longitude: h.longitude,
+          short_location: h.short_location,
+          long_location: h.long_location
+        }));
+      }
+    });
+
+    socket.on("error", function (reason) {
+      if (reason == "JsonWebTokenError: invalid signature") {
+        socket.disconnect();
+        socket = null;
+        window.setTimeout(requestToken, 2000);
+      }
+    });
+
+    socket.on('connect', function (){
+     console.info('successfully established a working and authorized connection');
+    });
+  };
+  if (storage().token == "") {
+    requestToken();
+  } else {
+    connect();
+  }
+  
+})(this, document, Math, Mustache, Masonry, io, when, depot, marmottajax);

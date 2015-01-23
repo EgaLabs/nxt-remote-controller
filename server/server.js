@@ -46,6 +46,7 @@ var url       = require("url");
 var mime      = require("mime");
 var _         = require("underscore");
 var express   = require("express");
+var bodyParse = require("body-parser");
 var io        = require("socket.io");
 var app       = express();
 var socketJwt = require("socketio-jwt");
@@ -78,7 +79,7 @@ Log.i("Config file (settings.json): OK.");
 
 
 
-/**
+/*
  * Handles file requests, supported methods and redirects to HTTPS.
  */
 var redirect = function (request, response) {
@@ -91,14 +92,6 @@ var redirect = function (request, response) {
     response.end("Unsupported request method. Only GET requests allowed.");
     return;
   }
-
-  /*
-   * Permanently redirect to HTTPS. Temporally disallowed for testing purposes.
-   */
-  response.writeHead(301, {
-    "Content-Length": "0",
-    "Location": "https://" + secure_ip + ":" + secure_port + url.parse(resquest.url).pathname
-  });
 
   /*
    * If redirect didn't worked we send the redirect path.
@@ -119,6 +112,14 @@ var redirect = function (request, response) {
   response.setHeader("Content-Type", mime.lookup(readUri) );
   file = fs.createReadStream( readUri );
   file.pipe( response );
+
+  /*
+   * Permanently redirect to HTTPS. Temporally disallowed for testing purposes.
+   */
+  response.writeHead(301, {
+    "Content-Length": "0",
+    "Location": "https://localhost:" + secure_port + url.parse(request.url).pathname
+  });
 
 };
 
@@ -150,6 +151,11 @@ Log.i("Loaded certificates.");
  * We enable gzip compression.
  */
 app.use( express.compress() );
+app.use( bodyParse.json() );
+app.use( bodyParse.urlencoded({
+  extended: false
+}) );
+app.set("secretPass", (Math.random() * 0xffffffff | 0).toString());
 
 /*
  * We serve all paths defined in settings.json.
@@ -171,7 +177,7 @@ _.each(config.paths, function (pathObject, index) {
     object = path.static;
   }
   
-  if (path.settings) {
+  if (!!path.settings) {
     require(_dirname + path.settings)(app, config, path, _dirname, users);
   } else {
     app.use(virtual, express.static(_dirname + real, object) );
@@ -187,24 +193,46 @@ var HttpsServer = https.createServer({
   cert: cert
 }, app);
 
-
-
-
 /*
  ***************************************************************************
  * Here starts sockets connection.
  */
-var user;
 io = io.listen(HttpsServer);
-io.on("connection", function (socket) {
-  user = new User(null, socket.id);
-  users.add(user);
-  Log.i("Added user: " + user);
+io.set("authorization", function (handshakeData, accept) {
+  var token = url.parse(handshakeData.url, true).query.token;
+  try {
+    jsonwt.verify(token, app.get("secretPass"), function (err, data) {
+      if (err) {
+        accept(err, false);
+      } else {
+        handshakeData.decoded_token = data;
+        accept(err, true);
+      }
+    });
+  } catch (e) {
+    accept(e, false);
+  }
 });
-
-
-
-
+io.on("connection", function (socket) {
+  var data = _.extend({
+    connected: true,
+    id: socket.id
+  }, socket.request.decoded_token);
+  data.connected = true;
+  if (users.exists_user(data.id)) {
+    user = users.users[data.id];
+  } else {
+    user = new User(data);
+    users.save_user(user);
+  }
+  socket.on("disconnect", function () {
+    users.remove_user(user);
+  });
+  var hosts = users.filter(function (singleUser) {
+    return singleUser.host == true;
+  });
+  socket.emit("hosts", { hosts: hosts });
+});
 
 /*
  ***************************************************************************

@@ -9,7 +9,8 @@ var User = function (data) {
   this._email     = data.email || "";
   this._latitude  = data.latitude || "";
   this._longitude = data.longitude || "";
-  this._location  = data.location || "";
+  this._short_location = data.short_location || "";
+  this._long_location  = data.long_location || "";
   this._host      = data.host || false;
   this._connected = data.connected || false;
   if (!!data.password) this.password = data.password;
@@ -20,10 +21,10 @@ User.prototype = {
   _id:        "",
   _name:      "",
   _email:     "",
-  _password:  "",
   _latitude:  "",
   _longitude: "",
-  _location:  "",
+  _short_location: "",
+  _long_location:  "",
   
   _host:      false,
   _connected: false,
@@ -59,7 +60,7 @@ User.prototype = {
   },
   
   get name () {
-	return this._name;
+	  return this._name;
   },
   
   set email (val) {
@@ -70,14 +71,6 @@ User.prototype = {
   
   get email () {
     return this._email;
-  },
-  
-  set password (val) {
-    this._password = md5(val);
-  },
-  
-  get password () {
-    return this._password;
   },
   
   set latitude (val) {
@@ -100,14 +93,24 @@ User.prototype = {
     return this._longitude;
   },
   
-  set location (val) {
-    var old = this._location;
-    this._location = val;
-    this._onChangeLocation(this, old);
+  set short_location (val) {
+    var old = this._short_location;
+    this._short_location = val;
+    this._onChangeLocation(this, old, this._long_location);
   },
   
-  get location () {
-    return this._location;
+  get short_location () {
+    return this._short_location;
+  },
+
+  set long_location (val) {
+    var old = this._long_location;
+    this._long_location = val;
+    this._onChangeLocation(this, this._short_location, old);
+  },
+  
+  get long_location () {
+    return this._long_location;
   }
   
 };

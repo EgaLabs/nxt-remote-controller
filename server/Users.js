@@ -61,8 +61,7 @@ Users[proto].exists_user = function (user) {
  * Removes existing user.
  */
 Users[proto].remove_user = function (user) {
-  if (typeof user == "string")
-  {
+  if (typeof user == "string") {
     delete this.users[user];
     this.remove_uuid(user);
     return this;
@@ -98,21 +97,13 @@ Users[proto].filter = function (fn) {
   for (var user in this.users) {
     if ( this.users.hasOwnProperty(user) ) {
       check = fn(this.users[user]);
-      if (typeof check == "boolean")
-      {
+      if (typeof check == "boolean") {
         if (check == true) result[result.length] = this.users[user];
       }
       if (!!check) result[result.length] = check;
     }
   }
   return result;
-};
-
-/*
- * Authenticate an user.
- */
-Users[proto].auth = function (email, password) {
-  this.filter(function () {});
 };
 
 module.exports = Users;

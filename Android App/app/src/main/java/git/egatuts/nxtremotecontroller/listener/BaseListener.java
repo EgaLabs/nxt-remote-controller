@@ -39,43 +39,43 @@ import android.content.Intent;
 /*
  *  Most base listener which defines all the possible events.
  */
-public abstract class BaseListener {
+public interface BaseListener {
 
   /*
    *  Methods for Broadcast Actions from BluetoothAdapter.
    */
-  public abstract void onConnectionChange (Context context, Intent intent);
+  public void onConnectionChange (Context context, Intent intent);
 
-  public abstract void onDiscoveryFinish (Context context, Intent intent);
+  public void onDiscoveryFinish (Context context, Intent intent);
 
-  public abstract void onDiscoveryStart (Context context, Intent intent);
+  public void onDiscoveryStart (Context context, Intent intent);
 
-  public abstract void onLocalNameChange (Context context, Intent intent);
+  public void onLocalNameChange (Context context, Intent intent);
 
-  public abstract void onScanModeChange (Context context, Intent intent);
+  public void onScanModeChange (Context context, Intent intent);
 
-  public abstract void onStateChange (Context context, Intent intent);
+  public void onStateChange (Context context, Intent intent);
 
   /*
    *  Methods for Broadcast Actions from BluetoothDevice.
    */
-  public abstract void onLowLevelConnect (Context context, Intent intent);
+  public void onLowLevelConnect (Context context, Intent intent);
 
-  public abstract void onLowLevelDisconnect (Context context, Intent intent);
+  public void onLowLevelDisconnect (Context context, Intent intent);
 
-  public abstract void onLowLevelDisconnectRequest (Context context, Intent intent);
+  public void onLowLevelDisconnectRequest (Context context, Intent intent);
 
-  public abstract void onBondStateChange (Context context, Intent intent);
+  public void onBondStateChange (Context context, Intent intent);
 
-  public abstract void onDeviceClassChange (Context context, Intent intent);
+  public void onDeviceClassChange (Context context, Intent intent);
 
-  public abstract void onDeviceFound (Context context, Intent intent);
+  public void onDeviceFound (Context context, Intent intent);
 
-  public abstract void onRemoteNameChange (Context context, Intent intent);
+  public void onRemoteNameChange (Context context, Intent intent);
 
   /*
    *  Our unique intent.
    */
-  public abstract void onAppNeedsRestart (Context context, Intent intent);
+  public void onAppNeedsRestart (Context context, Intent intent);
 
 }
