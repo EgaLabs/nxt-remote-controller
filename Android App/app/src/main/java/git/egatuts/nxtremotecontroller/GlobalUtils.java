@@ -38,15 +38,21 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources.Theme;
 import android.content.res.XmlResourceParser;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /*
  *  Utility-belt class used almost in all the parts of the Android Application with a few static
@@ -528,6 +534,34 @@ public class GlobalUtils {
       }
     }
     return result;
+  }
+
+  /*
+   *  Gets MD5 of String without omitting trailing zeros.
+   */
+  public static String md5 (byte[] bytes) {
+    byte[] digest = null;
+    try {
+      digest = MessageDigest.getInstance("MD5").digest(bytes);
+    } catch (NoSuchAlgorithmException e) {
+      //e.printStackTrace();
+    }
+    StringBuffer buffer = new StringBuffer();
+    for (int i = 0; i < digest.length; i++) {
+      int number = (digest[i] & 0xFF) | 0x100;
+      buffer.append(Integer.toHexString(number).substring(1, 3));
+    }
+    return buffer.toString();
+  }
+
+  public static String md5 (String data) {
+    return GlobalUtils.md5(data.getBytes());
+  }
+
+  public static Bitmap downloadDrawable (String url) throws IOException {
+    HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
+    connection.connect();
+    return BitmapFactory.decodeStream(connection.getInputStream());
   }
 
 }

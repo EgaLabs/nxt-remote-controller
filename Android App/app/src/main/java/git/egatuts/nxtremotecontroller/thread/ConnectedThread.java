@@ -59,7 +59,7 @@ public class ConnectedThread extends BaseThread {
       in = this.connector.getSocket().getInputStream();
       out = this.connector.getSocket().getOutputStream();
     } catch (IOException e) {
-      e.printStackTrace();
+      //e.printStackTrace();
     }
     this.input  = in;
     this.output = out;
@@ -86,7 +86,7 @@ public class ConnectedThread extends BaseThread {
     try {
       this.output.write(buffer);
     } catch (IOException e) {
-      e.printStackTrace();
+      //e.printStackTrace();
     }
   }
 
@@ -105,7 +105,7 @@ public class ConnectedThread extends BaseThread {
       try {
         bytes = this.input.read(buffer);
       } catch (IOException e) {
-        e.printStackTrace();
+        //e.printStackTrace();
         if (this.isRunning()) this.connector.setConnectionLost();
         break;
       }

@@ -39,6 +39,9 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import git.egatuts.nxtremotecontroller.fragment.ScanFragment;
+import git.egatuts.nxtremotecontroller.preference.PreferencesUtils;
+
 /*
  *  Paired device that saves a BluetoothDevice and some of it's properties for easy/fast access.
  */
@@ -462,18 +465,24 @@ public class PairedDevice implements Parcelable {
   /*
    *  Calculates the connectivity percentage.
    */
-  public static int calculateConnectivity (int min, int max, int con) {
+  public static int calculateConnectivity (int min, int max, int con, PreferencesUtils.Editor editor) {
+    if (con > max) {
+      editor.saveInt(ScanFragment.PREFERENCE_MIN_SIGNAL_KEY, con);
+    }
+    if (con < min) {
+      editor.saveInt(ScanFragment.PREFERENCE_MAX_SIGNAL_KEY, con);
+    }
     int total = max - min;
     int portion = con - min;
     return (int) (((float) portion / (float) total) * 100);
   }
 
-  public static int calculateConnectivity (int min, int max, byte sig) {
-    return PairedDevice.calculateConnectivity(min, max, (int) ((float) (sig & 0xff) / 0xff * 100));
+  public static int calculateConnectivity (int min, int max, byte sig, PreferencesUtils.Editor editor) {
+    return PairedDevice.calculateConnectivity(min, max, (int) ((float) (sig & 0xff) / 0xff * 100), editor);
   }
 
-  public static int calculateConnectivity (int min, int max, Intent intent) {
-    return PairedDevice.calculateConnectivity(min, max, (int) intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE));
+  public static int calculateConnectivity (int min, int max, Intent intent, PreferencesUtils.Editor editor) {
+    return PairedDevice.calculateConnectivity(min, max, (int) intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE), editor);
   }
 
   /*
@@ -487,13 +496,13 @@ public class PairedDevice implements Parcelable {
     return new PairedDevice(device.getName(), device.getAddress(), signal, device);
   }
 
-  public static PairedDevice from (BluetoothDevice device, Intent intent, int min, int max) {
-    int connectivity = PairedDevice.calculateConnectivity(min, max, intent);
+  public static PairedDevice from (BluetoothDevice device, Intent intent, int min, int max, PreferencesUtils.Editor editor) {
+    int connectivity = PairedDevice.calculateConnectivity(min, max, intent, editor);
     return new PairedDevice(device.getName(), device.getAddress(), connectivity, device);
   }
 
-  public static PairedDevice from (Intent intent, int min, int max) {
-    return PairedDevice.from((BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE), intent, min, max);
+  public static PairedDevice from (Intent intent, int min, int max, PreferencesUtils.Editor editor) {
+    return PairedDevice.from((BluetoothDevice) intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE), intent, min, max, editor);
   }
 
   public static PairedDevice from (BluetoothDevice device) {

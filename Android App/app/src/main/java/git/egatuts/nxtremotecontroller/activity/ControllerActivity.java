@@ -53,12 +53,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import java.io.IOError;
 import java.io.IOException;
 
 import git.egatuts.nxtremotecontroller.GlobalUtils;
@@ -67,7 +67,6 @@ import git.egatuts.nxtremotecontroller.bluetooth.NXTConnector;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
 import git.egatuts.nxtremotecontroller.fragment.LocalControllerFragment;
 import git.egatuts.nxtremotecontroller.fragment.OnlineControllerFragment;
-import git.egatuts.nxtremotecontroller.views.BaseIndeterminateProgressDialog;
 
 /*
  *  Main activity that is created to handle a BluetoothSocket and control locally and remotely the NXT robot.
@@ -187,7 +186,7 @@ public class ControllerActivity extends BaseActivity implements ActivityPendingT
       try {
         this.connector.getSocket().close();
       } catch (IOException e) {
-        e.printStackTrace();
+        //e.printStackTrace();
       }
     }
     super.onDestroy();
@@ -465,6 +464,14 @@ public class ControllerActivity extends BaseActivity implements ActivityPendingT
       this.firstTime = false;
       this.resume();
     }
+  }
+
+  /*
+   *  Tab selector.
+   */
+  public void setTab (int index) {
+    this.tabHost.setCurrentTab(index);
+    Log.d("CHANGING INDEX", "CURRENT INDEX WILL BE " + index);
   }
 
 }

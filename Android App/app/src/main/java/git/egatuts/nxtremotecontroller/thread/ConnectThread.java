@@ -79,7 +79,7 @@ public class ConnectThread extends BaseThread {
       /*
        *  If there was a SocketCreationException this means the socket failed at it's creation.
        */
-      e.printStackTrace();
+      //e.printStackTrace();
       this.connector.setConnectionSocketFailed();
       return;
     } catch (IOException e2) {
@@ -88,7 +88,7 @@ public class ConnectThread extends BaseThread {
        *  If there was an IOException that means there was an error connecting.
        *  So we close the socket.
        */
-      e2.printStackTrace();
+      //e2.printStackTrace();
       try {
         this.connector.getSocket().close();
       } catch (IOException e3) {
@@ -96,7 +96,7 @@ public class ConnectThread extends BaseThread {
         /*
          *  If there was another IOException that means there was an unexpected error closing the socket.
          */
-        e3.printStackTrace();
+        //e3.printStackTrace();
         this.connector.setConnectionUnexpectedError();
         return;
       }

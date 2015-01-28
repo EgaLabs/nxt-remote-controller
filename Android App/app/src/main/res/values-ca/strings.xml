@@ -72,6 +72,13 @@
   <!-- [/preference_fragment.xml] -->
 
 
+  <!-- [preference_fragment.xml] -->
+  <string name="preference_title_token">Codi d\'accès</string>
+  <string name="preference_summary_token">Codi d\'dentificació que permet conectarse al servidor ICE y establir connecions de baixa latencia. Borra-ho per reiniciar-ho.</string>
+  <string name="preference_dialog_token">Ves amb compte.</string>
+  <!-- [/preference_fragment.xml] -->
+
+
   <!-- [preference_fragment.xml]  -->
   <string name="preference_title_theme">Tema</string>
   <string name="preference_summary_theme">Defineix el tema de colors que s\'usara en la totalitat de la aplicació.</string>
@@ -128,6 +135,8 @@
   <string name="controller_tab_local_spec">local</string>
   <string name="controller_tab_online_title">En linea</string>
   <string name="controller_tab_online_spec">en linea</string>
+  <string name="controller_tab_error_message">No s\'ha pogut establir la conexió.</string>
+  <string name="controller_tab_error_button">Reintentar</string>
   <!-- [/ControllerActivity.java] -->
 
 </resources>

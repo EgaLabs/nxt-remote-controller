@@ -195,7 +195,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
         return new int[] { R.anim.controller_transition_in, R.anim.controller_transition_out };
       }
     } catch (NullPointerException e) {
-      e.printStackTrace();
+      //e.printStackTrace();
     }
     return new int[] {};
   }
@@ -431,7 +431,7 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
                 public void run () {
                   progress.dismiss();
                 }
-              }, 500);
+              }, 750);
             } else {
               progress.dismiss();
             }

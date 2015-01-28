@@ -152,14 +152,14 @@ public class BluetoothUtils {
     try{
       socket = device.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
     } catch (IOException e) {
-      e.printStackTrace();
+      //e.printStackTrace();
       try {
         Method method = device.getClass().getMethod("createRfcommSocket", new Class[] { int.class });
         socket = (BluetoothSocket) method.invoke(device, Integer.valueOf(1));
       } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e2) {
-        e.printStackTrace();
+        //e2.printStackTrace();
       } catch (Exception e3) {
-        e3.printStackTrace();
+        //e3.printStackTrace();
         throw new SocketCreationException();
       }
     }

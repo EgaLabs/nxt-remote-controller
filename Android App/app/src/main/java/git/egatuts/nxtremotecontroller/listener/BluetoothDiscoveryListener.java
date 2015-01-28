@@ -39,7 +39,7 @@ import android.content.Intent;
 /*
  *  Extended class of BaseListener which listens for Bluetooth disovery, finish, starts and device found.
  */
-public abstract class BluetoothDiscoveryListener  extends BaseListener {
+public abstract class BluetoothDiscoveryListener implements BaseListener {
 
   @Override public void onConnectionChange  (Context context, Intent intent) {}
   //@Override public void onDiscoveryFinish (Context context, Intent intent) {}

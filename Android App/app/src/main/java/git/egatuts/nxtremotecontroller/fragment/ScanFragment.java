@@ -373,7 +373,7 @@ public class ScanFragment extends ActivityBaseFragment implements Animation.Anim
           PreferencesUtils.Editor editor = self.getPreferencesEditor();
           int min = Integer.parseInt(editor.getString(ScanFragment.PREFERENCE_MIN_SIGNAL_KEY, ScanFragment.PREFERENCE_MIN_SIGNAL_VALUE));
           int max = Integer.parseInt(editor.getString(ScanFragment.PREFERENCE_MAX_SIGNAL_KEY, ScanFragment.PREFERENCE_MAX_SIGNAL_VALUE));
-          device.setConnectivity(PairedDevice.calculateConnectivity(min, max, intent));
+          device.setConnectivity(PairedDevice.calculateConnectivity(min, max, intent, editor));
           int index = self.devicesAdapter.exists(device);
           if (index != -1) {
             self.devicesAdapter.get(index).setSignal(device.getSignal());
@@ -415,6 +415,7 @@ public class ScanFragment extends ActivityBaseFragment implements Animation.Anim
            */
           } else if (self.isBonded(states)) {
             self.isPairing = false;
+            progressDialog.dismiss();
             msg = R.string.bluetooth_paired;
             boolean goBack = self.getPreferencesEditor()
                     .getBoolean(ScanFragment.PREFERENCE_GO_BACK_HOME_KEY, ScanFragment.PREFERENCE_GO_BACK_HOME_VALUE);
@@ -510,7 +511,7 @@ public class ScanFragment extends ActivityBaseFragment implements Animation.Anim
     } else {
       this.buttonFloatImage.setImageDrawable(utils.getDrawableResource(R.drawable.ic_discover));
     }
-    this.buttonFloat.setRippleColor(utils.getDarkerColor(color, 0.65f));
+    this.buttonFloat.setRippleColor(GlobalUtils.getDarkerColor(color, 0.65f));
     this.buttonFloat.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick (View v) {

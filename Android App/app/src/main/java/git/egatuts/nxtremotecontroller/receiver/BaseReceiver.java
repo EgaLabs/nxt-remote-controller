@@ -39,7 +39,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.util.Log;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -182,7 +185,6 @@ public abstract class BaseReceiver extends BroadcastReceiver {
    */
   @Override
   public void onReceive (Context context, Intent intent) {
-
     /*
      *  We create some variables.
      */
@@ -223,7 +225,7 @@ public abstract class BaseReceiver extends BroadcastReceiver {
           method = defClass.getMethod(listenerMethod, new Class[] { Context.class, Intent.class });
           method.invoke(this.listener, context, intent);
         } catch (NoClassDefFoundError | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-          e.printStackTrace();
+          //e.printStackTrace();
         }
       }
     }

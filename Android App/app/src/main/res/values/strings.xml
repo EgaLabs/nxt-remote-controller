@@ -72,6 +72,13 @@
   <!-- [/preference_fragment.xml] -->
 
 
+  <!-- [preference_fragment.xml] -->
+  <string name="preference_title_token">Access token</string>
+  <string name="preference_summary_token">Identification token that lets you connect to the ICE Server and establish low-latency communications. Delete it to reset.</string>
+  <string name="preference_dialog_token">Be careful.</string>
+  <!-- [/preference_fragment.xml] -->
+
+
   <!-- [preference_fragment.xml]  -->
   <string name="preference_title_theme">Application theme</string>
   <string name="preference_summary_theme">It sets the color theme to use in the whole application.</string>
@@ -129,6 +136,8 @@
   <string name="controller_tab_local_spec">local</string>
   <string name="controller_tab_online_title">Online</string>
   <string name="controller_tab_online_spec">online</string>
+  <string name="controller_tab_error_message">Connection couldn\'t be established.</string>
+  <string name="controller_tab_error_button">Retry</string>
   <!-- [/ControllerActivity.java] -->
 
 

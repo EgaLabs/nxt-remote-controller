@@ -33,6 +33,9 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.fragment;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
@@ -78,6 +81,10 @@ public abstract class BaseFragment extends Fragment {
 
   public BaseIndeterminateProgressDialog getLongProgressDialog () {
     return this.getBaseActivity().getLongProgressDialog();
+  }
+
+  public WifiManager getWifiManager () {
+    return (WifiManager) this.getActivity().getSystemService(Context.WIFI_SERVICE);
   }
 
 }
