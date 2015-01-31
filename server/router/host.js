@@ -19,11 +19,16 @@ module.exports = function (app, config, pathSettings, base, users) {
     var profile = {
       name: req.body.name,
       email: req.body.email,
-      latitude: req.body.latitude,
-      longitude: req.body.longitude,
+      latitude: parseFloat(req.body.latitude),
+      longitude: parseFloat(req.body.longitude),
       short_location: req.body.short_location,
-      long_location: req.body.long_location
+      long_location: req.body.long_location,
+      host: req.body.host == "true"
     };
+    console.log(profile);
+    if (profile.host === true) {
+      validators[0] = anything;
+    }
     for (var i = 0; i < fields.length; i++) {
       if (!validators[i].test(profile[ fields[i] ])) {
         res.json({ state: -1 });

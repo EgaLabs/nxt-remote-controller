@@ -153,7 +153,7 @@ Log.i("Loaded certificates.");
 app.use( express.compress() );
 app.use( bodyParse.json() );
 app.use( bodyParse.urlencoded({
-  extended: false
+  extended: true
 }) );
 app.set("secretPass", (Math.random() * 0xffffffff | 0).toString());
 
