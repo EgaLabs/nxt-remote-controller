@@ -24,7 +24,7 @@ chmod 0400 ./*
 ## Generates the certificate request of our Certificate Authority (EgaTrust.csr)
 ## using our private encrypted key (EgaTrust.key) and
 ## our custom openssl config file (EgaTrust.cnf).
-openssl req -new -key EgaTrust.key -out ../EgaTrust.csr -config ../EgaTrust.cnf
+openssl req -sha256 -new -key EgaTrust.key -out ../EgaTrust.csr -config ../EgaTrust.cnf
 
 ## Generates our Certificate Authority with a date of expiry of ~10 years
 ## using our private encrypted key (EgaTrust.key) and
