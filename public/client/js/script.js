@@ -246,9 +246,11 @@
    * Here starts async tasks.
    */
   var requestToken = function () {
+    var data = storage();
+    data.host = false;
     marmottajax.post({
       url: "/request-token",
-      options: storage(),
+      options: data,
       json: true
     }).then(function (data) {
       if (data.state == -1) {
