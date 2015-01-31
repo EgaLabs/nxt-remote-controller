@@ -33,6 +33,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -478,20 +479,37 @@ public class GlobalUtils {
   /*
    *  Shows a toast.
    */
-  public static void showToast (Context context, String message) {
-    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+  public static void showToast (final Context context, final String message, final boolean longLength) {
+    ((Activity) context).runOnUiThread(new Runnable() {
+      @Override
+      public void run () {
+        Toast.makeText(context, message, longLength ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT).show();
+      }
+    });
+  }
+
+  public void showToast (String message, boolean longLength) {
+    GlobalUtils.showToast(this.context, message, longLength);
   }
 
   public void showToast (String message) {
-    GlobalUtils.showToast(this.context, message);
+    this.showToast(message, false);
+  }
+
+  public void showToast (int resId, boolean longLength) {
+    this.showToast(this.getStringResource(resId), longLength);
   }
 
   public void showToast (int resId) {
-    this.showToast(this.getStringResource(resId));
+    this.showToast(resId, false);
+  }
+
+  public void showToast (int resId, String message, boolean longLength) {
+    this.showToast(this.format(resId, message), longLength);
   }
 
   public void showToast (int resId, String message) {
-    this.showToast(this.format(resId, message));
+    this.showToast(resId, message, false);
   }
 
   /*

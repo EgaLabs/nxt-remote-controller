@@ -66,9 +66,17 @@
   
   <!-- [preference_fragment.xml]  -->
   <string name="preference_title_address">Dirección del servidor</string>
-  <string name="preference_summary_address">La URL del servidor que administra las conexiones de los sockets sin el protocolo.</string>
+  <string name="preference_summary_address">La URL del servidor que administra las conexiones de baja latencia (sockets).</string>
   <string name="preference_dialog_address">¿Cuál es la dirección?</string>
-  <string name="preference_value_address">localhost:8080</string>
+  <string name="preference_value_address">https://localhost:8080</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml] -->
+  <string name="preference_title_login">Dirección de inicio de sesión</string>
+  <string name="preference_summary_login">La URL del servidor que permite identificarse mediante códigos de acceso únicos (tokens).</string>
+  <string name="preference_dialog_login">¿Cuál es la dirección?</string>
+  <string name="preference_value_login">https://localhost:443/request-token</string>
   <!-- [/preference_fragment.xml] -->
 
 
@@ -138,5 +146,16 @@
   <string name="controller_tab_error_message">No se ha podido establecer conexión.</string>
   <string name="controller_tab_error_button">Reintentar</string>
   <!-- [/ControllerActivity.java] -->
+
+
+  <!-- [OnlineControllerFragment.java]  -->
+  <string name="geolocation_required_title">Servicio de ubicación desactivado</string>
+  <string name="geolocation_required_message">Para inciar sesión correctamente se deben enviar las coordenadas de este dispositivo. Por favor, activa la geolocalización para acceder a esta función.</string>
+  <string name="connection_error_malformed">La URL contiene errores. Comprueba que esté correctamente escrita en el apartado de configuración.</string>
+  <string name="connection_error_token_not_found">No se ha podido descargar el código de acceso debido a que no existe o el código devuelto es el 404.</string>
+  <string name="connection_error_token_malformed">El código de acceso es incorrecto, indefinido, nulo o una cadena de texto vacía. Comprueba la configuración del servidor.</string>
+  <string name="connection_error_refused">El servidor ha rechazado la conexión.</string>
+  <string name="connection_error_login">Error con las variables enviadas para el inicio de sessión.</string>
+  <!-- [/OnlineControllerFragment.java] -->
 
 </resources>

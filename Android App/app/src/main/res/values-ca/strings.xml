@@ -66,15 +66,23 @@
 
   <!-- [preference_fragment.xml]  -->
   <string name="preference_title_address">Adreça del servidor</string>
-  <string name="preference_summary_address">La URL del servidor que administra les conexions dels sockets, sense escriure el protocol.</string>
+  <string name="preference_summary_address">La URL del servidor que administra les conexions de baixa latença (sockets).</string>
   <string name="preference_dialog_address">Quina és la adreça?</string>
-  <string name="preference_value_address">localhost:8080</string>
+  <string name="preference_value_address">https://localhost:8080</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml] -->
+  <string name="preference_title_login">Adreça d\'inici de sessió</string>
+  <string name="preference_summary_login">La URL del servidor que permeteix identificar-se mitjançant codis d\'inici de sessió únics (tokens).</string>
+  <string name="preference_dialog_login">Quina és la adreça?</string>
+  <string name="preference_value_login">https://localhost:443/request-token</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml] -->
   <string name="preference_title_token">Codi d\'accès</string>
-  <string name="preference_summary_token">Codi d\'dentificació que permet conectarse al servidor ICE y establir connecions de baixa latencia. Borra-ho per reiniciar-ho.</string>
+  <string name="preference_summary_token">Codi d\'dentificació que permet conectarse al servidor ICE y establir connecions de baixa latencia. Esborra-ho per reiniciar-ho.</string>
   <string name="preference_dialog_token">Ves amb compte.</string>
   <!-- [/preference_fragment.xml] -->
 
@@ -138,5 +146,16 @@
   <string name="controller_tab_error_message">No s\'ha pogut establir la conexió.</string>
   <string name="controller_tab_error_button">Reintentar</string>
   <!-- [/ControllerActivity.java] -->
+
+
+  <!-- [OnlineControllerFragment.java]  -->
+  <string name="geolocation_required_title">Servei de geolocalització desactivat</string>
+  <string name="geolocation_required_message">Per iniciar sessió correctament s\'han d\'enviar les coordenades del dispositiu. Si us plau, activa la geocolatizació per poder utilitzar aquesta funció.</string>
+  <string name="connection_error_malformed">La adreça conté errors. Comprova-la en la secció de configuració.</string>
+  <string name="connection_error_token_not_found">No s\'ha trobat el codi d\'access. Comprova que l\'adreça sigui la correcta.</string>
+  <string name="connection_error_token_malformed">El codi d\'access es incorrecte, indefinit, nul o es una text buit. Comprova la configuració del servidor.</string>
+  <string name="connection_error_refused">La conexió ha sigut rebutjada per el servidor.</string>
+  <string name="connection_error_login">Error al enviar les dades per a l\'inici de sessió.</string>
+  <!-- [/OnlineControllerFragment.java] -->
 
 </resources>

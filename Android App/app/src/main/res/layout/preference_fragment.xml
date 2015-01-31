@@ -9,6 +9,12 @@
         android:dialogTitle="@string/preference_dialog_address"
         android:defaultValue="@string/preference_value_address" />
     <EditTextPreference
+        android:key="preference_server_login"
+        android:title="@string/preference_title_login"
+        android:summary="@string/preference_summary_login"
+        android:dialogTitle="@string/preference_dialog_login"
+        android:defaultValue="@string/preference_value_login" />
+    <EditTextPreference
         android:key="preference_server_token"
         android:title="@string/preference_title_token"
         android:summary="@string/preference_summary_token"

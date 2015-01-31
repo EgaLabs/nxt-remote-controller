@@ -65,10 +65,18 @@
 
 
   <!-- [preference_fragment.xml] -->
-  <string name="preference_title_address">Server address</string>
-  <string name="preference_summary_address">The URL of the server handling the socket connection without the protocol scheme.</string>
+  <string name="preference_title_address">Server socket address</string>
+  <string name="preference_summary_address">The URL of the server handling the socket connection.</string>
   <string name="preference_dialog_address">Which is the location?</string>
-  <string name="preference_value_address">localhost:8080</string>
+  <string name="preference_value_address">https://localhost:443</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml] -->
+  <string name="preference_title_login">Server login address</string>
+  <string name="preference_summary_login">The URL of the server that handles the token-based login.</string>
+  <string name="preference_dialog_login">Which is the location?</string>
+  <string name="preference_value_login">https://localhost:443/request-token</string>
   <!-- [/preference_fragment.xml] -->
 
 
@@ -140,5 +148,15 @@
   <string name="controller_tab_error_button">Retry</string>
   <!-- [/ControllerActivity.java] -->
 
+
+  <!-- [OnlineControllerFragment.java]  -->
+  <string name="geolocation_required_title">Geolocation service disabled</string>
+  <string name="geolocation_required_message">To login correctly the coordinates of this device must be sent. Please, enable geolocation services to access this feature.</string>
+  <string name="connection_error_malformed">The URL is malformed. Check it out on the settings activity.</string>
+  <string name="connection_error_token_not_found">The token URL is not correct or it couldn\'t be accessed.</string>
+  <string name="connection_error_token_malformed">The token is malformed, undefined, null or an empty string. Check server configuration.</string>
+  <string name="connection_error_refused">The connection was refused by the server.</string>
+  <string name="connection_error_login">There was an error with the contact info sent to the server.</string>
+  <!-- [/OnlineControllerFragment.java] -->
 
 </resources>
