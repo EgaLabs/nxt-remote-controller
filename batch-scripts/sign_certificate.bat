@@ -13,8 +13,8 @@ cd ../certificate_authority
 ## EgaTrust.cnf (Certificate Authority config file)
 mkdir newcerts
 echo $null >> index.txt
-echo 1000 >> serial.txt
-openssl ca -config EgaTrust.cnf -policy policy_anything -keyfile private/EgaTrust.key -cert EgaTrust.crt -out ../certificates/localhost.crt -infiles ../certificates/localhost.csr
+echo '01' >> serial.txt
+openssl ca -config EgaTrust.cnf -policy signing_policy -extensions signing_req -keyfile private/EgaTrust.key -cert EgaTrust.crt -out ../certificates/localhost.crt -infiles ../certificates/localhost.csr
 
 ## Go back to the issued certificates folder.
 cd ../certificates
