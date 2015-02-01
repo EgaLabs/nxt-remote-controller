@@ -471,7 +471,6 @@ public class ControllerActivity extends BaseActivity implements ActivityPendingT
    */
   public void setTab (int index) {
     this.tabHost.setCurrentTab(index);
-    Log.d("CHANGING INDEX", "CURRENT INDEX WILL BE " + index);
   }
 
 }

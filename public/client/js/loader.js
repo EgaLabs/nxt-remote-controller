@@ -51,6 +51,7 @@ if (path.length > 0) {
 } else {
   Modernizr.load(
     [
+      "/res/js/md5.min.js",
       "/socket.io/socket.io.js",
       "/res/js/Masonry.min.js",
       "/res/js/Mustache.min.js",

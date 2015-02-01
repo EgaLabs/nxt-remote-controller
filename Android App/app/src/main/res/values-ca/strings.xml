@@ -156,6 +156,12 @@
   <string name="connection_error_token_malformed">El codi d\'access es incorrecte, indefinit, nul o es una text buit. Comprova la configuració del servidor.</string>
   <string name="connection_error_refused">La conexió ha sigut rebutjada per el servidor.</string>
   <string name="connection_error_login">Error al enviar les dades per a l\'inici de sessió.</string>
+  <string name="connection_error_unreach">No s\'ha pogut localitzar el servidor.</string>
+  <string name="getting_access_token">Obtenin codi d\'access&#8230;</string>
+  <string name="connecting_socket_server">Conectant socket&#8230;</string>
+  <string name="connected_socket_server">Conexió de baixa latencia establerta</string>
+  <string name="unknown_error">Error inesperat</string>
+  <string name="restoring_token">Restaurant codi d\'access a causa d\'un error de firma</string>
   <!-- [/OnlineControllerFragment.java] -->
 
 </resources>

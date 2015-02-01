@@ -156,7 +156,12 @@
   <string name="connection_error_token_not_found">The token URL is not correct or it couldn\'t be accessed.</string>
   <string name="connection_error_token_malformed">The token is malformed, undefined, null or an empty string. Check server configuration.</string>
   <string name="connection_error_refused">The connection was refused by the server.</string>
-  <string name="connection_error_login">There was an error with the contact info sent to the server.</string>
+  <string name="connection_error_unreach">Couldn\'t find the server.</string>
+  <string name="getting_access_token">Getting access token&#8230;</string>
+  <string name="connecting_socket_server">Connecting socket&#8230;</string>
+  <string name="connected_socket_server">Socket connection established</string>
+  <string name="unknown_error">Unknown error encountered</string>
+  <string name="restoring_token">Restoring access token due to a signature error</string>
   <!-- [/OnlineControllerFragment.java] -->
 
 </resources>

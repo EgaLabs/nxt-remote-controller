@@ -36,10 +36,12 @@ package git.egatuts.nxtremotecontroller.fragment;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +51,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.github.nkzawa.emitter.Emitter;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -61,11 +68,16 @@ import java.io.InputStreamReader;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
 
+import git.egatuts.nxtremotecontroller.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.ControllerActivity;
 import git.egatuts.nxtremotecontroller.client.Client;
@@ -73,7 +85,6 @@ import git.egatuts.nxtremotecontroller.client.ClientAdapter;
 import git.egatuts.nxtremotecontroller.exception.LoginException;
 import git.egatuts.nxtremotecontroller.exception.MalformedTokenException;
 import git.egatuts.nxtremotecontroller.listener.GPSLocationTracker;
-import git.egatuts.nxtremotecontroller.preference.PreferencesUtils;
 import git.egatuts.nxtremotecontroller.utils.TokenRequester;
 import git.egatuts.nxtremotecontroller.views.BaseProgressDialog;
 
@@ -92,10 +103,20 @@ public class OnlineControllerFragment extends BaseFragment {
   private int networkType;
   private double latitude;
   private double longitude;
+  private GPSLocationTracker tracker;
+  private TokenRequester requester;
+  private String token;
+  private Socket socket;
 
   public void refreshFragment () {
-    ((ControllerActivity) this.getBaseActivity()).setTab(0);
-    ((ControllerActivity) this.getBaseActivity()).setTab(1);
+    final OnlineControllerFragment self = this;
+    this.getBaseActivity().runOnUiThread(new Runnable() {
+      @Override
+      public void run () {
+        ((ControllerActivity) self.getBaseActivity()).setTab(0);
+        ((ControllerActivity) self.getBaseActivity()).setTab(1);
+      }
+    });
   }
 
   public String getOwnerEmail () {
@@ -160,13 +181,12 @@ public class OnlineControllerFragment extends BaseFragment {
             responseCode = connection.getResponseCode();
           }
           if (input != null) {
-            BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(input) );
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(input));
             String line;
             String result = "";
             while ((line = bufferedReader.readLine()) != null) {
               result += line;
             }
-            Log.d("RESULTADOOO", result);
             input.close();
             requester.finishRequest(result);
           }
@@ -177,6 +197,106 @@ public class OnlineControllerFragment extends BaseFragment {
       }
     });
     return requester;
+  }
+
+  public void startSocketConnection () {
+    final OnlineControllerFragment self = this;
+    final GlobalUtils globalUtils = this.getGlobalUtils();
+    if (this.socket != null && this.socket.connected()) {
+      return;
+    }
+    globalUtils.showToast(R.string.connecting_socket_server);
+    String url = this.getPreferencesEditor().getString("preference_server_address", this.getString(R.string.preference_value_address));
+    if (url.charAt(url.length() - 1) == '/') {
+      url += "/";
+    }
+    try {
+      if (url.contains("https://")) {
+        IO.setDefaultSSLContext(SSLContext.getDefault());
+      }
+      IO.Options options = new IO.Options();
+      options.forceNew = true;
+      options.reconnection = false;
+      this.socket = IO.socket(url + "?token=" + this.token, options);
+      socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+        @Override
+        public void call (Object... args) {
+        }
+      }).on(Socket.EVENT_ERROR, new Emitter.Listener() {
+        @Override
+        public void call (Object... args) {
+          try {
+            String error = (String) args[0];
+            if (error.contains("JsonWebToken") || error.contains("TokenExpiredError")) {
+              self.getBaseActivity().getPreferencesEditor().saveString("preference_server_token", "");
+              globalUtils.showToast(R.string.restoring_token);
+              self.refreshFragment();
+              return;
+            }
+          } catch (ClassCastException e) {
+            //e.printStackTrace();
+          }
+
+          globalUtils.showToast(R.string.unknown_error);
+        }
+      }).on("leave_member", new Emitter.Listener() {
+        @Override
+        public void call (Object... args) {
+          try {
+            JSONObject members = ((JSONObject) args[0]).getJSONObject("members");
+            Iterator<String> membersList = members.keys();
+            while (membersList.hasNext()) {
+              String id = membersList.next();
+              Client client = Client.fromJSON(members.getJSONObject(id));
+              client.setId(id);
+              final int index = self.clientsAdapter.exists(client);
+              if (index == -1) {
+                continue;
+              }
+              self.getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run () {
+                  self.clientsAdapter.remove(index);
+                }
+              });
+            }
+          } catch (JSONException e) {
+            //e.printStackTrace();
+          }
+        }
+      }).on("join_member", new Emitter.Listener() {
+        @Override
+        public void call (Object... args) {
+          try {
+            JSONObject members = ((JSONObject) args[0]).getJSONObject("members");
+            Iterator<String> membersList = members.keys();
+            while (membersList.hasNext()) {
+              String id = membersList.next();
+              JSONObject member = members.getJSONObject(id);
+              final Client client = Client.fromJSON(member);
+              client.setId(id);
+              if (self.clientsAdapter.exists(client) > -1) {
+                continue;
+              }
+              self.getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run () {
+                  self.clientsAdapter.add(client);
+                }
+              });
+            }
+          } catch (JSONException e) {
+            e.printStackTrace();
+          }
+        }
+      });
+      socket.connect();
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    } catch (NoSuchAlgorithmException e) {
+      e.printStackTrace();
+      // We are fucked if this ends here!
+    }
   }
 
   @Override
@@ -217,73 +337,94 @@ public class OnlineControllerFragment extends BaseFragment {
     ejemplo.setShortLocation("El Vendrell, Cataluña");
     ejemplo.setLongLocation("El Vendrell, Tarragona, Cataluña, España");
     this.clientsAdapter.add(ejemplo);
-
-    GPSLocationTracker tracker = new GPSLocationTracker(this.getActivity());
-    if (!tracker.isGPSEnabled() && !tracker.isNetworkEnabled()) {
-      this.getGlobalUtils().createAlertDialog(R.string.geolocation_required_title, R.string.geolocation_required_message)
-              .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick (DialogInterface dialog, int which) {
-
-                }
-              })
-              .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick (DialogInterface dialog, int which) {
-
-                }
-              })
-              .setCancelable(false)
-              .show();
-      return view;
-    }
-    final PreferencesUtils.Editor editor = this.getPreferencesEditor();
-    final TokenRequester requester = this.getTokenRequester();
-    requester.setOnFinishListener(new TokenRequester.OnFinishListener() {
-      @Override
-      public void onFinish (String data) {
-        try {
-          JSONObject jsonObject = new JSONObject(data);
-          if (jsonObject.has("state") && jsonObject.getInt("state") == -1) {
-            requester.cancelRequest(new LoginException());
-            return;
-          }
-          final String token = jsonObject.getString("token");
-          if (token != null || token != "") {
-            self.getActivity().runOnUiThread(new Runnable() {
-              @Override
-              public void run () {
-                self.getBaseActivity().getPreferencesEditor().saveString("preference_server_token", token);
-              }
-            });
-          } else {
-            requester.cancelRequest(new MalformedTokenException());
-          }
-        } catch (JSONException e) {
-          requester.cancelRequest(e);
-        }
-      }
-    });
-    requester.setOnExceptionListener(new TokenRequester.OnExceptionListener() {
-      @Override
-      public void onError (Exception e) {
-        e.printStackTrace();
-        if (e instanceof ConnectException) {
-          self.getGlobalUtils().showToast(R.string.connection_error_refused, true);
-        } else if (e instanceof FileNotFoundException) {
-          self.getGlobalUtils().showToast(R.string.connection_error_token_not_found, true);
-        } else if (e instanceof MalformedURLException) {
-          self.getGlobalUtils().showToast(R.string.connection_error_malformed, true);
-        } else if (e instanceof MalformedTokenException) {
-          self.getGlobalUtils().showToast(R.string.connection_error_token_malformed, true);
-        } else if (e instanceof LoginException) {
-          self.getGlobalUtils().showToast(R.string.connection_error_login, true);
-        }
-      }
-    });
-    tracker = this.getLocationRequester(requester);
-    tracker.startLocationService();
     return view;
+  }
+
+  @Override
+  public void onResume () {
+    super.onResume();
+    final OnlineControllerFragment self = this;
+    this.token = this.getPreferencesEditor().getString("preference_server_token");
+    this.tracker = new GPSLocationTracker(this.getActivity());
+    if (token.equals("")) {
+      if (!tracker.isGPSEnabled() && !tracker.isNetworkEnabled()) {
+        this.getGlobalUtils().createAlertDialog(R.string.geolocation_required_title, R.string.geolocation_required_message)
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                  @Override
+                  public void onClick (DialogInterface dialog, int which) {
+                    ((ControllerActivity) self.getBaseActivity()).setTab(0);
+                  }
+                })
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                  @Override
+                  public void onClick (DialogInterface dialog, int which) {
+                    self.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                  }
+                })
+                .setCancelable(false)
+                .show();
+        return;
+      }
+      this.getGlobalUtils().showToast(R.string.getting_access_token);
+      this.requester = this.getTokenRequester();
+      this.requester.setOnFinishListener(new TokenRequester.OnFinishListener() {
+        @Override
+        public void onFinish (String data) {
+          try {
+            JSONObject jsonObject = new JSONObject(data);
+            if (jsonObject.has("state") && jsonObject.getInt("state") == -1) {
+              self.requester.cancelRequest(new LoginException());
+              return;
+            }
+            final String token = jsonObject.getString("token");
+            if (token != null || token != "") {
+              self.getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run () {
+                  self.getBaseActivity().getPreferencesEditor().saveString("preference_server_token", token);
+                  self.token = token;
+                  self.startSocketConnection();
+                }
+              });
+            } else {
+              self.requester.cancelRequest(new MalformedTokenException());
+            }
+          } catch (JSONException e) {
+            self.requester.cancelRequest(e);
+          }
+        }
+      });
+      this.requester.setOnExceptionListener(new TokenRequester.OnExceptionListener() {
+        @Override
+        public void onError (Exception e) {
+          //e.printStackTrace();
+          if (e instanceof ConnectException) {
+            if (e.getLocalizedMessage().contains("ECONNREFUSED")) {
+              self.getGlobalUtils().showToast(R.string.connection_error_refused, true);
+            } else if (e.getLocalizedMessage().contains("EHOSTUNREACH")) {
+              self.getGlobalUtils().showToast(R.string.connection_error_unreach, true);
+            }
+          } else if (e instanceof FileNotFoundException) {
+            self.getGlobalUtils().showToast(R.string.connection_error_token_not_found, true);
+          } else if (e instanceof MalformedURLException) {
+            self.getGlobalUtils().showToast(R.string.connection_error_malformed, true);
+          } else if (e instanceof MalformedTokenException) {
+            self.getGlobalUtils().showToast(R.string.connection_error_token_malformed, true);
+          } else if (e instanceof LoginException) {
+            self.getGlobalUtils().showToast(R.string.connection_error_login, true);
+          }
+        }
+      });
+      this.tracker = this.getLocationRequester(this.requester);
+      this.tracker.startLocationService();
+      return;
+    }
+    this.startSocketConnection();
+  }
+
+  @Override
+  public void onPause () {
+    super.onPause();
   }
 
 }

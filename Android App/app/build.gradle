@@ -35,6 +35,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.2'
     compile 'com.android.support:support-v4-preferencefragment:1.0.0@aar'
     compile 'com.makeramen:roundedimageview:1.5.0'
+    compile 'com.github.nkzawa:socket.io-client:0.4.0'
     compile project(':RippleEffect')
     compile project(':MaterialDesign')
 }

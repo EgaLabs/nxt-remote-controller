@@ -52,7 +52,7 @@ var app       = express();
 var socketJwt = require("socketio-jwt");
 var jsonwt    = require("jsonwebtoken");
 var Users     = require("./Users.js");
-var users     = new Users();
+var _users     = new Users();
 var User      = require("./User.js");
 Log.i("Dependencies: OK.");
 
@@ -178,7 +178,7 @@ _.each(config.paths, function (pathObject, index) {
   }
   
   if (!!path.settings) {
-    require(_dirname + path.settings)(app, config, path, _dirname, users);
+    require(_dirname + path.settings)(app, config, path, _dirname, _users);
   } else {
     app.use(virtual, express.static(_dirname + real, object) );
   }
@@ -198,6 +198,7 @@ var HttpsServer = https.createServer({
  * Here starts sockets connection.
  */
 io = io.listen(HttpsServer);
+
 io.set("authorization", function (handshakeData, accept) {
   var token = url.parse(handshakeData.url, true).query.token;
   try {
@@ -205,7 +206,7 @@ io.set("authorization", function (handshakeData, accept) {
       if (err) {
         accept(err, false);
       } else {
-        handshakeData.decoded_token = data;
+        handshakeData.decoded_token = _.extend(data, { token: token, connected: false });
         accept(err, true);
       }
     });
@@ -213,33 +214,79 @@ io.set("authorization", function (handshakeData, accept) {
     accept(e, false);
   }
 });
+
 io.on("connection", function (socket) {
-  var data = _.extend({
+
+  var data = _.extend(socket.request.decoded_token, {
     connected: true,
     id: socket.id
-  }, socket.request.decoded_token);
-  data.connected = true;
-  if (users.exists_user(data.id)) {
-    user = users.users[data.id];
+  });
+
+  var user;
+  if (_users.existsByToken(data)) {
+    user = _users.findByToken(data);
+    user.id = socket.id;
+    user.connected = true;
   } else {
     user = new User(data);
-    users.save_user(user);
+    _users.saveById(user);
   }
+
+  var secure_user = user.clone();
+  secure_user.token = undefined;
+  delete secure_user.token;
+  var tmp = {};
+  tmp[_users.originalIdByToken(user)] = secure_user.parsed();
+  secure_user = tmp;
+
+  socket.on("refresh", function () {
+    socket.emit("join_member", { members: _users });
+  });
+
+  var tmp_hosts = _users.filterById(function (id, value, index) {
+    return value.host === true && value.connected === true;
+  }),
+  tmp_users = _users.filterById(function (id, value, index) {
+    return value.host === false && value.connected === true;
+  }),
+
+  hosts = {},
+  users = {};
+
+  _.each(tmp_hosts, function (value, key, index) {
+    hosts[_users.originalIdByToken(value)] = value.parsed();
+  });
+  _.each(tmp_users, function (value, key) {
+    users[_users.originalIdByToken(value)] = value.parsed();
+  });
+
   socket.on("disconnect", function () {
-    users.remove_user(user);
+    user.connected = false;
+    io.emit("leave_member", { members: secure_user });
+    io.emit("hosts_count", { count: _.size(hosts) - 1 });
   });
-  var hosts = users.filter(function (singleUser) {
-    return singleUser.host == true;
-  });
-  socket.emit("hosts", { hosts: hosts });
+
+  if (user.host === true) {
+    _.each(users, function (value, key) {
+      io.to(value.id).emit("join_member", { members: secure_user });
+      io.to(value.id).emit("hosts_count", { count: _.size(hosts) });
+    });
+    socket.emit("join_member", { members: users });
+  } else if (user.host === false) {
+    _.each(hosts, function (value, key) {
+      io.to(value.id).emit("join_member", { members: secure_user });
+    });
+    socket.emit("join_member", { members: hosts });
+    socket.emit("hosts_count", { count: _.size(hosts) });
+  }
 });
+
+
 
 /*
  ***************************************************************************
  * We start the server listening at the end of the script because of the routes.
  */
-
-
 HttpServer.listen(unsecure_port, unsecure_ip);
 HttpsServer.listen(secure_port, secure_ip);
 

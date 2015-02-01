@@ -156,6 +156,12 @@
   <string name="connection_error_token_malformed">El código de acceso es incorrecto, indefinido, nulo o una cadena de texto vacía. Comprueba la configuración del servidor.</string>
   <string name="connection_error_refused">El servidor ha rechazado la conexión.</string>
   <string name="connection_error_login">Error con las variables enviadas para el inicio de sessión.</string>
+  <string name="connection_error_unreach">No se ha podido encontrar el servidor.</string>
+  <string name="getting_access_token">Obteniendo código de acceso&#8230;</string>
+  <string name="connecting_socket_server">Conectando socket&#8230;</string>
+  <string name="connected_socket_server">Conexión de baja latencia establecida</string>
+  <string name="unknown_error">Error inesperado</string>
+  <string name="restoring_token">Restaurando código de acceso debido a un error en la firma</string>
   <!-- [/OnlineControllerFragment.java] -->
 
 </resources>

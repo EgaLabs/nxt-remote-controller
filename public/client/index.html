@@ -107,7 +107,7 @@
   <script type="text/javascript" src="/res/js/localstorage-fallback.min.js"></script>
   <script type="text/javascript" src="/res/js/depot.min.js"></script>
 </head>
-<body>
+<body onload="document.getElementById('loading-tip').innerHTML = 'Connecting...';">
   <section id="errors">
     <span id="no-js">You must enable <a title="¿How do I enable JavaScript?" href="http://www.enable-javascript.com/">JavaScript</a> to see the page functionality properly.</span>
     <span id="no-sockets">You must enable WebSockets or <a title="¿How do I update my browser?" href="http://browsehappy.com/">update</a> your browser.</span>
@@ -121,7 +121,7 @@
       </a>
     </div>
     <div id="count-hosts" class="padding">
-      <div id="loading" class="loading-tip hide">
+      <div id="loading" class="loading-tip">
         <span id="loading-tip">Loading page...</span>
       </div>
       <span id="description">Active host streamers:</span>
@@ -133,9 +133,12 @@
   </section>
   <script async defer type="text/javascript" src="/js/loader.js"></script>
 <script type="text/x-mustache" id="host-template">
-<div class="host">
+<div class="host" id="{{id}}">
   <div class="image-container">
-    <img src="{{image}}?s=150" width="150" height="150" title="{{email}}" />
+    <div class="absolute-container">
+      <img class="default-gravatar" src="/img/example.png" width="150" height="150">
+      <img src="{{image}}" width="150" height="150" title="{{email}}" />
+    </div>
   </div>
   <span class="description">{{name}}  |  {{email}}</span>
   <hr>
@@ -145,7 +148,9 @@
 <script type="text/x-template" id="add-template">
 <a class="host" href="{{location}}" alt="{{alt}} title="{{alt}}">
   <div class="image-container">
-    <img src="{{image}}" width="150" height="150" title="{{alt}}" />
+    <div class="absolute-container">
+      <img src="{{image}}" width="150" height="150" title="{{alt}}" />
+    </div>
   </div>
   <span class="description">{{title}}</span>
   <hr>

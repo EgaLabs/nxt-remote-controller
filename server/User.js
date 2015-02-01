@@ -1,24 +1,22 @@
 var exports = module.exports;
 
-var Users = require("./Users.js");
-var md5   = require("MD5");
-
 var User = function (data) {
-  this._id        = data.id || Users.uuid();
-  this._name      = data.name || "";
-  this._email     = data.email || "";
-  this._latitude  = data.latitude || "";
-  this._longitude = data.longitude || "";
+  this._id             = data.id             || "";
+  this._token          = data.token          || "";
+  this._name           = data.name           || "";
+  this._email          = data.email          || "";
+  this._latitude       = data.latitude       || "";
+  this._longitude      = data.longitude      || "";
   this._short_location = data.short_location || "";
-  this._long_location  = data.long_location || "";
-  this._host      = data.host || false;
-  this._connected = data.connected || false;
-  if (!!data.password) this.password = data.password;
+  this._long_location  = data.long_location  || "";
+  this._connected      = data.connected      || false;
+  this._host           = data.host           || false;
 };
 
 User.prototype = {
 		
   _id:        "",
+  _token:     "",
   _name:      "",
   _email:     "",
   _latitude:  "",
@@ -51,6 +49,16 @@ User.prototype = {
   
   get id () {
 	  return this._id;
+  },
+
+  set token (val) {
+    var old = this._token;
+    this._token = val;
+    this._onChangeId(this, old);
+  },
+  
+  get token () {
+    return this._token;
   },
   
   set name (val) {
@@ -96,7 +104,7 @@ User.prototype = {
   set short_location (val) {
     var old = this._short_location;
     this._short_location = val;
-    this._onChangeLocation(this, old, this._long_location);
+    this._onChangeLocation(this, old);
   },
   
   get short_location () {
@@ -106,11 +114,61 @@ User.prototype = {
   set long_location (val) {
     var old = this._long_location;
     this._long_location = val;
-    this._onChangeLocation(this, this._short_location, old);
+    this._onChangeLocation(this, old);
   },
   
   get long_location () {
     return this._long_location;
+  },
+
+  set connected (val) {
+    var old = this._connected;
+    this._connected = val;
+    this._onChangeLocation(this, old);
+  },
+  
+  get connected () {
+    return this._connected;
+  },
+
+  set host (val) {
+    var old = this._host;
+    this._host = val;
+    this._onChangeLocation(this, old);
+  },
+  
+  get host () {
+    return this._host;
+  },
+
+  clone: function () {
+    return new User({
+      id: this.id,
+      token: this.token,
+      name: this.name,
+      email: this.email,
+      latitude: this.latitude,
+      longitude: this.longitude,
+      short_location: this.short_location,
+      long_location: this.long_location,
+      host: this.hosts,
+      connected: this.connected
+    });
+  },
+
+  parsed: function () {
+    return {
+      id: this.id,
+      token: this.token,
+      name: this.name,
+      email: this.email,
+      latitude: this.latitude,
+      longitude: this.longitude,
+      short_location: this.short_location,
+      long_location: this.long_location,
+      host: this.hosts,
+      connected: this.connected
+    };
   }
   
 };

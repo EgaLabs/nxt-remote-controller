@@ -132,7 +132,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolder> {
     this.setupRipple(view.imageRipple);
     view.name.setText(client.getName());
     view.email.setText(client.getEmail());
-    view.coords.setText(client.getLongitude() + ", " + client.getLatitude());
+    view.coords.setText(client.getLatitude() + ", " + client.getLongitude());
     view.location.setText(client.getShortLocation());
     view.profileImage.setTag(client.getProfileImageURL());
     new ImageDownloader().execute(view.profileImage);
@@ -179,7 +179,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolder> {
       double mLongg = clientLoop.getLongitude();
       String mShortLocation = clientLoop.getShortLocation();
       String mLongLocation = clientLoop.getLongLocation();
-      if (name == mName && email == mEmail && latt == mLatt && longg == mLongg && shortLocation.equalsIgnoreCase(mShortLocation) && longLocation.equalsIgnoreCase(mLongLocation)) {
+      if (name.equals(mName) && email.equals(mEmail) && latt == mLatt && longg == mLongg && shortLocation.equalsIgnoreCase(mShortLocation) && longLocation.equalsIgnoreCase(mLongLocation)) {
         return i;
       }
     }

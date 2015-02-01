@@ -119,6 +119,8 @@
     add_template = DOC.getElementById("add-template"),
     tip          = DOC.getElementById("loading"),
     tip_message  = DOC.getElementById("loading-tip"),
+    active_hosts = DOC.getElementById("active-hosts"),
+
 
     /**
      * Renders the host template.
@@ -184,9 +186,9 @@
       tempColumns = len > maxColumns ? maxColumns : len,
       tempWidth   = tempColumns * columnWidth + (tempColumns - 1) * gutter;
       parent.style.width = tempWidth + "px";
-    },
+    };
 
-    masonry = new Masonry(container, {
+    window.masonry = new Masonry(container, {
       itemSelector: ".host",
       layoutMode: "fitRows",
       columnWidth: columnWidth,
@@ -202,6 +204,14 @@
     }
   };
 
+  Masonry.prototype.removeElements = function (parent, elements) {
+    for ( var i = 0; i < elements.length; i++ ) {
+      this.trigger("beforeLayoutComplete", [parent, elements[i], this.items.length + 1]);
+      this.remove(elements[i]);
+      this.layout();
+    }
+  };
+
   /*
    * Assigning resizing functions.
    */
@@ -209,24 +219,18 @@
     containerResizer(container, null, masonry.items.length);
   };
   masonry.on("beforeLayoutComplete", containerResizer);
-
-  W(function (pass) {
-    var addCard = _render(add_template.innerHTML, {
+  var
+    lat = _range(-90, 90),
+    lng = _range(-180, 180);
+  masonry.addElements(container, [
+    _render(add_template.innerHTML, {
       image: "/res/img/misc/add-icon.png",
       location: "/login/",
       title: "¿Not what you expected?",
       description: "Be a streamer.",
       alt: "¡Be a streamer!"
-    });
-    pass("addCard", addCard);
-  }).delay(function (res) {
-   masonry.addElements(container, [res.addCard]);
-  }, 500);
-
-  W(function (pass) {
-    var lat = _range(-90, 90),
-    lng = _range(-180, 180);
-    var example = renderTemplate({
+    }),
+    renderTemplate({
       email: "example@domain.com",
       image: "/img/example.png",
       name: "Example",
@@ -236,11 +240,8 @@
       long_latitude: lat,
       short_longitude: _fixed(lng, 5),
       long_longitude: lng
-    });
-    pass("example", example)
-  }).delay(function (result) {
-    masonry.addElements(container, [result.example]);
-  }, 2000);
+    })
+  ]);
 
   /*
    * Here starts async tasks.
@@ -262,40 +263,78 @@
     });
   }
   var connect = function () {
-    var socket = io.connect("", {
-      query: "token=" + storage().token
+    window.socket = io.connect("", {
+      query: "token=" + storage().token,
+      "force new connection": true
     });
 
-    socket.on('hosts', function (hosts) {
-      console.log(hosts);
-      for (var i = 0; i < hosts.length; i++) {
-        var h = hosts[i];
-        masonry.addElements(container, renderTemplate({
-          email: h.email,
-          name: h.name,
-          image: "https://gravatar.com/avatar/" + md5(h.email) + ".png?s=150&d=blank",
-          short_latitude: _fixed(h.latitude, 5),
-          long_latitude: h.latitude,
-          short_longitude: _fixed(h.longitude, 5),
-          long_longitude: h.longitude,
-          short_location: h.short_location,
-          long_location: h.long_location
-        }));
+    socket.on("leave_member", function (data) {
+      for (var member in data.members) {
+        console.log(DOC.getElementById(member));
+        masonry.removeElements(container, [DOC.getElementById(member)]);
+        root.onresize();
+      }
+    });
+
+    socket.on("join_member", function (data) {
+      var
+        hosts = data.members,
+        elements = [],
+        h;
+      for (var host in hosts) {
+        if (hosts.hasOwnProperty(host)) {
+          var h = hosts[host],
+          element = renderTemplate({
+            id: host,
+            email: h.email,
+            name: h.name,
+            image: "https://gravatar.com/avatar/" + md5(h.email) + ".png?s=150&d=blank",
+            short_latitude: _fixed(h.latitude, 5),
+            long_latitude: h.latitude,
+            short_longitude: _fixed(h.longitude, 5),
+            long_longitude: h.longitude,
+            short_location: h.short_location,
+            long_location: h.long_location
+          });
+          elements.push(element);
+        }
+      }
+      if (elements.length > 0) {
+        masonry.addElements(container, elements);
+        for (var i = 0; i < elements.length; i++) {
+          var element = elements[i],
+              coords = element.querySelectorAll(".coords")[0],
+              location = element.querySelectorAll(".short_location")[0];
+          location.title = h.long_location;
+          location.style.height = coords.offsetHeight + "px";
+          location.style.width = 240 - coords.offsetWidth + "px";
+        }
       }
     });
 
     socket.on("error", function (reason) {
-      if (reason == "JsonWebTokenError: invalid signature") {
+      if (reason == "JsonWebTokenError: invalid signature" || reason === "TokenExpiredError: jwt expired") {
         socket.disconnect();
         socket = null;
         window.setTimeout(requestToken, 2000);
       }
     });
 
+    socket.on("hosts_count", function (data) {
+      active_hosts.innerHTML = data.count;
+      tip.classList.add("hide");
+    });
+
+    socket.on("disconnect", function () {
+      tip.classList.remove("hide");
+      active_hosts.innerHTML = "-";
+    });
+
     socket.on('connect', function (){
-     console.info('successfully established a working and authorized connection');
+      tip.classList.add("hide");
     });
   };
+
   if (storage().token == "") {
     requestToken();
   } else {

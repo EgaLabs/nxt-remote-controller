@@ -1,109 +1,171 @@
 var exports = module.exports;
 
 var Users = function () {
-	this.users = {};
-};
+  this.users = {};
+}
 
-var proto = "prototype";
+Users.prototype = {
+  
+  existsById: function (id) {
+    if (typeof id !== "string") return this.existsById(id.id);
+    return this.users[id] !== undefined;
+  },
 
-/*
- * Stored UUID's.
- */
-Users[proto].uuids = [];
-Users[proto].uuid_spliter = "-";
-
-/*
- * Checks if UUID exists. If one UUID is destroyed it will be available. 
- */
-Users[proto].exists_uuid = function (id) {
-  return this.uuids.indexOf(id) > -1;
-};
-
-/*
- * Deletes a generated/saved UUID from the Array.
- */
-Users[proto].remove_uuid = function (id) {
-  if (this.exists_uuid(id)) this.uuids.splice(this.uuids.indexOf(id), 1);
-  return this;
-};
-
-/*
- * Saves the given UUID in the Array.
- */
-Users[proto].save_uuid = function (id) {
-  if (!this.exists_uuid(id)) this.uuids.push(id);
-  return this;
-};
-
-/*
- * Generates a new UUID unique in the Users.uuids Array.
- */
-Users[proto].generate_uuid = (function () {
-  var block = function () {
-    return ( (Math.random() * 0xffff) | 0).toString(16)
-  };
-  return function () {
-    var spliter = this.uuid_spliter,
-	      uuID = block() + spliter + block() + spliter + block() + spliter + block();
-	  return this.exists_uuid(uuID) > -1 ? this.generate_uuid() : uuID;
-  };
-});
-
-/*
- * Checks if user exists.
- */
-Users[proto].exists_user = function (user) {
-  if (typeof user == "string") return !!this.users[user] && this.exists_uuid(user);
-  return this.exists_user(user.id);
-};
-
-/*
- * Removes existing user.
- */
-Users[proto].remove_user = function (user) {
-  if (typeof user == "string") {
-    delete this.users[user];
-    this.remove_uuid(user);
-    return this;
-  }
-  return this.remove_user(user.id);
-};
-
-/*
- * Saves the user.
- */
-Users[proto].save_user = function (user) {
-  if (!this.exists_user(user)) this.save_uuid(user.id).users[user.id] = user;
-  return this;
-};
-
-/*
- * Saves the user and listens to ID changes.
- */
-Users[proto].register_user = function (user) {
-  if (this.exists_user(id)) return this;
-  var self = this;
-  this.save_user(user);
-  user.onChangeId(function (client, uuid) {
-    self.remove_user(uuid).save_user(client);
-  });
-};
-
-/*
- * Filters over all the users.
- */
-Users[proto].filter = function (fn) {
-  var result = [], check = null;
-  for (var user in this.users) {
-    if ( this.users.hasOwnProperty(user) ) {
-      check = fn(this.users[user]);
-      if (typeof check == "boolean") {
-        if (check == true) result[result.length] = this.users[user];
+  indexById: function (id) {
+    if (typeof id !== "string") return this.indexById(id.id);
+    var i = 0;
+    for (var user in this.users) {
+      if (this.users.hasOwnProperty(user)) {
+        if (id === user) return i;
       }
-      if (!!check) result[result.length] = check;
+      i++;
+    }
+    return -1;
+  },
+
+  eachById: function (fn) {
+    var i = 0, user;
+    for (user in this.users) {
+      if (this.users.hasOwnProperty(user)) {
+        fn(user, this.users[user], i);
+      }
+      i++;
+    }
+    return this;
+  },
+
+  mapById: function (fn) {
+    var i = 0, user;
+    for (user in this.users) {
+      if (this.users.hasOwnProperty(user)) {
+        this.users[user] = fn(user, this.users[user], i);
+      }
+      i++;
+    }
+    return this;
+  },
+
+  filterById: function (fn) {
+    var i = 0, result = {}, user, check;
+    for (user in this.users) {
+      if (this.users.hasOwnProperty(user)) {
+        check = fn(user, this.users[user], i);
+        if (typeof check === "boolean" && check === true) result[user] = this.users[user];
+      }
+      i++;
+    }
+    return result;
+  },
+
+  findById: function (id) {
+    if (typeof id === "string") return this.findById(id.id);
+    return this.users[id];
+  },
+
+  saveById: function (user) {
+    this.users[user.id] = user;
+  },
+
+  removeById: function (id) {
+    this.users[id] = undefined;
+  },
+
+
+  existsByToken: function (token) {
+    if (typeof token !== "string") return this.existsByToken(token.token);
+    for (var user in this.users) {
+      if (this.users.hasOwnProperty(user)) {
+        if (this.users[user].token === token) return true;
+      }
+    }
+    return false;
+  },
+
+  indexByToken: function (token) {
+    if (typeof token !== "string") return this.indexByToken(token.token);
+    var i = 0;
+    for (var user in this.users) {
+      if (this.users.hasOwnProperty(user)) {
+        if (token === this.users[user].token) return i;
+      }
+      i++;
+    }
+    return -1;
+  },
+
+  eachByToken: function (fn) {
+    var i = 0, user, us;
+    for (user in this.users) {
+      if (this.users.hasOwnProperty(user)) {
+        us = this.users[user];
+        fn(us.token, us, i);
+      }
+      i++;
+    }
+    return this;
+  },
+
+  mapByToken: function (fn) {
+    var i = 0, user, us;
+    for (user in this.users) {
+      if (this.users.hasOwnProperty(user)) {
+        us = this.users[user];
+        this.users[user] = fn(us.token, us, i);
+      }
+      i++;
+    }
+    return this;
+  },
+
+  filterByToken: function (fn) {
+    var i = 0, result = {}, user, check, us;
+    for (user in this.users) {
+      if (this.users.hasOwnProperty(user)) {
+        us = this.users[user];
+        check = fn(us.token, us, i);
+        if (typeof check === "boolean" && check === true) result[us.token] = us;
+      }
+      i++;
+    }
+    return result;
+  },
+
+  findByToken: function (token) {
+    if (typeof token !== "string") return this.findByToken(token.token);
+    var user, us;
+    for (user in this.users) {
+      if (this.users.hasOwnProperty(user)) {
+        us = this.users[user];
+        if (us.token === token) return us;
+      }
+    } 
+  },
+
+  removeByToken: function (token) {
+    if (typeof token !== "string") return this.removeByToken(token.token); 
+    var user, us;
+    for (user in this.users) {
+      if (this.users.hasOwnProperty(user)) {
+        us = this.users[user];
+        if (us.token === token) {
+          us = null;
+          us = undefined;
+          delete us;
+        }
+      }
+    }
+    return this;
+  },
+
+  originalIdByToken: function (token) {
+    if (typeof token !== "string") return this.originalIdByToken(token.token); 
+    for (var user in this.users) {
+      if (this.users.hasOwnProperty(user)) {
+        if (this.users[user].token === token) return user;
+      }
     }
   }
-  return result;
+
 };
 
 module.exports = Users;

@@ -2,6 +2,8 @@ module.exports = function (app, config, pathSettings, base, users) {
   
   var
     jwt = require("jsonwebtoken"),
+    https = require("https"),
+    geocoder = require("geocoder"),
     letters    = "a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð",
     validName  = new RegExp("^(((["+letters+"]+)((-["+letters+"]+)*)(('(["+letters+"]+)?)*)|())( ?)){1,4}$"),
     validEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -25,18 +27,44 @@ module.exports = function (app, config, pathSettings, base, users) {
       long_location: req.body.long_location,
       host: req.body.host == "true"
     };
-    console.log(profile);
     if (profile.host === true) {
       validators[0] = anything;
     }
     for (var i = 0; i < fields.length; i++) {
       if (!validators[i].test(profile[ fields[i] ])) {
         res.json({ state: -1 });
-        console.log("valor incorrecto: " + fields[i] + " es " + profile[ fields[i] ]);
         return;
       }
     }
-    var token = jwt.sign(profile, app.get("secretPass"), { expiresInMinutes: 60 * 2 });
-    res.json({ token: token });
+    if (profile.host === false) {
+      var token = jwt.sign(profile, app.get("secretPass"), { expiresInMinutes: 30 });
+      res.json({ token: token });
+      return;
+    }
+    geocoder.reverseGeocode(profile.latitude, profile.longitude, function (err, data) {
+      var result, component, type, locality, province, comunity, country;
+      for (var i = 0; i < data.results.length; i++) {
+        result = data.results[i];
+        for (var e = 0; e < result.address_components.length; e++) {
+          component = result.address_components[e];
+          for (var n = 0; n < component.types.length; n++) {
+            type = component.types[n];
+            if (type == "administrative_area_level_1") {
+              comunity = component.long_name;
+            } else if (type == "administrative_area_level_2") {
+              province = component.long_name;
+            } else if (type == "locality") {
+              locality = component.long_name;
+            } else if (type == "country") {
+              country = component.long_name;
+            }
+          }
+        }
+      }
+      profile.short_location = locality + ", " + comunity;
+      profile.long_location = locality + ", " + province + ", " + comunity + ", " + country;
+      var token = jwt.sign(profile, app.get("secretPass"), { expiresInMinutes: 1 });
+      res.json({ token: token });
+    }, { language: "es" });
   })
 };
