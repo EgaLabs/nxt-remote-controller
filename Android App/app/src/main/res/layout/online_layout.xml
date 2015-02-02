@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_gravity="center">
+
+  <!--View
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/clients"
+      android:background="#f00"/-->
 
   <android.support.v7.widget.RecyclerView
       android:id="@+id/clients"
       style="@style/recycler_view"
       tools:context="git.egatuts.nxtremotecontroller.activity.ControllerActivity"
-      tools:listitem="@layout/paired_device" />
+      tools:listitem="@layout/paired_device"/>
 
 </RelativeLayout>

@@ -35,7 +35,7 @@ if ( !storage() ) {
 privateData = storage();
 for (; i < fields.length; i++) {
   if ( !validators[i].test(privateData[ fields[i] ]) ) {
-    storage({ token: "" });
+    storage({ token: "", peer: "" });
     window.location.href = "/login";
   }
 }
@@ -53,6 +53,7 @@ if (path.length > 0) {
     [
       "/res/js/md5.min.js",
       "/socket.io/socket.io.js",
+      "/res/js/peer.min.js",
       "/res/js/Masonry.min.js",
       "/res/js/Mustache.min.js",
       "/res/js/when-then.min.js",

@@ -35,6 +35,8 @@ package git.egatuts.nxtremotecontroller.fragment;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
@@ -42,10 +44,10 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +57,6 @@ import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -82,6 +83,7 @@ import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.ControllerActivity;
 import git.egatuts.nxtremotecontroller.client.Client;
 import git.egatuts.nxtremotecontroller.client.ClientAdapter;
+import git.egatuts.nxtremotecontroller.client.ClientViewHolder;
 import git.egatuts.nxtremotecontroller.exception.LoginException;
 import git.egatuts.nxtremotecontroller.exception.MalformedTokenException;
 import git.egatuts.nxtremotecontroller.listener.GPSLocationTracker;
@@ -94,9 +96,10 @@ import git.egatuts.nxtremotecontroller.views.BaseProgressDialog;
  *  This fragment will send audio and video record to the remote controller and will have access to the
  *  robot sensors and the phone flash (if possible).
  */
-public class OnlineControllerFragment extends BaseFragment {
+public class OnlineControllerFragment extends ControllerBaseFragment {
 
   private RecyclerView recyclerView;
+  //private XWalkView xwalkview;
   private ClientAdapter clientsAdapter;
   private BaseProgressDialog progressDialog;
   private long showingTime;
@@ -107,6 +110,7 @@ public class OnlineControllerFragment extends BaseFragment {
   private TokenRequester requester;
   private String token;
   private Socket socket;
+  private Client controlledBy;
 
   public void refreshFragment () {
     final OnlineControllerFragment self = this;
@@ -289,6 +293,24 @@ public class OnlineControllerFragment extends BaseFragment {
             e.printStackTrace();
           }
         }
+      }).on("motors", new Emitter.Listener() {
+        @Override
+        public void call (Object... args) {
+          globalUtils.showToast("motores");
+          try {
+            JSONObject data = (JSONObject) args[0];
+            String sender = data.getString("from");
+            if (!sender.equals(self.controlledBy.getPeerId())) {
+              return;
+            }
+            double b = data.getDouble("b");
+            double c = data.getDouble("c");
+            self.getConnector().motorBC(c, b, false, false);
+          } catch (JSONException e) {
+            //e.printStackTrace();
+          }
+
+        }
       });
       socket.connect();
     } catch (URISyntaxException e) {
@@ -320,6 +342,9 @@ public class OnlineControllerFragment extends BaseFragment {
 
     view = inflater.inflate(R.layout.online_layout, parent, false);
     this.recyclerView = (RecyclerView) view.findViewById(R.id.clients);
+    /*this.xwalkview = (XWalkView) view.findViewById(R.id.xwalkview);
+    this.xwalkview.setResourceClient(new XWalkResourceClient(this.xwalkview));
+    this.xwalkview.setUIClient(new XWalkUIClient(this.xwalkview));*/
 
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getBaseActivity());
     linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -328,6 +353,12 @@ public class OnlineControllerFragment extends BaseFragment {
     recyclerView.setLayoutManager(linearLayoutManager);
     recyclerView.setItemAnimator(new DefaultItemAnimator());
     this.clientsAdapter = new ClientAdapter(this, new ArrayList<Client>());
+    this.clientsAdapter.setOnClickListener(new ClientAdapter.OnClickListener() {
+      @Override
+      public void onClick (ClientViewHolder view, int index) {
+        self.controllBy(view, index);
+      }
+    });
     recyclerView.setAdapter(this.clientsAdapter);
     Client ejemplo = new Client();
     ejemplo.setName("EgaTuts");
@@ -420,6 +451,18 @@ public class OnlineControllerFragment extends BaseFragment {
       return;
     }
     this.startSocketConnection();
+  }
+
+  public void controllBy (ClientViewHolder view, int index) {
+    Client client = this.clientsAdapter.get(index);
+    this.controlledBy = client;
+    this.socket.emit("call", this.controlledBy.getId());
+    NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getActivity());
+    builder.setSmallIcon(R.drawable.ic_launcher)
+            .setContentTitle("Remote controlling.")
+            .setContentText("Your robot is now being controlled by: " + this.clientsAdapter.get(index).getName())
+            .setAutoCancel(false);
+    ((NotificationManager) this.getActivity().getSystemService(Context.NOTIFICATION_SERVICE)).notify(1, builder.build());
   }
 
   @Override

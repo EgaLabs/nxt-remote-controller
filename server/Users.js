@@ -164,6 +164,15 @@ Users.prototype = {
         if (this.users[user].token === token) return user;
       }
     }
+  },
+
+  findByPeer: function (peer) {
+    if (typeof peer !== "string") return this.findByPeer(peer.peer);
+    for (var user in this.users) {
+      if (this.users.hasOwnProperty(user)) {
+        if (this.users[user].peer === peer) return user; 
+      }
+    } 
   }
 
 };

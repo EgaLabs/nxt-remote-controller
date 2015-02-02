@@ -10,6 +10,7 @@ public class Client {
 
   public String id;
   public String socketId;
+  public String peerId;
   public String name;
   public String email;
   public double latitude;
@@ -30,8 +31,16 @@ public class Client {
     this.socketId = socketId;
   }
 
-  public String getsocketId () {
+  public String getSocketId () {
     return this.socketId;
+  }
+
+  public void setPeerId (String peerId) {
+    this.peerId = peerId;
+  }
+
+  public String getPeerId () {
+    return this.peerId;
   }
 
   public void setName (String name) {
@@ -96,6 +105,7 @@ public class Client {
     client.setLatitude(member.getDouble("latitude"));
     client.setLongitude(member.getDouble("longitude"));
     client.setSocketId(member.getString("id"));
+    client.setPeerId(member.getString("peer"));
     return client;
   }
 

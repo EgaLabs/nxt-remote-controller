@@ -218,6 +218,7 @@
   root.onresize = function () {
     containerResizer(container, null, masonry.items.length);
   };
+
   masonry.on("beforeLayoutComplete", containerResizer);
   var
     lat = _range(-90, 90),
@@ -258,7 +259,7 @@
         window.location.href = "/login";
         return;
       }
-      storage(data);
+      storage({ token: data.token, peer: md5(data.token) });
       connect();
     });
   }
@@ -330,9 +331,22 @@
       active_hosts.innerHTML = "-";
     });
 
-    socket.on('connect', function (){
+    socket.on("connect", function (){
       tip.classList.add("hide");
     });
+
+    socket.on("receive_call", function () {
+      console.log(arguments);
+    });
+
+    /*var peer = new Peer(storage().peer, { host: "localhost", port: 9000, path: "/" });
+    peer.on("call", function (call) {
+      alert("call");
+    });
+    peer.on("stream", function (stream) {
+      alert("stream");
+    });*/
+
   };
 
   if (storage().token == "") {

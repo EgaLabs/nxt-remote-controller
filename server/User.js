@@ -3,6 +3,7 @@ var exports = module.exports;
 var User = function (data) {
   this._id             = data.id             || "";
   this._token          = data.token          || "";
+  this._peer           = data.peer           || "";
   this._name           = data.name           || "";
   this._email          = data.email          || "";
   this._latitude       = data.latitude       || "";
@@ -11,12 +12,25 @@ var User = function (data) {
   this._long_location  = data.long_location  || "";
   this._connected      = data.connected      || false;
   this._host           = data.host           || false;
+
+  this._onChangeId            = function () {};
+  this._onChangeToken         = function () {};
+  this._onChangePeer          = function () {};
+  this._onChangeName          = function () {};
+  this._onChangeEmail         = function () {};
+  this._onChangeLatitude      = function () {};
+  this._onChangeLongitude     = function () {};
+  this._onChangeShortLocation = function () {};
+  this._onChangeLongLocation  = function () {};
+  this._onChangeHost          = function () {};
+  this._onChangeConnected     = function () {};
 };
 
 User.prototype = {
 		
   _id:        "",
   _token:     "",
+  _peer:      "",
   _name:      "",
   _email:     "",
   _latitude:  "",
@@ -27,19 +41,29 @@ User.prototype = {
   _host:      false,
   _connected: false,
   
-  _onChangeId:        function () {},
-  _onChangeName:      function () {},
-  _onChangeEmail:     function () {},
-  _onChangeLatitude:  function () {},
-  _onChangeLongitude: function () {},
-  _onChangeLocation:  function () {},
+  _onChangeId:            function () {},
+  _onChangeToken:         function () {},
+  _onChangePeer:          function () {},
+  _onChangeName:          function () {},
+  _onChangeEmail:         function () {},
+  _onChangeLatitude:      function () {},
+  _onChangeLongitude:     function () {},
+  _onChangeShortLocation: function () {},
+  _onChangeLongLocation:  function () {},
+  _onChangeHost:          function () {},
+  _onChangeConnected:     function () {},
   
-  onChangeId:        function (fn) { this._onChangeId        = fn; },
-  onChangeName:      function (fn) { this._onChangeName      = fn; },
-  onChangeEmail:     function (fn) { this._onChangeEmail     = fn; },
-  onChangeLatitude:  function (fn) { this._onChangeLatitude  = fn; },
-  onChangeLongitude: function (fn) { this._onChangeLongitude = fn; },
-  onChangeLocation:  function (fn) { this._onChangeLocation  = fn; },
+  _onChangeId:            function (fn) { this._onChangeId = fn;            },
+  _onChangeToken:         function (fn) { this._onChangeToken = fn;         },
+  _onChangePeer:          function (fn) { this._onChangePeer = fn;          },
+  _onChangeName:          function (fn) { this._onChangeName = fn;          },
+  _onChangeEmail:         function (fn) { this._onChangeEmail = fn;         },
+  _onChangeLatitude:      function (fn) { this._onChangeLatitude = fn;      },
+  _onChangeLongitude:     function (fn) { this._onChangeLongitude = fn;     },
+  _onChangeShortLocation: function (fn) { this._onChangeShortLocation = fn; },
+  _onChangeLongLocation:  function (fn) { this._onChangeLongLocation = fn;  },
+  _onChangeHost:          function (fn) { this._onChangeHost = fn;          },
+  _onChangeConnected:     function (fn) { this._onChangeConnected = fn;     },
   
   set id (val) {
 	  var old = this._id;
@@ -59,6 +83,16 @@ User.prototype = {
   
   get token () {
     return this._token;
+  },
+
+  set peer (val) {
+    var old = this._peer;
+    this._peer = val;
+    this._onChangePeer(this, old);
+  },
+  
+  get peer () {
+    return this._peer;
   },
   
   set name (val) {
@@ -104,7 +138,7 @@ User.prototype = {
   set short_location (val) {
     var old = this._short_location;
     this._short_location = val;
-    this._onChangeLocation(this, old);
+    this._onChangeShortLocation(this, old);
   },
   
   get short_location () {
@@ -114,37 +148,38 @@ User.prototype = {
   set long_location (val) {
     var old = this._long_location;
     this._long_location = val;
-    this._onChangeLocation(this, old);
+    this._onChangeLongLocation(this, old);
   },
   
   get long_location () {
     return this._long_location;
   },
 
-  set connected (val) {
-    var old = this._connected;
-    this._connected = val;
-    this._onChangeLocation(this, old);
-  },
-  
-  get connected () {
-    return this._connected;
-  },
-
   set host (val) {
     var old = this._host;
     this._host = val;
-    this._onChangeLocation(this, old);
+    this._onChangeHost(this, old);
   },
   
   get host () {
     return this._host;
   },
 
+  set connected (val) {
+    var old = this._connected;
+    this._connected = val;
+    this._onChangeConnected(this, old);
+  },
+  
+  get connected () {
+    return this._connected;
+  },
+
   clone: function () {
     return new User({
       id: this.id,
       token: this.token,
+      peer: this.peer,
       name: this.name,
       email: this.email,
       latitude: this.latitude,
@@ -160,6 +195,7 @@ User.prototype = {
     return {
       id: this.id,
       token: this.token,
+      peer: this.peer,
       name: this.name,
       email: this.email,
       latitude: this.latitude,

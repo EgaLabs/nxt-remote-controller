@@ -1,8 +1,7 @@
 package git.egatuts.nxtremotecontroller.client;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import git.egatuts.nxtremotecontroller.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.BaseActivity;
 import git.egatuts.nxtremotecontroller.fragment.BaseFragment;
-import git.egatuts.nxtremotecontroller.listener.AnimationEndListener;
 import git.egatuts.nxtremotecontroller.utils.ImageDownloader;
 
 public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolder> {
@@ -29,6 +27,11 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolder> {
   private int rippleDuration;
   private boolean exists;
   private int i;
+  private OnClickListener clickListener;
+
+  public interface OnClickListener {
+    public void onClick (ClientViewHolder view, int index);
+  }
 
   public ClientAdapter (GlobalUtils utils, ArrayList<Client> devices) {
     this.clients = devices;
@@ -55,6 +58,14 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolder> {
 
   public ClientAdapter (BaseActivity context) {
     this(context.getGlobalUtils());
+  }
+
+  public void setOnClickListener (OnClickListener clickListener) {
+    this.clickListener = clickListener;
+  }
+
+  public OnClickListener getClickListener () {
+    return this.clickListener;
   }
 
   public Client[] getAll () {
@@ -125,11 +136,18 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolder> {
   }
 
   @Override
-  public void onBindViewHolder (ClientViewHolder view, int index) {
+  public void onBindViewHolder (final ClientViewHolder view, final int index) {
+    final ClientAdapter self = this;
     Client client = this.clients.get(index);
     this.toggleRipple(view.nameRipple, view.name, view.email);
     this.toggleRipple(view.coordsRipple, view.location, view.coords);
     this.setupRipple(view.imageRipple);
+    view.imageRipple.setAnimationFinishListener(new RippleView.AnimationFinishListener() {
+      @Override
+      public void onFinish () {
+        if (self.clickListener != null) self.clickListener.onClick(view, index);
+      }
+    });
     view.name.setText(client.getName());
     view.email.setText(client.getEmail());
     view.coords.setText(client.getLatitude() + ", " + client.getLongitude());

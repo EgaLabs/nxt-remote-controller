@@ -48,11 +48,13 @@ var _         = require("underscore");
 var express   = require("express");
 var bodyParse = require("body-parser");
 var io        = require("socket.io");
+var peer      = require("peer");
 var app       = express();
 var socketJwt = require("socketio-jwt");
 var jsonwt    = require("jsonwebtoken");
+var MD5       = require("MD5");
 var Users     = require("./Users.js");
-var _users     = new Users();
+var _users    = new Users();
 var User      = require("./User.js");
 Log.i("Dependencies: OK.");
 
@@ -197,6 +199,34 @@ var HttpsServer = https.createServer({
  ***************************************************************************
  * Here starts sockets connection.
  */
+
+var getUsers = function () {
+  var tmp_users = _users.filterById(function (id, value, index) {
+    return value.host === false && value.connected === true;
+  }),
+  users = {};
+  _.each(tmp_users, function (value, key) {
+    var userr = value.parsed();
+    userr.token = undefined;
+    delete userr.token;
+    users[_users.originalIdByToken(value)] = userr;
+  });
+  return users;
+},
+getHosts = function () {
+  var tmp_hosts = _users.filterById(function (id, value, index) {
+    return value.host === true && value.connected === true;
+  }),
+  hosts = {};
+  _.each(tmp_hosts, function (value, key, index) {
+    var hostt = value.parsed();
+    hostt.token = undefined;
+    delete hostt.token;
+    hosts[_users.originalIdByToken(value)] = hostt;
+  });
+  return hosts;
+};
+
 io = io.listen(HttpsServer);
 
 io.set("authorization", function (handshakeData, accept) {
@@ -206,7 +236,7 @@ io.set("authorization", function (handshakeData, accept) {
       if (err) {
         accept(err, false);
       } else {
-        handshakeData.decoded_token = _.extend(data, { token: token, connected: false });
+        handshakeData.decoded_token = _.extend(data, { token: token, connected: false, peer: MD5(token) });
         accept(err, true);
       }
     });
@@ -239,26 +269,9 @@ io.on("connection", function (socket) {
   tmp[_users.originalIdByToken(user)] = secure_user.parsed();
   secure_user = tmp;
 
-  socket.on("refresh", function () {
-    socket.emit("join_member", { members: _users });
-  });
-
-  var tmp_hosts = _users.filterById(function (id, value, index) {
-    return value.host === true && value.connected === true;
-  }),
-  tmp_users = _users.filterById(function (id, value, index) {
-    return value.host === false && value.connected === true;
-  }),
-
-  hosts = {},
-  users = {};
-
-  _.each(tmp_hosts, function (value, key, index) {
-    hosts[_users.originalIdByToken(value)] = value.parsed();
-  });
-  _.each(tmp_users, function (value, key) {
-    users[_users.originalIdByToken(value)] = value.parsed();
-  });
+  var hosts = getHosts(),
+      users = getUsers();
+  
 
   socket.on("disconnect", function () {
     user.connected = false;
@@ -267,20 +280,57 @@ io.on("connection", function (socket) {
   });
 
   if (user.host === true) {
+    secure_user.peer = undefined;
+    delete secure_user.peer;
     _.each(users, function (value, key) {
       io.to(value.id).emit("join_member", { members: secure_user });
       io.to(value.id).emit("hosts_count", { count: _.size(hosts) });
     });
     socket.emit("join_member", { members: users });
+
+    socket.on("call", function (id) {
+      _.each(getUsers(), function (value, key) {
+        if (key === id) {
+          io.to(value.id).emit("receive_call", { from: user.peer });
+        }
+      });
+    });
   } else if (user.host === false) {
     _.each(hosts, function (value, key) {
       io.to(value.id).emit("join_member", { members: secure_user });
     });
     socket.emit("join_member", { members: hosts });
     socket.emit("hosts_count", { count: _.size(hosts) });
+
+    socket.on("motor", function (data) {
+      _.each(getHosts(), function (value, key) {
+        if (data.to !== value.peer) return;
+        io.to(value.id).emit("motors", {
+          a: data.a,
+          b: data.b,
+          c: data.c,
+          from: user.peer
+        });
+      });
+    });
   }
 });
 
+
+/*
+ *  
+ */
+/*var server = peer.PeerServer({
+  port: 9000,
+  ssl: {
+    key: key,
+    cert: cert
+  },
+  path: "/"
+});
+server.on("connection", function (id) {
+  console.log(id);
+});*/
 
 
 /*
