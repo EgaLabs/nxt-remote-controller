@@ -6,520 +6,521 @@
 (function (root, DOC, M, Mustache, Masonry, io, W, depot, marmottajax, key, undefined) {
   "use strict";
 
-  var configData = [
-    { url:'stun:stun01.sipphone.com' },
-    { url:'stun:stun.ekiga.net' },
-    { url:'stun:stun.fwdnet.net' },
-    { url:'stun:stun.ideasip.com' },
-    { url:'stun:stun.iptel.org' },
-    { url:'stun:stun.rixtelecom.se' },
-    { url:'stun:stun.schlund.de' },
-    { url:'stun:stun.l.google.com:19302' },
-    { url:'stun:stun1.l.google.com:19302' },
-    { url:'stun:stun2.l.google.com:19302' },
-    { url:'stun:stun3.l.google.com:19302' },
-    { url:'stun:stun4.l.google.com:19302' },
-    { url:'stun:stunserver.org' },
-    { url:'stun:stun.softjoys.com' },
-    { url:'stun:stun.voiparound.com' },
-    { url:'stun:stun.voipbuster.com' },
-    { url:'stun:stun.voipstunt.com' },
-    { url:'stun:stun.voxgratia.org' },
-    { url:'stun:stun.xten.com' },
-    {
-      url: 'turn:numb.viagenie.ca',
-      credential: 'muazkh',
-      username: 'webrtc@live.com'
-    },
-    {
-      url: 'turn:192.158.29.39:3478?transport=udp',
-      credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-      username: '28224511:1379330808'
-    },
-    {
-      url: 'turn:192.158.29.39:3478?transport=tcp',
-      credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-      username: '28224511:1379330808'
-    }
-  ];
-
   /*
-   * First of all we add a little modification to the when-then library
-   * to add a custom method that allows delaying async tasks.
+   * Returns a random number between the given range.
    */
-
-  /**
-   * Allows delaying the callback function when the async tasks have finished.
-   */
-  W.prototype.delay = function (fn, time) {
-    var
-      self    = this,
-      args    = null,
-      timeout = time || 0;
-    return self.then(function () {
-      args = arguments;
-      root.setTimeout(function () {
-        fn.apply(self, args);
-      }, timeout);
-    });
-
+  var _range = function (min, max) {
+    return (max - min) * M.random() + min;
   };
 
   /*
-   * We start defining our custom methods.
+   * Returns a number truncated with the given number of decimal part.
    */
+  var _fixed = function (num, round) {
+    return (num * M.pow(10, round) | 0) / M.pow(10, round);
+  };
 
-  /**
-   * Returns a random value between the specified range.
-   * @param {number} min The minimum value that can be returned.
-   * @param {number} max The maximum value that can be returned.
-   * @return {number} Random value between the given range.
+  /*
+   * Transforms HTML string into real HTML elements.
    */
-  var
-    _range = function (min, max) {
-      return (max - min) * M.random() + min;
-    },
-
-    /**
-     * Sets the maximum number of decimals a number can have.
-     * @param {number} num The number to strip.
-     * @param {number} round The maximum decimal precision.
-     * @return {number} The given number with given fixed length.
-     */
-    _fixed = function (num, round) {
-      return (num * M.pow(10, round) | 0) / M.pow(10, round);
-    },
-
-    /**
-     * Transforms a string containing HTML to an HTML element.
-     * @param {string} html The string containing all the HTML.
-     * @return {Element} The given string as an HTML element.
-     */
-    _toHTML = (function (elem) {
-      var child = null;
-      return function (html) {
-        elem.innerHTML = html;
-        child = elem.children[0];
-        elem.innerHTML = "";
-        return child;
-      };
-    })(DOC.createElement("div")),
-
-    /**
-     * Debounces a function to execute after a certain time that resets the timer if called more than once before being executed.
-     * @param {function} fn The function to debounce.
-     * @param {number} time The time to debounce in miliseconds.
-     * @param {boolean} immediate Specifies if it must be executed instantly.
-     */
-    _debounce = (function () {
-      var
-        timeout = null,
-        context = null,
-        args    = null,
-        func    = null,
-        instant = null,
-        later = function () {
-          timeout = null;
-          if ( !instant ) func.apply(context, args);
-        };
-
-      return function (fn, time, immediate) {
-
-        return function () {
-          context = this,
-          args    = arguments,
-          func    = fn;
-          instant = !!immediate && !timeout;
-          clearTimeout(timeout);
-          timeout = setTimeout(later, time);
-          if (instant) func.apply(context, args);
-        };
-
-      };
-    })(),
-
-    /**
-     * Renders a mustache template.
-     * @param {string} data The data to render with Mustache.
-     * @param {object} settings Custom data to render in the template.
-     * @return {element} The rendered template returned by Mustache as string as HTML.
-     */
-    _render = function (data, settings) {
-      return _toHTML(Mustache.to_html(data, settings));
-    },
-
-    /*
-     * Local variables.
-     */
-    container     = DOC.getElementById("container"),
-    template      = DOC.getElementById("host-template"),
-    add_template  = DOC.getElementById("add-template"),
-    tip           = DOC.getElementById("loading"),
-    tip_message   = DOC.getElementById("loading-tip"),
-    active_hosts  = DOC.getElementById("active-hosts"),
-    section       = DOC.querySelectorAll("section")[1],
-    controller_ui = DOC.getElementById("controll-ui-container"),
-
-
-    /**
-     * Renders the host template.
-     * @param {object} settings Object containing the data to render.
-     * @return {element} The rendered template.
-     * @see _render
-     */
-    renderTemplate = function (settings) {
-      return _render(template.innerHTML, settings);
-    },
-
-    /*
-     * Updates user data if arguments passed,
-     or returns it's value if no arguments passed.
-     */
-    userdata = depot("userdata"),
-    storage = function (data) {
-      if (!data) return userdata.get(userdata.ids[0]);
-      return userdata.update(userdata.ids[0], data);
-    },
-
-    /*
-     * The Masonry main instance.
-     */
-
-    len           = 0,
-    columnWidth   = 280,
-    gutter        = 32,
-    maxWidth      = null,
-    maxColumns    = null,
-    tempColumns   = null,
-    tempWidth     = null,
-    connectedPeer = null,
-    mediaStream   = null,
-
-    /*
-     * Returns the width that takes up a n number of columns.
-     *
-     * f(x) = |x| * width + (|x| - 1) * gutter
-     */
-    sizeOfColumns = function (x, w, m) {
-      return x * w + (x - 1) * m;
-    },
-
-    /**
-     * Returns the number of columns that can fit up in the given width. Is the inverted sizeOfColumns'() function.
-     *
-     * @param {number} x The free space to fill with columns.
-     * @return {number} A natural and integer number.
-     */
-    possibleColumns = function (x, w, m) {
-      return ( (x + m) / (w + m) ) | 0;
-    },
-
-    /**
-     * Resizes the main container.
-     * @param {element} parent The main container of all columns.
-     * @param {element} element The new added element.
-     * @param {number} length The number of elements.
-     */
-    containerResizer = function (parent, element, length, size, margin) {
-      len         = length,
-      maxWidth    = root.innerWidth - margin * 2,
-      maxColumns  = possibleColumns(maxWidth, size, margin),
-      tempColumns = len > maxColumns ? maxColumns : len,
-      tempWidth   = tempColumns * size + (tempColumns - 1) * margin;
-      parent.style.width = tempWidth + "px";
-    },
-
-    sign = function (number) {
-      return number < 0 ? -1 : 1;
-    },
-
-    joystickCalculator = function (x, y, angle, max) {
-      var
-        mod = Math.sqrt(x * x + y * y),
-        left, right;
-      mod = mod > max ? max : mod;
-      if (y >= 0) {
-        if ( x >= 0) {
-          left  = mod / max;
-          right = M.abs(M.sin(angle)) * y;
-        } else if (x < 0) {
-          left  = M.abs(M.sin(angle)) * -y;
-          right = mod / max;
-        }
-      } else if (y < 0) {
-        if ( x >= 0) {
-          left  = mod / max * sign(y);
-          right = Math.sin(angle) * y;
-        } else if (x < 0) {
-          left  = Math.sin(angle) * y;
-          right = mod / max * sign(y);
-        }
-      }
-      return [left, right];
+  var _toHTML = (function (elem) {
+    var child = null;
+    return function (html) {
+      elem.innerHTML = html;
+      child = elem.children[0];
+      elem.innerHTML = "";
+      return child;
     };
+  })(DOC.createElement("div"))
 
-    window.masonry = new Masonry(container, {
-      itemSelector: ".host",
-      layoutMode: "fitRows",
-      columnWidth: columnWidth,
-      gutter: gutter
-    });
-
-    window.controllerMasonry = new Masonry(controller_ui, {
-      itemSelector: ".video",
-      layoutMode: "fitRows",
-      columnWidth: 640,
-      gutter: 32
-    });
-
-  Masonry.prototype.addElements = function (parent, elements) {
-    for ( var i = 0; i < elements.length; i++ ) {
-      containerResizer(parent, null, this.items.length + 1, this.columnWidth - this.gutter, this.gutter);
-      this.trigger("beforeLayoutComplete", [parent, elements[i], this.items.length + 1]);
-      parent.appendChild( elements[i] );
-      this.appended( elements[i] );
-      this.layout();
-    }
-  };
-
-  Masonry.prototype.removeElements = function (parent, elements) {
-    for ( var i = 0; i < elements.length; i++ ) {
-      this.trigger("beforeLayoutComplete", [parent, elements[i], this.items.length + 1]);
-      this.remove(elements[i]);
-      this.layout();
-    }
+  /*
+   * Renders an HTML Mustache template.
+   */
+  var _render = function (data, settings) {
+    return _toHTML(Mustache.to_html(data, settings));
   };
 
   /*
-   * Assigning resizing functions.
+   * Creates a renderer function to allow easy templating of the same HTML template.
+   */
+  var _template_renderer_ = function (element) {
+    return function (settings) {
+      return _render(element.innerHTML, settings);
+    };
+  };
+
+  /*
+   * Returns the size that will take to render an X number of columns.
+   */
+  var _sizeOfColumns = function (number, width, margin) {
+    return number * width + (number - 1) * margin;
+  };
+
+  /*
+   * Returns the number of columns that can take place in a limited given space.
+   */
+  var _numberOfColumns = function (space, width, margin) {
+    return ( (space + margin) / (width + margin) ) | 0;
+  };
+
+  /*
+   * Returns a function that saves and gets the data of the given data object.
+   */
+  var _storage_saver_ = function (id) {
+    var storage = depot(id);
+    return function (data) {
+      if (!data) return storage.get(storage.ids[0]);
+      return storage.update(storage.ids[0], data);
+    };
+  };
+
+  /*
+   * Creates a video element.
+   */
+  var _createVideoElement = function (id, width, height) {
+    var video = document.createElement("video");
+    video.width  = width;
+    video.height = height;
+    video.id = id;
+    video.className = "video";
+    video.controls = true;
+    return video;
+  };
+
+  /*
+   * Returns a new PeerJS instance.
+   */
+  var _getPeerInstance = function (id) {
+    return new Peer(id, {
+      host: "localhost",
+      port: 9000,
+      path: "/",
+      debug: true,
+      config: {
+        "iceServers": [
+          { url: "stun:stun01.sipphone.com"      }, { url: "stun:stun.ekiga.net"           },
+          { url: "stun:stun.fwdnet.net"          }, { url: "stun:stun.ideasip.com"         },
+          { url: "stun:stun.iptel.org"           }, { url: "stun:stun.rixtelecom.se"       },
+          { url: "stun:stun.schlund.de"          }, { url: "stun:stun.l.google.com:19302"  },
+          { url: "stun:stun1.l.google.com:19302" }, { url: "stun:stun2.l.google.com:19302" },
+          { url: "stun:stun3.l.google.com:19302" }, { url: "stun:stun4.l.google.com:19302" },
+          { url: "stun:stunserver.org"           }, { url: "stun:stun.softjoys.com"        },
+          { url: "stun:stun.voiparound.com"      }, { url: "stun:stun.voipbuster.com"      },
+          { url: "stun:stun.voipstunt.com"       }, { url: "stun:stun.voxgratia.org"       },
+          { url: "stun:stun.xten.com"            },
+          
+          { url: "turn:numb.viagenie.ca",                 credential: "muazkh",                       username: "webrtc@live.com"     },
+          { url: "turn:192.158.29.39:3478?transport=udp", credential: "JZEOEt2V3Qb0y27GRntt2u2PAYA=", username: "28224511:1379330808" },
+          { url: "turn:192.158.29.39:3478?transport=tcp", credential: "JZEOEt2V3Qb0y27GRntt2u2PAYA=", username: "28224511:1379330808" }
+        ]
+      }
+    });
+  };
+
+
+  ///////////////////////////////////////
+  /// Fallback method of getUserMedia ///
+  ///////////////////////////////////////
+  navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
+  
+  ///////////////////////////////
+  /// Masonry plugin edition. ///
+  ///////////////////////////////
+
+  /*
+   * Resize the parent to fit its content.
+   */
+  Masonry.prototype.calculateResize = function () {
+    var
+      length         = this.items.length,
+      margin         = this.gutter,
+      columnWidth    = this.columnWidth - margin,
+      maximumWidth   = root.innerWidth - margin * 2,
+      maximumColumns = _numberOfColumns(maximumWidth, columnWidth, margin),
+      columns        = length > maximumColumns ? maximumColumns : length;
+    this.element.style.width = _sizeOfColumns(columns, columnWidth, margin) + "px";
+    return this;
+  };
+
+  /*
+   * Adds a set of elements to the container and performs the layout.
+   */
+  Masonry.prototype.addElements = function (elements) {
+    var i = 0, element;
+    for (; i < elements.length; i++) {
+      element = elements[i];
+      this.trigger("beforeLayoutComplete", [ this.element, element, this.items.length + 1 ]);
+      this.element.appendChild(element);
+    }
+    this.appended(elements);
+    this.calculateResize().layout();
+    return this;
+  };
+
+  /*
+   * Removes a set of elements and performs the layout.
+   */
+  Masonry.prototype.removeElements = function (elements) {
+    var i = 0, element;
+    for (; i < elements.length; i++ ) {
+      element = elements[i];
+      this.trigger("beforeLayoutComplete", [ this.element, element, this.items.length + 1 ]);
+    }
+    this.remove(elements);
+    this.calculateResize().layout();
+    return this;
+  };
+
+  /*
+   * Renderer function to render the host template and the login template.
+   */
+  var _renderHost  = _template_renderer_(document.getElementById("host-template")),
+      _renderLogin = _template_renderer_(document.getElementById("add-template")),
+      _userdata    = _storage_saver_("userdata"),
+
+      section_wrapper    = DOC.querySelectorAll("section")[1],
+      hosts_container    = DOC.getElementById("container"),
+      controll_container = DOC.getElementById("controll-ui-container"),
+      active_hosts       = DOC.getElementById("active-hosts"),
+      tip_container      = DOC.getElementById("loading"),
+      tip_message        = DOC.getElementById("loading-tip"),
+
+      HOSTS_WIDTH          = 280,
+      HOSTS_GUTTER         = 32,
+      HOSTS_SELECTOR       = ".host",
+      HOSTS_LAYOUT_MODE    = "fitRows",
+      HOSTS_LOCATION_WIDTH = 240,
+      VIDEO_WIDTH          = 640,
+      VIDEO_HEIGHT         = 320,
+      VIDEO_GUTTER         = 32,
+      VIDEO_SELECTOR       = ".video",
+      VIDEO_LAYOUT_MODE    = "fitRows",
+      CONNECTED_PEER       = "",
+      MEDIA_STREAM         = null,
+      PEER_INSTANCE        = null,
+
+      REASON_TOKEN_SIGNATURE_ERROR = "JsonWebTokenError: invalid signature",
+      REASON_TOKEN_EXPIRED_ERROR   = "TokenExpiredError: jwt expired";
+
+  /*
+   * Masonry instances (global for testing purposes).
+   */
+  root.hosts_masonry = new Masonry(hosts_container, {
+    itemSelector: HOSTS_SELECTOR,
+    layoutMode: HOSTS_LAYOUT_MODE,
+    columnWidth: HOSTS_WIDTH,
+    gutter: HOSTS_GUTTER
+  });
+
+  root.videos_masonry = new Masonry(controll_container, {
+    itemSelector: VIDEO_SELECTOR,
+    layoutMode: VIDEO_LAYOUT_MODE,
+    columnWidth: VIDEO_WIDTH,
+    gutter: VIDEO_GUTTER
+  });
+
+  /*
+   * onResize window event.
    */
   root.onresize = function () {
-    containerResizer(container, null, masonry.items.length, 280, 32);
-    containerResizer(controller_ui, null, controllerMasonry.items.length, 640, 32);
-    masonry.layout();
-    controllerMasonry.layout();
+    hosts_masonry.calculateResize().layout();
+    videos_masonry.calculateResize().layout();
   };
 
-  masonry.on("beforeLayoutComplete", containerResizer);
-  var
-    lat = _range(-90, 90),
-    lng = _range(-180, 180),
-    videoElement = function (id) {
-      var video = document.createElement("video");
-      video.width  = 640;
-      video.height = 320;
-      video.id = id;
-      video.className = "video";
-      var div = document.createElement("div");
-      div.className = "host video";
-      div.appendChild(video);
-      return video;
-    };
-  controllerMasonry.addElements(controller_ui, [
-    videoElement("you"),
-    videoElement("me")
-  ]);
-  masonry.addElements(container, [
-    _render(add_template.innerHTML, {
+  /*
+   * We assign an event to resize the parent when the layout is completed.
+   */
+  hosts_masonry.on("beforeLayoutComplete", function () {
+    this.calculateResize();
+  });
+
+  /*
+   * We add the video elements.
+   */
+  videos_masonry.addElements([ _createVideoElement("remote", VIDEO_WIDTH, VIDEO_HEIGHT) ]);
+
+  /*
+   * We add the two hosts cards, one to redirect to the login page and the second one as an example.
+   * The example contains random coordinates.
+   */
+  var latitude  = _range(-90, 90),
+      longitude = _range(-180, 180);
+
+  hosts_masonry.addElements([
+    _renderLogin({
       image: "/res/img/misc/add-icon.png",
       location: "/login/",
       title: "¿Not what you expected?",
       description: "Be a streamer.",
       alt: "¡Be a streamer!"
     }),
-    renderTemplate({
+    _renderHost({
       email: "example@domain.com",
       image: "/img/example.png",
       name: "Example",
       short_location: "Spain",
       long_location: "Spain",
-      short_latitude: _fixed(lat, 5),
-      long_latitude: lat,
-      short_longitude: _fixed(lng, 5),
-      long_longitude: lng
+      short_latitude: _fixed(latitude, 5),
+      long_latitude: latitude,
+      short_longitude: _fixed(longitude, 5),
+      long_longitude: longitude
     })
   ]);
-  root.onresize();
+
+  /////////////////////////////////////////////////
+  /// Async tasks, login, sockets and streaming ///
+  /////////////////////////////////////////////////
 
   /*
-   * Here starts async tasks.
+   * Requests the token by sending the profile data.
    */
   var requestToken = function () {
-    var data = storage();
-    data.host = false;
+    var profile = _userdata();
+    profile.host = false;
+
+    /*
+     * AJAX request with promise.
+     */
     marmottajax.post({
       url: "/request-token",
-      options: data,
+      options: profile,
       json: true
-    }).then(function (data) {
-      if (data.state == -1) {
-        window.location.href = "/login";
+    }).then(function (result) {
+      /*
+       * The request failed due to errors on the profile data.
+       */
+      if (result.state === -1) {
+        root.location.href = "/login";
         return;
       }
-      storage({ token: data.token, peer: md5(data.token) });
+
+      /*
+       * Everything OK.
+       */
+      _userdata({ token: result.token, peer: md5(result.token) });
       connect();
     });
-  }
+  };
+
+  /*
+   * Starts the SocketIO connection to have a low-latency real-time bi-directional communication socket.
+   */
   var connect = function () {
-    window.socket = io.connect("", {
-      query: "token=" + storage().token,
-      "force new connection": true
+    /*
+     * global for testing purposes.
+     */
+    root.SOCKET = io.connect("", {
+      "force new connection": true,
+      query: "token=" + _userdata().token
     });
 
-    socket.on("leave_member", function (data) {
-      for (var member in data.members) {
-        if (data.members[member].peer === connectedPeer) {
-          section.classList.remove("stream");
-          if (mediaStream) mediaStream.stop();
-          connectedPeer = null;
-        }
-        masonry.removeElements(container, [DOC.getElementById(member)]);
-        root.onresize();
-      }
+    /*
+     * When the user is connected to the server.
+     */
+    SOCKET.on("connect", function (){
+      tip_container.classList.add("hide");
     });
 
-    socket.on("join_member", function (data) {
-      var
-        hosts = data.members,
-        elements = [],
-        h;
-      for (var host in hosts) {
-        if (hosts.hasOwnProperty(host)) {
-          console.log(host);
-          var h = hosts[host],
-          element = renderTemplate({
-            id: host,
-            email: h.email,
-            name: h.name,
-            image: "https://gravatar.com/avatar/" + md5(h.email) + ".png?s=150&d=blank",
-            short_latitude: _fixed(h.latitude, 5),
-            long_latitude: h.latitude,
-            short_longitude: _fixed(h.longitude, 5),
-            long_longitude: h.longitude,
-            short_location: h.short_location,
-            long_location: h.long_location
-          });
-          elements.push(element);
-        }
-      }
-      if (elements.length > 0) {
-        masonry.addElements(container, elements);
-        root.onresize();
-        for (var i = 0; i < elements.length; i++) {
-          var element = elements[i],
-              coords = element.querySelectorAll(".coords")[0],
-              location = element.querySelectorAll(".short_location")[0];
-          location.title = h.long_location;
-          location.style.height = coords.offsetHeight + "px";
-          location.style.width = 240 - coords.offsetWidth + "px";
-        }
-      }
-    });
-
-    socket.on("error", function (reason) {
-      if (reason == "JsonWebTokenError: invalid signature" || reason === "TokenExpiredError: jwt expired") {
-        socket.disconnect();
-        socket = null;
-        window.setTimeout(requestToken, 2000);
-      }
-    });
-
-    socket.on("hosts_count", function (data) {
-      active_hosts.innerHTML = data.count;
-      tip.classList.add("hide");
-    });
-
-    socket.on("disconnect", function () {
-      tip.classList.remove("hide");
+    /*
+     * When we are disconnected from the server due to an external error.
+     */
+    SOCKET.on("disconnect", function () {
+      var items = hosts_masonry.items,
+          elements = [],
+          i = 2;
+      tip_container.classList.remove("hide");
       active_hosts.innerHTML = "-";
+      for (; i < items.length; i++) {
+        elements.push(items[i].element);
+      }
+      hosts_masonry.removeElements(elements);
+      //root.onresize();
     });
 
-    socket.on("connect", function (){
-      tip.classList.add("hide");
+    /*
+     * When there is an error when connecting, usually because of an error on the access token.
+     */
+    SOCKET.on("error", function (reason) {
+      if (reason === REASON_TOKEN_SIGNATURE_ERROR || reason === REASON_TOKEN_EXPIRED_ERROR) {
+        if (SOCKET !== null) SOCKET.disconnect();
+        SOCKET = null;
+        root.setTimeout(requestToken, 2000);
+      }
     });
 
-    socket.on("receive_call", function (data) {
-      if (connectedPeer === data.from) {
-        socket.emit("answer", { state: answer, to: data.from });
+    /*
+     * When the server send us the number of connected hosts.
+     */
+    SOCKET.on("hosts_count", function (data) {
+      active_hosts.innerHTML = data.count;
+      tip_container.classList.add("hide");
+    });
+
+    /*
+     * When a new client enters the "room".
+     * We render the data based on the template and then add some visual effects like title for long location format
+     * and add ellipsis to the short location if it doesn't fit the size specified on HOSTS_LOCATION_WIDTH.
+     */
+    SOCKET.on("join_member", function (data) {
+      var hosts = data.members,
+          elements = [],
+          element,
+          coords,
+          location,
+          i = 0,
+          host, id;
+      for (id in hosts) {
+        if (!hosts.hasOwnProperty(id)) continue;
+        host = hosts[id];
+        elements.push(_renderHost({
+          id: id,
+          email: host.email,
+          name: host.name,
+          image: "https://gravatar.com/avatar/" + md5(host.email) + ".png?s=150&d=blank",
+          short_latitude: _fixed(host.latitude, 5),
+          long_latitude: host.latitude,
+          short_longitude: _fixed(host.longitude, 5),
+          long_longitude: host.longitude,
+          short_location: host.short_location,
+          long_location: host.long_location
+        }));
+      }
+      if (!(elements.length > 0)) return;
+      hosts_masonry.addElements(elements);
+      for (; i < elements.length; i++) {
+        element  = elements[i];
+        coords   = element.querySelector(".coords");
+        location = element.querySelector(".short_location");
+
+        location.title = host.long_location;
+        location.style.height = coords.offsetHeight + "px";
+        location.style.height = HOSTS_LOCATION_WIDTH - coords.offsetWidth + "px";
+      }
+    });
+
+    /*
+     * When a member leaves the "room".
+     * We do a "for" loop and remove all the clients from the interface.
+     * If the peerID equals the actual connection peer it means the hosts was gone so we return to the main interface.
+     */
+    SOCKET.on("leave_member", function (data) {
+      var members = data.members,
+          elements = [],
+          id, member;
+      for (id in members) {
+        if (!members.hasOwnProperty(id)) continue;
+        member = members[id];
+        if (member.peer === CONNECTED_PEER) {
+          section_wrapper.classList.remove("stream");
+          CONNECTED_PEER = null;
+          if (MEDIA_STREAM !== null) MEDIA_STREAM.stop();
+        }
+        elements.push(DOC.getElementById(id));
+      }
+      hosts_masonry.removeElements(elements);
+    });
+
+    /*
+     * When a hosts inits a video streaming.
+     */
+    SOCKET.on("receive_call", function (data) {
+      /*
+       * This probably means the connection is being recovered.
+       */
+      if (CONNECTED_PEER === data.from) {
+        SOCKET.emit("answer", { state: true, to: data.from });
+        return;
+
+      /*
+       * This means we are connected to someone and another client is calling as so we don't answer.
+       */
+      } else if (CONNECTED_PEER !== null && CONNECTED_PEER !== "" && CONNECTED_PEER !== data.from) {
+        SOCKET.emit("answer", { state: false, to: data.from });
         return;
       }
       var answer = window.confirm("Do you want to answer the call from '" + data.name + "' (" + data.email + ")?");
-      socket.emit("answer", { state: answer, to: data.from });
-      if (answer) {
-        connectedPeer = data.from;
-        section.classList.add("stream");
-        root.onresize();
-      }
+      SOCKET.emit("answer", { state: answer, to: data.from });
+      if (answer) CONNECTED_PEER = data.from;
     });
 
-    var onDirectionChange = function () {
-      /*if (connectedPeer === null || connectedPeer === "" || socket === null) {
+    /*
+     * When the stream has started from the remote.
+     */
+    var video  = DOC.getElementById("remote"),
+        vendor = window.URL || window.webkitURL;
+
+    SOCKET.on("init_stream", function (data) {
+      if (CONNECTED_PEER !== data.from) {
         return;
-      }*/
+      }
+      section_wrapper.classList.add("stream");
+      var PEER_INSTANCE = _getPeerInstance(_userdata().peer);
+      PEER_INSTANCE.on("call", function (call) {
+        call.answer();
+        call.on("stream", function (stream) {
+          if (navigator.mozGetUserMedia) {
+            video.mozSrcObject = stream;
+          } else {
+            video.src = vendor.createObjectURL(stream);
+          }
+          video.play();
+        });
+      }); 
+    });
+
+    /*
+     * When the stream has finished (and the controlling).
+     */
+    SOCKET.on("stop_stream", function (data) {
+      if (CONNECTED_PEER !== data.from) {
+        return;
+      }
+      section_wrapper.classList.remove("stream");
+      CONNECTED_PEER = null;
+      PEER_INSTANCE  = null;
+    });
+  };
+
+  /*
+   * When a key is pressed or released.
+   */
+  var onDirectionChange = (function () {
+    var latest = [];
+    return function () {
+      if (CONNECTED_PEER === null || CONNECTED_PEER === "" || SOCKET === null) {
+        return;
+      }
       var
         keys  = key.activeKeys(),
         up    = keys.indexOf("up")    > -1 ?  1 : 0,
         right = keys.indexOf("right") > -1 ?  1 : 0,
         down  = keys.indexOf("down")  > -1 ? -1 : 0,
         left  = keys.indexOf("left")  > -1 ? -1 : 0,
-        x = left + right,
-        y = up + down,
-        angle = M.atan(y / x),
-        result;
-      if (x < 0) {
-        angle += Math.PI;
-      } else if (x >= 0 && y < 0) {
-        angle += 2 * Math.PI;
+        x = (left + right) * 0.75,
+        y = (up + down) * 0.75;
+      if (latest[0] === x && latest[1] === y) {
+        return;
       }
-      if (!isNaN(angle)) {
-        x = x * M.abs(M.cos(angle));
-        y = y * M.abs(M.sin(angle));
-      }
-      result = joystickCalculator(x, y, angle, 1);
-      console.log(result);
-      /*socket.emit("motor", {
-        a: 0,
-        b: result[1],
-        c: result[0],
-        to: connectedPeer
-      });*/
-    };
-    key.on("up, right, down, left", onDirectionChange, onDirectionChange);
-
-    var peer = new Peer(storage().peer,
-      {
-        host: "localhost",
-        port: 9000,
-        path: "/",
-        debug: true,
-        config: {
-          "iceServers": configData
-        }
-      }
-    ),
-    attachStream = function (video, stream) {
-      if (navigator.mozGetUserMedia) {
-        video.mozSrcObject = stream;
-      } else {
-        var vendor = window.URL || window.webkitURL;
-        video.src = vendor.createObjectURL(stream);
-      }
-      video.play();
-    };
-    navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-    peer.on("call", function (call) {
-      navigator.getMedia({ video: true, audio: true }, function (stream) {
-        mediaStream = stream;
-        call.answer(stream);
-        attachStream(document.getElementById("me"), stream);
-      }, function () {});
-      call.on("stream", function (stream) {
-        attachStream(document.getElementById("you"), stream);
+      latest[0] = x;
+      latest[1] = y;
+      SOCKET.emit("motor", {
+        x: x,
+        y: y,
+        to: CONNECTED_PEER
       });
-    });
-  };
+    };
+  })();
 
-  if (storage().token == "") {
+  /*
+   * We bind the events to the directional arrows.
+   */
+  key.on("up, right, down, left", onDirectionChange, onDirectionChange);
+
+  /*
+   * Start the request if there isn't token or directly connect if exists.
+   */
+  if (_userdata().token === "") {
     requestToken();
   } else {
     connect();

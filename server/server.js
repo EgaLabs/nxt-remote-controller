@@ -290,6 +290,20 @@ io.on("connection", function (socket) {
         }
       });
     });
+    socket.on("init_stream", function (peer) {
+      _.each(getUsers(), function (value, key, index) {
+        if (peer === value.peer) {
+          io.to(value.id).emit("init_stream", { from: user.peer });
+        }
+      });
+    });
+    socket.on("stop_stream", function (peer) {
+      _.each(getUsers(), function (value, key, index) {
+        if (peer === value.peer) {
+          io.to(value.id).emit("stop_stream", { from: user.peer });
+        }
+      });
+    });
   } else if (user.host === false) {
     _.each(hosts, function (value, key) {
       io.to(value.id).emit("join_member", { members: secure_user });
@@ -307,13 +321,39 @@ io.on("connection", function (socket) {
     });
 
     socket.on("motor", function (data) {
+      var
+        x = data.x,
+        y = data.y,
+        mod = Math.min(1, Math.sqrt(x * x + y * y)),
+        angle = Math.atan(y / x) || 0,
+        left  = 0,
+        right = 0;
+      if (x !== 0 || y !== 0) {
+        if (x < 0) {
+          angle += Math.PI;
+        } else if (x >= 0 && y < 0) {
+          angle += 2 * Math.PI;
+        }
+
+        if (x >= 0 && y >= 0) {
+          left  = mod;
+          right = y * Math.sin(angle);
+        } else if (x < 0 && y >= 0) {
+          left  = y * Math.sin(angle);
+          right = mod;
+        } else if (x < 0 && y < 0) {
+          left  = -y  * Math.sin(angle);
+          right = -mod;
+        } else if (x >= 0 && y < 0) {
+          left  = -mod;
+          right = -y * Math.sin(angle);
+        }
+      }
       _.each(getHosts(), function (value, key) {
         if (data.to !== value.peer) return;
-        console.log(data);
         io.to(value.id).emit("motors", {
-          a: data.a,
-          b: data.b,
-          c: data.c,
+          b: right,
+          c: left,
           from: user.peer
         });
       });

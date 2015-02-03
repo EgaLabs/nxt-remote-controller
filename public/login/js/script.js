@@ -35,6 +35,9 @@
     return ;
   },
   updateAllData = function () {
+    storage({
+      token: ""
+    });
     data = storage();
     if (data.name != "") {
       name.innerHTML = data.name;
@@ -88,8 +91,8 @@
   }
   _fixed = function (num, round) {
     return (num * M.pow(10, round) | 0) / M.pow(10, round);
-  };
-  var mouseEnter = function (id) {
+  },
+  mouseEnter = function (id) {
     return function () {
       if (D.getElementById(id + "-input")) {
         return;
