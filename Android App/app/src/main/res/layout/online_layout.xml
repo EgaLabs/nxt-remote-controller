@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <RelativeLayout
+    style="@style/match_w_h"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:layout_gravity="center">
 
-  <!--View
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_below="@+id/clients"
-      android:background="#f00"/-->
+  <RelativeLayout
+      android:id="@+id/actions"
+      style="@style/match_w_h"
+      android:visibility="gone">
+
+    <Button
+        android:id="@+id/init_streaming"
+        style="@style/wrap_w_h"
+        android:layout_above="@+id/stop_streaming"
+        android:layout_centerInParent="true"
+        android:text="@string/init_streaming"/>
+
+    <Button
+        android:id="@+id/stop_streaming"
+        style="@style/wrap_w_h"
+        android:layout_centerInParent="true"
+        android:text="@string/stop_streaming"/>
+
+  </RelativeLayout>
 
   <android.support.v7.widget.RecyclerView
       android:id="@+id/clients"
       style="@style/recycler_view"
+      android:layout_below="@+id/actions"
       tools:context="git.egatuts.nxtremotecontroller.activity.ControllerActivity"
       tools:listitem="@layout/paired_device"/>
 

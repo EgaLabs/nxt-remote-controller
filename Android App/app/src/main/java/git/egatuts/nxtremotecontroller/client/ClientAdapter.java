@@ -69,7 +69,9 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolder> {
   }
 
   public Client[] getAll () {
-    return (Client[]) this.clients.toArray();
+    Client[] clientsCopy = new Client[this.clients.size()];
+    this.clients.toArray(clientsCopy);
+    return clientsCopy;
   }
 
   private void setupRipple (RippleView ripple) {
@@ -112,9 +114,9 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolder> {
 
   private void toggleRipple (RippleView ripple, final View view0, final View view1) {
     this.setupRipple(ripple);
-    ripple.setAnimationFinishListener(new RippleView.AnimationFinishListener() {
+    ripple.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onFinish () {
+      public void onClick (View v) {
         if (view0.getVisibility() == View.GONE) {
           view1.startAnimation(getHideAnimation(view1, view0));
         } else if (view1.getVisibility() == View.GONE) {
@@ -142,9 +144,9 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolder> {
     this.toggleRipple(view.nameRipple, view.name, view.email);
     this.toggleRipple(view.coordsRipple, view.location, view.coords);
     this.setupRipple(view.imageRipple);
-    view.imageRipple.setAnimationFinishListener(new RippleView.AnimationFinishListener() {
+    view.imageRipple.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onFinish () {
+      public void onClick (View v) {
         if (self.clickListener != null) self.clickListener.onClick(view, index);
       }
     });

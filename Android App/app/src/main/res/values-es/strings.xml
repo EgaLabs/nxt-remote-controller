@@ -169,7 +169,12 @@
   <string name="connecting_socket_server">Conectando socket&#8230;</string>
   <string name="connected_socket_server">Conexión de baja latencia establecida</string>
   <string name="unknown_error">Error inesperado</string>
-  <string name="restoring_token">Restaurando código de acceso debido a un error en la firma</string>
+  <string name="restoring_token">Restaurando código de acceso debido a un error en la firma&#8230;</string>
+  <string name="calling_client">Llamando al cliente&#8230;</string>
+  <string name="call_rejected">El cliente ha rechazado la llamada</string>
+  <string name="call_accepted">El cliente ha aceptado la llamada</string>
+  <string name="init_streaming">Iniciar streaming</string>
+  <string name="stop_streaming">Parar streaming</string>
   <!-- [/OnlineControllerFragment.java] -->
 
 </resources>

@@ -169,7 +169,12 @@
   <string name="connecting_socket_server">Conectant socket&#8230;</string>
   <string name="connected_socket_server">Conexió de baixa latencia establerta</string>
   <string name="unknown_error">Error inesperat</string>
-  <string name="restoring_token">Restaurant codi d\'access a causa d\'un error de firma</string>
+  <string name="restoring_token">Restaurant codi d\'access a causa d\'un error de firma&#8230;</string>
+  <string name="calling_client">Trucant al client&#8230;</string>
+  <string name="call_rejected">El client ha rebutjat la trucada</string>
+  <string name="call_accepted">El client ha acceptat la trucada</string>
+  <string name="init_streaming">Iniciar streaming</string>
+  <string name="stop_streaming">Parar streaming</string>
   <!-- [/OnlineControllerFragment.java] -->
 
 </resources>

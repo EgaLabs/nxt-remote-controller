@@ -46,11 +46,13 @@ import android.provider.Settings;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
@@ -85,6 +87,7 @@ import git.egatuts.nxtremotecontroller.client.ClientAdapter;
 import git.egatuts.nxtremotecontroller.client.ClientViewHolder;
 import git.egatuts.nxtremotecontroller.exception.LoginException;
 import git.egatuts.nxtremotecontroller.exception.MalformedTokenException;
+import git.egatuts.nxtremotecontroller.listener.AnimationEndListener;
 import git.egatuts.nxtremotecontroller.listener.GPSLocationTracker;
 import git.egatuts.nxtremotecontroller.utils.TokenRequester;
 import git.egatuts.nxtremotecontroller.views.BaseProgressDialog;
@@ -98,6 +101,9 @@ import git.egatuts.nxtremotecontroller.views.BaseProgressDialog;
 public class OnlineControllerFragment extends ControllerBaseFragment {
 
   private RecyclerView recyclerView;
+  private RelativeLayout actionsView;
+  private Button initStreamingView;
+  private Button stopStreamingView;
   private ClientAdapter clientsAdapter;
   private BaseProgressDialog progressDialog;
   private long showingTime;
@@ -202,13 +208,95 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
     return requester;
   }
 
+  public void removeAllClients () {
+    Client[] clients = this.clientsAdapter.getAll();
+    for (int i = 1; i < clients.length; i++) {
+      this.clientsAdapter.remove(i);
+    }
+  }
+
+  public void showActions () {
+    final OnlineControllerFragment self = this;
+    final AlphaAnimation hide = new AlphaAnimation(1.0f, 0.0f);
+    hide.setFillAfter(true);
+    hide.setDuration(500);
+    hide.setAnimationListener(new Animation.AnimationListener() {
+      @Override
+      public void onAnimationStart (Animation animation) {
+        self.recyclerView.setVisibility(View.VISIBLE);
+      }
+      @Override
+      public void onAnimationEnd (Animation animation) {
+        self.recyclerView.setVisibility(View.GONE);
+      }
+      @Override public void onAnimationRepeat (Animation animation) {}
+    });
+    final AlphaAnimation show = new AlphaAnimation(0.0f, 1.0f);
+    show.setFillAfter(true);
+    show.setDuration(500);
+    show.setStartOffset(500);
+    show.setAnimationListener(new Animation.AnimationListener() {
+      @Override
+      public void onAnimationStart (Animation animation) {
+        self.actionsView.setVisibility(View.VISIBLE);
+      }
+      @Override public void onAnimationEnd (Animation animation) {}
+      @Override public void onAnimationRepeat (Animation animation) {}
+    });
+    this.getActivity().runOnUiThread(new Runnable() {
+      @Override
+      public void run () {
+        self.recyclerView.startAnimation(hide);
+        self.actionsView.startAnimation(show);
+      }
+    });
+  }
+
+  public void hideActions () {
+    final OnlineControllerFragment self = this;
+    final AlphaAnimation hide = new AlphaAnimation(1.0f, 0.0f);
+    hide.setFillAfter(true);
+    hide.setDuration(500);
+    hide.setAnimationListener(new Animation.AnimationListener() {
+      @Override
+      public void onAnimationStart (Animation animation) {
+        self.actionsView.setVisibility(View.VISIBLE);
+      }
+      @Override
+      public void onAnimationEnd (Animation animation) {
+        self.actionsView.setVisibility(View.GONE);
+      }
+      @Override public void onAnimationRepeat (Animation animation) {}
+    });
+    final AlphaAnimation show = new AlphaAnimation(0.0f, 1.0f);
+    show.setFillAfter(true);
+    show.setDuration(500);
+    show.setStartOffset(500);
+    show.setAnimationListener(new Animation.AnimationListener() {
+      @Override
+      public void onAnimationStart (Animation animation) {
+        self.recyclerView.setVisibility(View.VISIBLE);
+      }
+      @Override public void onAnimationEnd (Animation animation) {}
+      @Override public void onAnimationRepeat (Animation animation) {}
+    });
+    this.getActivity().runOnUiThread(new Runnable() {
+      @Override
+      public void run () {
+        self.actionsView.startAnimation(hide);
+        self.recyclerView.startAnimation(show);
+      }
+    });
+  }
+
   public void startSocketConnection () {
     final OnlineControllerFragment self = this;
     final GlobalUtils globalUtils = this.getGlobalUtils();
     if (this.socket != null && this.socket.connected()) {
       return;
     }
-    globalUtils.showToast(R.string.connecting_socket_server);
+    this.progressDialog.show();
+    this.progressDialog.setText(R.string.connecting_socket_server);
     String url = this.getPreferencesEditor().getString("preference_server_address", this.getString(R.string.preference_value_address));
     if (url.charAt(url.length() - 1) == '/') {
       url += "/";
@@ -219,11 +307,18 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
       }
       IO.Options options = new IO.Options();
       options.forceNew = true;
-      options.reconnection = false;
+      options.reconnection = true;
       this.socket = IO.socket(url + "?token=" + this.token, options);
       socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
         @Override
         public void call (Object... args) {
+          self.removeAllClients();
+          self.progressDialog.dismiss();
+        }
+      }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
+        @Override
+        public void call (Object... args) {
+          self.removeAllClients();
         }
       }).on(Socket.EVENT_ERROR, new Emitter.Listener() {
         @Override
@@ -239,7 +334,7 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
           } catch (ClassCastException e) {
             //e.printStackTrace();
           }
-
+          self.progressDialog.dismiss();
           globalUtils.showToast(R.string.unknown_error);
         }
       }).on("leave_member", new Emitter.Listener() {
@@ -295,16 +390,16 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
       }).on("answered", new Emitter.Listener() {
         @Override
         public void call (Object... args) {
+          self.progressDialog.dismiss();
           try {
             JSONObject data = (JSONObject) args[0];
             String from = data.getString("from");
             boolean accepted = data.getBoolean("state");
             if (from.equals(self.calling)) {
+              globalUtils.showToast(accepted ? R.string.call_accepted : R.string.call_rejected);
               if (accepted) {
                 self.controlledBy = self.clientsAdapter.getByPeer(from);
-                self.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://localhost/connect/?from=" + GlobalUtils.md5(self.token) + "&to=" + from)));
-              } else {
-                globalUtils.showToast("NO TE HA ACEPTADO");
+                self.showActions();
               }
             }
           } catch (JSONException e) {
@@ -314,7 +409,6 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
       }).on("motors", new Emitter.Listener() {
         @Override
         public void call (Object... args) {
-          globalUtils.showToast("motores");
           try {
             JSONObject data = (JSONObject) args[0];
             String sender = data.getString("from");
@@ -328,7 +422,6 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
           } catch (JSONException e) {
             //e.printStackTrace();
           }
-
         }
       });
       socket.connect();
@@ -361,6 +454,26 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
 
     view = inflater.inflate(R.layout.online_layout, parent, false);
     this.recyclerView = (RecyclerView) view.findViewById(R.id.clients);
+    this.actionsView  = (RelativeLayout) view.findViewById(R.id.actions);
+    this.initStreamingView = (Button) view.findViewById(R.id.init_streaming);
+    this.stopStreamingView = (Button) view.findViewById(R.id.stop_streaming);
+
+    this.initStreamingView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick (View v) {
+        self.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://localhost/connect/?from=" + GlobalUtils.md5(self.token) + "&to=" + self.calling)));
+        self.socket.emit("init_stream", self.calling);
+      }
+    });
+    this.stopStreamingView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick (View v) {
+        self.socket.emit("stop_stream", self.calling);
+        self.calling = "";
+        self.controlledBy = null;
+        self.hideActions();
+      }
+    });
 
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getBaseActivity());
     linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -368,22 +481,17 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
 
     recyclerView.setLayoutManager(linearLayoutManager);
     recyclerView.setItemAnimator(new DefaultItemAnimator());
-    this.clientsAdapter = new ClientAdapter(this, new ArrayList<Client>());
+    this.clientsAdapter = new ClientAdapter(this, new ArrayList<Client>() {{
+      add(new Client(null, null, null, "Ejemplo", "ejemplo@gmail.com", 41.2133293d, 1.5253539d, "El Vendrell, Cataluña", "El Vendrell, Tarragona, Cataluña, España"));
+    }});
     this.clientsAdapter.setOnClickListener(new ClientAdapter.OnClickListener() {
       @Override
       public void onClick (ClientViewHolder view, int index) {
-        self.controllBy(view, index);
+        Client client = self.clientsAdapter.get(index);
+        if (!client.getPeerId().equals("")) self.requestCall(client, view, index);
       }
     });
     recyclerView.setAdapter(this.clientsAdapter);
-    Client ejemplo = new Client();
-    ejemplo.setName("EgaTuts");
-    ejemplo.setEmail("egatuts@gmail.com");
-    ejemplo.setLatitude(41.2133024d);
-    ejemplo.setLongitude(1.5255549d);
-    ejemplo.setShortLocation("El Vendrell, Cataluña");
-    ejemplo.setLongLocation("El Vendrell, Tarragona, Cataluña, España");
-    this.clientsAdapter.add(ejemplo);
     return view;
   }
 
@@ -412,7 +520,8 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
                 .show();
         return;
       }
-      this.getGlobalUtils().showToast(R.string.getting_access_token);
+      this.progressDialog.show();
+      this.progressDialog.setText(R.string.getting_access_token);
       this.requester = this.getTokenRequester();
       this.requester.setOnFinishListener(new TokenRequester.OnFinishListener() {
         @Override
@@ -469,10 +578,11 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
     this.startSocketConnection();
   }
 
-  public void controllBy (ClientViewHolder view, int index) {
-    Client client = this.clientsAdapter.get(index);
+  public void requestCall (Client client, ClientViewHolder view, int index) {
     this.calling = client.getPeerId();
     this.socket.emit("call", client.getPeerId());
+    this.progressDialog.show();
+    this.progressDialog.setText(R.string.calling_client);
     /*NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getActivity());
     builder.setSmallIcon(R.drawable.ic_launcher)
             .setContentTitle("Remote controlling.")
@@ -482,8 +592,9 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
   }
 
   @Override
-  public void onPause () {
-    super.onPause();
+  public void onDestroyView () {
+    this.socket.disconnect();
+    super.onDestroyView();
   }
 
 }

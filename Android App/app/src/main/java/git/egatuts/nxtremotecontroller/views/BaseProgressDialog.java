@@ -80,8 +80,14 @@ public abstract class BaseProgressDialog extends ProgressDialog {
   /*
    *  Sets the text of the progress dialog.
    */
-  public void setText (int resId) {
-    ((TextView) this.getTextView()).setText(this.activity.getString(resId));
+  public void setText (final int resId) {
+    final BaseProgressDialog self = this;
+    activity.runOnUiThread(new Runnable() {
+      @Override
+      public void run () {
+        ((TextView) self.getTextView()).setText(self.activity.getString(resId));
+      }
+    });
   }
 
   public void setText (String msg) {

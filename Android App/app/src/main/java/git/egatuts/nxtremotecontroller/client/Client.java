@@ -18,6 +18,20 @@ public class Client {
   public String longLocation;
   public String profileImageURL;
 
+  public Client () {}
+
+  public Client (String id, String socketId, String peerId, String name, String email, double latitude, double longitude, String shortLocation, String longLocation) {
+    this.id = id;
+    this.socketId = socketId;
+    this.peerId = peerId;
+    this.name = name;
+    this.email = email;
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.shortLocation = shortLocation;
+    this.longLocation = longLocation;
+  }
+
   public void setId (String id) {
     this.id = id;
   }
