@@ -3,8 +3,45 @@
  * @author Esaú García (EgaTuts).
  * @version 1.0.0
  */
-(function (root, DOC, M, Mustache, Masonry, io, W, depot, marmottajax) {
+(function (root, DOC, M, Mustache, Masonry, io, W, depot, marmottajax, key, undefined) {
   "use strict";
+
+  var configData = [
+    { url:'stun:stun01.sipphone.com' },
+    { url:'stun:stun.ekiga.net' },
+    { url:'stun:stun.fwdnet.net' },
+    { url:'stun:stun.ideasip.com' },
+    { url:'stun:stun.iptel.org' },
+    { url:'stun:stun.rixtelecom.se' },
+    { url:'stun:stun.schlund.de' },
+    { url:'stun:stun.l.google.com:19302' },
+    { url:'stun:stun1.l.google.com:19302' },
+    { url:'stun:stun2.l.google.com:19302' },
+    { url:'stun:stun3.l.google.com:19302' },
+    { url:'stun:stun4.l.google.com:19302' },
+    { url:'stun:stunserver.org' },
+    { url:'stun:stun.softjoys.com' },
+    { url:'stun:stun.voiparound.com' },
+    { url:'stun:stun.voipbuster.com' },
+    { url:'stun:stun.voipstunt.com' },
+    { url:'stun:stun.voxgratia.org' },
+    { url:'stun:stun.xten.com' },
+    {
+      url: 'turn:numb.viagenie.ca',
+      credential: 'muazkh',
+      username: 'webrtc@live.com'
+    },
+    {
+      url: 'turn:192.158.29.39:3478?transport=udp',
+      credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+      username: '28224511:1379330808'
+    },
+    {
+      url: 'turn:192.158.29.39:3478?transport=tcp',
+      credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+      username: '28224511:1379330808'
+    }
+  ];
 
   /*
    * First of all we add a little modification to the when-then library
@@ -114,12 +151,14 @@
     /*
      * Local variables.
      */
-    container    = DOC.getElementById("container"),
-    template     = DOC.getElementById("host-template"),
-    add_template = DOC.getElementById("add-template"),
-    tip          = DOC.getElementById("loading"),
-    tip_message  = DOC.getElementById("loading-tip"),
-    active_hosts = DOC.getElementById("active-hosts"),
+    container     = DOC.getElementById("container"),
+    template      = DOC.getElementById("host-template"),
+    add_template  = DOC.getElementById("add-template"),
+    tip           = DOC.getElementById("loading"),
+    tip_message   = DOC.getElementById("loading-tip"),
+    active_hosts  = DOC.getElementById("active-hosts"),
+    section       = DOC.querySelectorAll("section")[1],
+    controller_ui = DOC.getElementById("controll-ui-container"),
 
 
     /**
@@ -146,21 +185,23 @@
      * The Masonry main instance.
      */
 
-    len         = 0,
-    columnWidth = 280,
-    gutter      = 32,
-    maxWidth    = null,
-    maxColumns  = null,
-    tempColumns = null,
-    tempWidth   = null,
+    len           = 0,
+    columnWidth   = 280,
+    gutter        = 32,
+    maxWidth      = null,
+    maxColumns    = null,
+    tempColumns   = null,
+    tempWidth     = null,
+    connectedPeer = null,
+    mediaStream   = null,
 
     /*
      * Returns the width that takes up a n number of columns.
      *
      * f(x) = |x| * width + (|x| - 1) * gutter
      */
-    sizeOfColumns = function (x) {
-      return x * 280 + (x - 1) * 32;
+    sizeOfColumns = function (x, w, m) {
+      return x * w + (x - 1) * m;
     },
 
     /**
@@ -169,8 +210,8 @@
      * @param {number} x The free space to fill with columns.
      * @return {number} A natural and integer number.
      */
-    possibleColumns = function (x) {
-      return ( (x + 32) / 312) | 0;
+    possibleColumns = function (x, w, m) {
+      return ( (x + m) / (w + m) ) | 0;
     },
 
     /**
@@ -179,13 +220,42 @@
      * @param {element} element The new added element.
      * @param {number} length The number of elements.
      */
-    containerResizer = function (parent, element, length) {
+    containerResizer = function (parent, element, length, size, margin) {
       len         = length,
-      maxWidth    = root.innerWidth - gutter * 2,
-      maxColumns  = possibleColumns(maxWidth),
+      maxWidth    = root.innerWidth - margin * 2,
+      maxColumns  = possibleColumns(maxWidth, size, margin),
       tempColumns = len > maxColumns ? maxColumns : len,
-      tempWidth   = tempColumns * columnWidth + (tempColumns - 1) * gutter;
+      tempWidth   = tempColumns * size + (tempColumns - 1) * margin;
       parent.style.width = tempWidth + "px";
+    },
+
+    sign = function (number) {
+      return number < 0 ? -1 : 1;
+    },
+
+    joystickCalculator = function (x, y, angle, max) {
+      var
+        mod = Math.sqrt(x * x + y * y),
+        left, right;
+      mod = mod > max ? max : mod;
+      if (y >= 0) {
+        if ( x >= 0) {
+          left  = mod / max;
+          right = M.abs(M.sin(angle)) * y;
+        } else if (x < 0) {
+          left  = M.abs(M.sin(angle)) * -y;
+          right = mod / max;
+        }
+      } else if (y < 0) {
+        if ( x >= 0) {
+          left  = mod / max * sign(y);
+          right = Math.sin(angle) * y;
+        } else if (x < 0) {
+          left  = Math.sin(angle) * y;
+          right = mod / max * sign(y);
+        }
+      }
+      return [left, right];
     };
 
     window.masonry = new Masonry(container, {
@@ -195,8 +265,16 @@
       gutter: gutter
     });
 
+    window.controllerMasonry = new Masonry(controller_ui, {
+      itemSelector: ".video",
+      layoutMode: "fitRows",
+      columnWidth: 640,
+      gutter: 32
+    });
+
   Masonry.prototype.addElements = function (parent, elements) {
     for ( var i = 0; i < elements.length; i++ ) {
+      containerResizer(parent, null, this.items.length + 1, this.columnWidth - this.gutter, this.gutter);
       this.trigger("beforeLayoutComplete", [parent, elements[i], this.items.length + 1]);
       parent.appendChild( elements[i] );
       this.appended( elements[i] );
@@ -216,13 +294,31 @@
    * Assigning resizing functions.
    */
   root.onresize = function () {
-    containerResizer(container, null, masonry.items.length);
+    containerResizer(container, null, masonry.items.length, 280, 32);
+    containerResizer(controller_ui, null, controllerMasonry.items.length, 640, 32);
+    masonry.layout();
+    controllerMasonry.layout();
   };
 
   masonry.on("beforeLayoutComplete", containerResizer);
   var
     lat = _range(-90, 90),
-    lng = _range(-180, 180);
+    lng = _range(-180, 180),
+    videoElement = function (id) {
+      var video = document.createElement("video");
+      video.width  = 640;
+      video.height = 320;
+      video.id = id;
+      video.className = "video";
+      var div = document.createElement("div");
+      div.className = "host video";
+      div.appendChild(video);
+      return video;
+    };
+  controllerMasonry.addElements(controller_ui, [
+    videoElement("you"),
+    videoElement("me")
+  ]);
   masonry.addElements(container, [
     _render(add_template.innerHTML, {
       image: "/res/img/misc/add-icon.png",
@@ -243,6 +339,7 @@
       long_longitude: lng
     })
   ]);
+  root.onresize();
 
   /*
    * Here starts async tasks.
@@ -271,7 +368,11 @@
 
     socket.on("leave_member", function (data) {
       for (var member in data.members) {
-        console.log(DOC.getElementById(member));
+        if (data.members[member].peer === connectedPeer) {
+          section.classList.remove("stream");
+          if (mediaStream) mediaStream.stop();
+          connectedPeer = null;
+        }
         masonry.removeElements(container, [DOC.getElementById(member)]);
         root.onresize();
       }
@@ -284,6 +385,7 @@
         h;
       for (var host in hosts) {
         if (hosts.hasOwnProperty(host)) {
+          console.log(host);
           var h = hosts[host],
           element = renderTemplate({
             id: host,
@@ -302,6 +404,7 @@
       }
       if (elements.length > 0) {
         masonry.addElements(container, elements);
+        root.onresize();
         for (var i = 0; i < elements.length; i++) {
           var element = elements[i],
               coords = element.querySelectorAll(".coords")[0],
@@ -335,18 +438,85 @@
       tip.classList.add("hide");
     });
 
-    socket.on("receive_call", function () {
-      console.log(arguments);
+    socket.on("receive_call", function (data) {
+      if (connectedPeer === data.from) {
+        socket.emit("answer", { state: answer, to: data.from });
+        return;
+      }
+      var answer = window.confirm("Do you want to answer the call from '" + data.name + "' (" + data.email + ")?");
+      socket.emit("answer", { state: answer, to: data.from });
+      if (answer) {
+        connectedPeer = data.from;
+        section.classList.add("stream");
+        root.onresize();
+      }
     });
 
-    /*var peer = new Peer(storage().peer, { host: "localhost", port: 9000, path: "/" });
+    var onDirectionChange = function () {
+      /*if (connectedPeer === null || connectedPeer === "" || socket === null) {
+        return;
+      }*/
+      var
+        keys  = key.activeKeys(),
+        up    = keys.indexOf("up")    > -1 ?  1 : 0,
+        right = keys.indexOf("right") > -1 ?  1 : 0,
+        down  = keys.indexOf("down")  > -1 ? -1 : 0,
+        left  = keys.indexOf("left")  > -1 ? -1 : 0,
+        x = left + right,
+        y = up + down,
+        angle = M.atan(y / x),
+        result;
+      if (x < 0) {
+        angle += Math.PI;
+      } else if (x >= 0 && y < 0) {
+        angle += 2 * Math.PI;
+      }
+      if (!isNaN(angle)) {
+        x = x * M.abs(M.cos(angle));
+        y = y * M.abs(M.sin(angle));
+      }
+      result = joystickCalculator(x, y, angle, 1);
+      console.log(result);
+      /*socket.emit("motor", {
+        a: 0,
+        b: result[1],
+        c: result[0],
+        to: connectedPeer
+      });*/
+    };
+    key.on("up, right, down, left", onDirectionChange, onDirectionChange);
+
+    var peer = new Peer(storage().peer,
+      {
+        host: "localhost",
+        port: 9000,
+        path: "/",
+        debug: true,
+        config: {
+          "iceServers": configData
+        }
+      }
+    ),
+    attachStream = function (video, stream) {
+      if (navigator.mozGetUserMedia) {
+        video.mozSrcObject = stream;
+      } else {
+        var vendor = window.URL || window.webkitURL;
+        video.src = vendor.createObjectURL(stream);
+      }
+      video.play();
+    };
+    navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
     peer.on("call", function (call) {
-      alert("call");
+      navigator.getMedia({ video: true, audio: true }, function (stream) {
+        mediaStream = stream;
+        call.answer(stream);
+        attachStream(document.getElementById("me"), stream);
+      }, function () {});
+      call.on("stream", function (stream) {
+        attachStream(document.getElementById("you"), stream);
+      });
     });
-    peer.on("stream", function (stream) {
-      alert("stream");
-    });*/
-
   };
 
   if (storage().token == "") {
@@ -355,4 +525,4 @@
     connect();
   }
   
-})(this, document, Math, Mustache, Masonry, io, when, depot, marmottajax);
+})(this, document, Math, Mustache, Masonry, io, when, depot, marmottajax, KeyboardJS);

@@ -22,13 +22,47 @@
   display: none;
 }
 
-#container {
+section.stream {
+  > #controll-ui-container {
+    display: block;
+  }
+
+  > #container {
+    display: none;
+  }
+}
+
+section {
+  > #controll-ui-container {
+    display: none;
+  }
+
+  > #container {
+    display: block;
+  }
+}
+
+#container, #controll-ui-container {
   margin: 0 auto;
   display: table;
+}
+
+#container {
   min-width: 280px;
 }
 
-.host {
+#controll-ui-container {
+  min-width: 640px;
+}
+
+.video {
+  width: 640px;
+  height: 480px;
+  background: #000000;
+  margin: 1em 0;
+}
+
+div.host, a.host {
   width: 280px;
   height: 350px;
   margin: 1em 0;
@@ -61,7 +95,7 @@
 }
 
 .host {
-	
+  
   > span {
     display: block;
     padding: 1.25em 0;

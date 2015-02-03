@@ -162,108 +162,26 @@ section {
   display: none;
 }
 
-/* line 26, ../scss/style.scss */
-section.stream > #controll-ui-container {
-  display: block;
+/* line 25, ../scss/style.scss */
+#controll-ui-container {
+  width: 100%;
+  height: 200px;
+  background: #0f0;
 }
 /* line 30, ../scss/style.scss */
-section.stream > #container {
-  display: none;
-}
-
-/* line 36, ../scss/style.scss */
-section > #controll-ui-container {
-  display: none;
-}
-/* line 40, ../scss/style.scss */
-section > #container {
-  display: block;
-}
-
-/* line 45, ../scss/style.scss */
-#container, #controll-ui-container {
-  margin: 0 auto;
-  display: table;
-}
-
-/* line 50, ../scss/style.scss */
-#container {
-  min-width: 280px;
-}
-
-/* line 54, ../scss/style.scss */
-#controll-ui-container {
+#controll-ui-container > video {
   min-width: 640px;
+  min-height: 480px;
+  background: #000;
+  margin: 20px 10px;
 }
 
-/* line 58, ../scss/style.scss */
-.video {
-  width: 640px;
-  height: 480px;
-  background: #000000;
-  margin: 1em 0;
-}
-
-/* line 65, ../scss/style.scss */
-div.host, a.host {
-  width: 280px;
-  height: 350px;
-  margin: 1em 0;
-  background: white;
-  -moz-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.2);
-}
-
-/* line 73, ../scss/style.scss */
-.image-container {
-  background-color: #333333;
-  height: 200px;
-}
-
-/* line 78, ../scss/style.scss */
-.absolute-container {
-  width: 140px;
-  height: 175px;
-}
-/* line 82, ../scss/style.scss */
-.absolute-container > img {
-  position: absolute;
-  margin-top: 25px;
-  border-radius: 50%;
-}
-
-/* line 89, ../scss/style.scss */
-.short_location {
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  vertical-align: top;
-}
-
-/* line 99, ../scss/style.scss */
-.host > span {
-  display: block;
-  padding: 1.25em 0;
-}
-/* line 104, ../scss/style.scss */
-.host hr {
-  height: 1px;
-  border: none;
-  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjEiLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjMiLz48c3RvcCBvZmZzZXQ9IjgwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
-  background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(20%, rgba(0, 0, 0, 0.1)), color-stop(50%, rgba(0, 0, 0, 0.3)), color-stop(80%, rgba(0, 0, 0, 0.1)), color-stop(100%, rgba(0, 0, 0, 0)));
-  background: -moz-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0) 100%);
-  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0) 100%);
-  background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0) 100%);
-}
-
-/* line 112, ../scss/style.scss */
+/* line 38, ../scss/style.scss */
 .loading-tip.hide {
   display: none;
 }
 
-/* line 116, ../scss/style.scss */
+/* line 42, ../scss/style.scss */
 .loading-tip {
   font-size: 12px;
   color: white;
@@ -273,7 +191,7 @@ div.host, a.host {
   margin-left: -68px;
 }
 
-/* line 125, ../scss/style.scss */
+/* line 51, ../scss/style.scss */
 .loading-tip:before {
   content: "";
   background: url("/res/img/misc/spinner128.gif");
@@ -286,12 +204,12 @@ div.host, a.host {
   margin-right: 8px;
 }
 
-/* line 137, ../scss/style.scss */
+/* line 63, ../scss/style.scss */
 .loading-tip:hover > span {
   display: block;
 }
 
-/* line 141, ../scss/style.scss */
+/* line 67, ../scss/style.scss */
 .loading-tip span {
   display: none;
   text-align: left;
@@ -300,7 +218,7 @@ div.host, a.host {
   line-height: 1.4;
 }
 
-/* line 149, ../scss/style.scss */
+/* line 75, ../scss/style.scss */
 .loading-tip span:before {
   position: absolute;
   content: "";

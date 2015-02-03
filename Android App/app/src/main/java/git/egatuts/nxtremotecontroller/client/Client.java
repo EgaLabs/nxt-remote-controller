@@ -1,6 +1,5 @@
 package git.egatuts.nxtremotecontroller.client;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

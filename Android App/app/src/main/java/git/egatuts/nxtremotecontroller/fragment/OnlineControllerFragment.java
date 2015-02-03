@@ -35,19 +35,18 @@ package git.egatuts.nxtremotecontroller.fragment;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,7 +98,6 @@ import git.egatuts.nxtremotecontroller.views.BaseProgressDialog;
 public class OnlineControllerFragment extends ControllerBaseFragment {
 
   private RecyclerView recyclerView;
-  //private XWalkView xwalkview;
   private ClientAdapter clientsAdapter;
   private BaseProgressDialog progressDialog;
   private long showingTime;
@@ -111,6 +109,7 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
   private String token;
   private Socket socket;
   private Client controlledBy;
+  private String calling;
 
   public void refreshFragment () {
     final OnlineControllerFragment self = this;
@@ -293,6 +292,25 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
             e.printStackTrace();
           }
         }
+      }).on("answered", new Emitter.Listener() {
+        @Override
+        public void call (Object... args) {
+          try {
+            JSONObject data = (JSONObject) args[0];
+            String from = data.getString("from");
+            boolean accepted = data.getBoolean("state");
+            if (from.equals(self.calling)) {
+              if (accepted) {
+                self.controlledBy = self.clientsAdapter.getByPeer(from);
+                self.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://localhost/connect/?from=" + GlobalUtils.md5(self.token) + "&to=" + from)));
+              } else {
+                globalUtils.showToast("NO TE HA ACEPTADO");
+              }
+            }
+          } catch (JSONException e) {
+            //e.printStackTrace();
+          }
+        }
       }).on("motors", new Emitter.Listener() {
         @Override
         public void call (Object... args) {
@@ -300,9 +318,10 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
           try {
             JSONObject data = (JSONObject) args[0];
             String sender = data.getString("from");
+            /*Log.d("DATOS", data.toString());
             if (!sender.equals(self.controlledBy.getPeerId())) {
               return;
-            }
+            }*/
             double b = data.getDouble("b");
             double c = data.getDouble("c");
             self.getConnector().motorBC(c, b, false, false);
@@ -342,9 +361,6 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
 
     view = inflater.inflate(R.layout.online_layout, parent, false);
     this.recyclerView = (RecyclerView) view.findViewById(R.id.clients);
-    /*this.xwalkview = (XWalkView) view.findViewById(R.id.xwalkview);
-    this.xwalkview.setResourceClient(new XWalkResourceClient(this.xwalkview));
-    this.xwalkview.setUIClient(new XWalkUIClient(this.xwalkview));*/
 
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getBaseActivity());
     linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -455,14 +471,14 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
 
   public void controllBy (ClientViewHolder view, int index) {
     Client client = this.clientsAdapter.get(index);
-    this.controlledBy = client;
-    this.socket.emit("call", this.controlledBy.getId());
-    NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getActivity());
+    this.calling = client.getPeerId();
+    this.socket.emit("call", client.getPeerId());
+    /*NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getActivity());
     builder.setSmallIcon(R.drawable.ic_launcher)
             .setContentTitle("Remote controlling.")
             .setContentText("Your robot is now being controlled by: " + this.clientsAdapter.get(index).getName())
             .setAutoCancel(false);
-    ((NotificationManager) this.getActivity().getSystemService(Context.NOTIFICATION_SERVICE)).notify(1, builder.build());
+    ((NotificationManager) this.getActivity().getSystemService(Context.NOTIFICATION_SERVICE)).notify(1, builder.build());*/
   }
 
   @Override

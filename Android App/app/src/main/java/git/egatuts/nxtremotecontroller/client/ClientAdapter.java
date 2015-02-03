@@ -204,4 +204,11 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolder> {
     return -1;
   }
 
+  public Client getByPeer (String peer) {
+    for (int i = 0; i < this.clients.size(); i++) {
+      if (peer == this.clients.get(i).getPeerId()) return this.clients.get(i);
+    }
+    return null;
+  }
+
 }

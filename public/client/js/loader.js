@@ -52,6 +52,7 @@ if (path.length > 0) {
   Modernizr.load(
     [
       "/res/js/md5.min.js",
+      "/res/js/keymaster.min.js",
       "/socket.io/socket.io.js",
       "/res/js/peer.min.js",
       "/res/js/Masonry.min.js",

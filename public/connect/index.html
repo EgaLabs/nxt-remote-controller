@@ -115,7 +115,7 @@
   </section>
   <header>
     <div id="logo-container">
-      <a id="logo" class="padding" href="">
+      <a id="logo" class="padding" href="https://localhost">
        <div class="logo"></div>
        <h1>NXT Remote Controller</h1>
       </a>
@@ -129,34 +129,11 @@
     </div>
   </header>
   <section>
-    <div id="controll-ui-container" class="masonry js-masonry"></div>
-    <div id="container" class="masonry js-masonry"></div>
+    <div id="controll-ui-container">
+      <video id="me" width="640" height="480"></video>
+      <video id="you" width="640" height="480"></video>
+    </div>
   </section>
-  <script async defer type="text/javascript" src="/js/loader.js"></script>
-<script type="text/x-mustache" id="host-template">
-<div class="host" id="{{id}}">
-  <div class="image-container">
-    <div class="absolute-container">
-      <img class="default-gravatar" src="/img/example.png" width="150" height="150">
-      <img src="{{image}}" width="150" height="150" title="{{email}}" />
-    </div>
-  </div>
-  <span class="description">{{name}}  |  {{email}}</span>
-  <hr>
-  <span class="location"><span class="short_location" title="{{long_location}}">{{short_location}}</span>  |  <span class="coords"><span class="latitude" title="{{long_latitude}}">{{short_latitude}}</span>, <span class="longitude" title="{{long_longitude}}">{{short_longitude}}</span></span></span>
-</div>
-</script>
-<script type="text/x-template" id="add-template">
-<a class="host" href="{{location}}" alt="{{alt}} title="{{alt}}">
-  <div class="image-container">
-    <div class="absolute-container">
-      <img src="{{image}}" width="150" height="150" title="{{alt}}" />
-    </div>
-  </div>
-  <span class="description">{{title}}</span>
-  <hr>
-  <span class="location">{{description}}</span>
-</a>
-</script>
+  <script async defer type="text/javascript" src="js/loader.js"></script>
 </body>
 </html>

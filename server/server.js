@@ -206,10 +206,7 @@ var getUsers = function () {
   }),
   users = {};
   _.each(tmp_users, function (value, key) {
-    var userr = value.parsed();
-    userr.token = undefined;
-    delete userr.token;
-    users[_users.originalIdByToken(value)] = userr;
+    users[_users.originalIdByToken(value)] = value.secure_parsed();
   });
   return users;
 },
@@ -219,13 +216,14 @@ getHosts = function () {
   }),
   hosts = {};
   _.each(tmp_hosts, function (value, key, index) {
-    var hostt = value.parsed();
-    hostt.token = undefined;
-    delete hostt.token;
-    hosts[_users.originalIdByToken(value)] = hostt;
+    hosts[_users.originalIdByToken(value)] = value.secure_parsed();
   });
   return hosts;
-};
+},
+denyAccess = function (accept, args, ctx, token) {
+  console.log("Denegado acceso con token: " + token.substr(0, 50) + "\u2026");
+  accept.apply(ctx, args);
+}
 
 io = io.listen(HttpsServer);
 
@@ -234,14 +232,14 @@ io.set("authorization", function (handshakeData, accept) {
   try {
     jsonwt.verify(token, app.get("secretPass"), function (err, data) {
       if (err) {
-        accept(err, false);
+        denyAccess(accept, [err, false], this, token);
       } else {
         handshakeData.decoded_token = _.extend(data, { token: token, connected: false, peer: MD5(token) });
         accept(err, true);
       }
     });
   } catch (e) {
-    accept(e, false);
+    denyAccess(accept, [err, false], this, token);
   }
 });
 
@@ -262,18 +260,15 @@ io.on("connection", function (socket) {
     _users.saveById(user);
   }
 
-  var secure_user = user.clone();
-  secure_user.token = undefined;
-  delete secure_user.token;
-  var tmp = {};
-  tmp[_users.originalIdByToken(user)] = secure_user.parsed();
-  secure_user = tmp;
+  console.log((user.host ? "Host" : "Usuario") + " conectado '" + user.name + "' con socket id '" + user.id + "'' y id P2P '" + user.peer + "'.");
 
-  var hosts = getHosts(),
+  var secure_user = {},
+      hosts = getHosts(),
       users = getUsers();
-  
+  secure_user[_users.originalIdByToken(user)] = user.secure_parsed();
 
   socket.on("disconnect", function () {
+    console.log((user.host ? "Host" : "Usuario") + " desconectado '" + user.name + "' con socket id '" + user.id + "' y id P2P '" + user.peer + "'.");
     user.connected = false;
     io.emit("leave_member", { members: secure_user });
     io.emit("hosts_count", { count: _.size(hosts) - 1 });
@@ -287,11 +282,11 @@ io.on("connection", function (socket) {
       io.to(value.id).emit("hosts_count", { count: _.size(hosts) });
     });
     socket.emit("join_member", { members: users });
-
-    socket.on("call", function (id) {
+    socket.on("call", function (peer) {
       _.each(getUsers(), function (value, key) {
-        if (key === id) {
-          io.to(value.id).emit("receive_call", { from: user.peer });
+        if (peer === value.peer) {
+          console.log("Host '" + user.name + "' (" + user.peer + ") llamando al usuario '" + value.name + "' (" + peer + ").");
+          io.to(value.id).emit("receive_call", { from: user.peer, name: user.name, email: user.email });
         }
       });
     });
@@ -302,9 +297,19 @@ io.on("connection", function (socket) {
     socket.emit("join_member", { members: hosts });
     socket.emit("hosts_count", { count: _.size(hosts) });
 
+    socket.on("answer", function (data) {
+      _.each(getHosts(), function (value, key) {
+        if (data.to === value.peer) {
+          console.log("Usuario '" + user.name + "' (" + user.peer + ") ha aceptado la llamada de '" + value.name + "' (" + data.to + ").");
+          io.to(value.id).emit("answered", { from: user.peer, state: data.state });
+        }
+      });
+    });
+
     socket.on("motor", function (data) {
       _.each(getHosts(), function (value, key) {
         if (data.to !== value.peer) return;
+        console.log(data);
         io.to(value.id).emit("motors", {
           a: data.a,
           b: data.b,
@@ -320,18 +325,18 @@ io.on("connection", function (socket) {
 /*
  *  
  */
-/*var server = peer.PeerServer({
+var server = peer.PeerServer({
   port: 9000,
+  debug: true,
   ssl: {
     key: key,
     cert: cert
   },
   path: "/"
 });
-server.on("connection", function (id) {
-  console.log(id);
-});*/
+server.on("disconnect", function (id) {
 
+});
 
 /*
  ***************************************************************************

@@ -11,11 +11,12 @@ module.exports = function (app, config, pathSettings, base, users) {
     validToken = /^[a-fA-F0-9]{32}$/,
     anything   = /^.+$/,
     fields     = ["name", "email", "latitude", "longitude", "long_location", "short_location"],
-    validators = [validName, validEmail, validCoord, validCoord, anything, anything];
-  
-  app.get("/host/:id", function (req, res) {
-    res.send(req.params.id, 200);
-  });
+    validators = [validName, validEmail, validCoord, validCoord, anything, anything],
+    registerUser = function (res, profile) {
+      console.log("Registrado " + (profile.host ? "host" : "usuario") + ": " + profile.name + ", " + profile.email + ", " + profile.short_location + " (" + profile.latitude + " | " + profile.longitude + ")");
+      var token = jwt.sign(profile, app.get("secretPass"), { expiresInMinutes: 30 });
+      res.json({ token: token });
+    };
   
   app.post("/request-token", function (req, res) {
     var profile = {
@@ -37,8 +38,7 @@ module.exports = function (app, config, pathSettings, base, users) {
       }
     }
     if (profile.host === false) {
-      var token = jwt.sign(profile, app.get("secretPass"), { expiresInMinutes: 30 });
-      res.json({ token: token });
+      registerUser(res, profile);
       return;
     }
     geocoder.reverseGeocode(profile.latitude, profile.longitude, function (err, data) {
@@ -63,8 +63,7 @@ module.exports = function (app, config, pathSettings, base, users) {
       }
       profile.short_location = locality + ", " + comunity;
       profile.long_location = locality + ", " + province + ", " + comunity + ", " + country;
-      var token = jwt.sign(profile, app.get("secretPass"), { expiresInMinutes: 1 });
-      res.json({ token: token });
+      registerUser(res, profile);
     }, { language: "es" });
   })
 };

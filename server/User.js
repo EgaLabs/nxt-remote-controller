@@ -191,6 +191,12 @@ User.prototype = {
     });
   },
 
+  secure_clone: function () {
+    var clone = this.clone();
+    clone.token = undefined;
+    return clone;
+  },
+
   parsed: function () {
     return {
       id: this.id,
@@ -205,6 +211,13 @@ User.prototype = {
       host: this.hosts,
       connected: this.connected
     };
+  },
+
+  secure_parsed: function () {
+    var parse = this.parsed();
+    parse.token = undefined;
+    delete parse.token;
+    return parse;
   }
   
 };
