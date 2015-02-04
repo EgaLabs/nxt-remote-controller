@@ -175,9 +175,10 @@
   /*
    * Renderer function to render the host template and the login template.
    */
-  var _renderHost  = _template_renderer_(document.getElementById("host-template")),
-      _renderLogin = _template_renderer_(document.getElementById("add-template")),
-      _userdata    = _storage_saver_("userdata"),
+  var _renderHost    = _template_renderer_(document.getElementById("host-template")),
+      _renderLogin   = _template_renderer_(document.getElementById("add-template")),
+      _renderControl = _template_renderer_(document.getElementById("controls-template")),
+      _userdata      = _storage_saver_("userdata"),
 
       section_wrapper    = DOC.querySelectorAll("section")[1],
       hosts_container    = DOC.getElementById("container"),
@@ -238,7 +239,10 @@
   /*
    * We add the video elements.
    */
-  videos_masonry.addElements([ _createVideoElement("remote", VIDEO_WIDTH, VIDEO_HEIGHT) ]);
+  videos_masonry.addElements([
+    _createVideoElement("remote", VIDEO_WIDTH, VIDEO_HEIGHT),
+    _renderControl()
+  ]);
 
   /*
    * We add the two hosts cards, one to redirect to the login page and the second one as an example.
@@ -335,7 +339,6 @@
         elements.push(items[i].element);
       }
       hosts_masonry.removeElements(elements);
-      //root.onresize();
     });
 
     /*
@@ -447,8 +450,8 @@
     /*
      * When the stream has started from the remote.
      */
-    var video  = DOC.getElementById("remote"),
-        vendor = window.URL || window.webkitURL;
+    var video         = DOC.getElementById("remote"),
+        vendor        = window.URL || window.webkitURL;
 
     SOCKET.on("init_stream", function (data) {
       if (CONNECTED_PEER !== data.from) {
@@ -479,43 +482,192 @@
       section_wrapper.classList.remove("stream");
       CONNECTED_PEER = null;
       PEER_INSTANCE  = null;
+      video.src = "";
     });
   };
 
   /*
-   * When a key is pressed or released.
+   * Power element.
    */
-  var onDirectionChange = (function () {
-    var latest = [];
-    return function () {
-      if (CONNECTED_PEER === null || CONNECTED_PEER === "" || SOCKET === null) {
-        return;
-      }
-      var
-        keys  = key.activeKeys(),
-        up    = keys.indexOf("up")    > -1 ?  1 : 0,
-        right = keys.indexOf("right") > -1 ?  1 : 0,
-        down  = keys.indexOf("down")  > -1 ? -1 : 0,
-        left  = keys.indexOf("left")  > -1 ? -1 : 0,
-        x = (left + right) * 0.75,
-        y = (up + down) * 0.75;
-      if (latest[0] === x && latest[1] === y) {
-        return;
-      }
-      latest[0] = x;
-      latest[1] = y;
-      SOCKET.emit("motor", {
-        x: x,
-        y: y,
-        to: CONNECTED_PEER
-      });
-    };
-  })();
+  var
+    controls      = DOC.getElementById("controls"),
+    power_control = DOC.getElementById("power"),
+    flash_state   = false,
+    last_time     = 0,
+    passed_time   = true,
+    time_trigger  = true,
+
+    GAMEPAD = null,
+    LOOPING = true;
 
   /*
-   * We bind the events to the directional arrows.
+   * Returns a function that executes a checker that MUST returns the values on key events
+   * that will be passed to the callback handler if doesn't equal the last time values (used to avoid
+   * consequent event firing on keyholding).
    */
-  key.on("up, right, down, left", onDirectionChange, onDirectionChange);
+  var _one_press_ = function (checker, callback) {
+    var
+      latest  = [],
+      matches = 0,
+      result,
+      size,
+      res,
+      i;
+    return function (event, down) {
+      result  = checker();
+      size    = result.length;
+      matches = 0;
+      for (i = 0; i < size; i++) {
+        if (latest[i] === result[i]) matches++;
+        latest[i] = result[i];
+      }
+      if (matches !== size) res = callback(event, result, down);
+      if (res !== undefined) return res;
+    };
+  },
+
+  /*
+   * When the direction has changed on pressed arrows.
+   */
+  onDirectionChange = _one_press_(function () {
+    var
+      keys  = key.activeKeys(),
+      up    = keys.indexOf("up")    > -1 ?  1 : 0,
+      right = keys.indexOf("right") > -1 ?  1 : 0,
+      down  = keys.indexOf("down")  > -1 ? -1 : 0,
+      left  = keys.indexOf("left")  > -1 ? -1 : 0,
+      x = (left + right) * power_control.value,
+      y = (up + down) * power_control.value;
+    return [x, y];
+  }, function (event, data, down) {
+    var action = down ? "add" : "remove";
+    DOC.getElementById(event.keyCode).classList[action]("pressed");
+    if (CONNECTED_PEER === null || CONNECTED_PEER === "" || SOCKET === null) {
+      event.preventDefault();
+      return;
+    }
+    SOCKET.emit("motor", {
+      x: data[0],
+      y: data[1],
+      to: CONNECTED_PEER
+    });
+    event.preventDefault();
+  }),
+
+  _totalValueWASD = function () {
+    var
+      keys  = key.activeKeys(),
+      w     = keys.indexOf("w") > -1 ?  1 : 0,
+      d     = keys.indexOf("d") > -1 ?  1 : 0,
+      s     = keys.indexOf("s") > -1 ? -1 : 0,
+      a     = keys.indexOf("a") > -1 ? -1 : 0,
+      total = w + d + s + a;
+    if (total > 0) total =  1;
+    if (total < 0) total = -1;
+    return total;
+  },
+
+  onPowerChangeRelease = function (event, data, down) {
+    var action = down ? "add" : "remove";
+    DOC.getElementById(event.keyCode).classList[action]("pressed");
+    power_control.value = power_control.value - - data[1] * 0.05;
+    event.preventDefault();
+  },
+
+  onPowerChange = _one_press_(function () {
+    var
+      total = _totalValueWASD(),
+      now  = Date.now();
+    passed_time = now - last_time > 100;
+    if (passed_time) {
+      last_time = now;
+      time_trigger = !time_trigger;
+    }
+    return [time_trigger, total];
+  }, onPowerChangeRelease),
+
+  onFlashChange = _one_press_(function () {
+    flash_state = !flash_state;
+    return [flash_state];
+  }, function (event, data, down) {
+    var action = down ? "add" : "remove";
+    DOC.getElementById(event.keyCode).classList[action]("pressed");
+    if (CONNECTED_PEER === null || CONNECTED_PEER === "" || SOCKET === null) {
+      event.preventDefault();
+      return;
+    }
+    /*SOCKET.emit("flash", {
+      state: flash_state,
+      to: CONNECTED_PEER
+    });*/
+    event.preventDefault();
+  });
+
+  /*
+   * We bind the events to the directional arrows the WASD keys and the spacebar.
+   */
+  key.on("up, right, down, left", function (event) {
+    onDirectionChange.call(this, event, true);
+  }, function (event) {
+    onDirectionChange.call(this, event, false);
+  });
+
+  key.on("w, d, s, a", function (event) {
+    onPowerChange.call(this, event, true);
+  }, function (event) {
+    var total = _totalValueWASD();
+    onPowerChangeRelease.call(this, event, [null, total], false);
+  });
+
+  key.on("space", function (event) {
+    onFlashChange.call(this, event, true);
+  }, function (event) {
+    onFlashChange.call(this, event, false);
+  });
+
+  /*
+   * Gamepad connection and disconnection events.
+   */
+  var onGamepadConnected = function (event) {
+    GAMEPAD = event.gamepad;
+    controls.classList.remove("keyboard");
+    controls.classList.add("gamepad");
+  };
+
+  root.addEventListener("gamepadconnected", onGamepadConnected);
+  root.addEventListener("gamepaddisconnected", function (event) {
+    if (event.gamepad.id === GAMEPAD.id) {
+      GAMEPAD = null;
+      controls.classList.remove("gamepad");
+      controls.classList.add("keyboard");
+    } 
+  });
+
+  /*
+   * We execute the gamepadconnected handler if existed a gamepad before the page was loaded.
+   */
+  if (!!navigator.getGamepads()[0]) onGamepadConnected({ gamepad: navigator.getGamepads()[0] });
+
+  /*
+   * The loop that detects faces and gamepads.
+   */
+  /*var loop = (function () {
+    var gamepads;
+    return function () {
+      if (!LOOPING) return;
+      gamepads = navigator.getGamepads();
+      if (!GAMEPAD && !!gamepads[0]) {
+        GAMEPAD = gamepads[0];
+        if (root.ongamepadconnected) root.ongamepadconnected();
+      } else if (!!GAMEPAD && !gamepads[0]) {
+        GAMEPAD = null;
+        if (root.ongamepaddisconnected) root.ongamepaddisconnected();
+      }
+      root.requestAnimationFrame(loop);
+    };
+  })();
+  LOOPING = true;
+  loop();*/
 
   /*
    * Start the request if there isn't token or directly connect if exists.

@@ -37,6 +37,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Camera;
 import android.location.Location;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
@@ -46,6 +47,7 @@ import android.provider.Settings;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -351,6 +353,11 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
               if (index == -1) {
                 continue;
               }
+              if (self.calling.equals(self.clientsAdapter.get(index).getPeerId())) {
+                self.hideActions();
+                self.calling = "";
+                self.controlledBy = null;
+              }
               self.getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run () {
@@ -412,10 +419,7 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
           try {
             JSONObject data = (JSONObject) args[0];
             String sender = data.getString("from");
-            /*Log.d("DATOS", data.toString());
-            if (!sender.equals(self.controlledBy.getPeerId())) {
-              return;
-            }*/
+            if (!sender.equals(self.controlledBy.getPeerId())) return;
             double b = data.getDouble("b");
             double c = data.getDouble("c");
             self.getConnector().motorBC(c, b, false, false);
@@ -423,7 +427,25 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
             //e.printStackTrace();
           }
         }
-      });
+      });/*.on("flash", new Emitter.Listener() {
+        @Override
+        public void call (Object... args) {
+          try {
+            JSONObject data = (JSONObject) args[0];
+            String sender = data.getString("from");
+            boolean state = data.getBoolean("state");
+            if (!sender.equals(self.controlledBy.getPeerId())) return;
+            if (!globalUtils.isFlashAvailable()) return;
+            Camera camera = Camera.open();
+            Camera.Parameters parameters = camera.getParameters();
+            parameters.setFlashMode(state ? Camera.Parameters.FLASH_MODE_ON : Camera.Parameters.FLASH_MODE_OFF);
+            camera.setParameters(parameters);
+            camera.startPreview();
+          } catch (JSONException e) {
+            e.printStackTrace();
+          }
+        }
+      });*/
       socket.connect();
     } catch (URISyntaxException e) {
       e.printStackTrace();
@@ -436,11 +458,10 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
   @Override
   public View onCreateView (LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
     final OnlineControllerFragment self = this;
-    final WifiManager wifiManager = this.getWifiManager();
     this.progressDialog = this.getShortProgressDialog();
     View view;
     Button button;
-    if (!wifiManager.isWifiEnabled()) {
+    if (!this.getWifiManager().isWifiEnabled()) {
       view = inflater.inflate(R.layout.online_error_layout, parent, false);
       button = (Button) view.findViewById(R.id.redo_action);
       button.setOnClickListener(new View.OnClickListener() {
@@ -498,6 +519,9 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
   @Override
   public void onResume () {
     super.onResume();
+    if (!this.getWifiManager().isWifiEnabled()) {
+      return;
+    }
     final OnlineControllerFragment self = this;
     this.token = this.getPreferencesEditor().getString("preference_server_token");
     this.tracker = new GPSLocationTracker(this.getActivity());
@@ -593,7 +617,7 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
 
   @Override
   public void onDestroyView () {
-    this.socket.disconnect();
+    if (this.socket != null) this.socket.disconnect();
     super.onDestroyView();
   }
 

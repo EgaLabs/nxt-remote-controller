@@ -51,16 +51,198 @@ section {
   min-width: 280px;
 }
 
+
+////////////////////////////////
+/// Video and control styles ///
+////////////////////////////////
+
 #controll-ui-container {
   min-width: 640px;
 }
 
+video.video {
+  background: #000000;
+}
+
 .video {
   width: 640px;
-  height: 480px;
-  background: #000000;
+  height: 480px;  
   margin: 1em 0;
+  background: #fafafa;
+  @include single-box-shadow(0px, 0px, 5px, 3px, rgba(0, 0, 0, 0.2), false);
 }
+
+#controls.keyboard {
+  *.gamepad {
+    display: none;
+  }
+}
+
+#controls.gamepad {
+  *.keyboard {
+    display: none;
+  }
+}
+
+h2.title {
+  margin: 2em auto;
+  font-size: 2em;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+}
+
+
+//////////////////////////
+/// Input range styles ///
+//////////////////////////
+
+@mixin shadow ($x, $y, $size, $blur, $color) {
+  @include single-box-shadow($x, $y, $blur, $size, $color, false);
+}
+
+@mixin track () {
+  width: $track-width;
+  height: $track-height;
+  cursor: pointer;
+  @include animation-properties((animation-duration: 0.2s));
+}
+
+@mixin thumb () {
+  border: $thumb-border-width solid $thumb-border-color;
+  height: $thumb-height;
+  width: $thumb-width;  
+  background: $thumb-color;
+  cursor: pointer;
+  @include border-radius($thumb-radius);
+  @include shadow(0, 0, $thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color);
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: $thumb-height/2 0;
+  width: $track-width;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-slider-runnable-track {
+    @include track();
+    @include shadow(0, 0, $track-shadow-size, $track-shadow-blur, $track-shadow-color);
+    @include border-radius($track-radius);
+    background: $track-color;
+    border: $track-border-width solid $track-border-color;
+  }
+  
+  &::-webkit-slider-thumb {
+    @include thumb();
+    -webkit-appearance: none;
+    margin-top: ((-$track-border-width * 2 + $track-height) / 2) - ($thumb-height / 2);
+  }
+
+  &:focus::-webkit-slider-runnable-track {
+    background: tint($track-color, $contrast);
+  }
+
+  &::-moz-range-track {
+    @include track();
+    @include shadow(0, 0, $track-shadow-size, $track-shadow-blur, $track-shadow-color);
+    @include border-radius($track-radius);
+    background: $track-color;
+    border: $track-border-width solid $track-border-color;
+  }
+
+  &::-moz-range-thumb {
+     @include thumb();
+  }
+
+  &::-ms-track {
+    @include track(); 
+    background: transparent;
+    border-color: transparent;
+    border-width: $thumb-width 0;
+    color: transparent;
+  }
+
+  &::-ms-fill-lower {
+    @include shadow(0, 0, $track-shadow-size, $track-shadow-blur, $track-shadow-color);
+    background: shade($track-color, $contrast);
+    border: $track-border-width solid $track-border-color;
+    border-radius: $track-radius * 2; 
+  }
+
+  &::-ms-fill-upper {
+    @include border-radius($track-radius * 2);
+    @include shadow(0, 0, $track-shadow-size, $track-shadow-blur, $track-shadow-color);
+    background: $track-color;
+    border: $track-border-width solid $track-border-color;
+  }
+
+  &::-ms-thumb {
+    @include thumb();
+  }
+
+  &:focus::-ms-fill-lower {
+    background: $track-color;
+  }
+
+  &:focus::-ms-fill-upper {
+    background: tint($track-color, $contrast);
+  }
+}
+
+#keyboard-container {
+  margin: 1em 0 0 0;
+  > * {
+    vertical-align: text-top;
+  }
+}
+
+.keyboard-ui {
+  display: inline-block;
+  margin: 0 1em;
+  > * {
+    background: #fff;
+    display: inline-block;
+    margin: 1.5px auto;
+    @include border-radius(5px);
+  }
+
+  > .keyboard-key {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #bbb;
+    @include background-image(linear-gradient(shade(#fff, 5%), shade(#fff, 12%)));
+
+    &.pressed {
+      color: white;
+      @include background-image(linear-gradient(shade(#3498db, 20%), shade(#3498db, 13%)));
+    }
+
+    &.space {
+      width: 20em;
+    }
+  }
+
+  > .row-ending {
+    display: block;
+  }
+
+  > small.footer {
+    background: none;
+    font-size: 0.65em;
+    font-style: italic;
+  }
+}
+
+#space {
+  margin: 1.5em;
+}
+
+
+///////////////////
+/// Host styles ///
+///////////////////
 
 div.host, a.host {
   width: 280px;

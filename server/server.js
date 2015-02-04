@@ -358,6 +358,16 @@ io.on("connection", function (socket) {
         });
       });
     });
+
+    /*socket.on("flash", function (data) {
+      _.each(getHosts(), function (value, key) {
+        if (data.to !== value.peer) return;
+        io.to(value.id).emit("flash", {
+          state: data.state,
+          from: user.peer
+        });
+      });
+    });*/
   }
 });
 

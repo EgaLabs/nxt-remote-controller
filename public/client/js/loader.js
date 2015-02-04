@@ -53,6 +53,8 @@ if (path.length > 0) {
     [
       "/res/js/md5.min.js",
       "/res/js/keymaster.min.js",
+      "/res/js/gamepad.min.js",
+      "/res/js/rAF.min.js",
       "/socket.io/socket.io.js",
       "/res/js/peer.min.js",
       "/res/js/Masonry.min.js",

@@ -158,5 +158,31 @@
   <span class="location">{{description}}</span>
 </a>
 </script>
+<script type="text/x-template" id="controls-template">
+  <div id="controls" class="video keyboard">
+    <h2 class="title">Use your <span class="keyboard">keyboard</span><span class="gamepad">gamepad</span> to send orders to the host.</h2>
+    <input name="power" id="power" type="range" min="0" max="1" step="0.01" />
+    <div id="keyboard-container" class="keyboard">
+      <div class="keyboard-ui">
+        <div id="87" class="keyboard-key row-ending">W</div>
+        <div id="65" class="keyboard-key">A</div>
+        <div id="83" class="keyboard-key">S</div>
+        <div id="68" class="keyboard-key">D</div>
+        <small class="footer row-ending">*Use W and D to increase and A and S to decrease the power.</small>
+      </div>
+      <div class="keyboard-ui">
+        <div id="38" class="keyboard-key row-ending">&#8593;</div>
+        <div id="37" class="keyboard-key">&#8592;</div>
+        <div id="40" class="keyboard-key">&#8595;</div>
+        <div id="39" class="keyboard-key">&#8594;</div>
+        <small class="footer row-ending">*Use &#8593; to go forward, &#8592; to turn left, &#8595; to go backward and &#8594; to turn right.<br>Opossite directions result in a nul value interpreted as no movement.</small>
+      </div>
+      <div id="space" class="keyboard-ui">
+        <div id="32" class="keyboard-key space">Spacebar</div>
+        <small class="footer row-ending">*Use the space key to toggle the state of the remote camera flash.</small>
+      </div>
+    </div>
+  </div>
+</script>
 </body>
 </html>

@@ -36,6 +36,7 @@ package git.egatuts.nxtremotecontroller;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Resources.Theme;
 import android.content.res.XmlResourceParser;
@@ -580,6 +581,10 @@ public class GlobalUtils {
     HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
     connection.connect();
     return BitmapFactory.decodeStream(connection.getInputStream());
+  }
+
+  public boolean isFlashAvailable () {
+    return this.context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
   }
 
 }

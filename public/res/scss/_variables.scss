@@ -37,3 +37,25 @@ $header-color: #fff;
 $header-background: #072A36;
 
 $section-padding: 1em 2em;
+
+$thumb-color: tint(#3498db, 30%);
+$thumb-radius: 8px;
+$thumb-height: 16px;
+$thumb-width: 16px;
+$thumb-shadow-size: 0px;
+$thumb-shadow-blur: 0px;
+$thumb-shadow-color: #111;
+$thumb-border-width: 1px;
+$thumb-border-color: shade(#3498db, 50%);;
+
+$track-color: #424242;
+$track-width: 100%;
+$track-height: 5px;
+$track-shadow-size: 0px;
+$track-shadow-blur: 0px;
+$track-shadow-color: $header-background;
+$track-border-width: 1px;
+$track-border-color: black;
+
+$track-radius: 5px;
+$contrast: 5%;
