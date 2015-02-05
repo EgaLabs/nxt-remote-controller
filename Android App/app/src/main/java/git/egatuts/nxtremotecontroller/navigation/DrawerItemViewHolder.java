@@ -46,6 +46,9 @@ public class DrawerItemViewHolder extends RecyclerView.ViewHolder {
 
   public TextView textView;
 
+  /*
+   *  Constructor.
+   */
   public DrawerItemViewHolder (View item) {
     super(item);
     textView = (TextView) item.findViewById(R.id.item_name);

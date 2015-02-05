@@ -33,8 +33,6 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.thread;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -50,7 +48,7 @@ public class ConnectedThread extends BaseThread {
   private OutputStream output;
 
   /*
-   *  Constructor.
+   *  Executed in all the constructors.
    */
   private void init () {
     InputStream in = null;
@@ -65,6 +63,9 @@ public class ConnectedThread extends BaseThread {
     this.output = out;
   }
 
+  /*
+   *  Constructors.
+   */
   public ConnectedThread () {
     super();
     this.init();
@@ -90,6 +91,9 @@ public class ConnectedThread extends BaseThread {
     }
   }
 
+  /*
+   *  Stops the thread and deletes the socket.
+   */
   @Override
   public void stopThread () {
     super.stopThread();

@@ -27,15 +27,15 @@
 
 
   <!-- [scan_fragment.xml] -->
-  <string name="bluetooth_preparing_pairing">Preparant emparellament&#8230;</string>
-  <string name="bluetooth_pairing">Emparellant dispositiu&#8230;</string>
-  <string name="bluetooth_paired">Dispositiu emparellat: %s</string>
-  <string name="bluetooth_failed_pairing">Emparellament erroni: %s</string>
-  <string name="bluetooth_already_paired">El dispositiu %s ja està emparellat</string>
+  <string name="bluetooth_preparing_pairing">Preparant vinculació&#8230;</string>
+  <string name="bluetooth_pairing">Vinculant dispositiu&#8230;</string>
+  <string name="bluetooth_paired">Dispositiu vinculat: %s</string>
+  <string name="bluetooth_failed_pairing">Vinculament erroni: %s</string>
+  <string name="bluetooth_already_paired">El dispositiu %s ja està vinculat</string>
   <!-- [/scan_fragment.xml] -->
 
 
-  <!-- [home_fragment.xml]  -->
+  <!-- [HomeFragment.java]  -->
   <string name="device_type_toy_title">Tipus de dispositiu desconegut</string>
   <string name="device_type_toy_message">El dispositiu %s no s\'identifica com una joguina.</string>
   <string name="device_type_robot_title">Tipus de dispositiu desconegut</string>
@@ -52,9 +52,9 @@
   <string name="connecting_connection_closed">La conexió s\'ha tancat</string>
   <string name="connecting_connection_lost">La conexió s\'ha perdut</string>
   <string name="connecting_aborted">Conexió abortada</string>
-  <string name="connecting_reconnect_title">La conexió ha fallat.</string>
+  <string name="connecting_reconnect_title">La conexió ha fallat</string>
   <string name="connecting_reconnect_message">S\'ha perdut la conexió amb el dispositiu %s. Voldríes reconectar?</string>
-  <!-- [/home_fragment.xml] -->
+  <!-- [/HomeFragment.java] -->
 
 
   <!-- [preference_fragment.xml]  -->
@@ -68,7 +68,7 @@
   <string name="preference_title_address">Adreça del servidor</string>
   <string name="preference_summary_address">La URL del servidor que administra les conexions de baixa latença (sockets).</string>
   <string name="preference_dialog_address">Quina és la adreça?</string>
-  <string name="preference_value_address">https://localhost:8080</string>
+  <string name="preference_value_address">https://localhost</string>
   <!-- [/preference_fragment.xml] -->
 
 
@@ -76,7 +76,7 @@
   <string name="preference_title_login">Adreça d\'inici de sessió</string>
   <string name="preference_summary_login">La URL del servidor que permeteix identificar-se mitjançant codis d\'inici de sessió únics (tokens).</string>
   <string name="preference_dialog_login">Quina és la adreça?</string>
-  <string name="preference_value_login">https://localhost:443/request-token</string>
+  <string name="preference_value_login">https://localhost/request-token</string>
   <!-- [/preference_fragment.xml] -->
 
 
@@ -91,7 +91,7 @@
   <string name="preference_title_peer">Adreça del servidor P2P</string>
   <string name="preference_summary_peer">La URL del servidor que administra els candidats per a les conexions P2P.</string>
   <string name="preference_dialog_peer">Quina és la adreça?</string>
-  <string name="preference_value_peer">https://localhost:9000</string>
+  <string name="preference_value_peer">https://localhost/connect</string>
   <!-- [/preference_fragment.xml] -->
 
 

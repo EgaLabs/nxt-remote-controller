@@ -38,7 +38,7 @@ import git.egatuts.nxtremotecontroller.activity.ControllerActivity;
 import git.egatuts.nxtremotecontroller.bluetooth.NXTConnector;
 
 /*
- *  Base class for the ControllerActivity fragments that access some activity's methods.
+ *  Base fragment class for the ControllerActivity fragments that access some activity's methods.
  */
 public class ControllerBaseFragment extends BaseFragment {
 

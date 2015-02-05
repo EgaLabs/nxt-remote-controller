@@ -37,17 +37,14 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.hardware.Camera;
 import android.location.Location;
 import android.net.Uri;
-import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,7 +78,7 @@ import java.util.Iterator;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 
-import git.egatuts.nxtremotecontroller.GlobalUtils;
+import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.ControllerActivity;
 import git.egatuts.nxtremotecontroller.client.Client;
@@ -89,7 +86,6 @@ import git.egatuts.nxtremotecontroller.client.ClientAdapter;
 import git.egatuts.nxtremotecontroller.client.ClientViewHolder;
 import git.egatuts.nxtremotecontroller.exception.LoginException;
 import git.egatuts.nxtremotecontroller.exception.MalformedTokenException;
-import git.egatuts.nxtremotecontroller.listener.AnimationEndListener;
 import git.egatuts.nxtremotecontroller.listener.GPSLocationTracker;
 import git.egatuts.nxtremotecontroller.utils.TokenRequester;
 import git.egatuts.nxtremotecontroller.views.BaseProgressDialog;
@@ -119,6 +115,9 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
   private Client controlledBy;
   private String calling;
 
+  /*
+   *  Refreshes the fragment by changing the tab to the first and then again to this.
+   */
   public void refreshFragment () {
     final OnlineControllerFragment self = this;
     this.getBaseActivity().runOnUiThread(new Runnable() {
@@ -130,12 +129,19 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
     });
   }
 
+  /*
+   *  Returns the owners mail by assuming the device has a google account configured.
+   */
   public String getOwnerEmail () {
     AccountManager manager = AccountManager.get(this.getActivity());
     Account[] accounts = manager.getAccountsByType("com.google");
     return accounts[0].name;
   }
 
+  /*
+   *  Returns a location requester using GPSLocationTracker and setting up the listener.
+   *  When location is obtained it stops the geolocation service and starts the passed thread.
+   */
   public GPSLocationTracker getLocationRequester (final Thread thread) {
     final OnlineControllerFragment self = this;
     final GPSLocationTracker locationTracker = new GPSLocationTracker(this.getActivity());
@@ -151,6 +157,9 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
     return locationTracker;
   }
 
+  /*
+   *  Returns the token requester that does the POST request.
+   */
   public TokenRequester getTokenRequester () {
     final OnlineControllerFragment self = this;
     final TokenRequester requester = new TokenRequester();
@@ -210,6 +219,9 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
     return requester;
   }
 
+  /*
+   *  Removes all the clients from the adapter (used when disconnected from the server).
+   */
   public void removeAllClients () {
     Client[] clients = this.clientsAdapter.getAll();
     for (int i = 1; i < clients.length; i++) {
@@ -217,9 +229,60 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
     }
   }
 
+  /*
+   *  Returns the show animation used to show the actions or the recycler view.
+   */
+  public AlphaAnimation getShowAnimation (final View view0) {
+    AlphaAnimation show = new AlphaAnimation(0.0f, 1.0f);
+    show.setDuration(300);
+    show.setStartOffset(300);
+    show.setFillAfter(true);
+    show.setAnimationListener(new Animation.AnimationListener() {
+      @Override
+      public void onAnimationStart (Animation animation) {
+        view0.setVisibility(View.VISIBLE);
+      }
+      @Override public void onAnimationEnd (Animation animation) {}
+      @Override public void onAnimationRepeat (Animation animation) {}
+    });
+    return show;
+  }
+
+  /*
+   *  Returns the hide animation used to hide the actions or the recycler view.
+   */
+  public AlphaAnimation getHideAnimation (final View view0, final View view1) {
+    AlphaAnimation hide = new AlphaAnimation(1.0f, 0.0f);
+    hide.setDuration(300);
+    hide.setFillAfter(true);
+    hide.setAnimationListener(new Animation.AnimationListener() {
+      @Override
+      public void onAnimationStart (Animation animation) {
+        view0.setVisibility(View.VISIBLE);
+      }
+      @Override
+      public void onAnimationEnd (Animation animation) {
+        view0.setVisibility(View.GONE);
+        view1.startAnimation(getShowAnimation(view1));
+      }
+      @Override public void onAnimationRepeat (Animation animation) {}
+    });
+    return hide;
+  }
+
+  /*
+   *  Executes the hide animation that hides the recycler view and shows the actions.
+   */
   public void showActions () {
     final OnlineControllerFragment self = this;
-    final AlphaAnimation hide = new AlphaAnimation(1.0f, 0.0f);
+    final AlphaAnimation hide = this.getHideAnimation(this.recyclerView, this.actionsView);
+    this.getActivity().runOnUiThread(new Runnable() {
+      @Override
+      public void run () {
+        self.recyclerView.startAnimation(hide);
+      }
+    });
+    /*final AlphaAnimation hide = new AlphaAnimation(1.0f, 0.0f);
     hide.setFillAfter(true);
     hide.setDuration(500);
     hide.setAnimationListener(new Animation.AnimationListener() {
@@ -227,11 +290,15 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
       public void onAnimationStart (Animation animation) {
         self.recyclerView.setVisibility(View.VISIBLE);
       }
+
       @Override
       public void onAnimationEnd (Animation animation) {
         self.recyclerView.setVisibility(View.GONE);
       }
-      @Override public void onAnimationRepeat (Animation animation) {}
+
+      @Override
+      public void onAnimationRepeat (Animation animation) {
+      }
     });
     final AlphaAnimation show = new AlphaAnimation(0.0f, 1.0f);
     show.setFillAfter(true);
@@ -242,8 +309,14 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
       public void onAnimationStart (Animation animation) {
         self.actionsView.setVisibility(View.VISIBLE);
       }
-      @Override public void onAnimationEnd (Animation animation) {}
-      @Override public void onAnimationRepeat (Animation animation) {}
+
+      @Override
+      public void onAnimationEnd (Animation animation) {
+      }
+
+      @Override
+      public void onAnimationRepeat (Animation animation) {
+      }
     });
     this.getActivity().runOnUiThread(new Runnable() {
       @Override
@@ -251,12 +324,22 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
         self.recyclerView.startAnimation(hide);
         self.actionsView.startAnimation(show);
       }
-    });
+    });*/
   }
 
+  /*
+   *  Starts the animation that hides the actions and shows the recycler view.
+   */
   public void hideActions () {
     final OnlineControllerFragment self = this;
-    final AlphaAnimation hide = new AlphaAnimation(1.0f, 0.0f);
+    final AlphaAnimation hide = this.getHideAnimation(this.recyclerView, this.actionsView);
+    this.getActivity().runOnUiThread(new Runnable() {
+      @Override
+      public void run () {
+        self.actionsView.startAnimation(hide);
+      }
+    });
+    /*final AlphaAnimation hide = new AlphaAnimation(1.0f, 0.0f);
     hide.setFillAfter(true);
     hide.setDuration(500);
     hide.setAnimationListener(new Animation.AnimationListener() {
@@ -264,11 +347,15 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
       public void onAnimationStart (Animation animation) {
         self.actionsView.setVisibility(View.VISIBLE);
       }
+
       @Override
       public void onAnimationEnd (Animation animation) {
         self.actionsView.setVisibility(View.GONE);
       }
-      @Override public void onAnimationRepeat (Animation animation) {}
+
+      @Override
+      public void onAnimationRepeat (Animation animation) {
+      }
     });
     final AlphaAnimation show = new AlphaAnimation(0.0f, 1.0f);
     show.setFillAfter(true);
@@ -279,8 +366,14 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
       public void onAnimationStart (Animation animation) {
         self.recyclerView.setVisibility(View.VISIBLE);
       }
-      @Override public void onAnimationEnd (Animation animation) {}
-      @Override public void onAnimationRepeat (Animation animation) {}
+
+      @Override
+      public void onAnimationEnd (Animation animation) {
+      }
+
+      @Override
+      public void onAnimationRepeat (Animation animation) {
+      }
     });
     this.getActivity().runOnUiThread(new Runnable() {
       @Override
@@ -288,9 +381,12 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
         self.actionsView.startAnimation(hide);
         self.recyclerView.startAnimation(show);
       }
-    });
+    });*/
   }
 
+  /*
+   *  Starts a new SocketIO connection with the server defined in preferences_server_address.
+   */
   public void startSocketConnection () {
     final OnlineControllerFragment self = this;
     final GlobalUtils globalUtils = this.getGlobalUtils();
@@ -300,9 +396,10 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
     this.progressDialog.show();
     this.progressDialog.setText(R.string.connecting_socket_server);
     String url = this.getPreferencesEditor().getString("preference_server_address", this.getString(R.string.preference_value_address));
-    if (url.charAt(url.length() - 1) == '/') {
-      url += "/";
-    }
+    Uri uri = Uri.parse(url)
+            .buildUpon()
+            .appendQueryParameter("token", this.token)
+            .build();
     try {
       if (url.contains("https://")) {
         IO.setDefaultSSLContext(SSLContext.getDefault());
@@ -310,18 +407,30 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
       IO.Options options = new IO.Options();
       options.forceNew = true;
       options.reconnection = true;
-      this.socket = IO.socket(url + "?token=" + this.token, options);
+      this.socket = IO.socket(uri.toString(), options);
+
+      /*
+       *  When the socket is connected.
+       */
       socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
         @Override
         public void call (Object... args) {
           self.removeAllClients();
           self.progressDialog.dismiss();
         }
+
+      /*
+       *  When the socket is disconnected.
+       */
       }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
         @Override
         public void call (Object... args) {
           self.removeAllClients();
         }
+
+      /*
+       *  When the socket receives an error.
+       */
       }).on(Socket.EVENT_ERROR, new Emitter.Listener() {
         @Override
         public void call (Object... args) {
@@ -339,6 +448,10 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
           self.progressDialog.dismiss();
           globalUtils.showToast(R.string.unknown_error);
         }
+
+      /*
+       *  When a new client is disconnected.
+       */
       }).on("leave_member", new Emitter.Listener() {
         @Override
         public void call (Object... args) {
@@ -353,7 +466,7 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
               if (index == -1) {
                 continue;
               }
-              if (self.calling.equals(self.clientsAdapter.get(index).getPeerId())) {
+              if (self.calling != null && self.calling.equals(self.clientsAdapter.get(index).getPeerId())) {
                 self.hideActions();
                 self.calling = "";
                 self.controlledBy = null;
@@ -369,6 +482,10 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
             //e.printStackTrace();
           }
         }
+
+      /*
+       *  When a new client is connected (also fired on first connection with all the active clients)
+       */
       }).on("join_member", new Emitter.Listener() {
         @Override
         public void call (Object... args) {
@@ -394,6 +511,10 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
             e.printStackTrace();
           }
         }
+
+       /*
+        *  When the client has answered our call request.
+        */
       }).on("answered", new Emitter.Listener() {
         @Override
         public void call (Object... args) {
@@ -413,6 +534,10 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
             //e.printStackTrace();
           }
         }
+
+      /*
+       *  When the client sends us a motor order.
+       */
       }).on("motors", new Emitter.Listener() {
         @Override
         public void call (Object... args) {
@@ -455,12 +580,16 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
     }
   }
 
+  /*
+   *  When the fragment creates the view. If wifi or GPS (that is needed) are not enabled it will stop execution of logic.
+   */
   @Override
   public View onCreateView (LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
     final OnlineControllerFragment self = this;
     this.progressDialog = this.getShortProgressDialog();
     View view;
     Button button;
+
     if (!this.getWifiManager().isWifiEnabled()) {
       view = inflater.inflate(R.layout.online_error_layout, parent, false);
       button = (Button) view.findViewById(R.id.redo_action);
@@ -475,17 +604,24 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
 
     view = inflater.inflate(R.layout.online_layout, parent, false);
     this.recyclerView = (RecyclerView) view.findViewById(R.id.clients);
-    this.actionsView  = (RelativeLayout) view.findViewById(R.id.actions);
-    this.initStreamingView = (Button) view.findViewById(R.id.init_streaming);
-    this.stopStreamingView = (Button) view.findViewById(R.id.stop_streaming);
+    this.actionsView = (RelativeLayout) view.findViewById(R.id.actions);
 
+    this.initStreamingView = (Button) view.findViewById(R.id.init_streaming);
     this.initStreamingView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick (View v) {
-        self.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://localhost/connect/?from=" + GlobalUtils.md5(self.token) + "&to=" + self.calling)));
+        String url = self.getPreferencesEditor().getString("preference_server_peer", self.getString(R.string.preference_value_peer));
+        Uri uri = Uri.parse(url)
+                .buildUpon()
+                .appendQueryParameter("from", GlobalUtils.md5(self.token))
+                .appendQueryParameter("to", self.calling)
+                .build();
+        self.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uri.toString())));
         self.socket.emit("init_stream", self.calling);
       }
     });
+
+    this.stopStreamingView = (Button) view.findViewById(R.id.stop_streaming);
     this.stopStreamingView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick (View v) {
@@ -516,6 +652,9 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
     return view;
   }
 
+  /*
+   *  When the app is resumed we check if connection was lost and all necessary stuff.
+   */
   @Override
   public void onResume () {
     super.onResume();
@@ -602,6 +741,9 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
     this.startSocketConnection();
   }
 
+  /*
+   *  Starts a call with the specified client.
+   */
   public void requestCall (Client client, ClientViewHolder view, int index) {
     this.calling = client.getPeerId();
     this.socket.emit("call", client.getPeerId());
@@ -615,6 +757,9 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
     ((NotificationManager) this.getActivity().getSystemService(Context.NOTIFICATION_SERVICE)).notify(1, builder.build());*/
   }
 
+  /*
+   *  When the view is destroyed.
+   */
   @Override
   public void onDestroyView () {
     if (this.socket != null) this.socket.disconnect();

@@ -1,3 +1,36 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  Copyright (c) 2014 EgaTuts & Esaú García - All Rights Reserved                 *
+ *                                                                                 *
+ *  Open-source code licensed under the MIT License (the "License").               *
+ *                                                                                 *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy   *
+ *  of this software and associated documentation files (the "Software"), to deal  *
+ *  in the Software without restriction, including without limitation the rights   *
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell      *
+ *  copies of the Software, and to permit persons to whom the Software is          *
+ *  furnished to do so, subject to the following conditions:                       *
+ *                                                                                 *
+ *  The above copyright notice and this permission notice shall be included in     *
+ *  all copies or substantial portions of the Software.                            *
+ *                                                                                 *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     *
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE    *
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         *
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  *
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN      *
+ *  THE SOFTWARE.                                                                  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  You can find the entire project at:                                                                                                                    *
+ *                                                                                                                                                         *
+ *    https://github.com/Egatuts/nxt-remote-controller                                                                                                     *
+ *                                                                                                                                                         *
+ *  And the corresponding file at:                                                                                                                         *
+ *                                                                                                                                                         *
+ *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/views/JoystickView.java *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.views;
 
 import android.content.Context;
@@ -11,6 +44,9 @@ import android.view.View;
 
 import git.egatuts.nxtremotecontroller.R;
 
+/*
+ *  Extended View that adds a customizable Joystick.
+ */
 public class JoystickView extends View {
 
   private int WIDTH;
@@ -31,6 +67,16 @@ public class JoystickView extends View {
   private Path path;
   private OnChangePosition listener;
 
+  /*
+   *  Represents a changing position event of the joystick.
+   */
+  public interface OnChangePosition {
+    public void onChange (float x, float y);
+  }
+
+  /*
+   *  Constructor.
+   */
   public JoystickView (Context context) {
     super(context);
   }
@@ -45,6 +91,9 @@ public class JoystickView extends View {
     this.init(context, attrs);
   }
 
+  /*
+   *  Executed in all the constructors.
+   */
   private void init (Context context, AttributeSet attrs) {
     if (isInEditMode()) return;
     final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.JoystickView);
@@ -56,6 +105,10 @@ public class JoystickView extends View {
     this.path = new Path();
   }
 
+  /*
+   *  Private method to resize view with the specified bounds.
+   *  It will fit to the minimum value because it must be a perfectly shaped circle.
+   */
   private void resize (int w, int h, boolean ready) {
     this.WIDTH = w;
     this.HEIGHT = h;
@@ -78,6 +131,9 @@ public class JoystickView extends View {
     }*/
   }
 
+  /*
+   *  Getter and setter for the change position listener of the joystick.
+   */
   public void setOnChangePositionListener (OnChangePosition listener) {
     this.listener = listener;
   }
@@ -86,6 +142,10 @@ public class JoystickView extends View {
     return this.listener;
   }
 
+  /*
+   *  Getters for the X and Y value, the angle, the module and the maximum module to
+   *  do the calculations and return a value between -1 and 1.
+   */
   public float getXValue () {
     return (float) (this.posX - this.centerX) / this.RADIUS;
   }
@@ -106,12 +166,20 @@ public class JoystickView extends View {
     return this.RADIUS;
   }
 
+  /*
+   *  When the size changed we resize it fitting to only one bound.
+   */
   @Override
   public void onSizeChanged (int w, int h, int oldw, int oldh) {
     super.onSizeChanged(w, h, oldw, oldh);
     this.resize(w, h, true);
   }
 
+  /*
+   *  We handle here all the stuff to calculate the point that is touched and draw it only without exiting the bounds
+   *  and applying paddings (internal margins) to avoid clipping of the joystick and do the correct drawing.
+   *  Also restores its state to the geometric center when the screen touch has been released and executes the corresponding listeners.
+   */
   @Override
   public boolean onTouchEvent (MotionEvent event) {
     float x = event.getX(0);
@@ -149,6 +217,9 @@ public class JoystickView extends View {
     return true;
   }
 
+  /*
+   *  Draws the joystick based on the position.
+   */
   @Override
   public void onDraw (Canvas canvas) {
     super.onDraw(canvas);
@@ -164,10 +235,6 @@ public class JoystickView extends View {
     this.paint.setColor(this.joystickStroke);
     this.paint.setAlpha(255);
     canvas.drawPath(path, this.paint);
-  }
-
-  public interface OnChangePosition {
-    public void onChange (float x, float y);
   }
 
 }

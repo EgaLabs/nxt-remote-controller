@@ -53,7 +53,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TabHost;
@@ -61,7 +60,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
-import git.egatuts.nxtremotecontroller.GlobalUtils;
+import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.bluetooth.NXTConnector;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;

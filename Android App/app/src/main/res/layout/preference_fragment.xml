@@ -15,16 +15,16 @@
         android:dialogTitle="@string/preference_dialog_login"
         android:defaultValue="@string/preference_value_login" />
     <EditTextPreference
-        android:key="preference_server_token"
-        android:title="@string/preference_title_token"
-        android:summary="@string/preference_summary_token"
-        android:dialogTitle="@string/preference_dialog_token" />
-    <EditTextPreference
         android:key="preference_server_peer"
         android:title="@string/preference_title_peer"
         android:summary="@string/preference_summary_peer"
         android:dialogTitle="@string/preference_dialog_peer"
         android:defaultValue="@string/preference_value_peer" />
+    <EditTextPreference
+        android:key="preference_server_token"
+        android:title="@string/preference_title_token"
+        android:summary="@string/preference_summary_token"
+        android:dialogTitle="@string/preference_dialog_token" />
   </PreferenceCategory>
 
   <PreferenceCategory android:title="@string/settings_category_visual">

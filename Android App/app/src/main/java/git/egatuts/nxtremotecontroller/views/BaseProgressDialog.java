@@ -90,6 +90,9 @@ public abstract class BaseProgressDialog extends ProgressDialog {
     });
   }
 
+  /*
+   *  Sets the text of the progress dialog.
+   */
   public void setText (String msg) {
     ((TextView) this.getTextView()).setText(msg);
   }

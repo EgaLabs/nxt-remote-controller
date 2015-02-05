@@ -44,6 +44,21 @@ public class DrawerItem {
   private Drawable drawable;
 
   /*
+   *  Constructors.
+   */
+  public DrawerItem (String custom_text, Drawable custom_drawable) {
+    init(custom_text, custom_drawable);
+  }
+
+  public DrawerItem (Drawable custom_drawable) {
+    init("", custom_drawable);
+  }
+
+  public DrawerItem (String custom_text) {
+    init(custom_text, null);
+  }
+
+  /*
    *  Setters and getters for text.
    */
   public void setText (String custom_text) {
@@ -66,23 +81,11 @@ public class DrawerItem {
   }
 
   /*
-   *  Constructors.
+   *  Executed in all type of constructors.
    */
   private void init (String custom_text, Drawable custom_drawable) {
     text = custom_text;
     drawable = custom_drawable;
-  }
-
-  public DrawerItem (String custom_text, Drawable custom_drawable) {
-    init(custom_text, custom_drawable);
-  }
-
-  public DrawerItem (Drawable custom_drawable) {
-    init("", custom_drawable);
-  }
-
-  public DrawerItem (String custom_text) {
-    init(custom_text, null);
   }
 
 }

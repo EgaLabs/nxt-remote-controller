@@ -77,4 +77,5 @@ public class BluetoothEnableReceiver extends BaseReceiver {
   public IntentFilter getIntentFilter () {
     return new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
   }
+
 }

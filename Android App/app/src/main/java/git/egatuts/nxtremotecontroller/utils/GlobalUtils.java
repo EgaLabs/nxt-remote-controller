@@ -22,34 +22,31 @@
  *  THE SOFTWARE.                                                                  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *  You can find the entire project at:                                                                                                              *
- *                                                                                                                                                   *
- *    https://github.com/Egatuts/nxt-remote-controller                                                                                               *
- *                                                                                                                                                   *
- *  And the corresponding file at:                                                                                                                   *
- *                                                                                                                                                   *
- *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/GlobalUtils.java  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-package git.egatuts.nxtremotecontroller;
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  You can find the entire project at:                                                                                                                    *
+ *                                                                                                                                                         *
+ *    https://github.com/Egatuts/nxt-remote-controller                                                                                                     *
+ *                                                                                                                                                         *
+ *  And the corresponding file at:                                                                                                                         *
+ *                                                                                                                                                         *
+ *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/utils/GlobalUtils.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+package git.egatuts.nxtremotecontroller.utils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Resources.Theme;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -583,8 +580,8 @@ public class GlobalUtils {
     return BitmapFactory.decodeStream(connection.getInputStream());
   }
 
-  public boolean isFlashAvailable () {
+  /*public boolean isFlashAvailable () {
     return this.context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-  }
+  }*/
 
 }

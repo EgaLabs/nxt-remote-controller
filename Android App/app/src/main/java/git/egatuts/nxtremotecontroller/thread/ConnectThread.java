@@ -33,8 +33,6 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.thread;
 
-import android.util.Log;
-
 import java.io.IOException;
 
 import git.egatuts.nxtremotecontroller.bluetooth.NXTConnector;

@@ -60,7 +60,7 @@ import com.andexert.library.RippleView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import git.egatuts.nxtremotecontroller.GlobalUtils;
+import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.MainActivity;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
@@ -559,7 +559,7 @@ public class ScanFragment extends ActivityBaseFragment implements Animation.Anim
        */
       @Override
       public void onItemLongClick (View view, int position) {
-        self.getGlobalUtils().showToast("LONG_CLICK");
+        //self.getGlobalUtils().showToast("LONG_CLICK");
       }
     }));
 

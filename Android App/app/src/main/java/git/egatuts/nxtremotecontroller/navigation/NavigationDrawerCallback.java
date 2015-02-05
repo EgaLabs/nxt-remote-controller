@@ -33,6 +33,9 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.navigation;
 
+/*
+ *  Represents the callback of the drawer events (opening, closing and selecting).
+ */
 public interface NavigationDrawerCallback {
 
   public void onNavigationDrawerItemSelected (int position);

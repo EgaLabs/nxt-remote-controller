@@ -34,7 +34,7 @@
 package git.egatuts.nxtremotecontroller.exception;
 
 /*
- *  Just an exception.
+ *  Represents an exception when creating a Bluetooth socket connection..
  */
 public class SocketCreationException extends Exception {
 

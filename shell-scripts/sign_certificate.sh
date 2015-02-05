@@ -15,7 +15,7 @@ cd ../certificate_authority
 mkdir newcerts
 touch index.txt
 touch serial.txt
-echo 1000 > serial.txt
+echo '01' > serial.txt
 openssl ca -config EgaTrust.cnf -policy signing_policy -extensions signing_req -keyfile private/EgaTrust.key -cert EgaTrust.crt -out ../certificates/localhost.crt -infiles ../certificates/localhost.csr
 
 ## Go back to the issued certificates folder.

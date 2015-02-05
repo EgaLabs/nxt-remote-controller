@@ -36,9 +36,9 @@
 
 
   <!-- [HomeFragment.java]  -->
-  <string name="device_type_toy_title">Unknown device type.</string>
+  <string name="device_type_toy_title">Unknown device type</string>
   <string name="device_type_toy_message">The device %s is not paired as a bluetooth toy device.</string>
-  <string name="device_type_robot_title">Unknown device type.</string>
+  <string name="device_type_robot_title">Unknown device type</string>
   <string name="device_type_robot_message">The device %s is not paired as a bluetooth robot device. Do you want to continue anyway?</string>
 
   <string name="connecting_preparing_connection">Preparing connection&#8230;</string>
@@ -52,7 +52,7 @@
   <string name="connecting_connection_closed">The connection was closed</string>
   <string name="connecting_connection_lost">The connection with the device has been lost</string>
   <string name="connecting_aborted">Connection aborted</string>
-  <string name="connecting_reconnect_title">The connection failed.</string>
+  <string name="connecting_reconnect_title">The connection failed</string>
   <string name="connecting_reconnect_message">The connection with %s has been lost. Do you want to reconnect?</string>
   <!-- [/HomeFragment.java] -->
 
@@ -68,7 +68,7 @@
   <string name="preference_title_address">Server socket address</string>
   <string name="preference_summary_address">The URL of the server handling the socket connection.</string>
   <string name="preference_dialog_address">Which is the URL?</string>
-  <string name="preference_value_address">https://localhost:443</string>
+  <string name="preference_value_address">https://localhost</string>
   <!-- [/preference_fragment.xml] -->
 
 
@@ -76,7 +76,7 @@
   <string name="preference_title_login">Server login address</string>
   <string name="preference_summary_login">The URL of the server that handles the token-based login.</string>
   <string name="preference_dialog_login">Which is the URL?</string>
-  <string name="preference_value_login">https://localhost:443/request-token</string>
+  <string name="preference_value_login">https://localhost/request-token</string>
   <!-- [/preference_fragment.xml] -->
 
 
@@ -91,7 +91,7 @@
   <string name="preference_title_peer">Peer server address</string>
   <string name="preference_summary_peer">The URL of the server that handles the P2P (peer-to-peer) connection.</string>
   <string name="preference_dialog_peer">Which is the URL?</string>
-  <string name="preference_value_peer">https://localhost:9000</string>
+  <string name="preference_value_peer">https://localhost/connect</string>
   <!-- [/preference_fragment.xml] -->
 
 

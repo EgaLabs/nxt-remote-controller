@@ -48,7 +48,7 @@ import com.andexert.library.RippleView;
 
 import java.util.ArrayList;
 
-import git.egatuts.nxtremotecontroller.GlobalUtils;
+import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.MainActivity;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;

@@ -240,7 +240,10 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     return getResources().getDrawable(id);
   }
 
-  public List<DrawerItem> getMenu () {
+  /*
+   *  Initializes the menu and returns it.
+   */
+  private List<DrawerItem> getMenu () {
     List<DrawerItem> items = new ArrayList<DrawerItem>();
     items.add(new DrawerItem(getStr(R.string.home_drawer_label), getDrw(R.drawable.ic_home)));
     items.add(new DrawerItem(getStr(R.string.scan_drawer_label), getDrw(R.drawable.ic_scan)));

@@ -15,27 +15,27 @@
   <!-- [NavigationDrawerFragment.java]  -->
   <string name="drawer_open">Abrir menú de navegación</string>
   <string name="drawer_close">Cerrar menú de navegación</string>
-  <string name="bluetooth_enabling">Activando bluetooth&#8230;</string>
-  <string name="bluetooth_disabling">Desactivando bluetooth&#8230;</string>
   <!-- [/NavigationDrawerFragment.java] -->
   
   
   <!-- [bluetooth_enable.xml]  -->
   <string name="bluetooth_message">Bluetooth desactivado.</string>
   <string name="bluetooth_button">Activar</string>
-  <string name="bluetooth_paired">Dispositivo emparejado: %s</string>
-  <string name="bluetooth_failed_pairing">Emparejamiento fallido: %s</string>
-  <string name="bluetooth_already_paired">El dispositivo %s ya está emparejado</string>
+  <string name="bluetooth_enabling">Activando bluetooth&#8230;</string>
+  <string name="bluetooth_disabling">Desactivando bluetooth&#8230;</string>
   <!-- [/bluetooth_enable.xml] -->
 
 
   <!-- [scan_fragment.xml] -->
-  <string name="bluetooth_preparing_pairing">Preparando proceso de emparejado&#8230;</string>
+  <string name="bluetooth_preparing_pairing">Preparando proceso de emparejamiento&#8230;</string>
   <string name="bluetooth_pairing">Emparejando dispositivo&#8230;</string>
+  <string name="bluetooth_paired">Dispositivo emparejado: %s</string>
+  <string name="bluetooth_failed_pairing">Emparejamiento fallido: %s</string>
+  <string name="bluetooth_already_paired">El dispositivo %s ya está emparejado</string>
   <!-- [/scan_fragment.xml] -->
 
 
-  <!-- [home_fragment.xml]  -->
+  <!-- [HomeFragment.java]  -->
   <string name="device_type_toy_title">Tipo de dispositivo desconocido</string>
   <string name="device_type_toy_message">El dispositivo %s no se identifica como un juguete.</string>
   <string name="device_type_robot_title">Tipo de dispositivo desconocido</string>
@@ -52,9 +52,9 @@
   <string name="connecting_connection_closed">La conexión se ha cerrado</string>
   <string name="connecting_connection_lost">La conexión se ha perdido</string>
   <string name="connecting_aborted">Conexión abortada</string>
-  <string name="connecting_reconnect_title">La conexión ha fallado.</string>
+  <string name="connecting_reconnect_title">La conexión ha fallado</string>
   <string name="connecting_reconnect_message">Se ha perdido la conexión con el dispositivo %s. ¿Quieres reconectar?</string>
-  <!-- [/home_fragment.xml] -->
+  <!-- [/HomeFragment.java] -->
 
   
   <!-- [preference_fragment.xml]  -->
@@ -68,7 +68,7 @@
   <string name="preference_title_address">Dirección del servidor</string>
   <string name="preference_summary_address">La URL del servidor que administra las conexiones de baja latencia (sockets).</string>
   <string name="preference_dialog_address">¿Cuál es la dirección?</string>
-  <string name="preference_value_address">https://localhost:8080</string>
+  <string name="preference_value_address">https://localhost</string>
   <!-- [/preference_fragment.xml] -->
 
 
@@ -91,7 +91,7 @@
   <string name="preference_title_peer">Dirección del servidor P2P</string>
   <string name="preference_summary_peer">La URL del servidor que administra los candidatos para las conexiones P2P.</string>
   <string name="preference_dialog_peer">¿Cuál es la dirección?</string>
-  <string name="preference_value_peer">https://localhost:9000</string>
+  <string name="preference_value_peer">https://localhost/connect</string>
   <!-- [/preference_fragment.xml] -->
 
 

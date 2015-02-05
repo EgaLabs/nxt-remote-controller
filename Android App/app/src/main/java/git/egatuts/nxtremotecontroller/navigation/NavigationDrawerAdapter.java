@@ -79,7 +79,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<DrawerItemView
   }
 
   /*
-   *  Binder and creator for view holders.
+   *  Creates and returns the view holder.
    */
   @Override
   public DrawerItemViewHolder onCreateViewHolder (ViewGroup parent, int index) {
@@ -87,6 +87,9 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<DrawerItemView
     return new DrawerItemViewHolder(drawerMenu);
   }
 
+  /*
+   *  Binds the holder to the adapter.
+   */
   @Override
   public void onBindViewHolder (DrawerItemViewHolder viewHolder, final int index) {
     TextView tmpView = viewHolder.textView;

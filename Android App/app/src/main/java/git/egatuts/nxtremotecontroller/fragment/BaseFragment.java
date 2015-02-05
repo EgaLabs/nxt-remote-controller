@@ -34,55 +34,82 @@
 package git.egatuts.nxtremotecontroller.fragment;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-import git.egatuts.nxtremotecontroller.GlobalUtils;
+import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.activity.BaseActivity;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 import git.egatuts.nxtremotecontroller.preference.PreferencesUtils;
 import git.egatuts.nxtremotecontroller.views.BaseIndeterminateProgressDialog;
 
+/*
+ *  Base class that is recommended to be used in all fragments.
+ */
 public abstract class BaseFragment extends Fragment {
 
   protected BaseFragment newFragment;
 
   /*
-   *  Getters for BaseActivity methods.
+   *  Returns the base activity (no need to cast).
    */
   public BaseActivity getBaseActivity () {
     return (BaseActivity) this.getActivity();
   }
+
+  /*
+   *  Returns the BluetoothUtils instance.
+   */
   public BluetoothUtils getBluetoothUtils () {
     return this.getBaseActivity().getBluetoothUtils();
   }
 
+  /*
+   *  Returns the fragment manager.
+   */
   public FragmentManager getBaseFragmentManager () {
     return this.getBaseActivity().getBaseFragmentManager();
   }
 
+  /*
+   *  Returns the global utils intance.
+   */
   public GlobalUtils getGlobalUtils () {
     return this.getBaseActivity().getGlobalUtils();
   }
 
+  /*
+   *  Returns the preferences utils.
+   */
   public PreferencesUtils getPreferencesUtils () {
     return this.getBaseActivity().getPreferencesUtils();
   }
 
+  /*
+   *  Returns the preferences editor.
+   */
   public PreferencesUtils.Editor getPreferencesEditor () {
     return this.getPreferencesUtils().getEditor();
   }
 
+  /*
+   *  Returns the short progress dialog (uncancellable BaseProgressDialog).
+   */
   public BaseIndeterminateProgressDialog getShortProgressDialog () {
     return this.getBaseActivity().getShortProgressDialog();
   }
 
+  /*
+   *  Returns the long progress dialog (cancellable BaseProgressDialog)
+   */
   public BaseIndeterminateProgressDialog getLongProgressDialog () {
     return this.getBaseActivity().getLongProgressDialog();
   }
 
+  /*
+   *  Returns the wifi service manager.
+   */
   public WifiManager getWifiManager () {
     return (WifiManager) this.getActivity().getSystemService(Context.WIFI_SERVICE);
   }

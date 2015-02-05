@@ -47,12 +47,15 @@ import git.egatuts.nxtremotecontroller.listener.BaseListener;
 public class BluetoothPairingReceiver extends BaseReceiver {
 
   /*
-   *  Constructors.
+   *  Executed in all the constructors.
    */
   private void init () {
     this.BROADCAST_CALLBACKS_STATES.put("ON_BOND_STATE_CHANGE", true);
   }
 
+  /*
+   *  Constructors.
+   */
   public BluetoothPairingReceiver (Context context) {
     super(context);
     this.init();

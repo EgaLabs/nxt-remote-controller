@@ -17,17 +17,24 @@
       "static": {
         "maxage": 86400000
       }
-    }, 
-    {
-      "virtual": "/res",
-      "real": "/public/res",
+    },
+	{
+      "virtual": "/login",
+      "real": "/public/login",
       "static": {
         "maxage": 86400000
       }
     },
     {
-      "virtual": "/login",
-      "real": "/public/login",
+      "virtual": "/connect",
+      "real": "/public/connect",
+      "static": {
+        "maxage": 86400000
+      }
+    },
+	{
+      "virtual": "/res",
+      "real": "/public/res",
       "static": {
         "maxage": 86400000
       }
