@@ -16,17 +16,14 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1.1"
+    buildToolsVersion "21.1.2"
     defaultConfig {
         minSdkVersion 9
-        targetSdkVersion 19
+        targetSdkVersion 21
     }
 }
 
 allprojects {
-
-    version = VERSION_NAME
-    group = GROUP
 
     repositories {
         jcenter()

@@ -92,7 +92,7 @@
    */
   var _getPeerInstance = function (id) {
     return new Peer(id, {
-      host: "localhost",
+      host: root.location.host,
       port: 9000,
       path: "/",
       debug: true,
@@ -108,7 +108,7 @@
           { url: "stun:stun.voiparound.com"      }, { url: "stun:stun.voipbuster.com"      },
           { url: "stun:stun.voipstunt.com"       }, { url: "stun:stun.voxgratia.org"       },
           { url: "stun:stun.xten.com"            },
-          
+
           { url: "turn:numb.viagenie.ca",                 credential: "muazkh",                       username: "webrtc@live.com"     },
           { url: "turn:192.158.29.39:3478?transport=udp", credential: "JZEOEt2V3Qb0y27GRntt2u2PAYA=", username: "28224511:1379330808" },
           { url: "turn:192.158.29.39:3478?transport=tcp", credential: "JZEOEt2V3Qb0y27GRntt2u2PAYA=", username: "28224511:1379330808" }
@@ -123,7 +123,7 @@
   ///////////////////////////////////////
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
-  
+
   ///////////////////////////////
   /// Masonry plugin edition. ///
   ///////////////////////////////
@@ -469,7 +469,7 @@
           }
           video.play();
         });
-      }); 
+      });
     });
 
     /*
@@ -640,7 +640,7 @@
       GAMEPAD = null;
       controls.classList.remove("gamepad");
       controls.classList.add("keyboard");
-    } 
+    }
   });
 
   /*
@@ -677,5 +677,5 @@
   } else {
     connect();
   }
-  
+
 })(this, document, Math, Mustache, Masonry, io, when, depot, marmottajax, KeyboardJS);
