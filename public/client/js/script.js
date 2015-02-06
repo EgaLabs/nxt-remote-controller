@@ -498,7 +498,43 @@
     time_trigger  = true,
 
     GAMEPAD = null,
-    LOOPING = true;
+    LOOPING = true,
+    BUTTON_MAPPING = {
+      "A": 0,
+      "B": 1,
+      "X": 2,
+      "Y": 3,
+      "LB": 4,
+      "RB": 5,
+      "LT": 6,
+      "RT": 7,
+      "BACK": 8,
+      "SELECT": 8,
+      "START": 9,
+      "MENU": 9,
+      "LS": 10,
+      "LEFT_STICK": 10,
+      "RS": 11,
+      "RIGHT_STICK": 11,
+      "UP": 12,
+      "DPAD_UP": 12,
+      "DOWN": 13,
+      "DPAD_DOWN": 13,
+      "LEFT": 14,
+      "DPAD_LEFT": 14,
+      "RIGHT": 15,
+      "DPAD_RIGHT": 15
+    },
+    AXIS_MAPPING = {
+      "LX": 0,
+      "LEFT_X": 0,
+      "LY": 1,
+      "LEFT_Y": 1,
+      "RX": 2,
+      "RIGHT_X": 2,
+      "RY": 3,
+      "RIGHT_Y": 3
+    };
 
   /*
    * Returns a function that executes a checker that MUST returns the values on key events
@@ -629,29 +665,125 @@
    * Gamepad connection and disconnection events.
    */
   var onGamepadConnected = function (event) {
-    GAMEPAD = event.gamepad;
     controls.classList.remove("keyboard");
     controls.classList.add("gamepad");
   };
+  root.ongamepadconnected = onGamepadConnected;
 
-  root.addEventListener("gamepadconnected", onGamepadConnected);
-  root.addEventListener("gamepaddisconnected", function (event) {
-    if (event.gamepad.id === GAMEPAD.id) {
-      GAMEPAD = null;
-      controls.classList.remove("gamepad");
-      controls.classList.add("keyboard");
+  /*
+   *  When the gamepad is disconnected.
+   */
+  root.ongamepaddisconnected = function () {
+    GAMEPAD = null;
+    controls.classList.remove("gamepad");
+    controls.classList.add("keyboard");
+  };
+
+  /*
+   *  Gamepad tick used to track buttons only when they change.
+   */
+  var _isInDeadZone = function (zone) {
+    var range = Math.abs(zone);
+    return function (value) {
+      return (value < range) && (value > -range);
+    };
+  },
+
+  _isActiveAxis = function (deadzone) {
+    return function (latest, now) {
+      return latest !== now && !deadzone(now);
+    };
+  };
+
+  var customDeadZone = _isInDeadZone(0.15),
+      customActive = _isActiveAxis(customDeadZone),
+      ids = ["LX", "LY", "RX", "RY", "A", "B", "X", "Y", "LB", "LT", "RB", "RT", "SELECT", "START", "LS", "RS", "UP", "DOWN", "LEFT", "RIGHT"],
+      latest_axis = [];
+
+  root.ongamepadtick = _one_press_(function () {
+    var buttons = [],
+        i = 0,
+        button;
+    for (; i < GAMEPAD.buttons.length; i++) {
+      button = GAMEPAD.buttons[i];
+      if (i === BUTTON_MAPPING.LT || i === BUTTON_MAPPING.RT) {
+        buttons.push(button.value);
+      } else {
+        buttons.push(button.pressed);
+      }
     }
+    return Array.prototype.concat(GAMEPAD.axes, buttons, [power_control.value]);
+  }, function (event, data, down) {
+    var
+      X1 = data[ AXIS_MAPPING["LX"] ],
+      Y1 = data[ AXIS_MAPPING["LY"] ] * -1,
+      M1 = Math.sqrt(X1 * X1 + Y1 * Y1),
+      X2 = data[ AXIS_MAPPING["RX"] ],
+      Y2 = data[ AXIS_MAPPING["RY"] ] * -1,
+      M2 = Math.sqrt(X2 * X2 + Y2 * Y2),
+      LT = data[ BUTTON_MAPPING["LT"] + 4] * -1,
+      RT = data[ BUTTON_MAPPING["RT"] + 4],
+      B  = data[ BUTTON_MAPPING["B"] ] ? 0 : 1,
+      power = 0.5 + (LT / 2) + (RT / 2),
+      parsed = false,
+      is1Active = customDeadZone(M1) ? customActive(latest_axis[0], M1) : true,
+      is2Active = customDeadZone(M2) ? customActive(latest_axis[1], M2) : true,
+      i = 0,
+      isNotActive = false,
+      element,
+      X3, Y3;
+    if (is1Active && !is2Active) {
+      X3 = X1;
+      Y3 = Y1;
+    } else if (!is1Active && is2Active) {
+      X3 = X2;
+      Y3 = Y2;
+    } else {
+      X3 = Y1;
+      Y3 = Y2;
+      parsed = true;
+    }
+    X3 *= B;
+    Y3 *= B;
+    latest_axis = [M1, M2];
+    power_control.value = power;
+    for (; i < data.length; i++) {
+      isNotActive = false;
+      element = null;
+      if (i === 0) {
+        element = DOC.getElementById("LS");
+        isNotActive = !is1Active;
+        console.log(element, isNotActive);
+      } else if (i === 2) {
+        element = DOC.getElementById("RS");
+        isNotActive = !is2Active;
+      } else if (i > 3 && !(i === 14 || i === 15)) {
+        element = DOC.getElementById( ids[i] );
+        isNotActive = data[ BUTTON_MAPPING[ids[i]] + 4] === false || data[ BUTTON_MAPPING[ids[i]] + 4] === 0;
+      }
+
+      if (!element) continue;
+      element.classList[!isNotActive ? "remove" : "add"]("normal");
+      element.classList[!isNotActive ? "add" : "remove"]("active");
+    }
+    if (CONNECTED_PEER === null || CONNECTED_PEER === "" || SOCKET === null) return;
+    SOCKET.emit("motor", {
+      x: X3,
+      y: Y3,
+      parsed: parsed,
+      to: CONNECTED_PEER
+    });
   });
 
   /*
-   * We execute the gamepadconnected handler if existed a gamepad before the page was loaded.
+   *  We execute the gamepadconnected handler if existed a gamepad before the page was loaded.
    */
   if (!!navigator.getGamepads()[0]) onGamepadConnected({ gamepad: navigator.getGamepads()[0] });
 
   /*
-   * The loop that detects faces and gamepads.
+   *  The loop that detects faces and gamepads.
    */
-  /*var loop = (function () {
+  var loop = (function () {
     var gamepads;
     return function () {
       if (!LOOPING) return;
@@ -663,14 +795,17 @@
         GAMEPAD = null;
         if (root.ongamepaddisconnected) root.ongamepaddisconnected();
       }
+      if (!!GAMEPAD) {
+        if (root.ongamepadtick) root.ongamepadtick();
+      }
       root.requestAnimationFrame(loop);
     };
   })();
   LOOPING = true;
-  loop();*/
+  loop();
 
   /*
-   * Start the request if there isn't token or directly connect if exists.
+   *  Start the request if there isn't token or directly connect if exists.
    */
   if (_userdata().token === "") {
     requestToken();

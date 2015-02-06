@@ -34,11 +34,11 @@ section.stream {
 
 section {
   > #controll-ui-container {
-    display: none;
+    display: block;
   }
 
   > #container {
-    display: block;
+    display: none;
   }
 }
 
@@ -221,6 +221,51 @@ input[type=range] {
 
     &.space {
       width: 20em;
+    }
+  }
+
+  > .row-ending {
+    display: block;
+  }
+
+  > small.footer {
+    background: none;
+    font-size: 0.65em;
+    font-style: italic;
+  }
+}
+
+.gamepad-ui {
+  display: inline-block;
+  margin: 2em 2em;
+
+  > * {
+    display: inline-block;
+    margin: 1.5px auto;
+  }
+
+  .gamepad-key {
+    margin: 0.5em 0;
+    > * {
+      margin: 0 auto;
+    }
+  }
+
+  .gamepad-key.normal {
+    > *.normal {
+      display: block;
+    }
+    > *.active {
+      display: none;
+    }
+  }
+
+  .gamepad-key.active {
+    > *.normal {
+      display: none;
+    }
+    > *.active {
+      display: block;
     }
   }
 

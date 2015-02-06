@@ -324,11 +324,12 @@ io.on("connection", function (socket) {
       var
         x = data.x,
         y = data.y,
+        parsed = data.parsed,
         mod = Math.min(1, Math.sqrt(x * x + y * y)),
         angle = Math.atan(y / x) || 0,
         left  = 0,
         right = 0;
-      if (x !== 0 || y !== 0) {
+      if ((x !== 0 || y !== 0) && !parsed) {
         if (x < 0) {
           angle += Math.PI;
         } else if (x >= 0 && y < 0) {
@@ -348,6 +349,9 @@ io.on("connection", function (socket) {
           left  = -mod;
           right = -y * Math.sin(angle);
         }
+      } else if (!!parsed) {
+        left = Math.max(-1, Math.min(1, x));
+        right = Math.max(-1, Math.min(1, y));
       }
       _.each(getHosts(), function (value, key) {
         if (data.to !== value.peer) return;

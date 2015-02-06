@@ -232,11 +232,10 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
   /*
    *  Returns the show animation used to show the actions or the recycler view.
    */
-  public AlphaAnimation getShowAnimation (final View view0) {
+  public AlphaAnimation getShowAnimation (final View view0, final long time) {
     AlphaAnimation show = new AlphaAnimation(0.0f, 1.0f);
-    show.setDuration(300);
-    show.setStartOffset(300);
     show.setFillAfter(true);
+    show.setDuration(time);
     show.setAnimationListener(new Animation.AnimationListener() {
       @Override
       public void onAnimationStart (Animation animation) {
@@ -251,20 +250,21 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
   /*
    *  Returns the hide animation used to hide the actions or the recycler view.
    */
-  public AlphaAnimation getHideAnimation (final View view0, final View view1) {
+  public AlphaAnimation getHideAnimation (final View view0, final View view1, final long time) {
     AlphaAnimation hide = new AlphaAnimation(1.0f, 0.0f);
-    hide.setDuration(300);
-    hide.setFillAfter(true);
+    hide.setDuration(time);
     hide.setAnimationListener(new Animation.AnimationListener() {
       @Override
       public void onAnimationStart (Animation animation) {
         view0.setVisibility(View.VISIBLE);
       }
+
       @Override
       public void onAnimationEnd (Animation animation) {
         view0.setVisibility(View.GONE);
-        view1.startAnimation(getShowAnimation(view1));
+        view1.startAnimation(getShowAnimation(view1, time));
       }
+
       @Override public void onAnimationRepeat (Animation animation) {}
     });
     return hide;
@@ -275,56 +275,13 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
    */
   public void showActions () {
     final OnlineControllerFragment self = this;
-    final AlphaAnimation hide = this.getHideAnimation(this.recyclerView, this.actionsView);
+    final AlphaAnimation hide = this.getHideAnimation(this.recyclerView, this.actionsView, 300);
     this.getActivity().runOnUiThread(new Runnable() {
       @Override
       public void run () {
         self.recyclerView.startAnimation(hide);
       }
     });
-    /*final AlphaAnimation hide = new AlphaAnimation(1.0f, 0.0f);
-    hide.setFillAfter(true);
-    hide.setDuration(500);
-    hide.setAnimationListener(new Animation.AnimationListener() {
-      @Override
-      public void onAnimationStart (Animation animation) {
-        self.recyclerView.setVisibility(View.VISIBLE);
-      }
-
-      @Override
-      public void onAnimationEnd (Animation animation) {
-        self.recyclerView.setVisibility(View.GONE);
-      }
-
-      @Override
-      public void onAnimationRepeat (Animation animation) {
-      }
-    });
-    final AlphaAnimation show = new AlphaAnimation(0.0f, 1.0f);
-    show.setFillAfter(true);
-    show.setDuration(500);
-    show.setStartOffset(500);
-    show.setAnimationListener(new Animation.AnimationListener() {
-      @Override
-      public void onAnimationStart (Animation animation) {
-        self.actionsView.setVisibility(View.VISIBLE);
-      }
-
-      @Override
-      public void onAnimationEnd (Animation animation) {
-      }
-
-      @Override
-      public void onAnimationRepeat (Animation animation) {
-      }
-    });
-    this.getActivity().runOnUiThread(new Runnable() {
-      @Override
-      public void run () {
-        self.recyclerView.startAnimation(hide);
-        self.actionsView.startAnimation(show);
-      }
-    });*/
   }
 
   /*
@@ -332,56 +289,13 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
    */
   public void hideActions () {
     final OnlineControllerFragment self = this;
-    final AlphaAnimation hide = this.getHideAnimation(this.recyclerView, this.actionsView);
+    final AlphaAnimation hide = this.getHideAnimation(this.actionsView, this.recyclerView, 300);
     this.getActivity().runOnUiThread(new Runnable() {
       @Override
       public void run () {
         self.actionsView.startAnimation(hide);
       }
     });
-    /*final AlphaAnimation hide = new AlphaAnimation(1.0f, 0.0f);
-    hide.setFillAfter(true);
-    hide.setDuration(500);
-    hide.setAnimationListener(new Animation.AnimationListener() {
-      @Override
-      public void onAnimationStart (Animation animation) {
-        self.actionsView.setVisibility(View.VISIBLE);
-      }
-
-      @Override
-      public void onAnimationEnd (Animation animation) {
-        self.actionsView.setVisibility(View.GONE);
-      }
-
-      @Override
-      public void onAnimationRepeat (Animation animation) {
-      }
-    });
-    final AlphaAnimation show = new AlphaAnimation(0.0f, 1.0f);
-    show.setFillAfter(true);
-    show.setDuration(500);
-    show.setStartOffset(500);
-    show.setAnimationListener(new Animation.AnimationListener() {
-      @Override
-      public void onAnimationStart (Animation animation) {
-        self.recyclerView.setVisibility(View.VISIBLE);
-      }
-
-      @Override
-      public void onAnimationEnd (Animation animation) {
-      }
-
-      @Override
-      public void onAnimationRepeat (Animation animation) {
-      }
-    });
-    this.getActivity().runOnUiThread(new Runnable() {
-      @Override
-      public void run () {
-        self.actionsView.startAnimation(hide);
-        self.recyclerView.startAnimation(show);
-      }
-    });*/
   }
 
   /*
@@ -645,7 +559,7 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
       @Override
       public void onClick (ClientViewHolder view, int index) {
         Client client = self.clientsAdapter.get(index);
-        if (!client.getPeerId().equals("")) self.requestCall(client, view, index);
+        if (client.getPeerId() != null && !client.getPeerId().equals("")) self.requestCall(client, view, index);
       }
     });
     recyclerView.setAdapter(this.clientsAdapter);

@@ -173,11 +173,11 @@ section.stream > #container {
 
 /* line 36, ../scss/style.scss */
 section > #controll-ui-container {
-  display: none;
+  display: block;
 }
 /* line 40, ../scss/style.scss */
 section > #container {
-  display: block;
+  display: none;
 }
 
 /* line 45, ../scss/style.scss */
@@ -425,11 +425,56 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 /* line 238, ../scss/style.scss */
+.gamepad-ui {
+  display: inline-block;
+  margin: 2em 2em;
+}
+/* line 242, ../scss/style.scss */
+.gamepad-ui > * {
+  display: inline-block;
+  margin: 1.5px auto;
+}
+/* line 247, ../scss/style.scss */
+.gamepad-ui .gamepad-key {
+  margin: 0.5em 0;
+}
+/* line 249, ../scss/style.scss */
+.gamepad-ui .gamepad-key > * {
+  margin: 0 auto;
+}
+/* line 255, ../scss/style.scss */
+.gamepad-ui .gamepad-key.normal > *.normal {
+  display: block;
+}
+/* line 258, ../scss/style.scss */
+.gamepad-ui .gamepad-key.normal > *.active {
+  display: none;
+}
+/* line 264, ../scss/style.scss */
+.gamepad-ui .gamepad-key.active > *.normal {
+  display: none;
+}
+/* line 267, ../scss/style.scss */
+.gamepad-ui .gamepad-key.active > *.active {
+  display: block;
+}
+/* line 272, ../scss/style.scss */
+.gamepad-ui > .row-ending {
+  display: block;
+}
+/* line 276, ../scss/style.scss */
+.gamepad-ui > small.footer {
+  background: none;
+  font-size: 0.65em;
+  font-style: italic;
+}
+
+/* line 283, ../scss/style.scss */
 #space {
   margin: 1.5em;
 }
 
-/* line 247, ../scss/style.scss */
+/* line 292, ../scss/style.scss */
 div.host, a.host {
   width: 280px;
   height: 350px;
@@ -440,25 +485,25 @@ div.host, a.host {
   box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* line 255, ../scss/style.scss */
+/* line 300, ../scss/style.scss */
 .image-container {
   background-color: #333333;
   height: 200px;
 }
 
-/* line 260, ../scss/style.scss */
+/* line 305, ../scss/style.scss */
 .absolute-container {
   width: 140px;
   height: 175px;
 }
-/* line 264, ../scss/style.scss */
+/* line 309, ../scss/style.scss */
 .absolute-container > img {
   position: absolute;
   margin-top: 25px;
   border-radius: 50%;
 }
 
-/* line 271, ../scss/style.scss */
+/* line 316, ../scss/style.scss */
 .short_location {
   display: inline-block;
   overflow: hidden;
@@ -467,12 +512,12 @@ div.host, a.host {
   vertical-align: top;
 }
 
-/* line 281, ../scss/style.scss */
+/* line 326, ../scss/style.scss */
 .host > span {
   display: block;
   padding: 1.25em 0;
 }
-/* line 286, ../scss/style.scss */
+/* line 331, ../scss/style.scss */
 .host hr {
   height: 1px;
   border: none;
@@ -483,12 +528,12 @@ div.host, a.host {
   background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0) 100%);
 }
 
-/* line 294, ../scss/style.scss */
+/* line 339, ../scss/style.scss */
 .loading-tip.hide {
   display: none;
 }
 
-/* line 298, ../scss/style.scss */
+/* line 343, ../scss/style.scss */
 .loading-tip {
   font-size: 12px;
   color: white;
@@ -498,7 +543,7 @@ div.host, a.host {
   margin-left: -68px;
 }
 
-/* line 307, ../scss/style.scss */
+/* line 352, ../scss/style.scss */
 .loading-tip:before {
   content: "";
   background: url("/res/img/misc/spinner128.gif");
@@ -511,12 +556,12 @@ div.host, a.host {
   margin-right: 8px;
 }
 
-/* line 319, ../scss/style.scss */
+/* line 364, ../scss/style.scss */
 .loading-tip:hover > span {
   display: block;
 }
 
-/* line 323, ../scss/style.scss */
+/* line 368, ../scss/style.scss */
 .loading-tip span {
   display: none;
   text-align: left;
@@ -525,7 +570,7 @@ div.host, a.host {
   line-height: 1.4;
 }
 
-/* line 331, ../scss/style.scss */
+/* line 376, ../scss/style.scss */
 .loading-tip span:before {
   position: absolute;
   content: "";
