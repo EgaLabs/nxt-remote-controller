@@ -173,11 +173,11 @@ section.stream > #container {
 
 /* line 36, ../scss/style.scss */
 section > #controll-ui-container {
-  display: block;
+  display: none;
 }
 /* line 40, ../scss/style.scss */
 section > #container {
-  display: none;
+  display: block;
 }
 
 /* line 45, ../scss/style.scss */

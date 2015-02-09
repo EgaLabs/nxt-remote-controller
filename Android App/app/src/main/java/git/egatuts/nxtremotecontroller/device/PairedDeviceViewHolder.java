@@ -64,9 +64,9 @@ public class PairedDeviceViewHolder extends RecyclerView.ViewHolder {
      *  We save all the views in public properties to be accessible.
      */
     this.rippleView = (RippleView) itemView.findViewById(R.id.ripple_view);
-    this.connection = (TextView)   itemView.findViewById(R.id.paired_device_connection);
-    this.name       = (TextView)   itemView.findViewById(R.id.paired_device_name);
-    this.address    = (TextView)   itemView.findViewById(R.id.paired_device_address);
+    this.connection = (TextView) itemView.findViewById(R.id.paired_device_connection);
+    this.name = (TextView) itemView.findViewById(R.id.paired_device_name);
+    this.address = (TextView) itemView.findViewById(R.id.paired_device_address);
   }
 
 }

@@ -200,6 +200,7 @@
       CONNECTED_PEER       = "",
       MEDIA_STREAM         = null,
       PEER_INSTANCE        = null,
+      SOCKET               = null,
 
       REASON_TOKEN_SIGNATURE_ERROR = "JsonWebTokenError: invalid signature",
       REASON_TOKEN_EXPIRED_ERROR   = "TokenExpiredError: jwt expired";
@@ -207,14 +208,14 @@
   /*
    * Masonry instances (global for testing purposes).
    */
-  root.hosts_masonry = new Masonry(hosts_container, {
+  var hosts_masonry = new Masonry(hosts_container, {
     itemSelector: HOSTS_SELECTOR,
     layoutMode: HOSTS_LAYOUT_MODE,
     columnWidth: HOSTS_WIDTH,
     gutter: HOSTS_GUTTER
-  });
+  }),
 
-  root.videos_masonry = new Masonry(controll_container, {
+  videos_masonry = new Masonry(controll_container, {
     itemSelector: VIDEO_SELECTOR,
     layoutMode: VIDEO_LAYOUT_MODE,
     columnWidth: VIDEO_WIDTH,
@@ -233,7 +234,7 @@
    * We assign an event to resize the parent when the layout is completed.
    */
   hosts_masonry.on("beforeLayoutComplete", function () {
-    this.calculateResize();
+    this.calculateResize().layout();
   });
 
   /*
@@ -314,7 +315,7 @@
     /*
      * global for testing purposes.
      */
-    root.SOCKET = io.connect("", {
+    SOCKET = io.connect("", {
       "force new connection": true,
       query: "token=" + _userdata().token
     });
@@ -458,6 +459,7 @@
         return;
       }
       section_wrapper.classList.add("stream");
+      videos_masonry.calculateResize().layout();
       var PEER_INSTANCE = _getPeerInstance(_userdata().peer);
       PEER_INSTANCE.on("call", function (call) {
         call.answer();
@@ -483,6 +485,7 @@
       CONNECTED_PEER = null;
       PEER_INSTANCE  = null;
       video.src = "";
+      hosts_masonry.calculateResize().layout();
     });
   };
 
@@ -550,7 +553,7 @@
       res,
       i;
     return function (event, down) {
-      result  = checker();
+      result  = checker(event);
       size    = result.length;
       matches = 0;
       for (i = 0; i < size; i++) {
@@ -565,7 +568,7 @@
   /*
    * When the direction has changed on pressed arrows.
    */
-  onDirectionChange = _one_press_(function () {
+  onDirectionChange = _one_press_(function (event) {
     var
       keys  = key.activeKeys(),
       up    = keys.indexOf("up")    > -1 ?  1 : 0,
@@ -578,10 +581,7 @@
   }, function (event, data, down) {
     var action = down ? "add" : "remove";
     DOC.getElementById(event.keyCode).classList[action]("pressed");
-    if (CONNECTED_PEER === null || CONNECTED_PEER === "" || SOCKET === null) {
-      event.preventDefault();
-      return;
-    }
+    if (CONNECTED_PEER === null || CONNECTED_PEER === "" || SOCKET === null) return;
     SOCKET.emit("motor", {
       x: data[0],
       y: data[1],
@@ -607,10 +607,9 @@
     var action = down ? "add" : "remove";
     DOC.getElementById(event.keyCode).classList[action]("pressed");
     power_control.value = power_control.value - - data[1] * 0.05;
-    event.preventDefault();
   },
 
-  onPowerChange = _one_press_(function () {
+  onPowerChange = _one_press_(function (event) {
     var
       total = _totalValueWASD(),
       now  = Date.now();
@@ -620,46 +619,44 @@
       time_trigger = !time_trigger;
     }
     return [time_trigger, total];
-  }, onPowerChangeRelease),
+  }, onPowerChangeRelease);
 
-  onFlashChange = _one_press_(function () {
+  /*onFlashChange = _one_press_(function (event) {
     flash_state = !flash_state;
     return [flash_state];
   }, function (event, data, down) {
     var action = down ? "add" : "remove";
     DOC.getElementById(event.keyCode).classList[action]("pressed");
-    if (CONNECTED_PEER === null || CONNECTED_PEER === "" || SOCKET === null) {
-      event.preventDefault();
-      return;
-    }
-    /*SOCKET.emit("flash", {
+    if (CONNECTED_PEER === null || CONNECTED_PEER === "" || SOCKET === null) return;
+    SOCKET.emit("flash", {
       state: flash_state,
       to: CONNECTED_PEER
-    });*/
-    event.preventDefault();
-  });
+    });
+  });*/
 
   /*
    * We bind the events to the directional arrows the WASD keys and the spacebar.
    */
   key.on("up, right, down, left", function (event) {
+    event.preventDefault();
     onDirectionChange.call(this, event, true);
   }, function (event) {
     onDirectionChange.call(this, event, false);
   });
 
   key.on("w, d, s, a", function (event) {
+    event.preventDefault();
     onPowerChange.call(this, event, true);
   }, function (event) {
     var total = _totalValueWASD();
     onPowerChangeRelease.call(this, event, [null, total], false);
   });
 
-  key.on("space", function (event) {
+  /*key.on("space", function (event) {
     onFlashChange.call(this, event, true);
   }, function (event) {
     onFlashChange.call(this, event, false);
-  });
+  });*/
 
   /*
    * Gamepad connection and disconnection events.
@@ -723,7 +720,7 @@
       M2 = Math.sqrt(X2 * X2 + Y2 * Y2),
       LT = data[ BUTTON_MAPPING["LT"] + 4] * -1,
       RT = data[ BUTTON_MAPPING["RT"] + 4],
-      B  = data[ BUTTON_MAPPING["B"] ] ? 0 : 1,
+      B  = data[ BUTTON_MAPPING["B"] + 4] ? 0 : 1,
       power = 0.5 + (LT / 2) + (RT / 2),
       parsed = false,
       is1Active = customDeadZone(M1) ? customActive(latest_axis[0], M1) : true,
@@ -753,7 +750,6 @@
       if (i === 0) {
         element = DOC.getElementById("LS");
         isNotActive = !is1Active;
-        console.log(element, isNotActive);
       } else if (i === 2) {
         element = DOC.getElementById("RS");
         isNotActive = !is2Active;
@@ -766,6 +762,8 @@
       element.classList[!isNotActive ? "remove" : "add"]("normal");
       element.classList[!isNotActive ? "add" : "remove"]("active");
     }
+    X3 *= power_control.value;
+    Y3 *= power_control.value;
     if (CONNECTED_PEER === null || CONNECTED_PEER === "" || SOCKET === null) return;
     SOCKET.emit("motor", {
       x: X3,

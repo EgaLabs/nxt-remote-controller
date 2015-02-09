@@ -29,7 +29,7 @@
  *                                                                                                                                                           *
  *  And the corresponding file at:                                                                                                                           *
  *                                                                                                                                                           *
- *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/utils/tokenRequester.java *
+ *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/utils/TokenRequester.java *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.utils;
 

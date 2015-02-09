@@ -38,10 +38,10 @@ import android.net.wifi.WifiManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.activity.BaseActivity;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 import git.egatuts.nxtremotecontroller.preference.PreferencesUtils;
+import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.views.BaseIndeterminateProgressDialog;
 
 /*

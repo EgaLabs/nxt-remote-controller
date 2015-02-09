@@ -15,13 +15,13 @@
         style="@style/wrap_w_h"
         android:layout_above="@+id/stop_streaming"
         android:layout_centerInParent="true"
-        android:text="@string/init_streaming"/>
+        android:text="@string/init_streaming" />
 
     <Button
         android:id="@+id/stop_streaming"
         style="@style/wrap_w_h"
         android:layout_centerInParent="true"
-        android:text="@string/stop_streaming"/>
+        android:text="@string/stop_streaming" />
 
   </RelativeLayout>
 
@@ -30,6 +30,6 @@
       style="@style/recycler_view"
       android:layout_below="@+id/actions"
       tools:context="git.egatuts.nxtremotecontroller.activity.ControllerActivity"
-      tools:listitem="@layout/paired_device"/>
+      tools:listitem="@layout/paired_device" />
 
 </RelativeLayout>

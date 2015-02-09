@@ -85,4 +85,5 @@ public class BluetoothDiscoveryReceiver extends BaseReceiver {
     intent.addAction(BluetoothDevice.ACTION_FOUND);
     return intent;
   }
+
 }

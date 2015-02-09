@@ -73,7 +73,7 @@ public class PairedDevice implements Parcelable {
    */
   @Override
   public void writeToParcel (Parcel out, int flags) {
-    out.writeStringArray(new String[] { this.name, this.address });
+    out.writeStringArray(new String[]{this.name, this.address});
     out.writeByte(this.signal);
     out.writeParcelable(this.bluetoothDevice, flags);
   }
@@ -93,7 +93,7 @@ public class PairedDevice implements Parcelable {
    *    return new YourClass(in);
    *  }
    */
-  public static final Parcelable.Creator<PairedDevice> CREATOR = new Parcelable.Creator<PairedDevice> () {
+  public static final Parcelable.Creator<PairedDevice> CREATOR = new Parcelable.Creator<PairedDevice>() {
     @Override
     public PairedDevice createFromParcel (Parcel in) {
 
@@ -124,15 +124,15 @@ public class PairedDevice implements Parcelable {
    *  Constructor.
    */
   public PairedDevice (String name, String address, byte signal, BluetoothDevice device) {
-    this.name            = name;
-    this.address         = address;
-    this.signal          = signal;
+    this.name = name;
+    this.address = address;
+    this.signal = signal;
     this.bluetoothDevice = device;
   }
 
   public PairedDevice (String name, String address, int connectivity, BluetoothDevice device) {
-    this.name            = name;
-    this.address         = address;
+    this.name = name;
+    this.address = address;
     this.setConnectivity(connectivity);
     this.bluetoothDevice = device;
   }
@@ -466,11 +466,15 @@ public class PairedDevice implements Parcelable {
    *  Calculates the connectivity percentage.
    */
   public static int calculateConnectivity (int min, int max, int con, PreferencesUtils.Editor editor) {
+    int realmax = max;
+    int realmin = min;
     if (con > max) {
-      editor.saveInt(ScanFragment.PREFERENCE_MIN_SIGNAL_KEY, con);
+      editor.saveString(ScanFragment.PREFERENCE_MAX_SIGNAL_KEY, "" + con);
+      realmax = con;
     }
     if (con < min) {
-      editor.saveInt(ScanFragment.PREFERENCE_MAX_SIGNAL_KEY, con);
+      editor.saveString(ScanFragment.PREFERENCE_MIN_SIGNAL_KEY, "" + con);
+      realmin = con;
     }
     int total = max - min;
     int portion = con - min;

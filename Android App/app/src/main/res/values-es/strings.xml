@@ -2,7 +2,7 @@
 <resources>
 
   <string name="app_name">Control Remoto NXT</string>
-  
+
   <!-- [NavigationDrawerFragment.java]  -->
   <string name="home_drawer_label">Inicio</string>
   <string name="scan_drawer_label">Escanear</string>
@@ -10,14 +10,14 @@
   <string name="help_drawer_label">Ayuda</string>
   <string name="donations_drawer_label">Donaciones</string>
   <!-- [/NavigationDrawerFragment.java] -->
-  
-  
+
+
   <!-- [NavigationDrawerFragment.java]  -->
   <string name="drawer_open">Abrir menú de navegación</string>
   <string name="drawer_close">Cerrar menú de navegación</string>
   <!-- [/NavigationDrawerFragment.java] -->
-  
-  
+
+
   <!-- [bluetooth_enable.xml]  -->
   <string name="bluetooth_message">Bluetooth desactivado.</string>
   <string name="bluetooth_button">Activar</string>
@@ -56,14 +56,14 @@
   <string name="connecting_reconnect_message">Se ha perdido la conexión con el dispositivo %s. ¿Quieres reconectar?</string>
   <!-- [/HomeFragment.java] -->
 
-  
+
   <!-- [preference_fragment.xml]  -->
   <string name="settings_category_server">Ajustes de conexión</string>
   <string name="settings_category_visual">Ajustes visuales</string>
   <string name="settings_category_misc">Miscelánea</string>
   <!-- [/preference_fragment.xml] -->
-  
-  
+
+
   <!-- [preference_fragment.xml]  -->
   <string name="preference_title_address">Dirección del servidor</string>
   <string name="preference_summary_address">La URL del servidor que administra las conexiones de baja latencia (sockets).</string>
@@ -135,8 +135,8 @@
   <string name="preference_dialog_min_signal">¿Cuál es el valor mínimo?</string>
   <string name="preference_value_min_signal">0</string>
   <!-- [/preference_fragment.xml] -->
-  
-  
+
+
   <!-- [preference_fragment.xml]  -->
   <string name="preference_title_max_signal">Señal máxima</string>
   <string name="preference_summary_max_signal">Señal máxima registrada para calcular el porcentaje. Cuanto más alto mejor. El valor por defecto es -60dBm.</string>

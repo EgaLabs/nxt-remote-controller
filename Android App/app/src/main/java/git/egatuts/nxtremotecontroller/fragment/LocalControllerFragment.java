@@ -61,16 +61,16 @@ public class LocalControllerFragment extends ControllerBaseFragment {
         double module = stick.getModule();
         double maxModule = stick.getMaximumModule();
         if (x >= 0 && y >= 0) {
-          powerLeft  = module / maxModule * Math.signum(y);
+          powerLeft = module / maxModule * Math.signum(y);
           powerRight = Math.abs(Math.sin(angle)) * y;
         } else if (x < 0 && y >= 0) {
-          powerLeft  = Math.sin(angle) * -y;
+          powerLeft = Math.sin(angle) * -y;
           powerRight = module / maxModule * Math.signum(y);
         } else if (x < 0 && y < 0) {
-          powerLeft  = Math.sin(angle) * y;
+          powerLeft = Math.sin(angle) * y;
           powerRight = module / maxModule * Math.signum(y);
         } else if (x >= 0 && y < 0) {
-          powerLeft  = module / maxModule * Math.signum(y);
+          powerLeft = module / maxModule * Math.signum(y);
           powerRight = Math.sin(angle) * y;
         }
         self.getConnector().motorBC(powerLeft, powerRight, false, false);

@@ -113,4 +113,5 @@ public class SettingsActivity extends BaseActivity implements ActivityPendingTra
     this.goToPreviousActivity();
     super.onBackPressed();
   }
+
 }

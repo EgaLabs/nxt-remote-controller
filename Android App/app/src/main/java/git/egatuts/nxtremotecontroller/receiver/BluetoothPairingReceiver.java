@@ -72,8 +72,8 @@ public class BluetoothPairingReceiver extends BaseReceiver {
   @Override
   public Object getIntentData (Intent intent) {
     int[] states = {
-       intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothAdapter.ERROR),
-       intent.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothAdapter.ERROR)
+            intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothAdapter.ERROR),
+            intent.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothAdapter.ERROR)
     };
     return states;
   }

@@ -2,23 +2,19 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
   <!-- [Styles for toolbar.xml]  -->
-
-  <!-- [Toolbar] -->
-  <style name="toolbar_theme_style" parent="toolbar_theme_style.base">
-    <item name="android:actionBarSize">56dp</item>
-  </style>
-  <!-- [/Toolbar] -->
-
+    <!-- [Toolbar] -->
+    <style name="toolbar_theme_style" parent="toolbar_theme_style.base">
+      <item name="android:actionBarSize">56dp</item>
+    </style>
+    <!-- [/Toolbar] -->
   <!-- [/Styles for toolbar.xml] -->
 
   <!-- [Styles for drawer_item_row.xml]  -->
-
     <!-- [TextView]  -->
     <style name="drawer_item_style" parent="drawer_item_style.base">
       <item name="android:alpha">?drawer_item_alpha</item>
     </style>
     <!-- [/TextView] -->
-
   <!-- [/Styles for drawer_item_row.xml] -->
 
 </resources>

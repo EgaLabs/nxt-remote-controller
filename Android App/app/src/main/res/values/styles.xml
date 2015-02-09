@@ -12,6 +12,11 @@
     <item name="android:layout_height">wrap_content</item>
   </style>
 
+  <style name="match_w_fill_h">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">fill_parent</item>
+  </style>
+
   <style name="wrap_w_h">
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
@@ -53,12 +58,14 @@
     <style name="toolbar_style.base" parent="match_w_wrap_h">
       <item name="android:minHeight">@dimen/abc_action_bar_default_height_material</item>
     </style>
+
     <style name="toolbar_style" parent="toolbar_style.base" />
 
     <style name="toolbar_theme_style.base" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
       <item name="android:textColorPrimary">?git.egatuts.nxtremotecontroller:toolbar_color</item>
       <item name="actionBarSize">@dimen/abc_action_bar_default_height_material</item>
     </style>
+
     <style name="toolbar_theme_style" parent="toolbar_theme_style.base" />
     <!-- [/Toolbar] -->
   <!-- [/Styles for main_layout.xml] -->
@@ -67,6 +74,7 @@
   <!-- [Styles for drawer_item_row.xml]  -->
     <!-- [TextView]  -->
     <style name="drawer_item_style.base" parent="match_w_h" />
+
     <style name="drawer_item_style" parent="drawer_item_style.base" />
     <!-- [/TextView] -->
   <!-- [/Styles for drawer_item_row.xml] -->
@@ -82,7 +90,7 @@
     <item name="android:windowBackground">@color/window_background</item>
     <item name="titleTextStyle">@style/AppTheme.Base.TitleTextStyle</item>
 
-    <!-- [Styles that applies to styles defined below]  -->
+    <!-- [Styles that apply to styles defined below]  -->
     <item name="drawer_layout">@layout/navigation_drawer_fragment</item>
     <item name="drawer_width">@dimen/drawer_width</item>
     <item name="drawer_background">@color/drawer_background</item>
@@ -117,7 +125,7 @@
     <item name="paired_device_address_text_color">@color/address_text_color</item>
 
     <item name="tab_height">55dp</item>
-    <!-- [/Styles that applies to styles defined below] -->
+    <!-- [/Styles that apply to styles defined below] -->
 
   </style>
 
@@ -330,7 +338,7 @@
 
   </style>
 
-  <style name="AppTheme.Indigo" parent="AppTheme.Base.Indigo"/>
+  <style name="AppTheme.Indigo" parent="AppTheme.Base.Indigo" />
   <!-- Indigo Theme -->
 
 

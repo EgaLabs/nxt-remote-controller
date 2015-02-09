@@ -39,10 +39,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.ConnectivityManager;
-import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.util.Log;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -65,39 +62,39 @@ public abstract class BaseReceiver extends BroadcastReceiver {
 
   public HashMap<String, Boolean> BROADCAST_CALLBACKS_STATES = new HashMap<String, Boolean>() {
     {
-      put("ON_CONNECTION",                   false);
-      put("ON_DISCOVER_FINISH",              false);
-      put("ON_DISCOVER_START",               false);
-      put("ON_LOCAL_NAME_CHANGE",            false);
-      put("ON_SCAN_MODE_CHANGE",             false);
-      put("ON_STATE_CHANGE",                 false);
-      put("ON_LOW_LEVEL_CONNECT",            false);
-      put("ON_LOW_LEVEL_DISCONNECT",         false);
+      put("ON_CONNECTION", false);
+      put("ON_DISCOVER_FINISH", false);
+      put("ON_DISCOVER_START", false);
+      put("ON_LOCAL_NAME_CHANGE", false);
+      put("ON_SCAN_MODE_CHANGE", false);
+      put("ON_STATE_CHANGE", false);
+      put("ON_LOW_LEVEL_CONNECT", false);
+      put("ON_LOW_LEVEL_DISCONNECT", false);
       put("ON_LOW_LEVEL_DISCONNECT_REQUEST", false);
-      put("ON_BOND_STATE_CHANGE",            false);
-      put("ON_DEVICE_CLASS_CHANGE",          false);
-      put("ON_DEVICE_FOUND",                 false);
-      put("ON_REMOTE_NAME_CHANGE",           false);
-      put("ON_ACTIVITY_RESTART",             false);
+      put("ON_BOND_STATE_CHANGE", false);
+      put("ON_DEVICE_CLASS_CHANGE", false);
+      put("ON_DEVICE_FOUND", false);
+      put("ON_REMOTE_NAME_CHANGE", false);
+      put("ON_ACTIVITY_RESTART", false);
     }
   };
 
   public static final HashMap<String, String> BROADCAST_CALLBACKS_METHODS = new HashMap<String, String>() {
     {
-      put("ON_CONNECTION",                   "onConnectionChange");
-      put("ON_DISCOVER_FINISH",              "onDiscoveryFinish");
-      put("ON_DISCOVER_START",               "onDiscoveryStart");
-      put("ON_LOCAL_NAME_CHANGE",            "onLocalNameChange");
-      put("ON_SCAN_MODE_CHANGE",             "onScanModeChange");
-      put("ON_STATE_CHANGE",                 "onStateChange");
-      put("ON_LOW_LEVEL_CONNECT",            "onLowLevelConnect");
-      put("ON_LOW_LEVEL_DISCONNECT",         "onLowLevelDisconnect");
+      put("ON_CONNECTION", "onConnectionChange");
+      put("ON_DISCOVER_FINISH", "onDiscoveryFinish");
+      put("ON_DISCOVER_START", "onDiscoveryStart");
+      put("ON_LOCAL_NAME_CHANGE", "onLocalNameChange");
+      put("ON_SCAN_MODE_CHANGE", "onScanModeChange");
+      put("ON_STATE_CHANGE", "onStateChange");
+      put("ON_LOW_LEVEL_CONNECT", "onLowLevelConnect");
+      put("ON_LOW_LEVEL_DISCONNECT", "onLowLevelDisconnect");
       put("ON_LOW_LEVEL_DISCONNECT_REQUEST", "onLowLevelDisconnectRequest");
-      put("ON_BOND_STATE_CHANGE",            "onBondStateChange");
-      put("ON_DEVICE_CLASS_CHANGE",          "onDeviceClassChange");
-      put("ON_DEVICE_FOUND",                 "onDeviceFound");
-      put("ON_REMOTE_NAME_CHANGE",           "onRemoteNameChange");
-      put("ON_ACTIVITY_RESTART",             "onAppNeedsRestart");
+      put("ON_BOND_STATE_CHANGE", "onBondStateChange");
+      put("ON_DEVICE_CLASS_CHANGE", "onDeviceClassChange");
+      put("ON_DEVICE_FOUND", "onDeviceFound");
+      put("ON_REMOTE_NAME_CHANGE", "onRemoteNameChange");
+      put("ON_ACTIVITY_RESTART", "onAppNeedsRestart");
     }
   };
 
@@ -106,19 +103,19 @@ public abstract class BaseReceiver extends BroadcastReceiver {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
         put("ON_CONNECTION", BluetoothAdapter.ACTION_CONNECTION_STATE_CHANGED);
       }
-      put("ON_DISCOVER_FINISH",              BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-      put("ON_DISCOVER_START",               BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-      put("ON_LOCAL_NAME_CHANGE",            BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED);
-      put("ON_SCAN_MODE_CHANGE",             BluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
-      put("ON_STATE_CHANGE",                 BluetoothAdapter.ACTION_STATE_CHANGED);
-      put("ON_LOW_LEVEL_CONNECT",            BluetoothDevice.ACTION_ACL_CONNECTED);
-      put("ON_LOW_LEVEL_DISCONNECT",         BluetoothDevice.ACTION_ACL_DISCONNECTED);
+      put("ON_DISCOVER_FINISH", BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+      put("ON_DISCOVER_START", BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+      put("ON_LOCAL_NAME_CHANGE", BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED);
+      put("ON_SCAN_MODE_CHANGE", BluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
+      put("ON_STATE_CHANGE", BluetoothAdapter.ACTION_STATE_CHANGED);
+      put("ON_LOW_LEVEL_CONNECT", BluetoothDevice.ACTION_ACL_CONNECTED);
+      put("ON_LOW_LEVEL_DISCONNECT", BluetoothDevice.ACTION_ACL_DISCONNECTED);
       put("ON_LOW_LEVEL_DISCONNECT_REQUEST", BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED);
-      put("ON_BOND_STATE_CHANGE",            BluetoothDevice.ACTION_BOND_STATE_CHANGED);
-      put("ON_DEVICE_CLASS_CHANGE",          BluetoothDevice.ACTION_CLASS_CHANGED);
-      put("ON_DEVICE_FOUND",                 BluetoothDevice.ACTION_FOUND);
-      put("ON_REMOTE_NAME_CHANGE",           BluetoothDevice.ACTION_NAME_CHANGED);
-      put("ON_ACTIVITY_RESTART",             MainActivity.ACTION_RESTART_APP);
+      put("ON_BOND_STATE_CHANGE", BluetoothDevice.ACTION_BOND_STATE_CHANGED);
+      put("ON_DEVICE_CLASS_CHANGE", BluetoothDevice.ACTION_CLASS_CHANGED);
+      put("ON_DEVICE_FOUND", BluetoothDevice.ACTION_FOUND);
+      put("ON_REMOTE_NAME_CHANGE", BluetoothDevice.ACTION_NAME_CHANGED);
+      put("ON_ACTIVITY_RESTART", MainActivity.ACTION_RESTART_APP);
     }
   };
 
@@ -189,7 +186,7 @@ public abstract class BaseReceiver extends BroadcastReceiver {
      *  We create some variables.
      */
     String action = intent.getAction();
-    Iterator< Map.Entry<String, String> > actionsIterator = BaseReceiver.BROADCAST_ACTIONS.entrySet().iterator();
+    Iterator<Map.Entry<String, String>> actionsIterator = BaseReceiver.BROADCAST_ACTIONS.entrySet().iterator();
     Map.Entry<String, String> pair;
     String realAction;
     String idAction;
@@ -222,7 +219,7 @@ public abstract class BaseReceiver extends BroadcastReceiver {
            *  Remember that the listener must extends our BaseListener.
            */
           defClass = this.listener.getClass();
-          method = defClass.getMethod(listenerMethod, new Class[] { Context.class, Intent.class });
+          method = defClass.getMethod(listenerMethod, new Class[]{Context.class, Intent.class});
           method.invoke(this.listener, context, intent);
         } catch (NoClassDefFoundError | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
           //e.printStackTrace();

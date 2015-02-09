@@ -45,8 +45,8 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
 
-import git.egatuts.nxtremotecontroller.exception.SocketCreationException;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
+import git.egatuts.nxtremotecontroller.exception.SocketCreationException;
 
 /*
  *  Global utility-belt class used to access properties from the bluetooth adapter and do some
@@ -149,12 +149,12 @@ public class BluetoothUtils {
 
   public BluetoothSocket getSocketFrom (BluetoothDevice device) throws SocketCreationException {
     BluetoothSocket socket = null;
-    try{
+    try {
       socket = device.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
     } catch (IOException e) {
       //e.printStackTrace();
       try {
-        Method method = device.getClass().getMethod("createRfcommSocket", new Class[] { int.class });
+        Method method = device.getClass().getMethod("createRfcommSocket", new Class[]{int.class});
         socket = (BluetoothSocket) method.invoke(device, Integer.valueOf(1));
       } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e2) {
         //e2.printStackTrace();

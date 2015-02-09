@@ -44,10 +44,10 @@ import com.andexert.library.RippleView;
 
 import java.util.ArrayList;
 
-import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.BaseActivity;
 import git.egatuts.nxtremotecontroller.fragment.BaseFragment;
+import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.utils.ImageDownloader;
 
 /*
@@ -142,8 +142,14 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolder> {
       public void onAnimationStart (Animation animation) {
         view0.setVisibility(View.VISIBLE);
       }
-      @Override public void onAnimationEnd (Animation animation) {}
-      @Override public void onAnimationRepeat (Animation animation) {}
+
+      @Override
+      public void onAnimationEnd (Animation animation) {
+      }
+
+      @Override
+      public void onAnimationRepeat (Animation animation) {
+      }
     });
     return show;
   }
@@ -160,12 +166,16 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientViewHolder> {
       public void onAnimationStart (Animation animation) {
         view0.setVisibility(View.VISIBLE);
       }
+
       @Override
       public void onAnimationEnd (Animation animation) {
         view0.setVisibility(View.GONE);
         view1.startAnimation(getShowAnimation(view1));
       }
-      @Override public void onAnimationRepeat (Animation animation) {}
+
+      @Override
+      public void onAnimationRepeat (Animation animation) {
+      }
     });
     return hide;
   }

@@ -15,7 +15,7 @@
 
   <Button
       android:id="@+id/redo_action"
-      android:text="@string/controller_tab_error_button"
-      style="@style/wrap_w_h" />
+      style="@style/wrap_w_h"
+      android:text="@string/controller_tab_error_button" />
 
 </LinearLayout>

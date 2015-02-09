@@ -6,7 +6,7 @@
   <include
       android:id="@+id/toolbar"
       style="@style/match_w_wrap_h"
-      layout="@layout/toolbar"/>
+      layout="@layout/toolbar" />
 
   <android.support.v4.app.FragmentTabHost
       android:id="@+id/tabhost"
@@ -14,14 +14,12 @@
       android:layout_below="@+id/toolbar">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        style="@style/match_w_h"
         android:orientation="vertical">
 
       <FrameLayout
           android:id="@+id/tabcontent"
-          android:layout_width="match_parent"
-          android:layout_height="fill_parent"
+          style="@style/match_w_fill_h"
           android:layout_below="@+id/tabs" />
 
       <TabWidget

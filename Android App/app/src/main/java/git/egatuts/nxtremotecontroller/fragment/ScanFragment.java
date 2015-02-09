@@ -60,7 +60,6 @@ import com.andexert.library.RippleView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.MainActivity;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
@@ -72,6 +71,7 @@ import git.egatuts.nxtremotecontroller.listener.BluetoothPairingListener;
 import git.egatuts.nxtremotecontroller.preference.PreferencesUtils;
 import git.egatuts.nxtremotecontroller.receiver.BluetoothDiscoveryReceiver;
 import git.egatuts.nxtremotecontroller.receiver.BluetoothPairingReceiver;
+import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.views.BaseIndeterminateProgressDialog;
 
 /*
@@ -468,7 +468,8 @@ public class ScanFragment extends ActivityBaseFragment implements Animation.Anim
     ArrayList<PairedDevice> devices;
     View view = inflater.inflate(R.layout.scan_fragment, parent, false);
 
-    if (this.devicesAdapter == null) this.devicesAdapter = new PairedDeviceAdapter(this, new ArrayList<PairedDevice>(0));
+    if (this.devicesAdapter == null)
+      this.devicesAdapter = new PairedDeviceAdapter(this, new ArrayList<PairedDevice>(0));
     this.linearLayoutManager = new LinearLayoutManager(this.getBaseActivity());
     this.linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
     this.linearLayoutManager.scrollToPosition(0);
@@ -557,10 +558,7 @@ public class ScanFragment extends ActivityBaseFragment implements Animation.Anim
       /*
        *  When we do a long click on the item we show the button to remove the paired the device.
        */
-      @Override
-      public void onItemLongClick (View view, int position) {
-        //self.getGlobalUtils().showToast("LONG_CLICK");
-      }
+      @Override public void onItemLongClick (View view, int position) {}
     }));
 
     return view;
@@ -572,7 +570,6 @@ public class ScanFragment extends ActivityBaseFragment implements Animation.Anim
    */
   @Override public void onAnimationStart (Animation animation) {}
   @Override public void onAnimationRepeat (Animation animation) {}
-
   @Override
   public void onAnimationEnd (Animation animation) {
     if (this.autoStart) {

@@ -38,9 +38,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.preference.PreferenceFragment;
 
+import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.BaseActivity;
 import git.egatuts.nxtremotecontroller.activity.MainActivity;
-import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.SettingsActivity;
 
 /*

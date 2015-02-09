@@ -52,7 +52,6 @@ import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
 import git.egatuts.nxtremotecontroller.fragment.ActivityBaseFragment;
-import git.egatuts.nxtremotecontroller.fragment.BaseFragment;
 import git.egatuts.nxtremotecontroller.fragment.BluetoothFragment;
 import git.egatuts.nxtremotecontroller.fragment.DefaultFragmentPendingTransition;
 import git.egatuts.nxtremotecontroller.fragment.FragmentPendingTransition;
@@ -190,19 +189,19 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
     try {
       String defClass = intent.getComponent().getClassName();
       if (defClass.equals(SettingsActivity.class.getName())) {
-        return new int[] { R.anim.settings_transition_in, R.anim.settings_transition_out };
+        return new int[]{R.anim.settings_transition_in, R.anim.settings_transition_out};
       } else if (defClass.equals(ControllerActivity.class.getName())) {
-        return new int[] { R.anim.controller_transition_in, R.anim.controller_transition_out };
+        return new int[]{R.anim.controller_transition_in, R.anim.controller_transition_out};
       }
     } catch (NullPointerException e) {
       //e.printStackTrace();
     }
-    return new int[] {};
+    return new int[]{};
   }
 
   @Override
   public int[] onBackward () {
-    return new int[] {};
+    return new int[]{};
   }
 
   /*
@@ -256,7 +255,9 @@ public class MainActivity extends BaseActivity implements NavigationDrawerCallba
    *  When the drawer is opened. Take in mind that this method
    *  will execute only when the opening animation has finished.
    */
-  @Override public void onOpenDrawer () {}
+  @Override
+  public void onOpenDrawer () {
+  }
 
   /*
    *  When the drawer is closed. Take in mind that this method

@@ -62,17 +62,17 @@ public class ConnectThread extends BaseThread {
     /*
      *  Here we are starting the connecting process but still not tried to.
      */
-      this.connector.setStatePreparing();
-      try {
+    this.connector.setStatePreparing();
+    try {
 
       /*
        *  Here we create the socket and then connect to it.
        */
-        this.connector.setStateCreatingSocket();
-        this.connector.createSocket();
-        this.connector.setStateConnecting();
-        this.connector.getSocket().connect();
-      } catch (SocketCreationException e) {
+      this.connector.setStateCreatingSocket();
+      this.connector.createSocket();
+      this.connector.setStateConnecting();
+      this.connector.getSocket().connect();
+    } catch (SocketCreationException e) {
 
       /*
        *  If there was a SocketCreationException this means the socket failed at it's creation.

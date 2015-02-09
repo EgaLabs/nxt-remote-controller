@@ -44,13 +44,13 @@ import android.view.View;
  */
 public class PairedDeviceItemClickListener implements RecyclerView.OnItemTouchListener {
 
-  public static final int GESTURE_NONE       = 0;
-  public static final int GESTURE_TAP_UP     = 1;
-  public static final int GESTURE_PRESS      = 2;
-  public static final int GESTURE_SCROLL     = 3;
+  public static final int GESTURE_NONE = 0;
+  public static final int GESTURE_TAP_UP = 1;
+  public static final int GESTURE_PRESS = 2;
+  public static final int GESTURE_SCROLL = 3;
   public static final int GESTURE_LONG_PRESS = 4;
-  public static final int GESTURE_FLING      = 5;
-  public static final int GESTURE_DOWN       = 6;
+  public static final int GESTURE_FLING = 5;
+  public static final int GESTURE_DOWN = 6;
 
   private GestureDetector gestureDetector;
   private OnItemClickListener listener;
@@ -61,6 +61,7 @@ public class PairedDeviceItemClickListener implements RecyclerView.OnItemTouchLi
    */
   public interface OnItemClickListener {
     public void onItemClick (View view, int position);
+
     public void onItemLongClick (View view, int position);
   }
 

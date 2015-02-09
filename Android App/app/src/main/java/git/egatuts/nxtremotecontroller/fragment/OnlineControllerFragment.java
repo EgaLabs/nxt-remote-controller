@@ -78,7 +78,6 @@ import java.util.Iterator;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 
-import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.ControllerActivity;
 import git.egatuts.nxtremotecontroller.client.Client;
@@ -87,6 +86,7 @@ import git.egatuts.nxtremotecontroller.client.ClientViewHolder;
 import git.egatuts.nxtremotecontroller.exception.LoginException;
 import git.egatuts.nxtremotecontroller.exception.MalformedTokenException;
 import git.egatuts.nxtremotecontroller.listener.GPSLocationTracker;
+import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.utils.TokenRequester;
 import git.egatuts.nxtremotecontroller.views.BaseProgressDialog;
 
@@ -258,14 +258,13 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
       public void onAnimationStart (Animation animation) {
         view0.setVisibility(View.VISIBLE);
       }
-
       @Override
       public void onAnimationEnd (Animation animation) {
         view0.setVisibility(View.GONE);
         view1.startAnimation(getShowAnimation(view1, time));
       }
-
-      @Override public void onAnimationRepeat (Animation animation) {}
+      @Override public void onAnimationRepeat (Animation animation) {
+      }
     });
     return hide;
   }
@@ -559,7 +558,8 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
       @Override
       public void onClick (ClientViewHolder view, int index) {
         Client client = self.clientsAdapter.get(index);
-        if (client.getPeerId() != null && !client.getPeerId().equals("")) self.requestCall(client, view, index);
+        if (client.getPeerId() != null && !client.getPeerId().equals(""))
+          self.requestCall(client, view, index);
       }
     });
     recyclerView.setAdapter(this.clientsAdapter);

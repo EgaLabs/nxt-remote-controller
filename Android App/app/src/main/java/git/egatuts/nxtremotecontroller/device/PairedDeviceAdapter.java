@@ -43,10 +43,10 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.BaseActivity;
 import git.egatuts.nxtremotecontroller.fragment.BaseFragment;
+import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 
 /*
  *  Extended class of the RecyclerView.Adapter to show the paired/found devices.

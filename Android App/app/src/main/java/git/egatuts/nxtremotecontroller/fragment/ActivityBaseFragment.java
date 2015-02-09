@@ -37,7 +37,6 @@ import android.os.Handler;
 
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.MainActivity;
-import git.egatuts.nxtremotecontroller.views.BaseIndeterminateProgressDialog;
 
 /*
  *  Default abstract class applied to the fragments of the MainActivity class.
@@ -102,7 +101,7 @@ public abstract class ActivityBaseFragment extends BaseFragment implements Fragm
    */
   @Override
   public int[] onForward (BaseFragment fragment) {
-    return new int[] { R.anim.transaction_in, R.anim.transaction_out };
+    return new int[]{R.anim.transaction_in, R.anim.transaction_out};
   }
 
   @Override

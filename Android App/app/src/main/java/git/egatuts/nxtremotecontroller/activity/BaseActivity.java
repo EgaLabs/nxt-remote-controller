@@ -43,10 +43,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.WindowManager;
 
-import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.bluetooth.BluetoothUtils;
 import git.egatuts.nxtremotecontroller.preference.PreferencesUtils;
+import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.views.BaseIndeterminateProgressDialog;
 import git.egatuts.nxtremotecontroller.views.LongIndeterminateProgressDialog;
 import git.egatuts.nxtremotecontroller.views.ShortIndeterminateProgressDialog;
@@ -193,7 +193,7 @@ public abstract class BaseActivity extends ActionBarActivity {
    *  Returns a short progress dialog (doFirstAnimation = false and setCancelable = false)
    */
   public BaseIndeterminateProgressDialog getShortProgressDialog () {
-    if ( !(this.progressDialog instanceof ShortIndeterminateProgressDialog) ) {
+    if (!(this.progressDialog instanceof ShortIndeterminateProgressDialog)) {
       this.progressDialog = new ShortIndeterminateProgressDialog(this);
     }
     return this.progressDialog;
@@ -203,7 +203,7 @@ public abstract class BaseActivity extends ActionBarActivity {
    *  Returns a long progress dialog (doFirstAnimation = true and setCancelable = true)
    */
   public BaseIndeterminateProgressDialog getLongProgressDialog () {
-    if ( !(this.progressDialog instanceof LongIndeterminateProgressDialog) ) {
+    if (!(this.progressDialog instanceof LongIndeterminateProgressDialog)) {
       this.progressDialog = new LongIndeterminateProgressDialog(this);
     }
     return this.progressDialog;

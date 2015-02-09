@@ -147,8 +147,13 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     selectItem(position);
   }
 
-  @Override public void onCloseDrawer () {}
-  @Override public void onOpenDrawer () {}
+  @Override
+  public void onCloseDrawer () {
+  }
+
+  @Override
+  public void onOpenDrawer () {
+  }
 
   /*
    *  onConfigurationChanged and onSaveInstanceState methods.
@@ -201,7 +206,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     drawer_toggle = new ActionBarDrawerToggle(getActivity(), drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close) {
       @Override
-        public void onDrawerClosed (View drawerView) {
+      public void onDrawerClosed (View drawerView) {
         super.onDrawerClosed(drawerView);
         if (!isAdded()) return;
         if (custom_callback != null) custom_callback.onCloseDrawer();

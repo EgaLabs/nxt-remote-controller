@@ -34,11 +34,11 @@ section.stream {
 
 section {
   > #controll-ui-container {
-    display: block;
+    display: none;
   }
 
   > #container {
-    display: none;
+    display: block;
   }
 }
 

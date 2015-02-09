@@ -1,9 +1,10 @@
 module.exports = function (app, config, pathSettings, base, users) {
-  
+
   var
-    jwt = require("jsonwebtoken"),
-    https = require("https"),
-    geocoder = require("geocoder"),
+    chalk      = require("chalk"),
+    https      = require("https"),
+    geocoder   = require("geocoder"),
+    jwt        = require("jsonwebtoken"),
     letters    = "a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð",
     validName  = new RegExp("^(((["+letters+"]+)((-["+letters+"]+)*)(('(["+letters+"]+)?)*)|())( ?)){1,4}$"),
     validEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -13,11 +14,18 @@ module.exports = function (app, config, pathSettings, base, users) {
     fields     = ["name", "email", "latitude", "longitude", "long_location", "short_location"],
     validators = [validName, validEmail, validCoord, validCoord, anything, anything],
     registerUser = function (res, profile) {
-      console.log("Registrado " + (profile.host ? "host" : "usuario") + ": " + profile.name + ", " + profile.email + ", " + profile.short_location + " (" + profile.latitude + " | " + profile.longitude + ")");
+      console.info( chalk.cyan(
+        "Registrado " + (profile.host ? "host" : "usuario") +
+        ": " + profile.name + ", " + profile.email +
+        ", " + profile.short_location +
+        " (" + profile.latitude +
+        " | " + profile.longitude +
+        ")")
+      );
       var token = jwt.sign(profile, app.get("secretPass"), { expiresInMinutes: 30 });
       res.json({ token: token });
     };
-  
+
   app.post("/request-token", function (req, res) {
     var profile = {
       name: req.body.name,

@@ -44,6 +44,7 @@ public class BaseThread extends Thread {
   protected volatile boolean isRunning;
 
   public BaseThread () {}
+
   public BaseThread (NXTConnector connector) {
     this.connector = connector;
   }

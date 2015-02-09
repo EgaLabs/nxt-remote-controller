@@ -22,15 +22,15 @@
  *  THE SOFTWARE.                                                                  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *  You can find the entire project at:                                                                                                                            *
- *                                                                                                                                                                 *
- *    https://github.com/Egatuts/nxt-remote-controller                                                                                                             *
- *                                                                                                                                                                 *
- *  And the corresponding file at:                                                                                                                                 *
- *                                                                                                                                                                 *
- *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/preference/PreferenceUtils.java *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *  You can find the entire project at:                                                                                                                              *
+ *                                                                                                                                                                   *
+ *    https://github.com/Egatuts/nxt-remote-controller                                                                                                               *
+ *                                                                                                                                                                   *
+ *  And the corresponding file at:                                                                                                                                   *
+ *                                                                                                                                                                   *
+ *    https://github.com/Egatuts/nxt-remote-controller/blob/master/Android%20App/app/src/main/java/git/egatuts/nxtremotecontroller/preference/PreferencesUtils.java  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package git.egatuts.nxtremotecontroller.preference;
 
 import android.content.Context;
@@ -221,6 +221,7 @@ public class PreferencesUtils {
     public boolean getBoolean (String key) {
       return this.getBoolean(key, false);
     }
+
   }
 
 }

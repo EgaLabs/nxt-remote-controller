@@ -5,17 +5,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
   <LinearLayout
-      style="@style/match_w_h"
+      android:layout_width="match_parent"
       android:layout_height="?git.egatuts.nxtremotecontroller:paired_device_height"
       android:layout_margin="?git.egatuts.nxtremotecontroller:paired_device_padding">
 
     <TextView
         android:id="@+id/paired_device_connection"
-        style="@style/match_w_h"
         android:layout_width="?git.egatuts.nxtremotecontroller:paired_device_height"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:textColor="?git.egatuts.nxtremotecontroller:paired_device_signal_text_color"
-        android:textSize="?git.egatuts.nxtremotecontroller:paired_device_signal_text_size"/>
+        android:textSize="?git.egatuts.nxtremotecontroller:paired_device_signal_text_size" />
 
     <LinearLayout
         style="@style/fill_w_match_h"
@@ -27,7 +27,6 @@
       <TextView
           android:id="@+id/paired_device_name"
           style="@style/fill_w_wrap_h"
-
           android:textColor="?paired_device_name_text_color"
           android:textSize="?paired_device_name_text_size" />
 

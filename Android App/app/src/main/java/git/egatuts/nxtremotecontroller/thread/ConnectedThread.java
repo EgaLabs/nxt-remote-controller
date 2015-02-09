@@ -59,7 +59,7 @@ public class ConnectedThread extends BaseThread {
     } catch (IOException e) {
       //e.printStackTrace();
     }
-    this.input  = in;
+    this.input = in;
     this.output = out;
   }
 

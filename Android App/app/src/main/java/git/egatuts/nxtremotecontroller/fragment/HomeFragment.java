@@ -48,12 +48,12 @@ import com.andexert.library.RippleView;
 
 import java.util.ArrayList;
 
-import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.activity.MainActivity;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceAdapter;
 import git.egatuts.nxtremotecontroller.device.PairedDeviceItemClickListener;
+import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 
 /*
  *  Default Activity fragment that shows all bonded devices.
@@ -146,10 +146,7 @@ public class HomeFragment extends ActivityBaseFragment {
         }, 0);
       }
 
-      @Override
-      public void onItemLongClick (View view, int position) {
-        HomeFragment.this.getGlobalUtils().createAlertDialog("MAL", "VAMOS").show();
-      }
+      @Override public void onItemLongClick (View view, int position) {}
     }));
 
     return view;

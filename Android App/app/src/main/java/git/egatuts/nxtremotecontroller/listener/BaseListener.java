@@ -45,32 +45,21 @@ public interface BaseListener {
    *  Methods for Broadcast Actions from BluetoothAdapter.
    */
   public void onConnectionChange (Context context, Intent intent);
-
   public void onDiscoveryFinish (Context context, Intent intent);
-
   public void onDiscoveryStart (Context context, Intent intent);
-
   public void onLocalNameChange (Context context, Intent intent);
-
   public void onScanModeChange (Context context, Intent intent);
-
   public void onStateChange (Context context, Intent intent);
 
   /*
    *  Methods for Broadcast Actions from BluetoothDevice.
    */
   public void onLowLevelConnect (Context context, Intent intent);
-
   public void onLowLevelDisconnect (Context context, Intent intent);
-
   public void onLowLevelDisconnectRequest (Context context, Intent intent);
-
   public void onBondStateChange (Context context, Intent intent);
-
   public void onDeviceClassChange (Context context, Intent intent);
-
   public void onDeviceFound (Context context, Intent intent);
-
   public void onRemoteNameChange (Context context, Intent intent);
 
   /*

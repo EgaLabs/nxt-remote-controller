@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="app_name">NXT Remote Controller</string>
+
+  <!-- [NavigationDrawerFragment.java] -->
+  <string name="home_drawer_label">Startseite</string>
+  <string name="scan_drawer_label">Durchsehen</string>
+  <string name="settings_drawer_label">Einstellungen</string>
+  <string name="help_drawer_label">Hilfe</string>
+  <string name="donations_drawer_label">Spenden</string>
+  <!-- [/NavigationDrawerFragment.java] -->
+
+
+  <!-- [NavigationDrawerFragment.java] -->
+  <string name="drawer_open">Öffnen Navigationsmenü</string>
+  <string name="drawer_close">Schließen Navigationsmenü</string>
+  <!-- [/NavigationDrawerFragment.java] -->
+
+
+  <!-- [bluetooth_enable.xml] -->
+  <string name="bluetooth_message">Bluetooth deaktiviert.</string>
+  <string name="bluetooth_button">Einschalten</string>
+  <string name="bluetooth_enabling">Enabling bluetooth&#8230;</string>
+  <string name="bluetooth_disabling">Disabling bluetooth&#8230;</string>
+  <!-- [/bluetooth_enable.xml] -->
+
+
+  <!-- [scan_fragment.xml] -->
+  <string name="bluetooth_preparing_pairing">Preparing pairing process&#8230;</string>
+  <string name="bluetooth_pairing">Pairing device&#8230;</string>
+  <string name="bluetooth_paired">Paired device: %s</string>
+  <string name="bluetooth_failed_pairing">Failed pairing: %s</string>
+  <string name="bluetooth_already_paired">Device %s is already paired</string>
+  <!-- [/scan_fragment.xml] -->
+
+
+  <!-- [HomeFragment.java]  -->
+  <string name="device_type_toy_title">Unknown device type</string>
+  <string name="device_type_toy_message">The device %s is not paired as a bluetooth toy device.</string>
+  <string name="device_type_robot_title">Unknown device type</string>
+  <string name="device_type_robot_message">The device %s is not paired as a bluetooth robot device. Do you want to continue anyway?</string>
+
+  <string name="connecting_preparing_connection">Preparing connection&#8230;</string>
+  <string name="connecting_creating_socket">Creating socket&#8230;</string>
+  <string name="connecting_connecting">Connecting to device&#8230;</string>
+  <string name="connecting_connected">Connected to %s</string>
+  <string name="connecting_disconnected">Disconnected from %s</string>
+  <string name="connecting_unexpected_error">Unexpected error</string>
+  <string name="connecting_socket_error">The socket could not be created</string>
+  <string name="connecting_request_failed">The device did not accept the connection</string>
+  <string name="connecting_connection_closed">The connection was closed</string>
+  <string name="connecting_connection_lost">The connection with the device has been lost</string>
+  <string name="connecting_aborted">Connection aborted</string>
+  <string name="connecting_reconnect_title">The connection failed</string>
+  <string name="connecting_reconnect_message">The connection with %s has been lost. Do you want to reconnect?</string>
+  <!-- [/HomeFragment.java] -->
+
+
+  <!-- [preference_fragment.xml] -->
+  <string name="settings_category_server">Connection settings</string>
+  <string name="settings_category_visual">Visual settings</string>
+  <string name="settings_category_misc">Miscellaneous</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml] -->
+  <string name="preference_title_address">Server socket address</string>
+  <string name="preference_summary_address">The URL of the server handling the socket connection.</string>
+  <string name="preference_dialog_address">Which is the URL?</string>
+  <string name="preference_value_address">https://localhost</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml] -->
+  <string name="preference_title_login">Server login address</string>
+  <string name="preference_summary_login">The URL of the server that handles the token-based login.</string>
+  <string name="preference_dialog_login">Which is the URL?</string>
+  <string name="preference_value_login">https://localhost/request-token</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml] -->
+  <string name="preference_title_token">Access token</string>
+  <string name="preference_summary_token">Identification token that lets you connect to the ICE Server and establish low-latency communications. Delete it to reset.</string>
+  <string name="preference_dialog_token">Be careful.</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml] -->
+  <string name="preference_title_peer">Peer server address</string>
+  <string name="preference_summary_peer">The URL of the server that handles the P2P (peer-to-peer) connection.</string>
+  <string name="preference_dialog_peer">Which is the URL?</string>
+  <string name="preference_value_peer">https://localhost/connect</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_theme">Application theme</string>
+  <string name="preference_summary_theme">It sets the color theme to use in the whole application.</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_toast">Show status toast messages</string>
+  <string name="preference_summary_toast">Show pairing toast messages. It\'s recommended to enable this option unless your operative system generates them automatically.</string>
+  <string name="preference_value_toast">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_back_home">Go back to home screen</string>
+  <string name="preference_summary_back_home">When the pairing process has succeed automatically goes to the home tab.</string>
+  <string name="preference_value_back_home">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_disable_bluetooth">Disable Bluetooth</string>
+  <string name="preference_summary_disable_bluetooth">Automatically disables the bluetooth when exiting the app.</string>
+  <string name="preference_value_disable_bluetooth">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml]  -->
+  <string name="preference_title_auto_discovery">Start scan process</string>
+  <string name="preference_summary_auto_discovery">Automatically starts the scan process when the tab <i>Scan</i> is clicked.</string>
+  <string name="preference_value_auto_discovery">true</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml] -->
+  <string name="preference_title_min_signal">Minimum signal</string>
+  <string name="preference_summary_min_signal">Minimum registered strength signal used to calculate the percentage. The lower the value the worse. Default value is -60dBm.</string>
+  <string name="preference_dialog_min_signal">Which is the minimum value?</string>
+  <string name="preference_value_min_signal">0</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [preference_fragment.xml] -->
+  <string name="preference_title_max_signal">Maximum signal</string>
+  <string name="preference_summary_max_signal">Maximum registered strength signal used to calculate the percentage. The higher the value the better. Default value is -60dBm.</string>
+  <string name="preference_dialog_max_signal">Which is the maximum value?</string>
+  <string name="preference_value_max_signal">-100</string>
+  <!-- [/preference_fragment.xml] -->
+
+
+  <!-- [ControllerActivity.java]  -->
+  <string name="controller_window_title">"Device: "</string>
+  <string name="controller_tab_local_title">Local</string>
+  <string name="controller_tab_local_spec">local</string>
+  <string name="controller_tab_online_title">Online</string>
+  <string name="controller_tab_online_spec">online</string>
+  <string name="controller_tab_error_message">Connection couldn\'t be established.</string>
+  <string name="controller_tab_error_button">Retry</string>
+  <!-- [/ControllerActivity.java] -->
+
+
+  <!-- [OnlineControllerFragment.java]  -->
+  <string name="geolocation_required_title">Geolocation service disabled</string>
+  <string name="geolocation_required_message">To login correctly the coordinates of this device must be sent. Please, enable geolocation services to access this feature.</string>
+  <string name="connection_error_malformed">The URL is malformed. Check it out on the settings activity.</string>
+  <string name="connection_error_token_not_found">The token URL is not correct or it couldn\'t be accessed.</string>
+  <string name="connection_error_token_malformed">The token is malformed, undefined, null or an empty string. Check server configuration.</string>
+  <string name="connection_error_refused">The connection was refused by the server.</string>
+  <string name="connection_error_login">Error while sending credentials to login</string>
+  <string name="connection_error_unreach">Couldn\'t find the server.</string>
+  <string name="getting_access_token">Getting access token&#8230;</string>
+  <string name="connecting_socket_server">Connecting socket&#8230;</string>
+  <string name="connected_socket_server">Socket connection established</string>
+  <string name="unknown_error">Unknown error encountered</string>
+  <string name="restoring_token">Restoring access token due to a signature error&#8230;</string>
+  <string name="calling_client">Calling client&#8230;</string>
+  <string name="call_rejected">The client has rejected your call</string>
+  <string name="call_accepted">The client has accepted your call</string>
+  <string name="init_streaming">Start streaming</string>
+  <string name="stop_streaming">Stop streaming</string>
+  <!-- [/OnlineControllerFragment.java] -->
+
+</resources>

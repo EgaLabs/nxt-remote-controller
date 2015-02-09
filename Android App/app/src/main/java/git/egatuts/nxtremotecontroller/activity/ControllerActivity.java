@@ -60,12 +60,12 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
-import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 import git.egatuts.nxtremotecontroller.R;
 import git.egatuts.nxtremotecontroller.bluetooth.NXTConnector;
 import git.egatuts.nxtremotecontroller.device.PairedDevice;
 import git.egatuts.nxtremotecontroller.fragment.LocalControllerFragment;
 import git.egatuts.nxtremotecontroller.fragment.OnlineControllerFragment;
+import git.egatuts.nxtremotecontroller.utils.GlobalUtils;
 
 /*
  *  Main activity that is created to handle a BluetoothSocket and control locally and remotely the NXT robot.
@@ -150,12 +150,12 @@ public class ControllerActivity extends BaseActivity implements ActivityPendingT
    */
   @Override
   public int[] onForward (Intent intent) {
-    return new int[] {};
+    return new int[]{};
   }
 
   @Override
   public int[] onBackward () {
-    return new int[] { R.anim.controller_transition_back_in, R.anim.controller_transition_back_out };
+    return new int[]{R.anim.controller_transition_back_in, R.anim.controller_transition_back_out};
   }
 
   /*
@@ -257,7 +257,7 @@ public class ControllerActivity extends BaseActivity implements ActivityPendingT
      *  Now we declare the handler that will handle (so obviously) the messages
      *  sent by the threads that are in the background connecting with the device.
      */
-    this.handler = new Handler () {
+    this.handler = new Handler() {
       @Override
       public void handleMessage (Message msg) {
         if ((self.connector.getConnectThread() == null || self.aborted) && self.connector.getConnectedThread() == null) {
@@ -340,11 +340,11 @@ public class ControllerActivity extends BaseActivity implements ActivityPendingT
         return new LinearGradient(
                 0, 0,       /* Origin of the background (top left corner) */
                 0, height,  /* End of the background (bottom left corner) */
-                new int[] {
+                new int[]{
                         backgroundColor, backgroundColor,  /* The first gradient doesn't change color so it's like a rectangle shape */
                         underlineColor, underlineColor     /* The same for the second one */
                 },
-                new float[] {
+                new float[]{
                         0, 51f / 55f,  /* The first background covers 51dp out of 55dp */
                         51f / 55f, 1   /* And the second one takes the rest of the space */
                 },
@@ -382,27 +382,27 @@ public class ControllerActivity extends BaseActivity implements ActivityPendingT
      *  Now we create the states lists for the drawables and the colors.
      */
     StateListDrawable drawableList = new StateListDrawable();
-    drawableList.addState(new int[] { -android.R.attr.state_selected, android.R.attr.state_pressed }, new ColorDrawable(lightBackgroundColor));
-    drawableList.addState(new int[] { -android.R.attr.state_selected, android.R.attr.state_pressed, android.R.attr.state_focused }, new ColorDrawable(lightBackgroundColor));
-    drawableList.addState(new int[] { android.R.attr.state_selected, -android.R.attr.state_pressed }, tabSel);
-    drawableList.addState(new int[] { android.R.attr.state_selected, -android.R.attr.state_pressed, -android.R.attr.state_focused }, tabSel);
-    drawableList.addState(new int[] { android.R.attr.state_selected, android.R.attr.state_pressed }, tabSelAndPress);
-    drawableList.addState(new int[] { android.R.attr.state_selected, android.R.attr.state_pressed, android.R.attr.state_focused }, tabSelAndPress);
-    drawableList.addState(new int[] {}, new ColorDrawable(backgroundColor));
+    drawableList.addState(new int[]{-android.R.attr.state_selected, android.R.attr.state_pressed}, new ColorDrawable(lightBackgroundColor));
+    drawableList.addState(new int[]{-android.R.attr.state_selected, android.R.attr.state_pressed, android.R.attr.state_focused}, new ColorDrawable(lightBackgroundColor));
+    drawableList.addState(new int[]{android.R.attr.state_selected, -android.R.attr.state_pressed}, tabSel);
+    drawableList.addState(new int[]{android.R.attr.state_selected, -android.R.attr.state_pressed, -android.R.attr.state_focused}, tabSel);
+    drawableList.addState(new int[]{android.R.attr.state_selected, android.R.attr.state_pressed}, tabSelAndPress);
+    drawableList.addState(new int[]{android.R.attr.state_selected, android.R.attr.state_pressed, android.R.attr.state_focused}, tabSelAndPress);
+    drawableList.addState(new int[]{}, new ColorDrawable(backgroundColor));
 
     int darkColor = utils.getAttribute(R.attr.toolbar_color);
     int lightColor = Color.argb(0xAA, Color.red(darkColor), Color.green(darkColor), Color.blue(darkColor));
     int[][] states = new int[][]{
-            new int[] { -android.R.attr.state_selected, android.R.attr.state_pressed },
-            new int[] { -android.R.attr.state_selected, android.R.attr.state_pressed, android.R.attr.state_focused },
-            new int[] { android.R.attr.state_selected, -android.R.attr.state_pressed },
-            new int[] { android.R.attr.state_selected, -android.R.attr.state_pressed, -android.R.attr.state_focused },
-            new int[] { android.R.attr.state_selected, android.R.attr.state_pressed},
-            new int[] { android.R.attr.state_selected, android.R.attr.state_pressed, android.R.attr.state_focused },
-            new int[] { -android.R.attr.state_selected, -android.R.attr.state_pressed, -android.R.attr.state_focused },
-            new int[] {}
+            new int[]{-android.R.attr.state_selected, android.R.attr.state_pressed},
+            new int[]{-android.R.attr.state_selected, android.R.attr.state_pressed, android.R.attr.state_focused},
+            new int[]{android.R.attr.state_selected, -android.R.attr.state_pressed},
+            new int[]{android.R.attr.state_selected, -android.R.attr.state_pressed, -android.R.attr.state_focused},
+            new int[]{android.R.attr.state_selected, android.R.attr.state_pressed},
+            new int[]{android.R.attr.state_selected, android.R.attr.state_pressed, android.R.attr.state_focused},
+            new int[]{-android.R.attr.state_selected, -android.R.attr.state_pressed, -android.R.attr.state_focused},
+            new int[]{}
     };
-    int[] colors = new int[] {
+    int[] colors = new int[]{
             lightColor,  /* Text color when pressed and not selected */
             lightColor,  /* Text color when pressed (with focused fallback) */
             darkColor,   /* Text color when selected and not pressed */

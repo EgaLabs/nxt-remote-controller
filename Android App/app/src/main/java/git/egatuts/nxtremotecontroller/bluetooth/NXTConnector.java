@@ -51,19 +51,19 @@ public class NXTConnector {
 
   public static final int EMPTY_FIELD = 0;
 
-  public static final int WHAT_CHANGE_STATE      = 1;
+  public static final int WHAT_CHANGE_STATE = 1;
   public static final int WHAT_ERROR_ENCOUNTERED = 2;
 
   public static final int STATE_CHANGE_PREPARING_CONNECTION = 3;
-  public static final int STATE_CHANGE_CREATING_SOCKET      = 4;
-  public static final int STATE_CHANGE_CONNECTING           = 5;
-  public static final int STATE_CHANGE_CONNECTED            = 6;
+  public static final int STATE_CHANGE_CREATING_SOCKET = 4;
+  public static final int STATE_CHANGE_CONNECTING = 5;
+  public static final int STATE_CHANGE_CONNECTED = 6;
 
-  public static final int ERROR_UNEXPECTED         = 7;
-  public static final int ERROR_REQUEST_FAILED     = 8;
-  public static final int ERROR_SOCKET_CREATE      = 9;
-  public static final int ERROR_CONNECTION_CLOSED  = 10;
-  public static final int ERROR_CONNECTION_LOST    = 11;
+  public static final int ERROR_UNEXPECTED = 7;
+  public static final int ERROR_REQUEST_FAILED = 8;
+  public static final int ERROR_SOCKET_CREATE = 9;
+  public static final int ERROR_CONNECTION_CLOSED = 10;
+  public static final int ERROR_CONNECTION_LOST = 11;
 
   private ControllerActivity activity;
   private Handler handler;
