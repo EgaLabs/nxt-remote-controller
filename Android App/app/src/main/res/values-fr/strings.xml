@@ -1,181 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="app_name">NXT Remote Controller</string>
+  <string name="app_name">Télécommande NXT</string>
 
   <!-- [NavigationDrawerFragment.java] -->
-  <string name="home_drawer_label">Home</string>
-  <string name="scan_drawer_label">Scan</string>
-  <string name="settings_drawer_label">Settings</string>
-  <string name="help_drawer_label">Help</string>
-  <string name="donations_drawer_label">Donations</string>
+  <string name="home_drawer_label">Initiation</string>
+  <string name="scan_drawer_label">Balayage</string>
+  <string name="settings_drawer_label">Paramètres</string>
+  <string name="help_drawer_label">Aidez-Moi</string>
+  <string name="donations_drawer_label">Les dons</string>
   <!-- [/NavigationDrawerFragment.java] -->
 
 
   <!-- [NavigationDrawerFragment.java] -->
-  <string name="drawer_open">Open navigation menu</string>
-  <string name="drawer_close">Close navigation menu</string>
+  <string name="drawer_open">Ouvrir la navigation</string>
+  <string name="drawer_close">Fermer la navigation</string>
   <!-- [/NavigationDrawerFragment.java] -->
 
 
   <!-- [bluetooth_enable.xml] -->
-  <string name="bluetooth_message">Bluetooth disabled.</string>
-  <string name="bluetooth_button">Enable</string>
-  <string name="bluetooth_enabling">Enabling bluetooth&#8230;</string>
-  <string name="bluetooth_disabling">Disabling bluetooth&#8230;</string>
+  <string name="bluetooth_message">Bluetooth désactivé.</string>
+  <string name="bluetooth_button">Activer</string>
+  <string name="bluetooth_enabling">Bluetooth Activation&#8230;</string>
+  <string name="bluetooth_disabling">Désactivation Bluetooth&#8230;</string>
   <!-- [/bluetooth_enable.xml] -->
 
 
   <!-- [scan_fragment.xml] -->
-  <string name="bluetooth_preparing_pairing">Preparing pairing process&#8230;</string>
-  <string name="bluetooth_pairing">Pairing device&#8230;</string>
-  <string name="bluetooth_paired">Paired device: %s</string>
-  <string name="bluetooth_failed_pairing">Failed pairing: %s</string>
-  <string name="bluetooth_already_paired">Device %s is already paired</string>
+  <string name="bluetooth_preparing_pairing">Appariement Préparation&#8230;</string>
+  <string name="bluetooth_pairing">Matching périphérique&#8230;</string>
+  <string name="bluetooth_paired">Appareil couplé: %s</string>
+  <string name="bluetooth_failed_pairing">La liaison a échoué: %s</string>
+  <string name="bluetooth_already_paired">Le dispositif de %s est déjà jumelé</string>
   <!-- [/scan_fragment.xml] -->
 
 
   <!-- [HomeFragment.java]  -->
-  <string name="device_type_toy_title">Unknown device type</string>
-  <string name="device_type_toy_message">The device %s is not paired as a bluetooth toy device.</string>
-  <string name="device_type_robot_title">Unknown device type</string>
-  <string name="device_type_robot_message">The device %s is not paired as a bluetooth robot device. Do you want to continue anyway?</string>
+  <string name="device_type_toy_title">Type de périphérique inconnu</string>
+  <string name="device_type_toy_message">Dispositif %s ne est pas identifié comme un jouet.</string>
+  <string name="device_type_robot_title">Type de périphérique inconnu</string>
+  <string name="device_type_robot_message">Dispositif de %s n’est pas identifié comme un robot. Voulez-vous continuer?</string>
 
-  <string name="connecting_preparing_connection">Preparing connection&#8230;</string>
-  <string name="connecting_creating_socket">Creating socket&#8230;</string>
-  <string name="connecting_connecting">Connecting to device&#8230;</string>
-  <string name="connecting_connected">Connected to %s</string>
-  <string name="connecting_disconnected">Disconnected from %s</string>
-  <string name="connecting_unexpected_error">Unexpected error</string>
-  <string name="connecting_socket_error">The socket could not be created</string>
-  <string name="connecting_request_failed">The device did not accept the connection</string>
-  <string name="connecting_connection_closed">The connection was closed</string>
-  <string name="connecting_connection_lost">The connection with the device has been lost</string>
-  <string name="connecting_aborted">Connection aborted</string>
-  <string name="connecting_reconnect_title">The connection failed</string>
-  <string name="connecting_reconnect_message">The connection with %s has been lost. Do you want to reconnect?</string>
+  <string name="connecting_preparing_connection">Préparation connexion&#8230;</string>
+  <string name="connecting_creating_socket">Socket Création&#8230;</string>
+  <string name="connecting_connecting">Connexion à l\'appareil&#8230;</string>
+  <string name="connecting_connected">Connecté à %s</string>
+  <string name="connecting_disconnected">Hors ligne %s</string>
+  <string name="connecting_unexpected_error">Erreur inattendue</string>
+  <string name="connecting_socket_error">Impossible de créer le socket</string>
+  <string name="connecting_request_failed">Le dispositif n\'a pas accepté la connexion</string>
+  <string name="connecting_connection_closed">La connexion a été fermée</string>
+  <string name="connecting_connection_lost">La connexion a été perdue</string>
+  <string name="connecting_aborted">Connexion annulée</string>
+  <string name="connecting_reconnect_title">La connexion a échoué</string>
+  <string name="connecting_reconnect_message">Il a perdu la connexion à l\'appareil %s. Voulez-vous reconnecter?</string>
   <!-- [/HomeFragment.java] -->
 
 
   <!-- [preference_fragment.xml] -->
-  <string name="settings_category_server">Connection settings</string>
-  <string name="settings_category_visual">Visual settings</string>
-  <string name="settings_category_misc">Miscellaneous</string>
+  <string name="settings_category_server">Paramètres de connexion</string>
+  <string name="settings_category_visual">Paramètres visuels</string>
+  <string name="settings_category_misc">Recueil</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml] -->
-  <string name="preference_title_address">Server socket address</string>
-  <string name="preference_summary_address">The URL of the server handling the socket connection.</string>
-  <string name="preference_dialog_address">Which is the URL?</string>
+  <string name="preference_title_address">Adresse du serveur</string>
+  <string name="preference_summary_address">L\'URL du serveur qui gère les connexions à faible latence (prises).</string>
+  <string name="preference_dialog_address">Quelle est l\'adresse?</string>
   <string name="preference_value_address">https://localhost</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml] -->
-  <string name="preference_title_login">Server login address</string>
-  <string name="preference_summary_login">The URL of the server that handles the token-based login.</string>
-  <string name="preference_dialog_login">Which is the URL?</string>
+  <string name="preference_title_login">Adresse connexion</string>
+  <string name="preference_summary_login">L\'URL du serveur qui permet identifié par des codes d\'accès uniques (jetons).</string>
+  <string name="preference_dialog_login">Quelle est l\'adresse?</string>
   <string name="preference_value_login">https://localhost/request-token</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml] -->
-  <string name="preference_title_token">Access token</string>
-  <string name="preference_summary_token">Identification token that lets you connect to the ICE Server and establish low-latency communications. Delete it to reset.</string>
-  <string name="preference_dialog_token">Be careful.</string>
+  <string name="preference_title_token">Passcode</string>
+  <string name="preference_summary_token">Code d\'accès qui permet la connexion au serveur et établir des communications ICE faible latence. Effacer pour réinitialiser.</string>
+  <string name="preference_dialog_token">Faites attention.</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml] -->
-  <string name="preference_title_peer">Peer server address</string>
-  <string name="preference_summary_peer">The URL of the server that handles the P2P (peer-to-peer) connection.</string>
-  <string name="preference_dialog_peer">Which is the URL?</string>
+  <string name="preference_title_peer">Adresse du serveur P2P</string>
+  <string name="preference_summary_peer">L\'URL du serveur qui gère les candidats pour les connexions P2P.</string>
+  <string name="preference_dialog_peer">Quelle est l\'adresse?</string>
   <string name="preference_value_peer">https://localhost/connect</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml]  -->
-  <string name="preference_title_theme">Application theme</string>
-  <string name="preference_summary_theme">It sets the color theme to use in the whole application.</string>
+  <string name="preference_title_theme">Thème</string>
+  <string name="preference_summary_theme">Définit le thème de la couleur utilisée dans l\'application.</string>
   <string name="preference_value_theme">R.style.AppTheme.Indigo</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml]  -->
-  <string name="preference_title_toast">Show status toast messages</string>
-  <string name="preference_summary_toast">Show pairing toast messages. It\'s recommended to enable this option unless your operative system generates them automatically.</string>
+  <string name="preference_title_toast">Afficher les messages d\'état</string>
+  <string name="preference_summary_toast">Affiche demande annonces correspondant. Il est recommandé d\'activer cette option que si le système génère automatiquement des notifications.</string>
   <string name="preference_value_toast">true</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml]  -->
-  <string name="preference_title_back_home">Go back to home screen</string>
-  <string name="preference_summary_back_home">When the pairing process has succeed automatically goes to the home tab.</string>
+  <string name="preference_title_back_home">Retour en haut de page</string>
+  <string name="preference_summary_back_home">Lorsque le jumelage était application réussie revient automatiquement à l\'écran d\'accueil.</string>
   <string name="preference_value_back_home">true</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml]  -->
-  <string name="preference_title_disable_bluetooth">Disable Bluetooth</string>
-  <string name="preference_summary_disable_bluetooth">Automatically disables the bluetooth when exiting the app.</string>
+  <string name="preference_title_disable_bluetooth">Désactiver Bluetooth</string>
+  <string name="preference_summary_disable_bluetooth">Désactivez le Bluetooth automatiquement lorsque vous quittez l\'application.</string>
   <string name="preference_value_disable_bluetooth">true</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml]  -->
-  <string name="preference_title_auto_discovery">Start scan process</string>
-  <string name="preference_summary_auto_discovery">Automatically starts the scan process when the tab <i>Scan</i> is clicked.</string>
+  <string name="preference_title_auto_discovery">Lancer processus de numérisation</string>
+  <string name="preference_summary_auto_discovery">Démarre automatiquement le processus de numérisation lorsque vous cliquez sur l\'onglet Numérisation.</string>
   <string name="preference_value_auto_discovery">true</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml] -->
-  <string name="preference_title_min_signal">Minimum signal</string>
-  <string name="preference_summary_min_signal">Minimum registered strength signal used to calculate the percentage. The lower the value the worse. Default value is -60dBm.</string>
+  <string name="preference_title_min_signal">Signal minimum</string>
+  <string name="preference_summary_min_signal">Signal minimum de calculer le pourcentage enregistré. Le pire inférieure. La valeur par défaut est -60dBm.</string>
   <string name="preference_dialog_min_signal">Which is the minimum value?</string>
   <string name="preference_value_min_signal">0</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml] -->
-  <string name="preference_title_max_signal">Maximum signal</string>
-  <string name="preference_summary_max_signal">Maximum registered strength signal used to calculate the percentage. The higher the value the better. Default value is -60dBm.</string>
-  <string name="preference_dialog_max_signal">Which is the maximum value?</string>
+  <string name="preference_title_max_signal">Signal maximum</string>
+  <string name="preference_summary_max_signal">Signal maximal enregistré pour calculer le pourcentage. Le plus haut possible. La valeur par défaut est -60dBm.</string>
+  <string name="preference_dialog_max_signal">Quelle est la valeur minimum?</string>
   <string name="preference_value_max_signal">-100</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [ControllerActivity.java]  -->
-  <string name="controller_window_title">"Device: "</string>
+  <string name="controller_window_title">"Dispositif: "</string>
   <string name="controller_tab_local_title">Local</string>
   <string name="controller_tab_local_spec">local</string>
-  <string name="controller_tab_online_title">Online</string>
-  <string name="controller_tab_online_spec">online</string>
-  <string name="controller_tab_error_message">Connection couldn\'t be established.</string>
-  <string name="controller_tab_error_button">Retry</string>
+  <string name="controller_tab_online_title">En ligne</string>
+  <string name="controller_tab_online_spec">en ligne</string>
+  <string name="controller_tab_error_message">Impossible d\'établir une connexion.</string>
+  <string name="controller_tab_error_button">Refaire</string>
   <!-- [/ControllerActivity.java] -->
 
 
   <!-- [OnlineControllerFragment.java]  -->
-  <string name="geolocation_required_title">Geolocation service disabled</string>
-  <string name="geolocation_required_message">To login correctly the coordinates of this device must be sent. Please, enable geolocation services to access this feature.</string>
-  <string name="connection_error_malformed">The URL is malformed. Check it out on the settings activity.</string>
-  <string name="connection_error_token_not_found">The token URL is not correct or it couldn\'t be accessed.</string>
-  <string name="connection_error_token_malformed">The token is malformed, undefined, null or an empty string. Check server configuration.</string>
-  <string name="connection_error_refused">The connection was refused by the server.</string>
-  <string name="connection_error_login">Error while sending credentials to login</string>
-  <string name="connection_error_unreach">Couldn\'t find the server.</string>
-  <string name="getting_access_token">Getting access token&#8230;</string>
-  <string name="connecting_socket_server">Connecting socket&#8230;</string>
-  <string name="connected_socket_server">Socket connection established</string>
-  <string name="unknown_error">Unknown error encountered</string>
-  <string name="restoring_token">Restoring access token due to a signature error&#8230;</string>
-  <string name="calling_client">Calling client&#8230;</string>
-  <string name="call_rejected">The client has rejected your call</string>
-  <string name="call_accepted">The client has accepted your call</string>
-  <string name="init_streaming">Start streaming</string>
-  <string name="stop_streaming">Stop streaming</string>
+  <string name="geolocation_required_title">Les services de localisation désactivés</string>
+  <string name="geolocation_required_message">Pour vous connecter avec succès doivent envoyer les coordonnées de ce dispositif. Se il vous plaît activer géolocalisation pour accéder à cette fonctionnalité.</string>
+  <string name="connection_error_malformed">L\'URL contient des erreurs. Vérifiez qu\'il est correctement écrit dans la section de configuration.</string>
+  <string name="connection_error_token_not_found">Impossible de télécharger le code parce existait pas ou le code de retour est 404.</string>
+  <string name="connection_error_token_malformed">Le code d\'accès est incorrect, undefined, null ou une chaîne vide. Vérifiez la configuration du serveur.</string>
+  <string name="connection_error_refused">Le serveur a rejeté la connexion.</string>
+  <string name="connection_error_login">Erreur avec des variables soumises à identifier.</string>
+  <string name="connection_error_unreach">Impossible de trouver le serveur.</string>
+  <string name="getting_access_token">Obtenir le code d\'accès&#8230;</string>
+  <string name="connecting_socket_server">Socle de connexion&#8230;</string>
+  <string name="connected_socket_server">Connexion à faible latence établi</string>
+  <string name="unknown_error">Erreur inattendue</string>
+  <string name="restoring_token">J’ai restauré code d\'accès en raison d\'une erreur dans l\'entreprise&#8230;</string>
+  <string name="calling_client">Appel clientèle&#8230;</string>
+  <string name="call_rejected">Le client a rejeté l\'appel</string>
+  <string name="call_accepted">Le client a accepté l\'appel</string>
+  <string name="init_streaming">La vidéo en streaming</string>
+  <string name="stop_streaming">Arrêter streaming</string>
   <!-- [/OnlineControllerFragment.java] -->
 
 </resources>

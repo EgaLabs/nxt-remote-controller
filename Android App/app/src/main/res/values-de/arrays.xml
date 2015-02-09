@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <!-- [preference_fragment.xml]  -->
+  <string-array name="theme_names">
+    <item>Bernstein</item>
+    <item>Blau</item>
+    <item>Blau-Grau</item>
+    <item>Braun</item>
+    <item>Cyan</item>
+    <item>Intensives Orange</item>
+    <item>Intensives Flieder</item>
+    <item>Grün</item>
+    <item>Indigo</item>
+    <item>Hellblau</item>
+    <item>Hellgrün</item>
+    <item>Kalk</item>
+    <item>Orange</item>
+    <item>Rosa</item>
+    <item>Lila</item>
+    <item>Rote</item>
+    <item>Teal</item>
+    <item>Gelb</item>
+  </string-array>
+  <!-- [/preference_fragment.xml] -->
+
+</resources>

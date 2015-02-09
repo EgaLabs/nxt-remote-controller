@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <!-- [preference_fragment.xml]  -->
+  <string-array name="theme_names">
+    <item>Ambre</item>
+    <item>Bleu</item>
+    <item>Gris bleu</item>
+    <item>Brun</item>
+    <item>Cyan</item>
+    <item>Orange intense</item>
+    <item>Pourpre intense</item>
+    <item>Vert</item>
+    <item>Indigo</item>
+    <item>Bleu clai</item>
+    <item>Vert clair</item>
+    <item>Citron Vert</item>
+    <item>Orange</item>
+    <item>Rose</item>
+    <item>Pourpre</item>
+    <item>Rouge</item>
+    <item>Turquoise</item>
+    <item>Jaune</item>
+  </string-array>
+  <!-- [/preference_fragment.xml] -->
+
+</resources>
