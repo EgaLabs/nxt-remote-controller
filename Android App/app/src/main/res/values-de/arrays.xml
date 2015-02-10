@@ -8,18 +8,18 @@
     <item>Blau-Grau</item>
     <item>Braun</item>
     <item>Cyan</item>
-    <item>Intensives Orange</item>
-    <item>Intensives Flieder</item>
+    <item>Dunkelorange</item>
+    <item>Dunkellila</item>
     <item>Grün</item>
     <item>Indigo</item>
     <item>Hellblau</item>
     <item>Hellgrün</item>
-    <item>Kalk</item>
+    <item>Limone</item>
     <item>Orange</item>
     <item>Rosa</item>
     <item>Lila</item>
-    <item>Rote</item>
-    <item>Teal</item>
+    <item>Rot</item>
+    <item>Turquoise</item>
     <item>Gelb</item>
   </string-array>
   <!-- [/preference_fragment.xml] -->

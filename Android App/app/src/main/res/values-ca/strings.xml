@@ -82,8 +82,8 @@
 
   <!-- [preference_fragment.xml] -->
   <string name="preference_title_token">Codi d\'accès</string>
-  <string name="preference_summary_token">Codi d\'dentificació que permet conectarse al servidor ICE y establir connecions de baixa latencia. Esborra-ho per reiniciar-ho.</string>
-  <string name="preference_dialog_token">Ves amb compte.</string>
+  <string name="preference_summary_token">Codi d\'dentificació que permet conectarse al servidor ICE i establir connecions de baixa latencia. Esborra-ho per reiniciar-ho.</string>
+  <string name="preference_dialog_token">Vés amb compte.</string>
   <!-- [/preference_fragment.xml] -->
 
 
@@ -97,27 +97,27 @@
 
   <!-- [preference_fragment.xml]  -->
   <string name="preference_title_theme">Tema</string>
-  <string name="preference_summary_theme">Defineix el tema de colors que s\'usara en la totalitat de la aplicació.</string>
+  <string name="preference_summary_theme">Defineix el tema de colors que s\'usara en la totalitat de l\'aplicació.</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml]  -->
   <string name="preference_title_toast">Mostrar missatges d\'estat</string>
-  <string name="preference_summary_toast">Mostra els missatges d\'alerta d\'estat d\'emparellament. Es recommana activar aquesta opció, a no ser que el sistema operatiu les generi automaticament.</string>
+  <string name="preference_summary_toast">Mostra els missatges d\'alerta d\'estat d\'emparellament. Es recommana activar aquesta opció, tret que el sistema operatiu les generi automaticament.</string>
   <string name="preference_value_toast">true</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml]  -->
   <string name="preference_title_back_home">Tornar a inici</string>
-  <string name="preference_summary_back_home">Quan el procés d\'emparellament a acabat correctament la aplicació torna a la pantalla d\'inici automàticament.</string>
+  <string name="preference_summary_back_home">Quan el procés d\'emparellament ha acabat correctament l\'aplicació torna a la pantalla d\'inici automàticament.</string>
   <string name="preference_value_back_home">true</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml]  -->
   <string name="preference_title_disable_bluetooth">Desactivar Bluetooth</string>
-  <string name="preference_summary_disable_bluetooth">Desactiva el Bluetooth automàticament al sortir de la aplicació.</string>
+  <string name="preference_summary_disable_bluetooth">Desactiva Bluetooth automàticament en sortir de l\'aplicació.</string>
   <string name="preference_value_disable_bluetooth">true</string>
   <!-- [/preference_fragment.xml] -->
 
@@ -158,12 +158,12 @@
 
   <!-- [OnlineControllerFragment.java]  -->
   <string name="geolocation_required_title">Servei de geolocalització desactivat</string>
-  <string name="geolocation_required_message">Per iniciar sessió correctament s\'han d\'enviar les coordenades del dispositiu. Si us plau, activa la geocolatizació per poder utilitzar aquesta funció.</string>
-  <string name="connection_error_malformed">La adreça conté errors. Comprova-la en la secció de configuració.</string>
+  <string name="geolocation_required_message">Per iniciar sessió correctament s\'han d\'enviar les coordenades del dispositiu. Si us plau, activa la geolocalització per poder utilitzar aquesta funció.</string>
+  <string name="connection_error_malformed">L\'adreça conté errors. Comprova-la en la secció de configuració.</string>
   <string name="connection_error_token_not_found">No s\'ha trobat el codi d\'access. Comprova que l\'adreça sigui la correcta.</string>
-  <string name="connection_error_token_malformed">El codi d\'access es incorrecte, indefinit, nul o es una text buit. Comprova la configuració del servidor.</string>
-  <string name="connection_error_refused">La conexió ha sigut rebutjada per el servidor.</string>
-  <string name="connection_error_login">Error al enviar les dades per a l\'inici de sessió.</string>
+  <string name="connection_error_token_malformed">El codi d\'access es incorrecte, indefinit, nul o és una text buit. Comprova la configuració del servidor.</string>
+  <string name="connection_error_refused">La conexió ha estat rebutjada pel servidor.</string>
+  <string name="connection_error_login">Error en enviar les dades per a l\'inici de sessió.</string>
   <string name="connection_error_unreach">No s\'ha pogut localitzar el servidor.</string>
   <string name="getting_access_token">Obtenin codi d\'access&#8230;</string>
   <string name="connecting_socket_server">Conectant socket&#8230;</string>
@@ -174,7 +174,7 @@
   <string name="call_rejected">El client ha rebutjat la trucada</string>
   <string name="call_accepted">El client ha acceptat la trucada</string>
   <string name="init_streaming">Iniciar streaming</string>
-  <string name="stop_streaming">Parar streaming</string>
+  <string name="stop_streaming">Aturar streaming</string>
   <!-- [/OnlineControllerFragment.java] -->
 
 </resources>

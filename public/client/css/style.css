@@ -366,7 +366,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 /* line 194, ../scss/style.scss */
 #keyboard-container {
-  margin: 1em 0 0 0;
+  margin: 5em 0 0 0;
 }
 /* line 196, ../scss/style.scss */
 #keyboard-container > * {
@@ -472,9 +472,10 @@ input[type=range]:focus::-ms-fill-upper {
 /* line 283, ../scss/style.scss */
 #space {
   margin: 1.5em;
+  display: none;
 }
 
-/* line 292, ../scss/style.scss */
+/* line 293, ../scss/style.scss */
 div.host, a.host {
   width: 280px;
   height: 350px;
@@ -485,25 +486,25 @@ div.host, a.host {
   box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* line 300, ../scss/style.scss */
+/* line 301, ../scss/style.scss */
 .image-container {
   background-color: #333333;
   height: 200px;
 }
 
-/* line 305, ../scss/style.scss */
+/* line 306, ../scss/style.scss */
 .absolute-container {
   width: 140px;
   height: 175px;
 }
-/* line 309, ../scss/style.scss */
+/* line 310, ../scss/style.scss */
 .absolute-container > img {
   position: absolute;
   margin-top: 25px;
   border-radius: 50%;
 }
 
-/* line 316, ../scss/style.scss */
+/* line 317, ../scss/style.scss */
 .short_location {
   display: inline-block;
   overflow: hidden;
@@ -512,12 +513,12 @@ div.host, a.host {
   vertical-align: top;
 }
 
-/* line 326, ../scss/style.scss */
+/* line 327, ../scss/style.scss */
 .host > span {
   display: block;
   padding: 1.25em 0;
 }
-/* line 331, ../scss/style.scss */
+/* line 332, ../scss/style.scss */
 .host hr {
   height: 1px;
   border: none;
@@ -528,12 +529,12 @@ div.host, a.host {
   background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0) 100%);
 }
 
-/* line 339, ../scss/style.scss */
+/* line 340, ../scss/style.scss */
 .loading-tip.hide {
   display: none;
 }
 
-/* line 343, ../scss/style.scss */
+/* line 344, ../scss/style.scss */
 .loading-tip {
   font-size: 12px;
   color: white;
@@ -543,7 +544,7 @@ div.host, a.host {
   margin-left: -68px;
 }
 
-/* line 352, ../scss/style.scss */
+/* line 353, ../scss/style.scss */
 .loading-tip:before {
   content: "";
   background: url("/res/img/misc/spinner128.gif");
@@ -556,12 +557,12 @@ div.host, a.host {
   margin-right: 8px;
 }
 
-/* line 364, ../scss/style.scss */
+/* line 365, ../scss/style.scss */
 .loading-tip:hover > span {
   display: block;
 }
 
-/* line 368, ../scss/style.scss */
+/* line 369, ../scss/style.scss */
 .loading-tip span {
   display: none;
   text-align: left;
@@ -570,7 +571,7 @@ div.host, a.host {
   line-height: 1.4;
 }
 
-/* line 376, ../scss/style.scss */
+/* line 377, ../scss/style.scss */
 .loading-tip span:before {
   position: absolute;
   content: "";

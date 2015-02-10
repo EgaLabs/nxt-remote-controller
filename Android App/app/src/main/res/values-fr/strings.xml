@@ -104,14 +104,14 @@
 
   <!-- [preference_fragment.xml]  -->
   <string name="preference_title_toast">Afficher les messages d\'état</string>
-  <string name="preference_summary_toast">Affiche demande annonces correspondant. Il est recommandé d\'activer cette option que si le système génère automatiquement des notifications.</string>
+  <string name="preference_summary_toast">Affiche demande annonces correspondant. Il\'st recommandé d\'activer cette option que si le système génère automatiquement des notifications.</string>
   <string name="preference_value_toast">true</string>
   <!-- [/preference_fragment.xml] -->
 
 
   <!-- [preference_fragment.xml]  -->
   <string name="preference_title_back_home">Retour en haut de page</string>
-  <string name="preference_summary_back_home">Lorsque le jumelage était application réussie revient automatiquement à l\'écran d\'accueil.</string>
+  <string name="preference_summary_back_home">Lorsque le jumelage est réussi, l\'application revient automatiquement à l\'écran d\'accueil.</string>
   <string name="preference_value_back_home">true</string>
   <!-- [/preference_fragment.xml] -->
 
@@ -132,7 +132,7 @@
 
   <!-- [preference_fragment.xml] -->
   <string name="preference_title_min_signal">Signal minimum</string>
-  <string name="preference_summary_min_signal">Signal minimum de calculer le pourcentage enregistré. Le pire inférieure. La valeur par défaut est -60dBm.</string>
+  <string name="preference_summary_min_signal">Signal minimum pour calculer le pourcentage enregistré. Le pire l\'inférieur. La valeur par défaut est -60dBm.</string>
   <string name="preference_dialog_min_signal">Which is the minimum value?</string>
   <string name="preference_value_min_signal">0</string>
   <!-- [/preference_fragment.xml] -->
@@ -159,10 +159,10 @@
 
   <!-- [OnlineControllerFragment.java]  -->
   <string name="geolocation_required_title">Les services de localisation désactivés</string>
-  <string name="geolocation_required_message">Pour vous connecter avec succès doivent envoyer les coordonnées de ce dispositif. Se il vous plaît activer géolocalisation pour accéder à cette fonctionnalité.</string>
-  <string name="connection_error_malformed">L\'URL contient des erreurs. Vérifiez qu\'il est correctement écrit dans la section de configuration.</string>
-  <string name="connection_error_token_not_found">Impossible de télécharger le code parce existait pas ou le code de retour est 404.</string>
-  <string name="connection_error_token_malformed">Le code d\'accès est incorrect, undefined, null ou une chaîne vide. Vérifiez la configuration du serveur.</string>
+  <string name="geolocation_required_message">Pour vous connecter avec succès il faut envoyer les coordonnées de ce dispositif. S\'il-vous-plaît, activer la géolocalisation pour accéder à cette fonction.</string>
+  <string name="connection_error_malformed">L\'URL contient des erreurs. Vérifiez qu\'il soit correctement écrit dans la section de configuration.</string>
+  <string name="connection_error_token_not_found">Impossible de télécharger le code inexistant ou le code de retour est 404.</string>
+  <string name="connection_error_token_malformed">Le code d\'accès est incorrect, indéfiniui, nul ou une chaîne vide. Vérifiez la configuration du serveur.</string>
   <string name="connection_error_refused">Le serveur a rejeté la connexion.</string>
   <string name="connection_error_login">Erreur avec des variables soumises à identifier.</string>
   <string name="connection_error_unreach">Impossible de trouver le serveur.</string>
@@ -170,7 +170,7 @@
   <string name="connecting_socket_server">Socle de connexion&#8230;</string>
   <string name="connected_socket_server">Connexion à faible latence établi</string>
   <string name="unknown_error">Erreur inattendue</string>
-  <string name="restoring_token">J’ai restauré code d\'accès en raison d\'une erreur dans l\'entreprise&#8230;</string>
+  <string name="restoring_token">Restauration du code d\'accès en raison d\'une erreur dans l\'entreprise&#8230;</string>
   <string name="calling_client">Appel clientèle&#8230;</string>
   <string name="call_rejected">Le client a rejeté l\'appel</string>
   <string name="call_accepted">Le client a accepté l\'appel</string>

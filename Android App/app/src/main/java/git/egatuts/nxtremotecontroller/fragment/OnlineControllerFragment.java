@@ -383,6 +383,7 @@ public class OnlineControllerFragment extends ControllerBaseFragment {
                 self.hideActions();
                 self.calling = "";
                 self.controlledBy = null;
+                self.getConnector().motorBC(0, 0, false, false);
               }
               self.getActivity().runOnUiThread(new Runnable() {
                 @Override
