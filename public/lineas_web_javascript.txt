@@ -1,7 +1,0 @@
-     67 ./client/js/loader.js
-    813 ./client/js/script.js
-     14 ./connect/js/loader.js
-    115 ./connect/js/script.js
-     19 ./login/js/loader.js
-    171 ./login/js/script.js
-   1199 total
